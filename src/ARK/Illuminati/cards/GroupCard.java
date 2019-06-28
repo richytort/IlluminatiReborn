@@ -1,6 +1,6 @@
 package ARK.Illuminati.cards;
 
-public class otherGroups extends Card {
+public class GroupCard extends Card {
     private int power;
     private String ability;
     private int tpower;
@@ -8,7 +8,7 @@ public class otherGroups extends Card {
     private int resistance;
 
 
-    public otherGroups(String name, String type, String ability, int power, int tpower, int resistance, int income){
+    public GroupCard(String name, String type, String ability, int power, int tpower, int resistance, int income){
         super(name,type);
         this.ability = ability;
         this.power = power;
