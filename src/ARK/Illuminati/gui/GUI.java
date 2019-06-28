@@ -4,6 +4,8 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 public class GUI extends JFrame {
+
+    /*
     public static Clip audioClip ;
     private JPanel panel2;
     private SpellsPanel spellAreap1;
@@ -179,6 +181,6 @@ public class GUI extends JFrame {
     public JScrollPane getPan(){ return pan ; }
 
     public void setPan( JScrollPane pan ){ this.pan = pan ; }
-    //Test
+    */
 
 }
