@@ -23,5 +23,5 @@ public interface Contender {
 
     public boolean endTurn();
 
-    public boolean switchGroupMode( GroupCard group ) ;
+    public boolean switchGroupPosition( GroupCard group ) ;
 }
