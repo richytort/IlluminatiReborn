@@ -179,7 +179,6 @@ public class GUI extends JFrame {
     public JScrollPane getPan(){ return pan ; }
 
     public void setPan( JScrollPane pan ){ this.pan = pan ; }
-
-
+    //Test
 
 }
