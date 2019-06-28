@@ -13,11 +13,9 @@ public class GUI extends JFrame {
     private NextActionButton nextAction ;
     private JLabel p1name ;
     private JLabel p2name ;
-    public JLabel curraction ;
+    public JLabel currAction ;
     private EndTurnButton endTurn ;
     private JPanel panel1 ;
-    private HandPanel handp1 ;
-    private HandPanel handp2 ;
     private JScrollPane pan ;
     private HiddenHandPanel p1hid;
     private HiddenHandPanel p2hid;
@@ -83,9 +81,9 @@ public class GUI extends JFrame {
 
     public void setP2name(JLabel p2name) { this.p2name = p2name; }
 
-    public JLabel getCurraction() { return curraction; }
+    public JLabel getCurrAction() { return currAction; }
 
-    public void setCurraction(JLabel curraction) { this.curraction = curraction; }
+    public void setCurrAction(JLabel currAction) { this.currAction = currAction; }
 
     public EndTurnButton getEndTurn() { return endTurn ; }
 
