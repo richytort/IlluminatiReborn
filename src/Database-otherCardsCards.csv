@@ -1,0 +1,83 @@
+Other group, American Autoduel Association, none, 1,0,5,1,violent weird
+Other group, Anti-Nuclear Activists, +2 on any attempt to destroy Nuclear Power Companies, 2,0,5,1,liberal
+Other group, Antiwar Activists, none, 0,0,3,1,peaceful liberal
+Other group, Big Media, none, 4,3,6,3, Liberal Straight
+Other group, Boy Sprouts,none, 0,0,3,1,straight peaceful
+Other group, California, none, 5,0,4,5,Liberal Weird Government
+Other group, CFL-AIO, none,6,0,5,3,liberal
+Other group, Chinese Campaign Donors, treat group as government when it attempts to control a government group, 3,0,2,3,communist
+Other group, C.I.A, none, 6,4,5,0, government, violent
+Other group, Clone Arrangers, +3 on any attempt to destroy any group, 6,2,6,1, Violent Communist Criminal
+Other group, Comic Book, none,1,0,1,2, Weird Violent
+Other group, Congressional Wives, none, 1,0,4,1, Conservative Straight
+Other group, Convenience Stores, none, 1,0,4,3, Straight
+Other group, Copy Shops, none, 1,0,3,4 Peaceful
+Other group, Cycle Gangs, +2 on any attempt to destroy any group, 0,0,4,0, Violent Weird
+Other group, Democrats, none, 5,0,4,3,Liberal
+Other group, Eco-Guerrillas, none, 0,0,6,1, Liberal Violent Weird
+Other group, Empty Vee, none, 3,0,3,4, none
+Other group, Evil Geniuses for a Better Tomorrow, +4 on any attempt to control or neutralize or destroy the orbital mind control lasers, 0,2,6,3, Violent Weird
+Other group, Fast Food Chains, none, 2,0,4,3, Straight
+Other group, F.B.I., none, 4,2,6,0, Government Straight
+Other group, Federal Reserve, when it transfer money that money can go to any group in the same power structure, 5,3,7,6, government
+Other group, Feminists, +3 on any attempt to control any Liberal group, 2,0,2,1, Liberal
+Other group, Fiendish Fluoridators,none, 3,0,5,1, Communists Fanatics
+Other group, Flat Eathers, none, 1,0,2,1, Weird Conservative
+Other group, Fnord Motor Company, none, 2,0,4,2, Peaceful
+Other group, Fraternal Orders, none, 3,0,5,2, Conservative
+Other group, Girlie Magazines, none, 2,0,2,3, Liberal
+Other group, Goldfish Fanciers, none, 0,0,4,1, Peaceful Fanatic
+Other group, Gun Lobby, normal resistance 3 and against any liberal communist or weird group resistance 10, 1,0,3,1, Conservative, Violent
+Other group, Hackers, +3 on any attempt to neutralize any group, 1,1,4,2, Weird Fanatic
+Other group, Health Food Stores, +2 on any attempt to control Anti-Nuclear Activists, 1,0,3,2, Liberal
+Other group, Hollywood, none, 2,0,0,5, Liberal
+Other group, Intellectuals, none,0,0,3,1, Weird Fanatic
+Other group, International Cocaine Smugglers, +4 on any attempt to control Punk Rockers Cycle Gangs or Hollywood
+Other group, International Communist Conspiracy, +3 on any attempt to control any Communist group, 7,0,8,6, Communist
+Other group, I.R.S, owning player may tax each opponent 2MB on his own income phase. Tax may come from any group. If a player has no money, he owes no tax, 5,3,5,2, Criminal Government
+Other group, Junk Mail, +4 on any attempt to control Post Office, 1,0,3,2, Criminal
+Other group, KGB, +2 on any attempt to destroy any group, 2,2,6,0, Communist Violent
+Other group, KKK, none, 2,0,5,1, Conservative Violent
+Other group, L-4 Society, +4 for direct control or neutralize or destruction of Orbital Mind Control Laser, 1,0,2,0, Weird
+Other group, Libertarians, none, 1,0,4,1, Fanatic
+Other group, Loan Sharks, none, 5,0,5,6, Criminal Violent
+Other group, Local Police Departments, none, 0,0,4,1, Conservative Straight Violent
+Other group, Madison Avenue, +5 on any attempt to control Big Media or Empty Vee, 3,3,3,2, none
+Other group, The Mafia, +3 for direct control of any Criminal group, ,7,0,7,6, Criminal Violent
+Other group, The Men In Black, none, 0,2,6,1, Criminal Weird
+Other group, Militia, +6 on any attempt to destroy any Communist group, 2,0,4,2, Violent Conservative
+Other group, Moonies, none, 2,0,4,3, Peaceful, Fanatic
+Other group, Moral Minority, none, 2,0,1,2, Conservative Straight Fanatic
+Other group, Morticians, none, 0,0,4,1, Straight, Peaceful
+Other group, Multinational Oil Companies, none, 6,0,4,8, none
+Other group, Nephews of God, none, 0,0,4,2, Conservative Fanatic
+Other group, New York, none, 7,0,8,3, Violent Criminal Government
+Other group, Nuclear Power Companies, none, 4,0,4,3, Conservative
+Other group, Orbital Mind Control Lasers, on his turn the owner can add remove or reverse an alignment of any one other group in play; change last for that turn only,4,2,5,0,Communist
+Other group, Parent/Teacher Agglomeration, none, 0,0,5,1, Peaceful Conservative Straight
+Other group, Pentagon, none, 6,0,6,2, Government Violent Straight
+Other group, The Phone Company, none, 5,2,6,3,none
+Other group, Phone Phreaks, +3 on any attempt to control neutralize or destroy the Phone Company, 0,1,1,1, Criminal Liberal
+Other group, Post Office, none, 4,3,3,-1,Government
+Other group, Professional Sports, none, 2,0,4,3, Violent Fanatic
+Other group, Psychiatrist, none, 0,0,6,2, Weird
+Other group, Punk Rockers, none, 0,0,4,1, Weird
+Other group, Recyclers, pay 5MB from this group to draw an extra card on your turn. This is not an action,2,0,2,3, Liberal
+Other group, Republicans, none, 4,0,4,4, Conservatives
+Other group, Robot Sea Monster, none, 0,0,6,2, Violent Communist
+Other group, Science Fiction Fans, +2 on any attempt to control any Weird group, 0,0,5,1, Weird
+Other group, Semiconscious Liberation Army, +1 on any attempt to destroy any group, 0,0,8,0, Criminal Violent Weird Liberal Communist
+Other group, S.M.O.F, +5 for direct control of S.F Fans. +2 for direct control of Trekkies, 1,0,1,0, Weird
+Other group, Society of Creative Anarchism, none, 0,0,4,1, Violent Weird
+Other group, South American Nazis, none,4,0,6,2, Conservative Violent
+Other group, Survivalists, +2 resistance to all owner's other groups, 0,0,6,2, Conservative, Violent, Fanatic
+Other group, Tabloids, +3 for direct control of Convenience Stores, 2,0,3,3, Weird
+Other group, Texas, none, 6,0,6,4, Violent Conservative Government
+Other group, Tobacco & Liquor Companies, none,4,0,3,3, Straight
+Other group, Trekkies, none,0,0,4,3, Weird Fanatic
+Other group, Triliberal Commission, none,5,0,6,3, Liberal Straight
+Other group, TV Preachers, +3 for direct control of the Moral Minority, 3,0,6,4,Straight Fanatic
+Other group, Underground Newspapers, none, 1,1,5,0, Communist, Liberal
+Other group, The United Nations, none, 1,0,3,3, Liberal
+Other group, Video Games, +3 for direct control of Convenience Store, 2,0,3,7, none
+Other group, Yuppies, none,1,1,4,5, Conservative
