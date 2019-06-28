@@ -1,5 +1,9 @@
 package ARK.Illuminati.board.player;
 
+import ARK.Illuminati.cards.Card;
+
+import java.util.ArrayList;
+
 public class Deck {
 
     //instance variables
