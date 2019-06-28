@@ -25,7 +25,16 @@ public class Board {
             opponentPlayer = p1;
         }
     }
-    public void StartGame(){
+    public void startGame(Player p1 , Player p2 ){
+        //We will need to figure out how to place cards on uncontrolled area instead
+        //of adding cards to each player hand.
+        //4 cards will be added to uncontrolled area.
+        //p1.addNCardsToHand(5);
+        //p2.addNCardsToHand(5);
+
+        whoStarts(p1, p2);
+
+        //activePlayer.addCardToHand();
 
     }
 

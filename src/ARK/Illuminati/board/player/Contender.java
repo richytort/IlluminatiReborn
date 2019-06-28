@@ -9,7 +9,7 @@ public interface Contender {
 
     public boolean setSpecial( SpecialCard special) ;
 
-    public boolean activateSpecial( SpecialCard special );
+    public boolean activateSpecial( SpecialCard special, GroupCard group );
 
     public boolean declareAttack(GroupCard group);
 
@@ -23,5 +23,5 @@ public interface Contender {
 
     public boolean endTurn();
 
-    public boolean switchGroupMode( GroupCard group ) ;
+    public boolean switchGroupPosition( GroupCard group ) ;
 }
