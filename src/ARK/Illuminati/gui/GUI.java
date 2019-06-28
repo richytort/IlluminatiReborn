@@ -117,10 +117,13 @@ public class GUI extends JFrame {
         b.startGame(p1, p2);
         setP1(p1);
         setP2(p2);
-        ImageIcon bg = new ImageIcon("src/bg.png"); /////////////figure out what this is!!!!!!!!!
+        //ImageIcon bg = new ImageIcon("src/bg.png"); /////////////figure out what this is!!!!!!!!!
         //////////////UPDATE: Oh! THIS IS BACKGROUND!
-        JLabel g = new JLabel(bg);
+        JLabel g = new JLabel(); //JLabel g = new JLabel(bg);
         g.setVisible(true);
+
+        /* EVENTUALLY GET A BACKGROUND IMAGE
+
         try {
             final Image backgroundImage = javax.imageio.ImageIO.read(new File("bg2"));
             setContentPane(new JPanel(new BorderLayout()) {
@@ -134,6 +137,8 @@ public class GUI extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+         */
         this.add(g);
         setResizable(false);
         setSize(1366, 768);
@@ -156,15 +161,17 @@ public class GUI extends JFrame {
         grave = new JButton();
 
         //finish field class
-        //deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
-        //currAction = new JLabel(Card.getBoard().getActivePlayer().getField().getPhase().name());
+        //test deck and test currAction
+        deck = new JLabel(); //deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
+        currAction = new JLabel(); //currAction = new JLabel(Card.getBoard().getActivePlayer().getField().getPhase().name());
 
         deck.setFont(new Font("Ariel", Font.BOLD, 15));
         deck.setForeground(Color.WHITE);
         //Note: other has it as grave. I made it to graveIcon since we already have grave as a JButton.
         //Maybe change it later since it is
         //possible that there may be use of "grave" on other instances.
-        ImageIcon graveIcon = new ImageIcon("Cards Images Database/GraveYard.png");
+        //Test graveIcon
+        ImageIcon graveIcon = new ImageIcon("Back.png");//ImageIcon graveIcon = new ImageIcon("Cards Images Database/GraveYard.png");
         grave.setIcon(graveIcon);
 
         //Note: Find out what description is used for. It may be important.
@@ -265,7 +272,8 @@ public class GUI extends JFrame {
 
 
         //May have to change this eventually.
-        imgThisImg = new ImageIcon("Cards Images Database/Card Back.png");
+        //test ingThisImg
+        imgThisImg = new ImageIcon("California.png");//imgThisImg = new ImageIcon("Cards Images Database/Card Back.png");
         //here is that description again. Find out what this description is for.
         description.setIcon(imgThisImg);
 
@@ -311,7 +319,8 @@ public class GUI extends JFrame {
 
     public static void main(String[]args) throws IOException, UnexpectedFormatException {
         //find an appropriate audio file to add here.
-        File audioFile = new File("pain.wav");
+        File audioFile = new File("");//File audioFile = new File("pain.wav");
+
         boolean playCompleted = false ;
 
         try{
@@ -349,7 +358,8 @@ public class GUI extends JFrame {
         start.setSize(1366, 768);
         start.setVisible(true);
         ////////////////Make a start game icon.
-        start.setContentPane(new JLabel(new ImageIcon("Start Game.png")));
+        //test start.setContentPane
+        start.setContentPane(new JLabel(new ImageIcon()));//start.setContentPane(new JLabel(new ImageIcon("Start Game.png")));
 
         start.revalidate();
         start.setLayout(null);
