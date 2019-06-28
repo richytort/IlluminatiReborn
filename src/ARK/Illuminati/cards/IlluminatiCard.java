@@ -14,6 +14,12 @@ public class IlluminatiCard extends Card {
         this.tpower= tp;
 
     }
+    public void actionIllu(){
+
+    }
+    public void actionIllu(IlluminatiCard illu){
+
+    }
     public String getAbility() {
         return ability;
     }
