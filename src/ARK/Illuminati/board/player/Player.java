@@ -165,6 +165,11 @@ public class Player implements Contender{
         return false ; //return groupRotated ;
 
     }
+
+    public String getName() {
+        return name ;
+    }
+
 }
 
 
