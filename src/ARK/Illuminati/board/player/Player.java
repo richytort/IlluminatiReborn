@@ -1,4 +1,6 @@
 package ARK.Illuminati.board.player;
 
-public class Player {
+public class Player implements Contender{
+
+
 }
