@@ -17,10 +17,11 @@ import java.io.IOException;
 public class GUI extends JFrame {
     public static Clip audioClip ;
     private JPanel panel2;
-    private GroupsPanel groupAreap1 ;
-    private GroupsPanel groupAreap2 ;
-    private SpecialPanel specialAreap1;
-    private SpecialPanel specialAreap2;
+    //finish these classes
+    //private GroupsPanel groupAreap1 ;
+    //private GroupsPanel groupAreap2 ;
+    //private SpecialPanel specialAreap1;
+    //private SpecialPanel specialAreap2;
     public JLabel deck ;
     public JButton grave ;
     private NextActionButton nextAction ;
@@ -140,10 +141,11 @@ public class GUI extends JFrame {
         this.setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        groupAreap1 = new GroupsPanel(p1);
-        groupAreap2 = new GroupsPanel(p2);
-        specialAreap1 = new SpecialPanel(p1);
-        specialAreap2 = new SpecialPanel(p2);
+        //Finish these classes.
+        //groupAreap1 = new GroupsPanel(p1);
+        //groupAreap2 = new GroupsPanel(p2);
+        //specialAreap1 = new SpecialPanel(p1);
+        //specialAreap2 = new SpecialPanel(p2);
         //I don't know why the previous added another set. Mistake?
         //groupAreap1= new MonstersPanel(p1);
         //groupAreap2 = new MonstersPanel(p2);
@@ -152,8 +154,10 @@ public class GUI extends JFrame {
         p1name = new JLabel(p1.getName());
         p2name = new JLabel(p2.getName());
         grave = new JButton();
-        deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
-        currAction = new JLabel(Card.getBoard().getActivePlayer().getField().getPhase().name());
+
+        //finish field class
+        //deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
+        //currAction = new JLabel(Card.getBoard().getActivePlayer().getField().getPhase().name());
 
         deck.setFont(new Font("Ariel", Font.BOLD, 15));
         deck.setForeground(Color.WHITE);
@@ -180,8 +184,10 @@ public class GUI extends JFrame {
 
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
-        panel1.add(groupAreap1,BorderLayout.NORTH);
-        panel1.add(specialAreap1 , BorderLayout.CENTER);
+
+        //finish these classes
+        //panel1.add(groupAreap1,BorderLayout.NORTH);
+        //panel1.add(specialAreap1 , BorderLayout.CENTER);
         panel1.setOpaque(false);
 
         //Consider deleting the sp1...Oh maybe not. SP could mean the "Special hand. We will see.
@@ -213,8 +219,9 @@ public class GUI extends JFrame {
 
         panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
-        panel2.add(groupAreap2, BorderLayout.SOUTH);
-        panel2.add(specialAreap2,BorderLayout.CENTER);
+        //finish these classes////////
+        //panel2.add(groupAreap2, BorderLayout.SOUTH);
+        //panel2.add(specialAreap2,BorderLayout.CENTER);
         panel2.setOpaque(false);
 
 
@@ -281,7 +288,8 @@ public class GUI extends JFrame {
 
         this.validate();
 
-        new Controller(b, this);
+        //finish controller class
+        //new Controller(b, this);
 
     }
 
