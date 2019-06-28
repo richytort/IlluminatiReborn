@@ -2,8 +2,8 @@ package ARK.Illuminati.board.player;
 
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.IlluminatiCard;
-import ARK.Illuminati.cards.specialCard;
-import ARK.Illuminati.cards.otherGroups;
+import ARK.Illuminati.cards.SpecialCard;
+import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.Mode;
 
