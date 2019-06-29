@@ -117,28 +117,22 @@ public class GUI extends JFrame {
         b.startGame(p1, p2);
         setP1(p1);
         setP2(p2);
-        //ImageIcon bg = new ImageIcon("src/bg.png"); /////////////figure out what this is!!!!!!!!!
-        //////////////UPDATE: Oh! THIS IS BACKGROUND!
-        JLabel g = new JLabel(); //JLabel g = new JLabel(bg);
+
+        ImageIcon bg = new ImageIcon("src/bg3.png");
+        JLabel g = new JLabel(bg);
         g.setVisible(true);
-
-        /* EVENTUALLY GET A BACKGROUND IMAGE
-
         try {
-            final Image backgroundImage = javax.imageio.ImageIO.read(new File("bg2"));
+            final Image backgroundImage = javax.imageio.ImageIO.read(new File("bg1.png"));
             setContentPane(new JPanel(new BorderLayout()) {
-                @Override
-                public void paintComponent(Graphics g) {
+                @Override public void paintComponent(Graphics g) {
                     g.drawImage(backgroundImage, 0, 0, null);
                 }
-
             });
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-         */
+
         this.add(g);
         setResizable(false);
         setSize(1366, 768);
@@ -359,7 +353,7 @@ public class GUI extends JFrame {
         start.setVisible(true);
         ////////////////Make a start game icon.
         //test start.setContentPane
-        start.setContentPane(new JLabel(new ImageIcon()));//start.setContentPane(new JLabel(new ImageIcon("Start Game.png")));
+        start.setContentPane(new JLabel(new ImageIcon("bg3.png" )));
 
         start.revalidate();
         start.setLayout(null);
@@ -372,7 +366,8 @@ public class GUI extends JFrame {
         p2.setBounds(475, 520, 400, 50);
 
         //Get a start button png file.
-        JButton startbut = new JButton (new ImageIcon("Start Button.png"));
+        JButton startbut = new JButton (new ImageIcon("start.png"));
+
         startbut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
