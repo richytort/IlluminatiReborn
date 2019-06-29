@@ -15,12 +15,7 @@ public class IlluminatiCard extends Card {
         this.tpower= tp;
 
     }
-    public void actionIllu(){
 
-    }
-    public void actionIllu(IlluminatiCard illu){
-
-    }
     public String getAbility() {
         return ability;
     }
@@ -37,8 +32,11 @@ public class IlluminatiCard extends Card {
         this.power = power;
     }
 
-    public int gettPower() { return tpower;
+    public void giveAwayMoney(){
+
     }
+
+    public int gettPower() { return tpower; }
 
     public void settPower(int tPower) {
         this.tpower = tPower;

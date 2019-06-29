@@ -197,6 +197,12 @@ public class Player implements Contender {
     public ArrayList<Card> getHand(){
         return hand;
     }
+    public int returnLocation(Card e){
+        return hand.indexOf(e);
+
+    }
+
+
 }
 
 

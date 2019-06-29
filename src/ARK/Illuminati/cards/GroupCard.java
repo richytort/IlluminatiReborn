@@ -14,6 +14,7 @@ public class GroupCard extends Card {
     private Mode mode = Mode.ATTACK;
     private int income;
     private boolean attacked;
+    private Field field;
     private Board boardd;
     private boolean switchedMode;
     private Player p;
@@ -113,16 +114,17 @@ public class GroupCard extends Card {
 
 
     }
-    public void moveAGroup(GroupCard moveGroup, int newLocation ){
-       // Collections.swap(p.getHand(),moveGroup.);
-
-
-    }
-    public void giveAgroupAway(){
+    public void moveAGroup(int moveGroup, int newLocation ){
+        Collections.swap(p.getHand(),newLocation,moveGroup);
 
     }
-    public void dropAgroup(){
+    public void giveAgroupAway(GroupCard target){
+        Player p1 = getBoard().getActivePlayer();
+     //   p1.getField().removeGroupToHand(target);
 
+    }
+    public void dropAgroup(GroupCard i){
+        field.removeCard(i);
     }
 
 
@@ -131,10 +133,6 @@ public class GroupCard extends Card {
     }
 
     public void giveAwaySpecialCard(){
-
-    }
-
-    public void giveAwayMoney(){
 
     }
 
@@ -188,6 +186,9 @@ public class GroupCard extends Card {
     public void setIncome(int income) {
         this.income = income;
     }
+
+    public int gettPower() { return tpower; }
+
 
     public int getIncome(){ return income;}
 

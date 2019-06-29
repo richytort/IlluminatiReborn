@@ -27,7 +27,6 @@ import ARK.Illuminati.cards.specialCards.Assassination;
 import ARK.Illuminati.cards.specialCards.Bribery;
 
 
-import javax.rmi.ssl.SslRMIClientSocketFactory;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -45,9 +44,9 @@ public class Deck {
 
     private final ArrayList<Card> deck;
 
-   private static String specialPath = "C:\\Users\\knmar\\IdeaProjects\\IlluminatiReborn\\src\\Database-specialCards.csv";
-   private static String otherPath = "C:\\Users\\knmar\\IdeaProjects\\IlluminatiReborn\\src\\Database-othergroupsCards.csv";
-   private static String illuminatiPath = "C:\\Users\\knmar\\IdeaProjects\\IlluminatiReborn\\src\\Database-IlluminatiCards.csv";
+   private static String specialPath = "Database-specialCards.csv";
+   private static String otherPath = "Database-othergroupsCards.csv";
+   private static String illuminatiPath = "Database-IlluminatiCards.csv";
    int trials = 0;
 
    public Deck() throws IOException, NumberFormatException, UnexpectedFormatException{
@@ -380,7 +379,17 @@ public class Deck {
             cards.add(deck.remove(0));
         }return cards;
     }
+    public void printd(){
+       for(Card e : deck){
+           System.out.println(e+ " ");
+       }
+    }
+    public static void main(String [] arg)throws IOException, UnexpectedFormatException {
+       Deck deck1 = new Deck();
+       deck1.printd();
 
+
+    }
     public  ArrayList<Card> getDeck(){ return deck; }
 
     public static void setIlluminati(ArrayList<Card> illuminati){ Deck.illuminati = illuminati; }

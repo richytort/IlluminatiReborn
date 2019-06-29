@@ -24,6 +24,10 @@ public class Field {
         illuminatiArea = new ArrayList<>();
         deck = new Deck();
     }
+    public void removeCard(Card e){
+        hand.remove(e);
+        uncontrolledGroups.add(e);
+    }
 
 
 }
