@@ -30,8 +30,21 @@ public class GroupCard extends Card {
     public void attackToControl(GroupCard target){
         Player active = getBoard().getActivePlayer();
         Player opponent = getBoard().getOpponentPlayer();
+        int thisPower = this.getPower();
+        int otherResistance = target.getResistance();
+        int totalSubtraction = thisPower-otherResistance;
+        int diceNumber = boardd.rollDice();
+        System.out.println(diceNumber);
+        if(diceNumber >= totalSubtraction){
+            opponent.getField().removeGroupToHand(target);
+        }else if(diceNumber == 11 || diceNumber == 12){
+            System.out.println("Sorry automatic lost");
 
+        }else{
+            System.out.println("Maybe next time");
         }
+
+    }
 
     public void attackToNeutralize(){
 
@@ -48,19 +61,30 @@ public class GroupCard extends Card {
     public void giveAgroupAway(){
 
     }
-    public void dropAgroup(){}
+    public void dropAgroup(){
+
+    }
 
 
+    public void aidAnAttack(){
 
-    public void aidAnAttack(){ }
+    }
 
-    public void giveAwaySpecialCard(){}
+    public void giveAwaySpecialCard(){
 
-    public void giveAwayMoney(){}
+    }
 
-    public void useSpecialCard(){}
+    public void giveAwayMoney(){
 
-    public void passing(){}
+    }
+
+    public void useSpecialCard(){
+
+    }
+
+    public void passing(){
+
+    }
 
 
     public void switchMode(){
@@ -75,6 +99,7 @@ public class GroupCard extends Card {
     public String getAbility() {
         return ability;
     }
+
     public String getAlignment(){
         return alignment;
     }
@@ -87,13 +112,6 @@ public class GroupCard extends Card {
 
     public int getPower() {
         return power;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
-    }
-
-    public int gettPower() { return tpower;
     }
 
     public void settPower(int tPower) {

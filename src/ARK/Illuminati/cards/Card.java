@@ -9,6 +9,7 @@ public abstract class Card {
     private String description;
     private boolean isHidden;
     private Location location;
+    private int income;
     private static Board board;
 
 
@@ -37,10 +38,13 @@ public abstract class Card {
         return description;
     }
 
-    public void setType(String type) {
+    public void setType(String type) { this.description = type; }
 
-        this.description = type;
-    }
+    public int getIncome() { return getIncome(); }
+
+    public int getPower(){ return getPower(); }
+
+    public int getResistance(){ return getResistance(); }
 
     public boolean isHidden(){
         return isHidden;
