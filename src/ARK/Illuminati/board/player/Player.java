@@ -3,8 +3,7 @@ package ARK.Illuminati.board.player;
 
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
-import ARK.Illuminati.cards.Mode;
-import ARK.Illuminati.cards.SpecialCard;
+import ARK.Illuminati.cards.specialCards.SpecialCard;
 
 import java.util.ArrayList;
 

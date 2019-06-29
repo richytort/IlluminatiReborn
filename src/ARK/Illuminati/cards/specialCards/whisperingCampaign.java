@@ -1,9 +1,9 @@
 package ARK.Illuminati.cards.specialCards;
 
-public class computerEspionage extends SpecialCard {
+public class whisperingCampaign extends SpecialCard {
     String ability;
 
-    public computerEspionage(String name, String type, String ability){
+    public whisperingCampaign(String name, String type, String ability){
         super(name, type);
         this.ability = ability;
     }
