@@ -17,7 +17,7 @@ public class GroupCard extends Card {
     private String alignment;
 
 
-    public GroupCard(String name, String type, String ability, int power, int tpower, int resistance, int income,String alignment){
+    public GroupCard(String name, String type, String ability,String alignment, int power, int tpower, int resistance, int income){
         super(name,type);
         this.ability = ability;
         this.power = power;

@@ -27,11 +27,11 @@ Other group,Fnord Motor Company,none,2,0,4,2, Peaceful
 Other group,Fraternal Orders,none,3,0,5,2, Conservative
 Other group,Girlie Magazines,none,2,0,2,3,Liberal
 Other group,Goldfish Fanciers,none,0,0,4,1,Peaceful Fanatic
-Other group,Gun Lobby, normal resistance 3 and against any liberal communist or weird group resistance 10, 1,0,3,1, Conservative, Violent
-Other group,Hackers, +3 on any attempt to neutralize any group, 1,1,4,2, Weird Fanatic
-Other group,Health Food Stores, +2 on any attempt to control Anti-Nuclear Activists, 1,0,3,2, Liberal
-Other group,Hollywood, none, 2,0,0,5, Liberal
-Other group,Intellectuals, none,0,0,3,1, Weird Fanatic
+Other group,Gun Lobby,normal resistance 3 and against any liberal communist or weird group resistance 10,1,0,3,1,Conservative Violent
+Other group,Hackers,+3 on any attempt to neutralize any group,1,1,4,2,Weird Fanatic
+Other group,Health Food Stores, +2 on any attempt to control Anti-Nuclear Activists,1,0,3,2,Liberal
+Other group,Hollywood,none,2,0,0,5,Liberal
+Other group,Intellectuals,none,0,0,3,1,Weird Fanatic
 Other group,International Cocaine Smugglers,+4 on any attempt to control Punk Rockers Cycle Gangs or Hollywood,3,0,5,5,Criminal
 Other group,International Communist Conspiracy,+3 on any attempt to control any Communist group,7,0,8,6,Communist
 Other group,I.R.S,owning player may tax each opponent 2MB on his own income phase. Tax may come from any group. If a player has no money he owes no tax,5,3,5,2,Criminal Government
@@ -68,9 +68,9 @@ Other group,Robot Sea Monster,none,0,0,6,2,Violent Communist
 Other group,Science Fiction Fans,+2 on any attempt to control any Weird group,0,0,5,1,Weird
 Other group,Semiconscious Liberation Army,+1 on any attempt to destroy any group,0,0,8,0,Criminal Violent Weird Liberal Communist
 Other group,S.M.O.F, +5 for direct control of S.F Fans. +2 for direct control of Trekkies,1,0,1,0,Weird
-Other group,Society of Creative Anarchism, none, 0,0,4,1,Violent Weird
+Other group,Society of Creative Anarchism,none,0,0,4,1,Violent Weird
 Other group,South American Nazis,none,4,0,6,2,Conservative Violent
-Other group,Survivalists,+2 resistance to all owner's other groups,0,0,6,2,Conservative, Violent, Fanatic
+Other group,Survivalists,+2 resistance to all owner's other groups,0,0,6,2,Conservative Violent Fanatic
 Other group,Tabloids,+3 for direct control of Convenience Stores,2,0,3,3,Weird
 Other group,Texas,none,6,0,6,4,Violent Conservative Government
 Other group,Tobacco & Liquor Companies,none,4,0,3,3,Straight

@@ -20,7 +20,9 @@ public class Field {
     public Field()throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         uncontrolledGroups = new ArrayList<Card>();
+        specialArea = new ArrayList<>();
+        illuminatiArea = new ArrayList<>();
         deck = new Deck();
-
     }
+
 }
