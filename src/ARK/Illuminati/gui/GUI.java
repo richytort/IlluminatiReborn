@@ -228,7 +228,7 @@ public class GUI extends JFrame {
         ////figure out where to implement specials
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
-        panel1.add(structureAreaP1,BorderLayout.SOUTH);
+        panel1.add(structureAreaP1,BorderLayout.CENTER);
         //        panel1.add(specialAreaP1 , BorderLayout.CENTER);
 
         panel1.setOpaque(true);
@@ -265,8 +265,8 @@ public class GUI extends JFrame {
 
         panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
-        panel2.add(structureAreaP2, BorderLayout.SOUTH);
-        panel2.add(specialAreaP2,BorderLayout.CENTER);
+        panel2.add(structureAreaP2, BorderLayout.CENTER);
+        //panel2.add(specialAreaP2,BorderLayout.CENTER);
         panel2.setOpaque(true);
 
 /*
