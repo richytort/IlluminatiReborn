@@ -84,11 +84,11 @@ public class GUI extends JFrame {
 
     public void setP1hid(HiddenHandPanel p1hid) {this.p1hid = p1hid ; }
 
-    public HiddenHandPanel getp2hid() { return p2hid; }
+    public HiddenHandPanel getP2hid() { return p2hid; }
 
-    public void setp2hid(HiddenHandPanel p2hid){ this.p2hid = p2hid ; }
+    public void setP2hid(HiddenHandPanel p2hid){ this.p2hid = p2hid ; }
 
-    public Player getp1() {return p1 ; }
+    public Player getP1() {return p1 ; }
 
     public void setP1(Player p1 ){ this.p1 = p1 ; }
 
