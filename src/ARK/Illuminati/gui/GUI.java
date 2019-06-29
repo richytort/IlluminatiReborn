@@ -5,6 +5,7 @@ import ARK.Illuminati.board.Board;
 import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
+import ARK.Illuminati.listeners.Controller;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -13,10 +14,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Image;
+import static java.awt.Image.SCALE_SMOOTH;
 
 public class GUI extends JFrame {
+
     public static Clip audioClip ;
-    private JPanel panel2;
+    private JPanel panel1 ; //make this for player 1 Structure
+    private JPanel panel2; // This is for player 2 Structure
+    private JPanel uPanel; // this will be for uncontrolled groups
     public JLabel deck ;
     public JButton grave ;
     private NextActionButton nextAction ;
@@ -24,7 +30,6 @@ public class GUI extends JFrame {
     private JLabel p2name ;
     public JLabel currAction ;
     private EndTurnButton endTurn ;
-    private JPanel panel1 ;
     private JScrollPane pan ;
     private StructurePanel structureAreaP1;
     private StructurePanel structureAreaP2 ;
@@ -84,11 +89,11 @@ public class GUI extends JFrame {
 
     public void setP1hid(HiddenHandPanel p1hid) {this.p1hid = p1hid ; }
 
-    public HiddenHandPanel getp2hid() { return p2hid; }
+    public HiddenHandPanel getP2hid() { return p2hid; }
 
-    public void setp2hid(HiddenHandPanel p2hid){ this.p2hid = p2hid ; }
+    public void setP2hid(HiddenHandPanel p2hid){ this.p2hid = p2hid ; }
 
-    public Player getp1() {return p1 ; }
+    public Player getP1() {return p1 ; }
 
     public void setP1(Player p1 ){ this.p1 = p1 ; }
 
@@ -199,7 +204,10 @@ public class GUI extends JFrame {
         //Maybe change it later since it is
         //possible that there may be use of "grave" on other instances.
         //Test graveIcon
-        ImageIcon graveIcon = new ImageIcon("Back.png");//ImageIcon graveIcon = new ImageIcon("Cards Images Database/GraveYard.png");
+        ImageIcon graveIcon = new ImageIcon("RegBack.png");//ImageIcon graveIcon = new ImageIcon("Cards Images Database/GraveYard.png");
+        Image img = graveIcon.getImage();
+        img = img.getScaledInstance(91, 62 , SCALE_SMOOTH);
+        graveIcon = new ImageIcon(img);
         grave.setIcon(graveIcon);
 
         //Note: Find out what description is used for. It may be important.
@@ -217,17 +225,18 @@ public class GUI extends JFrame {
         currAction.setForeground(Color.BLACK);
 
 
+        ////figure out where to implement specials
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
+        panel1.add(structureAreaP1,BorderLayout.SOUTH);
+        //        panel1.add(specialAreaP1 , BorderLayout.CENTER);
 
-        //finish these classes
-        //panel1.add(groupAreap1,BorderLayout.NORTH);
-        //panel1.add(specialAreap1 , BorderLayout.CENTER);
-        panel1.setOpaque(false);
+        panel1.setOpaque(true);
 
         //Consider deleting the sp1...Oh maybe not. SP could mean the "Special hand. We will see.
+/*
         if (p1 == Card.getBoard().getActivePlayer()) {
-            sp1 = new JScrollPane(); //sp1 = new JScrollPane(handp1); may not need this since we aren't using "Hand".
+            sp1 = new JScrollPane(structureAreaP1); //sp1 = new JScrollPane(handp1); may not need this since we aren't using "Hand".
             sp1.setBorder(null); //same as statedabove
             sp1.getViewport().setOpaque(false);
             sp1.setPreferredSize(new Dimension(500,150));
@@ -251,17 +260,18 @@ public class GUI extends JFrame {
             this.revalidate();
         }
 
+*/
+
 
         panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
-        //finish these classes////////
-        //panel2.add(groupAreap2, BorderLayout.SOUTH);
-        //panel2.add(specialAreap2,BorderLayout.CENTER);
-        panel2.setOpaque(false);
+        panel2.add(structureAreaP2, BorderLayout.SOUTH);
+        panel2.add(specialAreaP2,BorderLayout.CENTER);
+        panel2.setOpaque(true);
 
-
+/*
         if (p2 == Card.getBoard().getActivePlayer()) {
-            sp2 = new JScrollPane() ; //sp2 = new JScrollPane(handp2);
+            sp2 = new JScrollPane(structureAreaP2) ; //sp2 = new JScrollPane(handp2);
             sp2.setBorder(null);
             sp2.getViewport().setOpaque(false);
             sp2.setPreferredSize(new Dimension(500,150));
@@ -272,7 +282,7 @@ public class GUI extends JFrame {
             this.revalidate();
         }
         else{
-            sp2 = new JScrollPane(p2hid);
+            sp2= new JScrollPane();//sp2 = new JScrollPane(p2hid);
             sp2.setBorder(null);
             sp2.getViewport().setOpaque(false);
             sp2.setPreferredSize(new Dimension(500,150));
@@ -282,6 +292,8 @@ public class GUI extends JFrame {
             panel2.add(sp2,BorderLayout.NORTH);
             this.revalidate();
         }
+
+ */
 
 
         JPanel panel3 = new JPanel();
@@ -294,8 +306,8 @@ public class GUI extends JFrame {
         this.add(panel3);
         panel3.setBounds(0,0, 200, 700);
         p2name.setBounds(2,150, 311, 57);
-        endTurn.setBounds(5, 300, 157, 39 ) ;
-        nextAction.setBounds(5, 400, 157, 39);
+        endTurn.setBounds(5, 300, 214, 53 ) ;
+        nextAction.setBounds(5, 400, 214, 53);
         p1name.setBounds(2, 500, 311, 57);
 
 
@@ -303,29 +315,32 @@ public class GUI extends JFrame {
         //test ingThisImg
         imgThisImg = new ImageIcon("California.png");//imgThisImg = new ImageIcon("Cards Images Database/Card Back.png");
         //here is that description again. Find out what this description is for.
+        Image nimg = imgThisImg.getImage();
+        imgThisImg = new ImageIcon(nimg.getScaledInstance(338, 200, SCALE_SMOOTH));
         description.setIcon(imgThisImg);
 
 
 
 
         this.add(panel1);
-        panel1.setBounds(200, 380, 700, 350);
+        panel1.setBounds(280, 380, 700, 350);
         this.add(panel2);
         panel2.setBounds(280, 0, 700, 350);
         this.add(deck);
         deck.setBounds(1277, 645, 100, 100);
         this.add(grave);
-        grave.setBounds(1150, 645, 62, 91);
+        grave.setBounds(1150, 670   , 91, 62);
         this.add(description);
         //here is that description again. See what it does.
-        description.setBounds(1050, 140, 300, 438);
+        description.setBounds(1017, 250, 338, 200);     //description.setBounds(1050, 140, 300, 438);
+
         this.add(currAction);
         currAction.setBounds(583, 315, 300, 100) ;
 
         this.validate();
 
         //finish controller class
-        //new Controller(b, this);
+        new Controller(b, this);
 
     }
 
