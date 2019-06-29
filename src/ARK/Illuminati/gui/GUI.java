@@ -319,7 +319,7 @@ public class GUI extends JFrame {
 
     public static void main(String[]args) throws IOException, UnexpectedFormatException {
         //find an appropriate audio file to add here.
-        File audioFile = new File("");//File audioFile = new File("pain.wav");
+        File audioFile = new File("Halo.wav");
 
         boolean playCompleted = false ;
 
