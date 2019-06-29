@@ -27,6 +27,7 @@ import ARK.Illuminati.cards.specialCards.Assassination;
 import ARK.Illuminati.cards.specialCards.Bribery;
 
 
+import javax.rmi.ssl.SslRMIClientSocketFactory;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -41,18 +42,24 @@ public class Deck {
     private static ArrayList<Card> illuminati ;
     private static ArrayList<Card> group ;
     private static ArrayList<Card> special ;
+
     private final ArrayList<Card> deck;
 
-   private static String specialPath = "Database-specialCards";
-   private static String otherPath = "Database-othergroupsCards";
-   private static String illuminatiPath = "Database-IlluminatiCards";
+   private static String specialPath = "C:\\Users\\knmar\\IdeaProjects\\IlluminatiReborn\\src\\Database-specialCards.csv";
+   private static String otherPath = "C:\\Users\\knmar\\IdeaProjects\\IlluminatiReborn\\src\\Database-othergroupsCards.csv";
+   private static String illuminatiPath = "C:\\Users\\knmar\\IdeaProjects\\IlluminatiReborn\\src\\Database-IlluminatiCards.csv";
    int trials = 0;
 
    public Deck() throws IOException, NumberFormatException, UnexpectedFormatException{
+
        if((illuminati == null || special ==  null || group ==null )){
+
            Scanner sc = new Scanner(System.in);
+
            while(true){
+
                try{
+
                    group = loadCardsFromFile(Deck.getOtherPath());
                    special= loadCardsFromFile(Deck.getSpecialPath());
                    illuminati = loadCardsFromFile(Deck.getIlluminatiPath());
@@ -89,9 +96,8 @@ public class Deck {
                        sc.close();
                        throw e;
                    }
-
-                   String s;
-                   if(illuminati == null){
+                    String s;
+                    if(illuminati == null){
                       s= Deck.getIlluminatiPath();
                    }else if(special == null){
                        s= Deck.getSpecialPath();
@@ -133,21 +139,22 @@ public class Deck {
             if (cardInfo.length == 0) {
 
                 br.close();
-                throw new MissingFieldException(
-                        "The number of fields in the line did not match the expected.",
+                 throw new MissingFieldException(
+                         "The number of fields in the line did not match the expected.",
                         path, lineNumber);
 
             } else {
                 if (cardInfo[0].equalsIgnoreCase("Illuminati") && cardInfo.length != 6) {
                     br.close();
+                    System.out.println("there");
                     throw new MissingFieldException(
                             "The number of fields in the line did not match the expected.",
                             path, lineNumber);
-                } else if (cardInfo[0].equalsIgnoreCase("other group") && cardInfo.length != 7) {
+                } else if (cardInfo[0].equalsIgnoreCase("Other group") && cardInfo.length != 8) {
                     br.close();
                     throw new MissingFieldException(
                             "The number of fields in the line did not match the expected.",
-                            path, lineNumber);
+                            path,lineNumber);
                 } else if (cardInfo[0].equalsIgnoreCase("special card") && cardInfo.length != 3) {
                     br.close();
                     throw new MissingFieldException(
@@ -167,7 +174,7 @@ public class Deck {
                 temp.add(new IlluminatiCard(cardInfo[1],cardInfo[0],cardInfo[2],Integer.parseInt(cardInfo[5]),Integer.parseInt(cardInfo[3]),Integer.parseInt(cardInfo[4])));
 
             }else if(cardInfo[0].equalsIgnoreCase("other group")){
-                temp.add(new GroupCard(cardInfo[1],cardInfo[0],cardInfo[2],Integer.parseInt(cardInfo[3]),Integer.parseInt(cardInfo[4]),Integer.parseInt(cardInfo[5]),Integer.parseInt(cardInfo[6]),cardInfo[7]));
+                temp.add(new GroupCard(cardInfo[1],cardInfo[0],cardInfo[2],cardInfo[7],Integer.parseInt(cardInfo[3]),Integer.parseInt(cardInfo[4]),Integer.parseInt(cardInfo[5]),Integer.parseInt(cardInfo[6])));
 
             }else{
                 if(!cardInfo[0].equalsIgnoreCase("special card")){
@@ -183,7 +190,7 @@ public class Deck {
                     case "Bribery":
                         temp.add(new Bribery(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
-                    case "Computer espionage":
+                    case "Computer Espionage":
                         temp.add(new computerEspionage(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
                     case "Deep Agent":
@@ -204,7 +211,7 @@ public class Deck {
                     case "Murphy's Law":
                         temp.add(new murphysLaw(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
-                    case "Secrets Man Was Not Meant To Know":
+                    case "Secrets Man was not Meant to Know":
                         temp.add(new secretsManWasNotMeantToKnow(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
                     case "Senate Investigating Committee":
@@ -223,19 +230,17 @@ public class Deck {
                         temp.add(new whiteCollarCrime(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
                     default:
-                        new UnknownSpecialCardException("Unknown Special Card,", path, lineNumber, cardInfo[1]);
+                        throw new UnknownSpecialCardException("Unknown Special Card,", path, lineNumber, cardInfo[1]);
                 }
             }
         }
         br.close();
+
         return (temp);
    }
 
    public void buildDeck(ArrayList<Card> illuminati, ArrayList<Card> special, ArrayList<Card> group){
-       int illuminatiQuota = 8;
-       int  specialQuota = 15;
-       int otherQuota = 83;
-      for(int i =0; i <illuminatiQuota;i++) {
+      for(int i =0; i < illuminati.size();i++) {
           IlluminatiCard illuminati1 = (IlluminatiCard) illuminati.get(i);
           IlluminatiCard clone = new IlluminatiCard(illuminati1.getName(), illuminati1.getType(),
                   illuminati1.getAbility(), illuminati1.getIncome(), illuminati1.getPower(),
@@ -245,17 +250,17 @@ public class Deck {
           clone.setLocation(Location.DECK);
           deck.add(clone);
       }
-      for(int i = 0; i <otherQuota;i++){
+      for(int i = 0; i < group.size();i++){
           GroupCard otherG = (GroupCard) group.get(i);
-          GroupCard clone = new GroupCard(otherG.getName(), otherG.getType(),otherG.getAbility(),
+          GroupCard clone = new GroupCard(otherG.getName(), otherG.getType(),otherG.getAbility(),otherG.getAlignment(),
                   otherG.getPower(),otherG.gettPower(),otherG.getResistance(),
-                  otherG.getIncome(),otherG.getAlignment());
+                  otherG.getIncome());
           clone.setMode(otherG.getMode());
           clone.setHidden(otherG.isHidden());
           clone.setLocation(Location.DECK);
           deck.add(clone);
       }
-      for(int i = 0; i <specialQuota;i++){
+      for(int i = 0; i < special.size();i++){
           Card specialC = special.get(i);
           SpecialCard clone;
           if(specialC instanceof Assassination){
@@ -337,17 +342,6 @@ public class Deck {
       }
    }
 
-   public void printDeck(){
-       for(Card e: deck){
-           System.out.println(e + " ");
-       }
-       System.out.println("illuminati");
-       for(Card e: illuminati){
-           System.out.println(e +" ");
-       }
-   }
-
-
     public void shuffle(){
         Collections.shuffle(deck);
     }
@@ -385,6 +379,17 @@ public class Deck {
         for(int i= 0; i <4;i++){
             cards.add(deck.remove(0));
         }return cards;
+    }
+    public void printd(){
+       for(Card e : deck){
+           System.out.println(e+ " ");
+       }
+    }
+    public static void main(String [] arg)throws IOException, UnexpectedFormatException {
+       Deck deck1 = new Deck();
+       deck1.printd();
+
+
     }
     public  ArrayList<Card> getDeck(){ return deck; }
 
