@@ -87,10 +87,10 @@ public class Controller implements ActionListener, MouseListener {
             }
         }
 
-
-        gui.getDeck().setText("" + getP1().getField().getDeck().getDeck().size());
+/*
+        gui.getDeck().setText("" + gui.getP1().getField().getDeck().getDeck().size());
         gui.getCurrAction().setText(Card.getBoard().getActivePlayer().getField().getPhase().name());
-
+*/
         ///////Seems that this area may need to have some work done.
         if (gui.getP1() == board.getActivePlayer() ) {
             gui.getSp1().remove(gui.getP1hid());
@@ -180,6 +180,7 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel2().add(gui.getSpecialAreaP2(),BorderLayout.CENTER);
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
+
         if(gui.getP1().getField().getGraveyard().size()>0){
             String url;
             if(gui.getP1().getField().getGraveyard().get(gui.getP1().getField().getGraveyard().size()-1) instanceof GroupCard){
@@ -381,7 +382,7 @@ public class Controller implements ActionListener, MouseListener {
                             Object[] options2 = {"OK","Cancel"};
                             int y = JOptionPane.showOptionDialog(gui, "Change Monster's Mode ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
                             if(y==0){
-                                board.getActivePlayer().switchGroupPosition(Group);
+                                board.getActivePlayer().switchGroupPosition(group);
                                 updateField();
                                 fc=null;
                                 sc=null;
@@ -422,7 +423,7 @@ public class Controller implements ActionListener, MouseListener {
                         if(fc instanceof GroupButton){
 
                             GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
-                            if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE && !board.getActivePlayer().getField().getMonstersArea().contains(monster)){
+                            if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE && !board.getActivePlayer().getField().getMonstersArea().contains(group)){
                                 JOptionPane.showMessageDialog(gui, "You must choose monster cards from your field");
                                 fc=null;
                                 sc=null;
@@ -512,7 +513,7 @@ public class Controller implements ActionListener, MouseListener {
                                 }
                                 sc = (GroupButton)arg0.getSource();
                                 GroupCard mons = ((GroupButton)sc).getGroup();
-                                board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpeical(), ((GroupButton)sc).getGroup());
+                                board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), ((GroupButton)sc).getGroup());
                                 fc=null;
                                 sc=null;
                                 updateField();
