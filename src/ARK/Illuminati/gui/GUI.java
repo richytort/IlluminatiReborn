@@ -323,9 +323,9 @@ public class GUI extends JFrame {
 
 
         this.add(panel1);
-        panel1.setBounds(280, 380, 700, 350);
+        panel1.setBounds(280, 520, 700, 200);
         this.add(panel2);
-        panel2.setBounds(280, 0, 700, 350);
+        panel2.setBounds(280, 5, 700, 200);
         this.add(deck);
         deck.setBounds(1277, 645, 100, 100);
         this.add(grave);
