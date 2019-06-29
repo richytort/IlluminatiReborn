@@ -157,20 +157,20 @@ public class Controller implements ActionListener, MouseListener {
 
 
         gui.getPanel2().remove(gui.getStructureAreaP2());
-        gui.setMonsterAreap2(new MonstersPanel(gui.getP2()));
-        gui.getPanel2().add(gui.getMonsterAreap2(),BorderLayout.SOUTH);
+        gui.setStructureAreaP2(new StructurePanel(gui.getP2()));
+        gui.getPanel2().add(gui.getStructureAreaP2(),BorderLayout.SOUTH);
 
 
 
-        gui.getPanel1().remove(gui.getSpellAreap1());
-        gui.setSpellAreap1(new SpellsPanel(gui.getP1()));
-        gui.getPanel1().add(gui.getSpellAreap1(),BorderLayout.CENTER);
+        gui.getPanel1().remove(gui.getSpecialAreaP1());
+        gui.setSpecialAreaP1(new SpecialPanel(gui.getP1()));
+        gui.getPanel1().add(gui.getSpecialAreaP1(),BorderLayout.CENTER);
 
 
 
-        gui.getPanel2().remove(gui.getSpellAreap2());
-        gui.setSpellAreap2(new SpellsPanel(gui.getP2()));
-        gui.getPanel2().add(gui.getSpellAreap2(),BorderLayout.CENTER);
+        gui.getPanel2().remove(gui.getSpecialAreaP2());
+        gui.setSpecialAreaP2(new SpecialPanel(gui.getP2()));
+        gui.getPanel2().add(gui.getSpecialAreaP2(),BorderLayout.CENTER);
 
     }
 
