@@ -181,6 +181,7 @@ public class Controller implements ActionListener, MouseListener {
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
 
+        /*
         if(gui.getP1().getField().getGraveyard().size()>0){
             String url;
             if(gui.getP1().getField().getGraveyard().get(gui.getP1().getField().getGraveyard().size()-1) instanceof GroupCard){
@@ -207,6 +208,7 @@ public class Controller implements ActionListener, MouseListener {
             ImageIcon newIcon = new ImageIcon(newimg);
             gui.getGrave().setIcon(newIcon);
         }
+        */
         addActionListeners();
         //gui.getHandp1().update(gui.getP1());
         gui.revalidate();
@@ -285,7 +287,8 @@ public class Controller implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent arg0) {
         if(arg0.getSource() instanceof NextActionButton){
             board.getActivePlayer().endAction();
-            gui.getCurrAction().setText("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
+            //////////////IMPLEMENT WHEN FIELD IS DONE
+            //gui.getCurrAction().setText("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
             updateField();
             //addActionListeners();
         }
@@ -377,7 +380,9 @@ public class Controller implements ActionListener, MouseListener {
                         }
                         */
 
-                    }else{
+                    }
+                    /*
+                    else{
                         if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE){
                             Object[] options2 = {"OK","Cancel"};
                             int y = JOptionPane.showOptionDialog(gui, "Change Monster's Mode ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
@@ -410,11 +415,12 @@ public class Controller implements ActionListener, MouseListener {
 
                         }
                     }
+                    */
                 }
 
 
 
-
+/*
                 else{
 
 
@@ -560,6 +566,12 @@ public class Controller implements ActionListener, MouseListener {
                     }
 
                 }
+
+                */
+
+
+
+
             }
 /*
             catch(MultipleMonsterAdditionException e){
@@ -617,8 +629,11 @@ public class Controller implements ActionListener, MouseListener {
             }
 
             if(fc==null){
-                if(board.getActivePlayer().getField().getSpecialArea().contains(((SpecialButton)arg0.getSource()).getSpecial())
-                        || board.getActivePlayer().getField().getHand().contains(((SpecialButton)arg0.getSource()).getSpecial())){
+
+                //if(board.getActivePlayer().getField().getSpecialArea().contains(((SpecialButton)arg0.getSource()).getSpecial()) || board.getActivePlayer().getField().getHand().contains(((SpecialButton)arg0.getSource()).getSpecial()))
+                //repleace bottom line with top when field is implemented.
+                if(true)
+                {
                     if(((SpecialButton)arg0.getSource()).getSpecial().getLocation()==Location.HAND){
                         String[] buttons = { "Activate", "Set", "cancel"};
 
