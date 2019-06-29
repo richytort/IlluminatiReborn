@@ -280,10 +280,10 @@ public class GUI extends JFrame {
         panel2.setOpaque(true);
 
         //THIS IS UNCONTROLLEDGROUP AREA PANEL
-        JPanel panel4 = new JPanel();
-        panel4.setLayout(new BorderLayout());
-        panel4.add(uncontrolledArea, BorderLayout.CENTER);
-        panel4.setOpaque(true);
+        uPanel = new JPanel();
+        uPanel.setLayout(new BorderLayout());
+        uPanel.add(uncontrolledArea, BorderLayout.CENTER);
+        uPanel.setOpaque(true);
 
 
 /*
@@ -344,8 +344,8 @@ public class GUI extends JFrame {
         panel1.setBounds(280, 520, 700, 200);
         this.add(panel2);
         panel2.setBounds(280, 5, 700, 200);
-        this.add(panel4);
-        panel4.setBounds( 280, 262, 700, 200);
+        this.add(uPanel);
+        uPanel.setBounds( 280, 262, 700, 200);
         this.add(deck);
         deck.setBounds(1277, 645, 100, 100);
         this.add(grave);
