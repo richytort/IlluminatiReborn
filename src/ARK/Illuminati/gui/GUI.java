@@ -199,7 +199,10 @@ public class GUI extends JFrame {
         //Maybe change it later since it is
         //possible that there may be use of "grave" on other instances.
         //Test graveIcon
-        ImageIcon graveIcon = new ImageIcon("Back.png");//ImageIcon graveIcon = new ImageIcon("Cards Images Database/GraveYard.png");
+        ImageIcon graveIcon = new ImageIcon("RegBack.png");//ImageIcon graveIcon = new ImageIcon("Cards Images Database/GraveYard.png");
+        Image img = graveIcon.getImage();
+        img = img.getScaledInstance(91, 62 , java.awt.Image.SCALE_SMOOTH);
+        graveIcon = new ImageIcon(img);
         grave.setIcon(graveIcon);
 
         //Note: Find out what description is used for. It may be important.
@@ -315,7 +318,7 @@ public class GUI extends JFrame {
         this.add(deck);
         deck.setBounds(1277, 645, 100, 100);
         this.add(grave);
-        grave.setBounds(1150, 645, 62, 91);
+        grave.setBounds(1150, 670   , 91, 62);
         this.add(description);
         //here is that description again. See what it does.
         description.setBounds(1050, 140, 300, 438);
