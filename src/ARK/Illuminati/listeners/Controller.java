@@ -3,6 +3,7 @@ package ARK.Illuminati.listeners;
 import ARK.Illuminati.board.Board;
 import ARK.Illuminati.gui.GUI;
 import ARK.Illuminati.gui.GroupButton;
+import ARK.Illuminati.gui.SpecialButton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,10 @@ public class Controller implements ActionListener, MouseListener {
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroups();
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroups();
+        ///////not too sure of line 37. Investigate later.
+        ArrayList<JButton> specialsP1 = this.gui.getSpecialAreaP1().getSpecials();
+        ArrayList<JButton> specialsP2 = this.gui.getSpecialAreaP2().getSpecials();
+        ///Alot in this area that I felt didn't need to be implemented. Check back later to see if missing something.
     }
 
 
