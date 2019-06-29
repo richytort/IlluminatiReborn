@@ -23,7 +23,6 @@ public class StructurePanel extends JPanel {
             GroupButton groupButton = new GroupButton();
             groups.add(groupButton);
             groupButton.setBackground(Color.GRAY);
-            //learn what opaque is;
             groupButton.setOpaque(false);
             this.add(groupButton);
         }

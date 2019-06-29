@@ -17,11 +17,6 @@ import java.io.IOException;
 public class GUI extends JFrame {
     public static Clip audioClip ;
     private JPanel panel2;
-    //finish these classes
-    //private GroupsPanel groupAreap1 ;
-    //private GroupsPanel groupAreap2 ;
-    //private SpecialPanel specialAreap1;
-    //private SpecialPanel specialAreap2;
     public JLabel deck ;
     public JButton grave ;
     private NextActionButton nextAction ;
@@ -31,6 +26,10 @@ public class GUI extends JFrame {
     private EndTurnButton endTurn ;
     private JPanel panel1 ;
     private JScrollPane pan ;
+    private StructurePanel structureAreaP1;
+    private StructurePanel structureAreaP2 ;
+    private SpecialPanel specialAreaP1;
+    private SpecialPanel specialAreaP2;
     private HiddenHandPanel p1hid;
     private HiddenHandPanel p2hid;
     private Player p1 ;
@@ -42,6 +41,36 @@ public class GUI extends JFrame {
     public static Clip getAudioClip(){ return audioClip ; }
 
     public static void setAudioClip( Clip audioClip ) { GUI.audioClip = audioClip ; }
+
+    public StructurePanel getStructureAreaP1(){
+        return structureAreaP1;
+    }
+
+    public void setStructureAreaP1(StructurePanel structureAreaP1 ){
+        this.structureAreaP1 = structureAreaP1 ;
+    }
+    public StructurePanel getStructureAreaP2(){
+        return structureAreaP2;
+    }
+
+    public void setStructureAreaP2(StructurePanel structureAreaP2 ){
+        this.structureAreaP2 = structureAreaP2 ;
+    }
+
+    public SpecialPanel getSpecialAreaP1(){
+        return specialAreaP1;
+    }
+
+    public void setSpecialAreaP1(SpecialPanel specialAreaP1 ){
+        this.specialAreaP1 = specialAreaP1 ;
+    }
+    public SpecialPanel getSpecialAreaP2(){
+        return specialAreaP2;
+    }
+
+    public void setSpecialAreaP2(SpecialPanel specialAreaP2 ){
+        this.specialAreaP2 = specialAreaP2 ;
+    }
 
     public JScrollPane getSp1() { return sp1 ; }
 
@@ -140,14 +169,19 @@ public class GUI extends JFrame {
         this.setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //Finish these classes.
         //groupAreap1 = new GroupsPanel(p1);
+        structureAreaP1 = new StructurePanel(p1);
         //groupAreap2 = new GroupsPanel(p2);
+        structureAreaP2 = new StructurePanel(p2);
         //specialAreap1 = new SpecialPanel(p1);
+        specialAreaP1 = new SpecialPanel(p1);
         //specialAreap2 = new SpecialPanel(p2);
+        specialAreaP2 = new SpecialPanel(p2);
         //I don't know why the previous added another set. Mistake?
         //groupAreap1= new MonstersPanel(p1);
         //groupAreap2 = new MonstersPanel(p2);
+        structureAreaP1 = new StructurePanel(p1);
+        structureAreaP2 = new StructurePanel(p2);
         nextAction = new NextActionButton("Next Action");
         endTurn = new EndTurnButton("End Turn");
         p1name = new JLabel(p1.getName());
