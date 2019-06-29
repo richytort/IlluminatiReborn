@@ -33,6 +33,7 @@ public class GUI extends JFrame {
     private JScrollPane pan ;
     private StructurePanel structureAreaP1;
     private StructurePanel structureAreaP2 ;
+    private UncontrolledPanel uncontrolledArea ;
     private SpecialPanel specialAreaP1;
     private SpecialPanel specialAreaP2;
     private HiddenHandPanel p1hid;
@@ -60,6 +61,14 @@ public class GUI extends JFrame {
 
     public void setStructureAreaP2(StructurePanel structureAreaP2 ){
         this.structureAreaP2 = structureAreaP2 ;
+    }
+
+    public UncontrolledPanel getUncontrolledArea(){
+        return uncontrolledArea;
+    }
+
+    public void setUncontrolledArea(UncontrolledPanel uncontrolledArea){
+        this.uncontrolledArea = uncontrolledArea;
     }
 
     public SpecialPanel getSpecialAreaP1(){
@@ -179,6 +188,7 @@ public class GUI extends JFrame {
         //groupAreap2 = new GroupsPanel(p2);
         structureAreaP2 = new StructurePanel(p2);
         //specialAreap1 = new SpecialPanel(p1);
+        uncontrolledArea = new UncontrolledPanel(); ///////////////////mabybe we will have to pass an array list of group cards in here. Makes sense.
         specialAreaP1 = new SpecialPanel(p1);
         //specialAreap2 = new SpecialPanel(p2);
         specialAreaP2 = new SpecialPanel(p2);
@@ -269,6 +279,13 @@ public class GUI extends JFrame {
         //panel2.add(specialAreaP2,BorderLayout.CENTER);
         panel2.setOpaque(true);
 
+        //THIS IS UNCONTROLLEDGROUP AREA PANEL
+        JPanel panel4 = new JPanel();
+        panel4.setLayout(new BorderLayout());
+        panel4.add(uncontrolledArea, BorderLayout.CENTER);
+        panel4.setOpaque(true);
+
+
 /*
         if (p2 == Card.getBoard().getActivePlayer()) {
             sp2 = new JScrollPane(structureAreaP2) ; //sp2 = new JScrollPane(handp2);
@@ -311,6 +328,7 @@ public class GUI extends JFrame {
         p1name.setBounds(2, 500, 311, 57);
 
 
+
         //May have to change this eventually.
         //test ingThisImg
         imgThisImg = new ImageIcon("California.png");//imgThisImg = new ImageIcon("Cards Images Database/Card Back.png");
@@ -326,6 +344,8 @@ public class GUI extends JFrame {
         panel1.setBounds(280, 520, 700, 200);
         this.add(panel2);
         panel2.setBounds(280, 5, 700, 200);
+        this.add(panel4);
+        panel4.setBounds( 280, 262, 700, 200);
         this.add(deck);
         deck.setBounds(1277, 645, 100, 100);
         this.add(grave);
