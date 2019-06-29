@@ -4,23 +4,26 @@ package ARK.Illuminati.board.player;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
+import ARK.Illuminati.exceptions.UnexpectedFormatException;
+import ARK.Illuminati.cards.Mode;
+import ARK.Illuminati.exceptions.MultipleGroupAdditionException;
 
+import javax.print.attribute.standard.MediaSize;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player implements Contender {
     //instance variables
     private final String name;
-    ////////////////////////FINISH FIELD CLASS////////////////
-    //private Field field;
+    private int income;
+    private Field field;
     private boolean addedGroupThisTurn;
     private ArrayList<Card> hand;
 
-    public Player(String name) {
-
+    public Player(String name)  throws IOException, UnexpectedFormatException {
         this.name = name;
-        ////////////////FINISH FIELD CLASS///////////////////////////
-        //this.field = new Field();
-
+        this.field = new Field();
+        hand = new ArrayList<>();
     }
 
 
@@ -29,19 +32,19 @@ public class Player implements Contender {
         if (Card.getBoard().isGameOver())
             return false;
 
-        //if(this != Card.getBoard().getAvtivePlayer()){
-        //    return false;
-        //}
-
-        if (addedGroupThisTurn)
-            //throw new MultipleGroupAdditionException();
-
-            //boolean groupAdded = this.field.addMonsterToField(group, Mode.ATTACK, false);
-
-            //if (!groupAdded)
-            //  return false;
-
-            addedGroupThisTurn = true;
+        if(this != Card.getBoard().getActivePlayer()){
+            return false;
+        }
+//
+//        if (addedGroupThisTurn)
+//            throw new MultipleGroupAdditionException();
+//
+//            boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
+//
+//            if (!groupAdded)
+//              return false;
+//
+//            addedGroupThisTurn = true;
 
         return true;
     }
@@ -71,7 +74,7 @@ public class Player implements Contender {
 
         boolean specialActivated;
 
-        //if(this.field.getSpecialArea().contains(special))
+        ///if(this.field.getSpecialArea().contains(special))
         //    specialActivated = this.field.activateSetSpell(special,group);
         //else
         //    specialActivated = this.field.addSpellToField(special, group, false);
@@ -165,13 +168,34 @@ public class Player implements Contender {
         return false; //return groupRotated ;
 
     }
+    public void addCardToHand(){
+       // this.field.addCardToHand();
+    }
 
+    public Card getCard(Card i) {
+        return i;
+    }
     public String getName() {
         return name;
     }
+   public int getIncome(){
+        for(Card e: hand){
+            if(getCard(e).getType().equalsIgnoreCase("illuminati") || getCard(e).getType().equalsIgnoreCase("other group")){
+                income = e.getIncome() + e.getIncome();
+            }
+        }return income;
 
-    public int getCardIncome() {
-        return 0;
+    }
+    public int getPower(Card e){
+        return e.getPower();
+    }
+
+    public int getResistance(Card e){
+        return e.getResistance();
+    }
+
+    public ArrayList<Card> getHand(){
+        return hand;
     }
 }
 
