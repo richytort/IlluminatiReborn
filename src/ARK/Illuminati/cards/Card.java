@@ -28,6 +28,7 @@ public abstract class Card {
 //    public abstract void actionIllu(IlluminatiCard illuminati);
 //    public abstract void actionSpec(specialCard special);
 //    public abstract void actionother(otherGroups other);
+
     public String getName() {
         return name;
     }
