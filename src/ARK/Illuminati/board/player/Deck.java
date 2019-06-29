@@ -380,17 +380,7 @@ public class Deck {
             cards.add(deck.remove(0));
         }return cards;
     }
-    public void printd(){
-       for(Card e : deck){
-           System.out.println(e+ " ");
-       }
-    }
-    public static void main(String [] arg)throws IOException, UnexpectedFormatException {
-       Deck deck1 = new Deck();
-       deck1.printd();
 
-
-    }
     public  ArrayList<Card> getDeck(){ return deck; }
 
     public static void setIlluminati(ArrayList<Card> illuminati){ Deck.illuminati = illuminati; }
