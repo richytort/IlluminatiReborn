@@ -22,11 +22,11 @@ public class UnknownSpecialCardException extends UnexpectedFormatException{
     }
 
     public String getUnknownSpell() {
-        return unknownSpell;
+        return unknownSpecial;
     }
 
     public void setUnknownSpell(String unknownSpell) {
-        this.unknownSpell = unknownSpell;
+        this.unknownSpecial = unknownSpell;
     }
 
 }
