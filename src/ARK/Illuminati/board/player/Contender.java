@@ -1,7 +1,7 @@
 package ARK.Illuminati.board.player;
 
 import ARK.Illuminati.cards.GroupCard;
-import ARK.Illuminati.cards.SpecialCard;
+import ARK.Illuminati.cards.specialCards.SpecialCard;
 
 public interface Contender {
 

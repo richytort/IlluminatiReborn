@@ -4,13 +4,26 @@ import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.IlluminatiCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.cards.GroupCard;
+import ARK.Illuminati.cards.specialCards.deepAgent;
+import ARK.Illuminati.cards.specialCards.interference1;
+import ARK.Illuminati.cards.specialCards.interference2;
+import ARK.Illuminati.cards.specialCards.mediaCampaign;
+import ARK.Illuminati.cards.specialCards.slushFund;
+import ARK.Illuminati.cards.specialCards.swissBankAccount;
+import ARK.Illuminati.cards.specialCards.whiteCollarCrime;
+import ARK.Illuminati.cards.specialCards.senateInvestigatingCommittee;
+import ARK.Illuminati.cards.specialCards.secretsManWasNotMeantToKnow;
+import ARK.Illuminati.cards.specialCards.murphysLaw;
+import ARK.Illuminati.cards.specialCards.marketManipulation;
+import ARK.Illuminati.cards.specialCards.computerEspionage;
+import ARK.Illuminati.cards.specialCards.whisperingCampaign;
 import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.exceptions.EmptyFieldException;
 import ARK.Illuminati.exceptions.MissingFieldException;
 import ARK.Illuminati.exceptions.UnknownCardTypeException;
 import ARK.Illuminati.exceptions.UnknownSpecialCardException;
-import ARK.Illuminati.cards.specialCards.Assassionation;
+import ARK.Illuminati.cards.specialCards.Assassination;
 import ARK.Illuminati.cards.specialCards.Bribery;
 
 
@@ -28,15 +41,15 @@ public class Deck {
     private static ArrayList<Card> illuminati ;
     private static ArrayList<Card> group ;
     private static ArrayList<Card> special ;
-    private static ArrayList<Card> deck;
+    private final ArrayList<Card> deck;
 
    private static String specialPath = "Database-specialCards";
    private static String otherPath = "Database-othergroupsCards";
    private static String illuminatiPath = "Database-IlluminatiCards";
-    int trials = 0;
+   int trials = 0;
 
    public Deck() throws IOException, NumberFormatException, UnexpectedFormatException{
-       if((group == null || special ==  null || group ==null )){
+       if((illuminati == null || special ==  null || group ==null )){
            Scanner sc = new Scanner(System.in);
            while(true){
                try{
@@ -44,11 +57,13 @@ public class Deck {
                    special= loadCardsFromFile(Deck.getSpecialPath());
                    illuminati = loadCardsFromFile(Deck.getIlluminatiPath());
                    break;
+
                }catch(UnexpectedFormatException e){
                    if(trials >= 3){
                        sc.close();
                        throw e;
                    }
+
                    System.out.println("Error in reading from file "
                            + e.getSourceFile() + " at line "
                            + e.getSourceLine());
@@ -68,11 +83,13 @@ public class Deck {
                    if(e.getSourceFile().equalsIgnoreCase(Deck.getSpecialPath())){
                         Deck.setSpecialPath(sc.nextLine());
                    }
+
                }catch (FileNotFoundException e){
                    if(trials >= 3){
                        sc.close();
                        throw e;
                    }
+
                    String s;
                    if(illuminati == null){
                       s= Deck.getIlluminatiPath();
@@ -81,6 +98,7 @@ public class Deck {
                    }else{
                        s =Deck.getOtherPath();
                    }
+                   System.out.println(s);
                    System.out.println("The file \"" + s + "\" is not found.");
                    System.out.println("Please enter another path:");
 
@@ -104,7 +122,7 @@ public class Deck {
    }
 
     public ArrayList<Card> loadCardsFromFile(String path) throws  IOException, UnexpectedFormatException {
-        ArrayList<Card> temp = new ArrayList<>();
+        ArrayList<Card> temp = new ArrayList<Card>();
         String line;
         BufferedReader br = new BufferedReader(new FileReader(path));
         int lineNumber = 0;
@@ -120,7 +138,7 @@ public class Deck {
                         path, lineNumber);
 
             } else {
-                if (cardInfo[0].equalsIgnoreCase("illuminati") && cardInfo.length != 6) {
+                if (cardInfo[0].equalsIgnoreCase("Illuminati") && cardInfo.length != 6) {
                     br.close();
                     throw new MissingFieldException(
                             "The number of fields in the line did not match the expected.",
@@ -130,7 +148,7 @@ public class Deck {
                     throw new MissingFieldException(
                             "The number of fields in the line did not match the expected.",
                             path, lineNumber);
-                } else if (cardInfo[0].equalsIgnoreCase("special card") && cardInfo.length != 2) {
+                } else if (cardInfo[0].equalsIgnoreCase("special card") && cardInfo.length != 3) {
                     br.close();
                     throw new MissingFieldException(
                             "The number of fields in the line did not match the expected.",
@@ -160,7 +178,7 @@ public class Deck {
                 }
                 switch (cardInfo[1]){
                     case "Assassination":
-                        temp.add(new Assassionation(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        temp.add(new Assassination(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
                     case "Bribery":
                         temp.add(new Bribery(cardInfo[1], cardInfo[0], cardInfo[2]));
@@ -181,7 +199,7 @@ public class Deck {
                         temp.add(new marketManipulation(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
                     case "Media Campaign":
-                        temp.add(new medianCampaign(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        temp.add(new mediaCampaign(cardInfo[1], cardInfo[0], cardInfo[2]));
                         break;
                     case "Murphy's Law":
                         temp.add(new murphysLaw(cardInfo[1], cardInfo[0], cardInfo[2]));
@@ -240,78 +258,78 @@ public class Deck {
       for(int i = 0; i <specialQuota;i++){
           Card specialC = special.get(i);
           SpecialCard clone;
-          if(specialC instanceof Assassionation){
-              clone = new Assassionation(specialC.getName(), specialC.getType(),specialC.getAbility());
+          if(specialC instanceof Assassination){
+              clone = new Assassination(specialC.getName(), specialC.getType(),((Assassination) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof Bribery){
-              clone = new Bribery(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new Bribery(specialC.getName(), specialC.getType(),((Bribery) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof computerEspionage){
-              clone = new computerEspionage(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new computerEspionage(specialC.getName(), specialC.getType(),((computerEspionage) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof deepAgent){
-              clone = new deepAgent(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new deepAgent(specialC.getName(), specialC.getType(),((deepAgent) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof interference1){
-              clone = new interference2(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new interference2(specialC.getName(), specialC.getType(),((interference1) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof interference2){
-              clone = new interference1(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new interference1(specialC.getName(), specialC.getType(),((interference2) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof marketManipulation){
-              clone = new marketManipulation(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new marketManipulation(specialC.getName(), specialC.getType(),((marketManipulation) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof medianCampaign){
-              clone = new mediacampaign(specialC.getName(), specialC.getType(),specialC.getAbility());
+          } if(specialC instanceof mediaCampaign){
+              clone = new mediaCampaign(specialC.getName(), specialC.getType(),((mediaCampaign) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof murphysLaw){
-              clone = new murphysLaw(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new murphysLaw(specialC.getName(), specialC.getType(),((murphysLaw) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof secretsManWasNotMeantToKnow){
-              clone = new secretsManWasNotMeantToKnow(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new secretsManWasNotMeantToKnow(specialC.getName(), specialC.getType(),((secretsManWasNotMeantToKnow) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof senateInvestigatingCommittee){
-              clone = new senateInvestigatingCommittee(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new senateInvestigatingCommittee(specialC.getName(), specialC.getType(),((senateInvestigatingCommittee) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof slushFund){
-              clone = new slushFund(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new slushFund(specialC.getName(), specialC.getType(),((slushFund) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof swissBankAccount){
-              clone = new swissBankAccount(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new swissBankAccount(specialC.getName(), specialC.getType(),((swissBankAccount) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof whisperingCampaign){
-              clone = new whisperingCampaign(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new whisperingCampaign(specialC.getName(), specialC.getType(),((whisperingCampaign) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
           } if(specialC instanceof whiteCollarCrime){
-              clone = new whiteCollarCrime(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone = new whiteCollarCrime(specialC.getName(), specialC.getType(),((whiteCollarCrime) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
@@ -319,16 +337,16 @@ public class Deck {
       }
    }
 
-
    public void printDeck(){
        for(Card e: deck){
            System.out.println(e + " ");
        }
+       System.out.println("illuminati");
+       for(Card e: illuminati){
+           System.out.println(e +" ");
+       }
    }
-   public static void main(String [] args){
-       Deck deck1 = new Deck();
-       deck1.printDeck();
-   }
+
 
     public void shuffle(){
         Collections.shuffle(deck);
