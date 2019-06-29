@@ -14,15 +14,17 @@ public class GroupCard extends Card {
     private Board boardd;
     private boolean switchedMode;
     private int resistance;
+    private String alignment;
 
 
-    public GroupCard(String name, String type, String ability, int power, int tpower, int resistance, int income){
+    public GroupCard(String name, String type, String ability, int power, int tpower, int resistance, int income,String alignment){
         super(name,type);
         this.ability = ability;
         this.power = power;
         this.tpower = tpower;
         this.income = income;
         this.resistance = resistance;
+        this.alignment = alignment;
     }
 
     public void attackToControl(GroupCard target){
