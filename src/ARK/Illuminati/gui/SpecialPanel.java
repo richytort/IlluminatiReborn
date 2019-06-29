@@ -1,7 +1,8 @@
 package ARK.Illuminati.gui;
 
 import ARK.Illuminati.board.player.Player;
-import ARK.Illuminati.cards.SpecialCard;
+import ARK.Illuminati.cards.GroupCard;
+import ARK.Illuminati.cards.specialCards.SpecialCard;
 
 import javax.swing.*;
 import java.awt.*;

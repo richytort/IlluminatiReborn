@@ -32,7 +32,6 @@ public class Controller implements ActionListener, MouseListener {
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroups();
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroups();
-
     }
 
 
