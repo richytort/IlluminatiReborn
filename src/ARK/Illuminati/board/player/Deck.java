@@ -2,13 +2,16 @@ package ARK.Illuminati.board.player;
 
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.IlluminatiCard;
-import ARK.Illuminati.cards.SpecialCard;
+import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.Location;
-import ARK.Illuminati.cards.Mode;
+import ARK.Illuminati.exceptions.UnexpectedFormatException;
+import ARK.Illuminati.exceptions.EmptyFieldException;
+import ARK.Illuminati.exceptions.MissingFieldException;
+import ARK.Illuminati.exceptions.UnknownCardTypeException;
+import ARK.Illuminati.exceptions.UnknownSpecialCardException;
 import ARK.Illuminati.cards.specialCards.Assassionation;
 import ARK.Illuminati.cards.specialCards.Bribery;
-import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
 
 import java.io.BufferedReader;
@@ -214,16 +217,108 @@ public class Deck {
        int illuminatiQuota = 8;
        int  specialQuota = 15;
        int otherQuota = 83;
-      for(int i =0; i <illuminati.size();i++) {
+      for(int i =0; i <illuminatiQuota;i++) {
           IlluminatiCard illuminati1 = (IlluminatiCard) illuminati.get(i);
           IlluminatiCard clone = new IlluminatiCard(illuminati1.getName(), illuminati1.getType(),
                   illuminati1.getAbility(), illuminati1.getIncome(), illuminati1.getPower(),
                   illuminati1.gettPower());
-          clone.setMode(){
-
+          clone.setMode(illuminati1.getMode());
+          clone.setHidden(illuminati1.isHidden());
+          clone.setLocation(Location.DECK);
+          deck.add(clone);
+      }
+      for(int i = 0; i <otherQuota;i++){
+          GroupCard otherG = (GroupCard) group.get(i);
+          GroupCard clone = new GroupCard(otherG.getName(), otherG.getType(),otherG.getAbility(),
+                  otherG.getPower(),otherG.gettPower(),otherG.getResistance(),
+                  otherG.getIncome(),otherG.getAlignment());
+          clone.setMode(otherG.getMode());
+          clone.setHidden(otherG.isHidden());
+          clone.setLocation(Location.DECK);
+          deck.add(clone);
+      }
+      for(int i = 0; i <specialQuota;i++){
+          Card specialC = special.get(i);
+          SpecialCard clone;
+          if(specialC instanceof Assassionation){
+              clone = new Assassionation(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof Bribery){
+              clone = new Bribery(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof computerEspionage){
+              clone = new computerEspionage(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof deepAgent){
+              clone = new deepAgent(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof interference1){
+              clone = new interference2(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof interference2){
+              clone = new interference1(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof marketManipulation){
+              clone = new marketManipulation(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof medianCampaign){
+              clone = new mediacampaign(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof murphysLaw){
+              clone = new murphysLaw(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof secretsManWasNotMeantToKnow){
+              clone = new secretsManWasNotMeantToKnow(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof senateInvestigatingCommittee){
+              clone = new senateInvestigatingCommittee(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof slushFund){
+              clone = new slushFund(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof swissBankAccount){
+              clone = new swissBankAccount(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof whisperingCampaign){
+              clone = new whisperingCampaign(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
+          } if(specialC instanceof whiteCollarCrime){
+              clone = new whiteCollarCrime(specialC.getName(), specialC.getType(),specialC.getAbility());
+              clone.setLocation(Location.DECK);
+              deck.add(clone);
+              continue;
           }
       }
    }
+
 
    public void printDeck(){
        for(Card e: deck){

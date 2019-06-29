@@ -75,7 +75,12 @@ public class GroupCard extends Card {
     public String getAbility() {
         return ability;
     }
-
+    public String getAlignment(){
+        return alignment;
+    }
+    public void setAlignment(String alignment){
+        this.alignment = alignment;
+    }
     public void setAbility(String ability) {
         this.ability = ability;
     }
@@ -96,10 +101,17 @@ public class GroupCard extends Card {
     }
 
 
+   public int getResistance(){
+        return resistance;
+   }
+   public void setResistance(int resistance){
+        this.resistance = resistance;
+   }
     public void setIncome(int income) {
         this.income = income;
     }
 
+    public int getIncome(){ return income;}
 
     public void setHidden(boolean hidden){ super.setHidden(hidden); }
 

@@ -1,6 +1,8 @@
-package ARK.Illuminati.cards;
+package ARK.Illuminati.cards.specialCards;
 
-public class SpecialCard extends Card{
+import ARK.Illuminati.cards.Card;
+
+public class SpecialCard extends Card {
     private String ability;
 
     public SpecialCard(String name, String type, String ability){
