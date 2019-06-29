@@ -1,17 +1,18 @@
 package ARK.Illuminati.gui;
 
 import ARK.Illuminati.board.player.Player;
-import ARK.Illuminati.cards.SpecialCard;
+import ARK.Illuminati.cards.GroupCard;
+import ARK.Illuminati.cards.specialCards.SpecialCard;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class SpecialsPanel extends JPanel {
+public class SpecialPanel extends JPanel {
     private ArrayList<JButton> specials;
     private Player p;
 
-    public SpecialsPanel(SpecialCard special) {
+    public SpecialPanel(Player p) {
         super();
         setPreferredSize(new Dimension(500, 100));
         update(p);
