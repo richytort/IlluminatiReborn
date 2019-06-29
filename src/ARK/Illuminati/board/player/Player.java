@@ -8,16 +8,17 @@ import ARK.Illuminati.cards.SpecialCard;
 
 import java.util.ArrayList;
 
-public class Player implements Contender{
+public class Player implements Contender {
     //instance variables
     private final String name;
     ////////////////////////FINISH FIELD CLASS////////////////
     //private Field field;
     private boolean addedGroupThisTurn;
+    private ArrayList<Card> hand;
 
-    public Player(String name ){
+    public Player(String name) {
 
-        this.name = name ;
+        this.name = name;
         ////////////////FINISH FIELD CLASS///////////////////////////
         //this.field = new Field();
 
@@ -26,47 +27,47 @@ public class Player implements Contender{
 
     @Override
     public boolean setGroup(GroupCard group) {
-        if(Card.getBoard().isGameOver())
+        if (Card.getBoard().isGameOver())
             return false;
 
         //if(this != Card.getBoard().getAvtivePlayer()){
         //    return false;
         //}
 
-        if(addedGroupThisTurn)
+        if (addedGroupThisTurn)
             //throw new MultipleGroupAdditionException();
 
-        //boolean groupAdded = this.field.addMonsterToField(group, Mode.ATTACK, false);
+            //boolean groupAdded = this.field.addMonsterToField(group, Mode.ATTACK, false);
 
-        //if (!groupAdded)
-          //  return false;
+            //if (!groupAdded)
+            //  return false;
 
-        addedGroupThisTurn = true;
+            addedGroupThisTurn = true;
 
-        return true ;
+        return true;
     }
 
     @Override
     public boolean setSpecial(SpecialCard special) {
-        if (Card.getBoard().isGameOver() )
+        if (Card.getBoard().isGameOver())
             return false;
 
-        if(this != Card.getBoard().getActivePlayer())
+        if (this != Card.getBoard().getActivePlayer())
             return false;
 
         //boolean specialAdded = this.field.addSpecialToField( special , null , true );
 
         //return specialAdded;
-        return false ; ///////////////////delete when specialAdded is done
+        return false; ///////////////////delete when specialAdded is done
     }
 
     @Override
-    public boolean activateSpecial(SpecialCard special, GroupCard group ) {
+    public boolean activateSpecial(SpecialCard special, GroupCard group) {
 
         if (Card.getBoard().isGameOver())
             return false;
 
-        if(this != Card.getBoard().getActivePlayer() )
+        if (this != Card.getBoard().getActivePlayer())
             return false;
 
         boolean specialActivated;
@@ -82,33 +83,33 @@ public class Player implements Contender{
 
     @Override
     public boolean declareAttack(GroupCard group) {
-        if(Card.getBoard().isGameOver())
+        if (Card.getBoard().isGameOver())
             return false;
 
-        if( this != Card.getBoard().getActivePlayer() )
-            return false ;
+        if (this != Card.getBoard().getActivePlayer())
+            return false;
 
         //boolean groupAttacked = this.field.declareAttack(group, null);
 
         //return groupAttacked;
-        return false ;///////////delete when fixed.
+        return false;///////////delete when fixed.
 
     }
 
     @Override
     public boolean declareAttack(GroupCard activeGroup, GroupCard opponentGroup) {
 
-        if(Card.getBoard().isGameOver())
+        if (Card.getBoard().isGameOver())
             return false;
 
-        if(this != Card.getBoard().getActivePlayer())
-            return false ;
+        if (this != Card.getBoard().getActivePlayer())
+            return false;
 
         //boolean groupAttacked = this.field.declareAttack(activeGroup, opponentGroup);
 
         //return groupAttacked ;
 
-        return false ; //delete when fixed.
+        return false; //delete when fixed.
     }
 
     @Override
@@ -124,11 +125,11 @@ public class Player implements Contender{
     @Override
     public void endAction() {
 
-        if( Card.getBoard().isGameOver())
-            return ;
+        if (Card.getBoard().isGameOver())
+            return;
 
-        if( this != Card.getBoard().getActivePlayer())
-            return ;
+        if (this != Card.getBoard().getActivePlayer())
+            return;
 
         //this.getField().endAction();
 
@@ -136,17 +137,17 @@ public class Player implements Contender{
 
     @Override
     public boolean endTurn() {
-        if(Card.getBoard().isGameOver() )
-            return false ;
+        if (Card.getBoard().isGameOver())
+            return false;
 
-        if(this != Card.getBoard().getActivePlayer() )
+        if (this != Card.getBoard().getActivePlayer())
             return false;
 
         /////////////////////////////////////////May have to adjust this part for addedGropuThisTurn////////////////////
-        addedGroupThisTurn = false ;
+        addedGroupThisTurn = false;
         //this.getField().endTurn();
 
-        return true ;
+        return true;
 
     }
 
@@ -155,21 +156,24 @@ public class Player implements Contender{
     public boolean switchGroupPosition(GroupCard group) {
 
         if (Card.getBoard().isGameOver())
-            return false ;
+            return false;
 
-        if(this != Card.getBoard().getActivePlayer())
-            return false ;
+        if (this != Card.getBoard().getActivePlayer())
+            return false;
 
         //boolean groupRotated = this.field.switchGroupPosition(group);
 
-        return false ; //return groupRotated ;
+        return false; //return groupRotated ;
 
     }
 
     public String getName() {
-        return name ;
+        return name;
     }
 
+    public int getCardIncome() {
+        return 0;
+    }
 }
 
 

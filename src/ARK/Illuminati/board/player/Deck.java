@@ -6,11 +6,13 @@ import ARK.Illuminati.cards.SpecialCard;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.Mode;
+import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Deck {
 
@@ -23,14 +25,74 @@ public class Deck {
    private static String specialPath = "Database-specialCards";
    private static String otherPath = "Database-othergroupsCards";
    private static String illuminatiPath = "Database-IlluminatiCards";
+    int trials = 0;
+
+   public Deck() throws IOException, NumberFormatException, UnexpectedFormatException{
+       if((group == null || special ==  null || group ==null )){
+           Scanner sc = new Scanner(System.in);
+           while(true){
+               try{
+                   group = loadCardsFromFile(Deck.getOtherPath());
+                   special= loadCardsFromFile(Deck.getSpecialPath());
+                   illuminati = loadCardsFromFile(Deck.getIlluminatiPath());
+                   break;
+               }catch(UnexpectedFormatException e){
+                   if(trials >= 3){
+                       sc.close();
+                       throw e;
+                   }
+                   System.out.println("Error in reading from file "
+                           + e.getSourceFile() + " at line "
+                           + e.getSourceLine());
+                   System.out.println(e.getMessage());
+                   System.out.println("Please enter another path:");
+
+                   trials++;
+
+                   if(e.getSourceFile().equalsIgnoreCase(Deck.getIlluminatiPath())){
+
+
+                   }
+
+               }
+           }
+       }
+
+
+   }
+
 
    public void buildDeck(ArrayList<Card> illuminati, ArrayList<Card> special, ArrayList<Card> group){
        int illuminatiQuota = 8;
        int  specialQuota = 15;
        int otherQuota = 83;
-
-
+       for(int i = 0; i < illuminati.size();i++){
+          Card ilu= illuminati.get(i);
+          deck.add(ilu);
+       }
+       for(int i = 0; i < group.size();i++){
+           Card groups= group.get(i);
+           deck.add(groups);
+       }
+       for(int i = 0; i < special.size();i++){
+           Card spec= special.get(i);
+           deck.add(spec);
+       }
    }
+
+   public void printDeck(){
+       for(Card e : illuminati){
+           System.out.println(e + " ");
+       }
+//       for(Card e: deck){
+//           System.out.println(e + " ");
+//       }
+   }
+   public static void main(String [] args){
+       Deck deck1 = new Deck();
+       deck1.printDeck();
+   }
+
     public void shuffle(){
         Collections.shuffle(deck);
     }
@@ -79,4 +141,9 @@ public class Deck {
 
     public static String getIlluminatiPath(){ return illuminatiPath; }
 
+    public void setIlluminatiPath(String illuminatiPath){ Deck.illuminatiPath = illuminatiPath; }
+
+    public void setSpecialPath(String specialPath){Deck.specialPath = specialPath;}
+
+    public void setOtherPath(String otherPath){ Deck.otherPath = otherPath;}
 }

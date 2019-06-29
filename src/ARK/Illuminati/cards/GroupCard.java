@@ -1,5 +1,9 @@
 package ARK.Illuminati.cards;
 import ARK.Illuminati.board.Board;
+import ARK.Illuminati.board.player.Player;
+
+import javax.print.attribute.standard.MediaSize;
+
 public class GroupCard extends Card {
     private int power;
     private String ability;
@@ -20,16 +24,17 @@ public class GroupCard extends Card {
         this.income = income;
         this.resistance = resistance;
     }
-    public void attackToControl(){
-      //  int sum = getBoard().getActivePlayer().getCard().getPower;
-        int numberRoll = boardd.rollDice();
-      //  if(sum <= numberRoll){
+
+    public void attackToControl(GroupCard target){
+        Player active = getBoard().getActivePlayer();
+        Player opponent = getBoard().getOpponentPlayer();
 
         }
-    }
+
     public void attackToNeutralize(){
 
-    }public void attacktoDestroy(){
+    }
+    public void attacktoDestroy(){
 
     }
     public void transferMoney(){
@@ -41,6 +46,20 @@ public class GroupCard extends Card {
     public void giveAgroupAway(){
 
     }
+    public void dropAgroup(){}
+
+
+
+    public void aidAnAttack(){ }
+
+    public void giveAwaySpecialCard(){}
+
+    public void giveAwayMoney(){}
+
+    public void useSpecialCard(){}
+
+    public void passing(){}
+
 
     public void switchMode(){
         if(mode == Mode.ATTACK){
@@ -51,6 +70,35 @@ public class GroupCard extends Card {
             setHidden(true);
         }
     }
+    public String getAbility() {
+        return ability;
+    }
+
+    public void setAbility(String ability) {
+        this.ability = ability;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int gettPower() { return tpower;
+    }
+
+    public void settPower(int tPower) {
+        this.tpower = tPower;
+    }
+
+
+    public void setIncome(int income) {
+        this.income = income;
+    }
+
+
     public void setHidden(boolean hidden){ super.setHidden(hidden); }
 
     public void setMode(Mode mode){ this.mode = mode; }
@@ -59,7 +107,9 @@ public class GroupCard extends Card {
 
     public void setAttacked(boolean attacked){this.attacked = attacked;}
 
-    public boolean isSwitchedMode(){ return switchedMode}
+    public boolean isSwitchedMode(){ return switchedMode;}
 
-    public void setSwitchedMode(boolean switchedMode){ this.switchedMode = switchedMode;}
+    public void setSwitchedMode(boolean switchedMode){
+        this.switchedMode = switchedMode;
+    }
 }

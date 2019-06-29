@@ -12,8 +12,10 @@ public class Board {
     private int total;
 
     public Board(){
+
         Card.setBoard(this);
     }
+
     public void whoStarts(Player p1, Player p2){
         int FirstP =rollDice();
         int SecondP = rollDice();
@@ -44,6 +46,7 @@ public class Board {
         opponentPlayer = temp;
        //activePlayer.addCardToHand();
     }
+
     public boolean isGameOver(){
         if(winner != null){
             return true;
