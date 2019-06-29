@@ -6,6 +6,8 @@ import ARK.Illuminati.cards.SpecialCard;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.Mode;
+import ARK.Illuminati.cards.specialCards.Assassionation;
+import ARK.Illuminati.cards.specialCards.Bribery;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
 
@@ -154,7 +156,53 @@ public class Deck {
 
                 }
                 switch (cardInfo[1]){
-                    case "": //missing cases special cards
+                    case "Assassination":
+                        temp.add(new Assassionation(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Bribery":
+                        temp.add(new Bribery(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Computer espionage":
+                        temp.add(new computerEspionage(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Deep Agent":
+                        temp.add(new deepAgent(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Interference1":
+                        temp.add(new interference1(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Interference2":
+                        temp.add(new interference2(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Market Manipulation":
+                        temp.add(new marketManipulation(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Media Campaign":
+                        temp.add(new medianCampaign(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Murphy's Law":
+                        temp.add(new murphysLaw(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Secrets Man Was Not Meant To Know":
+                        temp.add(new secretsManWasNotMeantToKnow(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Senate Investigating Committee":
+                        temp.add(new senateInvestigatingCommittee(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Slush Fund":
+                        temp.add(new slushFund(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Swiss Bank Account":
+                        temp.add(new swissBankAccount(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "Whispering Campaign":
+                        temp.add(new whisperingCampaign(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    case "White Collar Crime":
+                        temp.add(new whiteCollarCrime(cardInfo[1], cardInfo[0], cardInfo[2]));
+                        break;
+                    default:
+                        new UnknownSpecialCardException("Unknown Special Card,", path, lineNumber, cardInfo[1]);
                 }
             }
         }
@@ -166,28 +214,25 @@ public class Deck {
        int illuminatiQuota = 8;
        int  specialQuota = 15;
        int otherQuota = 83;
-//       for(int i = 0; i < illuminati.size();i++){
-//          Card ilu= illuminati.get(i);
-//          deck.add(ilu);
-//       }
-//       for(int i = 0; i < group.size();i++){
-//           Card groups= group.get(i);
-//           deck.add(groups);
-//       }
-     //missing special cards
+      for(int i =0; i <illuminati.size();i++) {
+          IlluminatiCard illuminati1 = (IlluminatiCard) illuminati.get(i);
+          IlluminatiCard clone = new IlluminatiCard(illuminati1.getName(), illuminati1.getType(),
+                  illuminati1.getAbility(), illuminati1.getIncome(), illuminati1.getPower(),
+                  illuminati1.gettPower());
+          clone.setMode(){
+
+          }
+      }
    }
 
    public void printDeck(){
-       for(Card e : illuminati){
+       for(Card e: deck){
            System.out.println(e + " ");
        }
-//       for(Card e: deck){
-//           System.out.println(e + " ");
-//       }
    }
    public static void main(String [] args){
-//       Deck deck1 = new Deck();
-//       deck1.printDeck();
+       Deck deck1 = new Deck();
+       deck1.printDeck();
    }
 
     public void shuffle(){
