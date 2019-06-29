@@ -1,10 +1,15 @@
 package ARK.Illuminati.listeners;
 
 import ARK.Illuminati.board.Board;
+import ARK.Illuminati.board.player.Phase;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
+import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
+import ARK.Illuminati.exceptions.DefenseGroupAttackException;
+import ARK.Illuminati.exceptions.NoGroupSpaceException;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
+import ARK.Illuminati.exceptions.WrongActionException;
 import ARK.Illuminati.gui.*;
 
 import javax.swing.*;
@@ -277,36 +282,39 @@ public class Controller implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        if(arg0.getSource() instanceof NextPhBut){
-            board.getActivePlayer().endPhase();
-            gui.getCurrphase().setText("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
-            updatefield();
+        if(arg0.getSource() instanceof NextActionButton){
+            board.getActivePlayer().endAction();
+            gui.getCurrAction().setText("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
+            updateField();
             //addActionListeners();
         }
-        if(arg0.getSource() instanceof EndTurnBut){
+        if(arg0.getSource() instanceof EndTurnButton){
             board.getActivePlayer().endTurn();
-            updatefield();
+            updateField();
             //addActionListeners();
         }
-        if(arg0.getSource() instanceof MonsterButton){
+        if(arg0.getSource() instanceof GroupButton){
 
             try{
                 if(fc==null){
 
-                    MonsterCard monster = ((MonsterButton) arg0.getSource()).getMonster();
+                    GroupCard group = ((GroupButton) arg0.getSource()).getGroup();
                     //fc = button;
 
-                    if(monster.getLocation()==Location.HAND){
-                        fc = (MonsterButton) arg0.getSource();
-                        monster = ((MonsterButton) fc).getMonster();
+                    if(group.getLocation()== Location.HAND){
+                        fc = (GroupButton) arg0.getSource();
+                        group = ((GroupButton) fc).getGroup();
                         //fc = button;
+                        ///////////THIS MAY NEED TO BE CHANGED. BETTER YET, will be changed.
                         Object[] options = {"Summon","Set","Cancel"};
                         summonset = JOptionPane.showOptionDialog(gui, "What is your action?",null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,options, options[2]);
                         if(summonset==2){
                             fc = null;
                             return;
                         }
-                        if(monster.getLevel()<=4){
+
+                        /*
+                        if(group.getLevel()<=4){
                             if(summonset==0){
                                 Card.getBoard().getActivePlayer().summonMonster(monster);
                             }
@@ -315,9 +323,10 @@ public class Controller implements ActionListener, MouseListener {
                             }
 
                             fc = null;
-                            updatefield();
+                            updateField();
                             return;
                         }
+
                         else{
                             if(monster.getLevel()<=6){
                                 if(Card.getBoard().getActivePlayer().getField().getMonstersArea().size()==0){
@@ -365,21 +374,22 @@ public class Controller implements ActionListener, MouseListener {
 
 
                         }
+                        */
 
                     }else{
-                        if(board.getActivePlayer().getField().getPhase()!=Phase.BATTLE){
+                        if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE){
                             Object[] options2 = {"OK","Cancel"};
                             int y = JOptionPane.showOptionDialog(gui, "Change Monster's Mode ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
                             if(y==0){
-                                board.getActivePlayer().switchMonsterMode(monster);
-                                updatefield();
+                                board.getActivePlayer().switchGroupPosition(Group);
+                                updateField();
                                 fc=null;
                                 sc=null;
                                 tc=null;
                             }
                         }else{
-                            fc = (MonsterButton)arg0.getSource();
-                            monster = ((MonsterButton) fc).getMonster();
+                            fc = (GroupButton)arg0.getSource();
+                            group = ((GroupButton) fc).getGroup();
                             Object[] options2 = {"OK","Cancel"};
                             int y = JOptionPane.showOptionDialog(gui, "Attack ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
                             if(y==1){
@@ -388,10 +398,10 @@ public class Controller implements ActionListener, MouseListener {
                                 tc=null;
                                 return;
                             }
-                            if(board.getOpponentPlayer().getField().getMonstersArea().size()==0){
-                                board.getActivePlayer().declareAttack(((MonsterButton)fc).getMonster());
+                            if(board.getOpponentPlayer().getField().getGroupArea().size()==0){
+                                board.getActivePlayer().declareAttack(((GroupButton)fc).getGroup());
                                 fc=null;
-                                updatefield();
+                                updateField();
                                 return;
                             }
                             JOptionPane.showMessageDialog(gui, "Choose the monster you wish to attack");
@@ -409,50 +419,54 @@ public class Controller implements ActionListener, MouseListener {
 
                     if(sc==null){
 
-                        if(fc instanceof MonsterButton){
+                        if(fc instanceof GroupButton){
 
-                            MonsterCard monster = ((MonsterButton)arg0.getSource()).getMonster();
+                            GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
                             if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE && !board.getActivePlayer().getField().getMonstersArea().contains(monster)){
                                 JOptionPane.showMessageDialog(gui, "You must choose monster cards from your field");
                                 fc=null;
                                 sc=null;
                                 return;
                             }
-                            if(((MonsterButton) fc).getMonster().getLocation()==Location.HAND && monster.getLocation()==Location.FIELD
-                                    && board.getActivePlayer().getField().getMonstersArea().contains(monster)
+                            if(((GroupButton) fc).getGroup().getLocation()==Location.HAND && group.getLocation()==Location.FIELD
+                                    && board.getActivePlayer().getField().getGroupArea().contains(group)
                                     && board.getActivePlayer().getField().getPhase()!= Phase.BATTLE){
-                                if(((MonsterButton) fc).getMonster().getLevel()<=6){
 
-                                    sc = (MonsterButton) arg0.getSource();
-                                    monster = ((MonsterButton) sc).getMonster();
 
-                                    if(monster.getLocation()==Location.FIELD){
-                                        ArrayList<MonsterCard> sacrifices = new ArrayList<MonsterCard>();
-                                        sacrifices.add(((MonsterButton)sc).getMonster());
+                                if(((GroupButton) fc).getGroup().getLevel()<=6){
+
+                                    sc = (GroupButton) arg0.getSource();
+                                    group = ((GroupButton) sc).getGroup();
+
+                                    if(group.getLocation()==Location.FIELD){
+                                        ArrayList<GroupCard> sacrifices = new ArrayList<GroupCard>();
+                                        sacrifices.add(((GroupButton)sc).getGroup());
                                         if(summonset == 0){
-                                            Card.getBoard().getActivePlayer().summonMonster(((MonsterButton) fc).getMonster(), sacrifices);
+                                            Card.getBoard().getActivePlayer().summonGroup(((GroupButton) fc).getGroup(), sacrifices);
                                         }
                                         else{
-                                            board.getActivePlayer().setMonster(((MonsterButton)fc).getMonster(), sacrifices);
+                                            board.getActivePlayer().setGroup(((GroupButton)fc).getGroup(), sacrifices);
                                         }
-                                        updatefield();
+                                        updateField();
                                         fc=null;
                                         sc=null;
                                         return;
                                     }
                                 }
+
+                                ////////////CHECK THIS!!!!!!!!!!!!!
                                 else{
-                                    MonsterButton button = (MonsterButton) arg0.getSource();
-                                    MonsterCard card = button.getMonster();
+                                    GroupButton button = (GroupButton) arg0.getSource();
+                                    GroupCard card = button.getGroup();
                                     sc = button;
                                     Object[] options2 = {"OK","Cancel"};
                                     int y = JOptionPane.showOptionDialog(gui, "Choose the second sacrifice",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
                                     if(y==0){
-                                        //updatefield();
+                                        //updateField();
                                         return;
                                     }
                                     else{
-                                        //updatefield();
+                                        //updateField();
                                         fc = null;
                                         sc = null;
                                         return;
@@ -460,59 +474,60 @@ public class Controller implements ActionListener, MouseListener {
                                 }
                             }
                             else{
-                                sc = (MonsterButton) arg0.getSource();
-                                monster = ((MonsterButton) sc).getMonster();
-                                board.getActivePlayer().declareAttack(((MonsterButton)fc).getMonster(), ((MonsterButton)sc).getMonster());
+                                sc = (GroupButton) arg0.getSource();
+                                group = ((GroupButton) sc).getGroup();
+                                board.getActivePlayer().declareAttack(((GroupButton)fc).getGroup(), ((GroupButton)sc).getGroup());
                                 fc=null;
                                 sc=null;
                                 tc = null;
-                                updatefield();
+                                updateField();
                                 return;
                             }
                         }
                         else{//fc is a spellbutton
-                            MonsterCard monster = ((MonsterButton)arg0.getSource()).getMonster();
+                            GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
 
-                            if(((SpellButton)fc).getSpell().getName().equalsIgnoreCase("Change Of Heart")){
-                                if(!board.getOpponentPlayer().getField().getMonstersArea().contains(monster)){
+                            /////////EVENTIALLY CHANGE SPELL NAME/////////////
+                            if(((SpecialButton)fc).getSpecial().getName().equalsIgnoreCase("Change Of Heart")){
+                                if(!board.getOpponentPlayer().getField().getGroupArea().contains(group)){
                                     JOptionPane.showMessageDialog(gui, "You must choose monster cards from your opponent's field");
                                     fc=null;
                                     sc=null;
                                     return;
                                 }
-                                sc = (MonsterButton)arg0.getSource();
-                                MonsterCard mons = ((MonsterButton)sc).getMonster();
-                                board.getActivePlayer().activateSpell(((SpellButton)fc).getSpell(), ((MonsterButton)sc).getMonster());
+                                sc = (GroupButton)arg0.getSource();
+                                GroupCard mons = ((GroupButton)sc).getGroup();
+                                board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), ((GroupButton)sc).getGroup());
                                 fc=null;
                                 sc=null;
-                                updatefield();
+                                updateField();
                                 return;
                             }
                             else{
-                                if(!board.getActivePlayer().getField().getMonstersArea().contains(monster)){
+                                if(!board.getActivePlayer().getField().getGroupArea().contains(group)){
                                     JOptionPane.showMessageDialog(gui, "You must choose monster cards from your field");
                                     fc=null;
                                     sc=null;
                                     return;
                                 }
-                                sc = (MonsterButton)arg0.getSource();
-                                MonsterCard mons = ((MonsterButton)sc).getMonster();
-                                board.getActivePlayer().activateSpell(((SpellButton)fc).getSpell(), ((MonsterButton)sc).getMonster());
+                                sc = (GroupButton)arg0.getSource();
+                                GroupCard mons = ((GroupButton)sc).getGroup();
+                                board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpeical(), ((GroupButton)sc).getGroup());
                                 fc=null;
                                 sc=null;
-                                updatefield();
+                                updateField();
                                 return;
                             }
                         }
                     }
                     else{
-                        if(arg0.getSource() instanceof MonsterButton){
-                            MonsterCard monster = ((MonsterButton)arg0.getSource()).getMonster();
+                        if(arg0.getSource() instanceof GroupButton){
+                            GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
 
-                            if(fc instanceof MonsterButton && ((MonsterButton) fc).getMonster().getLocation()==Location.HAND && monster.getLocation()==Location.FIELD && board.getActivePlayer().getField().getMonstersArea().contains(monster)){
+                            if(fc instanceof GroupButton && ((GroupButton) fc).getGroup().getLocation()==Location.HAND && group.getLocation()==Location.FIELD && board.getActivePlayer().getField().getGroupArea().contains(group)){
 
-                                MonsterButton button = (MonsterButton) arg0.getSource();
-                                monster = button.getMonster();
+                                GroupButton button = (GroupButton) arg0.getSource();
+                                group = button.getGroup();
                                 tc = button;
                                 if(tc==sc){
                                     JOptionPane.showMessageDialog(gui, "you have to choose two different monsters");
@@ -521,16 +536,16 @@ public class Controller implements ActionListener, MouseListener {
                                     tc=null;
                                     return;
                                 }
-                                ArrayList<MonsterCard> sacrifices = new ArrayList<MonsterCard>();
-                                sacrifices.add(((MonsterButton)sc).getMonster());
-                                sacrifices.add(((MonsterButton)tc).getMonster());
+                                ArrayList<GroupCard> sacrifices = new ArrayList<GroupCard>();
+                                sacrifices.add(((GroupButton)sc).getGroup());
+                                sacrifices.add(((GroupButton)tc).getGroup());
                                 if(summonset == 0){
-                                    Card.getBoard().getActivePlayer().summonMonster(((MonsterButton) fc).getMonster(), sacrifices);
+                                    Card.getBoard().getActivePlayer().summonGroup(((GroupButton) fc).getGroup(), sacrifices);
                                 }
                                 else{
-                                    board.getActivePlayer().setMonster(((MonsterButton) fc).getMonster(), sacrifices);
+                                    board.getActivePlayer().setGroup(((GroupButton) fc).getGroup(), sacrifices);
                                 }
-                                updatefield();
+                                updateField();
                                 fc=null;
                                 sc=null;
                                 tc=null;
@@ -545,32 +560,37 @@ public class Controller implements ActionListener, MouseListener {
 
                 }
             }
-
+/*
             catch(MultipleMonsterAdditionException e){
                 fc = null;
                 sc = null;
                 tc = null;
                 JOptionPane.showMessageDialog(gui, "you can't play more than one card");
             }
-            catch(WrongPhaseException e){
+
+ */
+            catch(WrongActionException e){
                 fc = null;
                 sc = null;
                 tc = null;
                 JOptionPane.showMessageDialog(gui, "you can't set or summon a monster in this phase");
             }
-            catch(NoMonsterSpaceException e){
+            catch(NoGroupSpaceException e){
                 fc = null;
                 sc = null;
                 tc = null;
                 JOptionPane.showMessageDialog(gui, "There is no avaialble space in monster Area");
             }
+            /*
             catch(MonsterMultipleAttackException e){
                 fc = null;
                 sc = null;
                 tc = null;
                 JOptionPane.showMessageDialog(gui, "You Can Attack Only Once");
             }
-            catch(DefenseMonsterAttackException e){
+
+             */
+            catch(DefenseGroupAttackException e){
                 fc = null;
                 sc = null;
                 tc = null;
@@ -579,14 +599,16 @@ public class Controller implements ActionListener, MouseListener {
 
         }
 
-        if(arg0.getSource() instanceof SpellButton){
-            if(fc instanceof MonsterButton){
+        if(arg0.getSource() instanceof SpecialButton){
+            if(fc instanceof GroupButton){
                 fc = null;
                 sc=null;
                 JOptionPane.showMessageDialog(gui, "you must sacrifice a monster card");
                 return;
             }
-            if(fc!=null &&((SpellButton)fc).getName().equalsIgnoreCase("Change Of Heart")){
+
+            ///////eventally change the name or so
+            if(fc!=null &&((SpecialButton)fc).getName().equalsIgnoreCase("Change Of Heart")){
                 JOptionPane.showMessageDialog(gui, "you must choose a monster card");
                 fc = null;
                 sc=null;
@@ -594,20 +616,20 @@ public class Controller implements ActionListener, MouseListener {
             }
 
             if(fc==null){
-                if(board.getActivePlayer().getField().getSpellArea().contains(((SpellButton)arg0.getSource()).getSpell())
-                        || board.getActivePlayer().getField().getHand().contains(((SpellButton)arg0.getSource()).getSpell())){
-                    if(((SpellButton)arg0.getSource()).getSpell().getLocation()==Location.HAND){
+                if(board.getActivePlayer().getField().getSpecialArea().contains(((SpecialButton)arg0.getSource()).getSpecial())
+                        || board.getActivePlayer().getField().getHand().contains(((SpecialButton)arg0.getSource()).getSpecial())){
+                    if(((SpecialButton)arg0.getSource()).getSpecial().getLocation()==Location.HAND){
                         String[] buttons = { "Activate", "Set", "cancel"};
 
                         int rc = JOptionPane.showOptionDialog(null, "Activate or set spell ?", "SpellCard",
                                 JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
-                        SpellButton button = (SpellButton) arg0.getSource();
-                        SpellCard card = button.getSpell();
+                        SpecialButton button = (SpecialButton) arg0.getSource();
+                        SpecialCard card = button.getSpecial();
                         fc=button;
                         if(rc==1){
-                            Card.getBoard().getActivePlayer().setSpell(card);
+                            Card.getBoard().getActivePlayer().setSpecial(card);
                             fc=null;
-                            updatefield();
+                            updateField();
                             return;
 
                         }
@@ -617,12 +639,13 @@ public class Controller implements ActionListener, MouseListener {
                         }
                         else{
                             switch (card.getName()) {
-
+///////////change eventually
                                 case "Card Destruction":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
+
                                 case "Change Of Heart":
                                     String[] options = { "ok", "cancel"};
 
@@ -635,23 +658,23 @@ public class Controller implements ActionListener, MouseListener {
                                     fc=null;
                                     return;
                                 case "Dark Hole":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Graceful Dice":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Harpie's Feather Duster":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Heavy Storm":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Mage Power":
@@ -666,23 +689,23 @@ public class Controller implements ActionListener, MouseListener {
                                     fc=null;
                                     return;
                                 case "Monster Reborn":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Pot of Greed":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Raigeki":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 default:
-                                    board.getActivePlayer().activateSpell(((SpellButton)fc).getSpell(), null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), null);
+                                    updateField();
 
                             }
                         }
@@ -692,21 +715,21 @@ public class Controller implements ActionListener, MouseListener {
 
                         int rc = JOptionPane.showOptionDialog(null, "Activate spell card ?", "SpellCard",
                                 JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
-                        SpellButton button = (SpellButton) arg0.getSource();
-                        SpellCard card = button.getSpell();
+                        SpecialButton button = (SpecialButton) arg0.getSource();
+                        SpecialCard card = button.getSpecial();
                         fc=button;
                         if(rc==1){
-                            Card.getBoard().getActivePlayer().setSpell(card);
+                            Card.getBoard().getActivePlayer().setSpecial(card);
                             fc=null;
-                            updatefield();
+                            updateField();
                             return;
                         }
                         else{
                             switch (card.getName()) {
 
                                 case "Card Destruction":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Change Of Heart":
@@ -721,23 +744,23 @@ public class Controller implements ActionListener, MouseListener {
                                     fc=null;
                                     return;
                                 case "Dark Hole":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Graceful Dice":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Harpie's Feather Duster":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Heavy Storm":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Mage Power":
@@ -752,23 +775,23 @@ public class Controller implements ActionListener, MouseListener {
                                     fc=null;
                                     return;
                                 case "Monster Reborn":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Pot of Greed":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 case "Raigeki":
-                                    board.getActivePlayer().activateSpell(card, null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
                                     fc = null;
                                     return;
                                 default:
-                                    board.getActivePlayer().activateSpell(((SpellButton)fc).getSpell(), null);
-                                    updatefield();
+                                    board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), null);
+                                    updateField();
 
                             }
                         }
