@@ -1,5 +1,6 @@
 package ARK.Illuminati.exceptions;
 
+@SuppressWarnings("serial")
 public class UnexpectedFormatException extends Exception {
 
     String sourceFile;
