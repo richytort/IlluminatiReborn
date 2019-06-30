@@ -3,9 +3,6 @@ import ARK.Illuminati.board.Board;
 import ARK.Illuminati.board.player.Field;
 import ARK.Illuminati.board.player.Player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class GroupCard extends Card {
     private int power;
@@ -123,11 +120,12 @@ public class GroupCard extends Card {
     public void aidAnAttack(){
 
     }
-//    public void giveAgroupAway(GroupCard target){
-//        Player p1 = getBoard().getActivePlayer();
-//        p1.getField().removeGroupToHand(target);
-//
-//    }
+    public void giveAgroupAway(GroupCard target){
+        Player p1 = getBoard().getActivePlayer();
+        Player p2 = getBoard().getOpponentPlayer();
+        p1.getField().removeGroupToHand(target);
+
+    }
 
 
 
@@ -167,9 +165,7 @@ public class GroupCard extends Card {
    public int getResistance(){
         return resistance;
    }
-   public void setResistance(int resistance){
-        this.resistance = resistance;
-   }
+
     public void setIncome(int income) {
         this.income = income;
     }

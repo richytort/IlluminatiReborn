@@ -133,7 +133,7 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer())
             return;
 
-        this.getField().endAction();
+      //  this.getField().endAction();
 
     }
 
@@ -145,7 +145,7 @@ public class Player implements Contender {
             return false;
 
         addedGroupThisTurn = false;
-        this.getField().endTurn();
+      //  this.getField().endTurn();
 
         return true;
 
@@ -155,8 +155,9 @@ public class Player implements Contender {
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-        boolean CardSwitched = this.file.switchCardMode(cards);
-        return CardSwitched;
+       // boolean CardSwitched = this.file.switchCardMode(cards);
+        //return CardSwitched;
+        return false;
     }
 
     /////////////Seems we can adjust the rotation on this part/////////////////////////////////////////////////////////
@@ -225,11 +226,14 @@ public class Player implements Contender {
     public void moveAGroup(int moveGroup, int newLocation ){
         Collections.swap(hand,moveGroup,newLocation);
     }
-
-    public void passing(){
-        this.getField().endTurn();
-        totalIncome = getTotalIncome() + 5;
+    public void addCardToHand(Card e){
+        hand.add(e);
     }
+
+//    public void passing(){
+//        this.getField().endTurn();
+//        totalIncome = getTotalIncome() + 5;
+//    }
 
 }
 

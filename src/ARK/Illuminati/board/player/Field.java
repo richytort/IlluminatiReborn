@@ -5,7 +5,7 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.IlluminatiCard;
-import ARK.Illuminati.cards.Mode;
+import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
@@ -14,16 +14,14 @@ import ARK.Illuminati.exceptions.UnexpectedFormatException;
 public class Field {
     private final Deck deck;
     private ArrayList<Card> hand;
-    private ArrayList<IlluminatiCard> illuminatiArea;
-    private ArrayList<SpecialCard> specialArea;
-    private ArrayList<GroupCard> GroupArea;
+    Player p1;
+    Player p2;
     private  ArrayList<Card> uncontrolledGroups;
+    private ArrayList<Card> graveYard;
 
     public Field()throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         uncontrolledGroups = new ArrayList<Card>();
-        specialArea = new ArrayList<>();
-        illuminatiArea = new ArrayList<>();
         deck = new Deck();
     }
     public void removeCard(Card e){
@@ -62,58 +60,46 @@ public class Field {
             temp.setLocation(Location.UNCONTROLLED);
         }
     }
-
-//    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 //
+//    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 //        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
 //            return false;
-//
 //        if (hand.size() >= 5)
 //            throw new NoSpaceException();
-//
 //        if (Action == Action.Attack)
 //            throw new WrongActionException();
-//
 //        hand.remove(group);
 //        group.setHidden(isHidden);
 //        group.setLocation(Location.FIELD);
 //        hand.add(group);
 //        return true;
-//
 //    }
-//
-//
-//    public void removeCard(GroupCard group) {
+//    public void removeCardtoGraveYard(GroupCard group) {
 //        if (illuminatiArea.contains(group)) {
 //            illuminatiArea.remove(group);
 //            uncontrolledGroups.add(group);
-//            uncontrolledGroups.setLocation(Location.UNCONTROLLED);
+//            uncontrolledGroups.setLocation(Location.uncontrolledGroups);
 //        }
-//
 //    }
-//
 //    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
-//
 //        if (!specialArea.contains(card))
 //            return false;
-//
 //        if (Action == Action.BATTLE)
 //            throw new WrongActionException();
 //        card.action(group);
 //        removeCard(card);
-//
 //        return true;
-//
 //    }
-
-
-
-
-
-
-
-
-
-
-
+//
+//
+//
+//
+//
+//
+    public void removeGroupToHand(Card target){
+        if(p1.getHand().contains(target)){
+            p1.getHand().remove(target);
+            p2.getHand().add(target);
+        }
+    }
 }
