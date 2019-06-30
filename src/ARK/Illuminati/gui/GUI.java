@@ -289,7 +289,7 @@ public class GUI extends JFrame {
         hand1SP.setBorder(null);
         hand1SP.getViewport().setOpaque(false);
         hand1SP.setPreferredSize(new Dimension(200, 150));
-        hand1SP.setOpaque(true);
+        hand1SP.setOpaque(false);
         hand1SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         hand1SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         panel1.add(hand1SP,BorderLayout.EAST);

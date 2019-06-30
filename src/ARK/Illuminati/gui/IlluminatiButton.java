@@ -9,7 +9,7 @@ public class IlluminatiButton extends JButton {
     public IlluminatiCard getIlluminati() {
         return illuminati;
     }
-    public void setIlluminati(IlluminatiCard monster) {
+    public void setIlluminati(IlluminatiCard illuminati) {
         this.illuminati = illuminati;
     }
     public IlluminatiButton() {

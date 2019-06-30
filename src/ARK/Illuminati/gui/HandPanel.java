@@ -15,10 +15,11 @@ public class HandPanel extends JPanel {
     private ArrayList<SpecialButton> specialButtons;
     private IlluminatiButton illuminatiButton ;
 
-    public HandPanel( Player p ) {
+    public HandPanel(Player p ) {
         super();
         update(p);
     }
+
 
     public ArrayList<GroupButton> getHandButtons(){
         return this.groupButtons;
@@ -52,6 +53,11 @@ public class HandPanel extends JPanel {
             this.add(s);
             specialButtons.add(s);
         }
+
+        IlluminatiButton ii = new IlluminatiButton();
+        ii.setVisible(false);
+        this.add(ii);
+        illuminatiButton.add(ii);
 
         for(int i = 0; i <hand.size();i++){
             if(hand.get(i) instanceof GroupCard){

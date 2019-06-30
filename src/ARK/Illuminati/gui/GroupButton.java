@@ -15,7 +15,7 @@ public class GroupButton extends JButton {
     public GroupButton() {
         this.setVisible(true);
     }
-    public GroupButton(GroupCard monster){
+    public GroupButton(GroupCard group){
         this.setVisible(true);
         this.setName(group.getName());
 
