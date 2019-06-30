@@ -37,6 +37,12 @@ public class Board {
         }
     }
     public void startGame(Player p1 , Player p2 ){
+        p1.addNCardsToHand(1);
+        p2.addNCardsToHand(1);
+        //p1.addIlluminatiCard();
+        //p2.addIlluminatiCard();
+        //deck.shuffle();
+        //uncontrolled.add4CardsToUncontrolled();
         p1.addIlluminatiCard();
         p2.addIlluminatiCard();
         uncontrolled.add4CardsToUncontrolled();

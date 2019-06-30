@@ -123,7 +123,7 @@ public class GroupCard extends Card {
     public void giveAgroupAway(GroupCard target){
         Player p1 = getBoard().getActivePlayer();
         Player p2 = getBoard().getOpponentPlayer();
-        p1.getField().removeGroupToHand(target);
+        //p1.getField().removeGroupToHand(target);
 
     }
 

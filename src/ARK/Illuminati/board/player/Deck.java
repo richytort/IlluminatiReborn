@@ -357,6 +357,10 @@ public class Deck {
        }
     }
 
+    public Card drawOneCard(){
+       return deck.remove(0);
+    }
+
     public Card drawOneCardB() {
         Card c = deck.get(0);
         if(deck.get(0).getType().equalsIgnoreCase("other group")){
@@ -419,4 +423,6 @@ public class Deck {
     public static void setSpecialPath(String specialPath){Deck.specialPath = specialPath;}
 
     public static void setOtherPath(String otherPath){ Deck.otherPath = otherPath;}
+
+
 }

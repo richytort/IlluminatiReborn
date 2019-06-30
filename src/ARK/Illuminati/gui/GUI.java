@@ -23,6 +23,7 @@ public class GUI extends JFrame {
     private JPanel panel1 ; //make this for player 1 Structure
     private JPanel panel2; // This is for player 2 Structure
     private JPanel uPanel; // this will be for uncontrolled groups
+    private JPanel hPanel; //this will be used for the hand.
     public JLabel deck ;
     public JButton grave ;
     private NextActionButton nextAction ;
@@ -33,6 +34,8 @@ public class GUI extends JFrame {
     private JScrollPane pan ;
     private StructurePanel structureAreaP1;
     private StructurePanel structureAreaP2 ;
+    private HandPanel handAreaP1;
+    private HandPanel handAreaP2;
     private UncontrolledPanel uncontrolledArea ;
     private SpecialPanel specialAreaP1;
     private SpecialPanel specialAreaP2;
@@ -47,6 +50,46 @@ public class GUI extends JFrame {
     public static Clip getAudioClip(){ return audioClip ; }
 
     public static void setAudioClip( Clip audioClip ) { GUI.audioClip = audioClip ; }
+
+    public void setPanel1(JPanel panel1) {
+        this.panel1 = panel1;
+    }
+
+    public JPanel getuPanel() {
+        return uPanel;
+    }
+
+    public void setuPanel(JPanel uPanel) {
+        this.uPanel = uPanel;
+    }
+
+    public JPanel gethPanel() {
+        return hPanel;
+    }
+
+    public void sethPanel(JPanel hPanel) {
+        this.hPanel = hPanel;
+    }
+
+    public void setNextAction(NextActionButton nextAction) {
+        this.nextAction = nextAction;
+    }
+
+    public HandPanel getHandAreaP1() {
+        return handAreaP1;
+    }
+
+    public void setHandAreaP1(HandPanel handAreaP1) {
+        this.handAreaP1 = handAreaP1;
+    }
+
+    public HandPanel getHandAreaP2() {
+        return handAreaP2;
+    }
+
+    public void setHandAreaP2(HandPanel handAreaP2) {
+        this.handAreaP2 = handAreaP2;
+    }
 
     public StructurePanel getStructureAreaP1(){
         return structureAreaP1;
@@ -160,7 +203,6 @@ public class GUI extends JFrame {
         b.startGame(p1, p2);
         setP1(p1);
         setP2(p2);
-
         ImageIcon bg = new ImageIcon("src/bg3.png");
         JLabel g = new JLabel(bg);
         g.setVisible(true);
@@ -205,7 +247,7 @@ public class GUI extends JFrame {
 
         //finish field class
         //test deck and test currAction
-        deck = new JLabel(); //deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
+        deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
         currAction = new JLabel(); //currAction = new JLabel(Card.getBoard().getActivePlayer().getField().getPhase().name());
 
         deck.setFont(new Font("Ariel", Font.BOLD, 15));
@@ -239,9 +281,17 @@ public class GUI extends JFrame {
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
         panel1.add(structureAreaP1,BorderLayout.CENTER);
-        //        panel1.add(specialAreaP1 , BorderLayout.CENTER);
-
         panel1.setOpaque(true);
+
+        JScrollPane hand1SP = new JScrollPane(handAreaP1);
+        hand1SP.setBorder(null);
+        hand1SP.getViewport().setOpaque(false);
+        hand1SP.setPreferredSize(new Dimension(200, 150));
+        hand1SP.setOpaque(false);
+        hand1SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        hand1SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        panel1.add(hand1SP,BorderLayout.EAST);
+        this.revalidate();
 
 //THIS IS UNCONTROLLEDGROUP AREA PANEL
         sp1 = new JScrollPane(uncontrolledArea);
@@ -253,47 +303,24 @@ public class GUI extends JFrame {
         sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         uPanel = new JPanel();
         uPanel.add(sp1,BorderLayout.CENTER);
-        uPanel.add(uncontrolledArea, BorderLayout.CENTER);
         uPanel.setOpaque(false);
         this.revalidate();
 
-
-
+//player 2 STUFF
         panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
         panel2.add(structureAreaP2, BorderLayout.CENTER);
-        //panel2.add(specialAreaP2,BorderLayout.CENTER);
         panel2.setOpaque(true);
 
-
-
-
-/*
-        if (p2 == Card.getBoard().getActivePlayer()) {
-            sp2 = new JScrollPane(structureAreaP2) ; //sp2 = new JScrollPane(handp2);
-            sp2.setBorder(null);
-            sp2.getViewport().setOpaque(false);
-            sp2.setPreferredSize(new Dimension(500,150));
-            sp2.setOpaque(false);
-            sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            panel2.add(sp2,BorderLayout.NORTH);
-            this.revalidate();
-        }
-        else{
-            sp2= new JScrollPane();//sp2 = new JScrollPane(p2hid);
-            sp2.setBorder(null);
-            sp2.getViewport().setOpaque(false);
-            sp2.setPreferredSize(new Dimension(500,150));
-            sp2.setOpaque(false);
-            sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            panel2.add(sp2,BorderLayout.NORTH);
-            this.revalidate();
-        }
-
- */
-
+        JScrollPane hand2SP = new JScrollPane(handAreaP2) ; //sp2 = new JScrollPane(handp2);
+        hand2SP.setBorder(null);
+        hand2SP.getViewport().setOpaque(false);
+        hand2SP.setPreferredSize(new Dimension(200,150));
+        hand2SP.setOpaque(false);
+        hand2SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        hand2SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        panel2.add(hand2SP,BorderLayout.EAST);
+        this.revalidate();
 
         JPanel panel3 = new JPanel();
         panel3.setOpaque(false);
@@ -323,9 +350,9 @@ public class GUI extends JFrame {
 
 
         this.add(panel1);
-        panel1.setBounds(280, 520, 700, 200);
+        panel1.setBounds(280, 520, 800, 200);
         this.add(panel2);
-        panel2.setBounds(280, 5, 700, 200);
+        panel2.setBounds(280, 5, 800, 200);
         this.add(uPanel);
         uPanel.setBounds( 280, 262, 700, 150);
         this.add(deck);
