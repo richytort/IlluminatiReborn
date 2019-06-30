@@ -61,7 +61,7 @@ public class Field {
             temp.setLocation(Location.UNCONTROLLED);
         }
     }
-
+/*
     public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 
         if (!(hand.contains(group) && group.getLocation() == Location.HAND))
@@ -111,7 +111,7 @@ public class Field {
 
 
 
-
+*/
 
 
 

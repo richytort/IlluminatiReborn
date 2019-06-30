@@ -42,7 +42,7 @@ public class GUI extends JFrame {
     private Player p2 ;
     private ImageIcon imgThisImg ;
     private JLabel description ;
-    private JScrollPane sp1 ;
+    private JScrollPane sp1 ; //use this for uncontrolled area scroll pane
     private JScrollPane sp2 ;
     public static Clip getAudioClip(){ return audioClip ; }
 
@@ -243,34 +243,20 @@ public class GUI extends JFrame {
 
         panel1.setOpaque(true);
 
-        //Consider deleting the sp1...Oh maybe not. SP could mean the "Special hand. We will see.
-/*
-        if (p1 == Card.getBoard().getActivePlayer()) {
-            sp1 = new JScrollPane(structureAreaP1); //sp1 = new JScrollPane(handp1); may not need this since we aren't using "Hand".
-            sp1.setBorder(null); //same as statedabove
-            sp1.getViewport().setOpaque(false);
-            sp1.setPreferredSize(new Dimension(500,150));
-            sp1.setOpaque(false);
-            sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            panel1.add(sp1,BorderLayout.SOUTH);
-            this.revalidate();
-        }
-        //hmm, we may only need this one since we do have a p1hid. This is the specials that will
-        //be hidden.
-        else{
-            sp1 = new JScrollPane(p1hid);
-            sp1.setBorder(null);
-            sp1.getViewport().setOpaque(false);
-            sp1.setPreferredSize(new Dimension(500,150));
-            sp1.setOpaque(false);
-            sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            panel1.add(sp1,BorderLayout.SOUTH);
-            this.revalidate();
-        }
+//THIS IS UNCONTROLLEDGROUP AREA PANEL
+        sp1 = new JScrollPane(uncontrolledArea);
+        sp1.setBorder(null); //same as statedabove
+        sp1.getViewport().setOpaque(false);
+        sp1.setPreferredSize(new Dimension(500,150));
+        sp1.setOpaque(false);
+        sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        uPanel = new JPanel();
+        uPanel.add(sp1,BorderLayout.CENTER);
+        uPanel.add(uncontrolledArea, BorderLayout.CENTER);
+        uPanel.setOpaque(false);
+        this.revalidate();
 
-*/
 
 
         panel2 = new JPanel();
@@ -279,12 +265,7 @@ public class GUI extends JFrame {
         //panel2.add(specialAreaP2,BorderLayout.CENTER);
         panel2.setOpaque(true);
 
-        //THIS IS UNCONTROLLEDGROUP AREA PANEL
-        sp1 = new JScrollPane(uPanel);
-        uPanel = new JPanel();
-        uPanel.setLayout(new BorderLayout());
-        uPanel.add(uncontrolledArea, BorderLayout.CENTER);
-        uPanel.setOpaque(true);
+
 
 
 /*
@@ -332,7 +313,7 @@ public class GUI extends JFrame {
 
         //May have to change this eventually.
         //test ingThisImg
-        imgThisImg = new ImageIcon("California.png");//imgThisImg = new ImageIcon("Cards Images Database/Card Back.png");
+        imgThisImg = new ImageIcon("RegBack.png");//imgThisImg = new ImageIcon("Cards Images Database/Card Back.png");
         //here is that description again. Find out what this description is for.
         Image nimg = imgThisImg.getImage();
         imgThisImg = new ImageIcon(nimg.getScaledInstance(338, 200, SCALE_SMOOTH));
