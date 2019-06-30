@@ -124,7 +124,7 @@ public class GroupCard extends Card {
 
     }
     public void dropAgroup(GroupCard i){
-        field.removeCard(i);
+        //field.removeCard(i);
     }
 
 

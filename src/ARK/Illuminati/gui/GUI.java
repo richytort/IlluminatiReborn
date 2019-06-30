@@ -280,6 +280,7 @@ public class GUI extends JFrame {
         panel2.setOpaque(true);
 
         //THIS IS UNCONTROLLEDGROUP AREA PANEL
+        sp1 = new JScrollPane(uPanel);
         uPanel = new JPanel();
         uPanel.setLayout(new BorderLayout());
         uPanel.add(uncontrolledArea, BorderLayout.CENTER);
@@ -345,7 +346,7 @@ public class GUI extends JFrame {
         this.add(panel2);
         panel2.setBounds(280, 5, 700, 200);
         this.add(uPanel);
-        uPanel.setBounds( 280, 262, 700, 200);
+        uPanel.setBounds( 280, 262, 700, 150);
         this.add(deck);
         deck.setBounds(1277, 645, 100, 100);
         this.add(grave);
@@ -420,8 +421,8 @@ public class GUI extends JFrame {
         JFrame start = new JFrame() ;
         start.setSize(1366, 768);
         start.setVisible(true);
-        ////////////////Make a start game icon.
-        //test start.setContentPane
+        start.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         start.setContentPane(new JLabel(new ImageIcon("bg3.png" )));
 
         start.revalidate();

@@ -1,6 +1,6 @@
 package ARK.Illuminati.board.player;
 
 public enum Phase {
-    MAIN1, BATTLE, MAIN2
+    ACTION1, ACTION2, MAIN, MAIN1, BATTLE, MAIN2
 
 }
