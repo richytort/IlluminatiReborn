@@ -356,12 +356,7 @@ public class Deck {
     }
     //figure out how to add to uncontrolled and hand
     public Card drawCards(){
-       Card c = deck.get(0);
-       if(c.getType().toLowerCase().equalsIgnoreCase("special card")){
-           c = deck.remove(0);
-       }else{
-           c = deck.remove(0);
-       }return c;
+       return deck.remove(0);
     }
 
     public Card drawIlluminatiCard(){
@@ -372,12 +367,6 @@ public class Deck {
                 deck.remove(0);
             }
         }return c;
-    }
-    public ArrayList<Card> draw4cards(){
-        ArrayList cards = new ArrayList<Card>(4);
-        for(int i= 0; i <4;i++){
-            cards.add(deck.remove(0));
-        }return cards;
     }
     public void printd(){
        for(Card e : deck){

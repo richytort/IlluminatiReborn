@@ -1,5 +1,7 @@
 package ARK.Illuminati.cards.specialCards;
 
+import ARK.Illuminati.cards.Card;
+
 public class whisperingCampaign extends SpecialCard {
     String ability;
 
@@ -7,9 +9,9 @@ public class whisperingCampaign extends SpecialCard {
         super(name, type);
         this.ability = ability;
     }
-    public void Action(){
 
-    }
+    public  void action(Card cardA){}
+
     public void setAbility(String ability){
         this.ability = ability;
     }

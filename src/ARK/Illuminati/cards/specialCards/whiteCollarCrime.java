@@ -1,5 +1,7 @@
 package ARK.Illuminati.cards.specialCards;
 
+import ARK.Illuminati.cards.Card;
+
 public class whiteCollarCrime extends SpecialCard {
     String ability;
 
@@ -7,10 +9,8 @@ public class whiteCollarCrime extends SpecialCard {
         super(name, type);
         this.ability = ability;
     }
+    public  void action(Card cardA){}
 
-    public void Action(){
-
-    }
     public void setAbility(String ability){
         this.ability = ability;
     }

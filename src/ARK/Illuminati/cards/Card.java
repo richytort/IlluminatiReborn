@@ -26,9 +26,7 @@ public abstract class Card {
         this.location = location;
     }
 
-//    public abstract void actionIllu(IlluminatiCard illuminati);
-//    public abstract void actionSpec(SpecialCard special);
-//    public abstract void actionother(otherGroups other);
+    public abstract void action(Card cardA);
 
     public String getName() {
         return name;

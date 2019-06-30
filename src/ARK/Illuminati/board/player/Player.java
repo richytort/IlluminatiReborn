@@ -16,6 +16,7 @@ public class Player implements Contender {
     //instance variables
     private final String name;
     private int income;
+    private int totalIncome;
     private Field field;
     private boolean addedGroupThisTurn;
     private ArrayList<Card> hand;
@@ -48,6 +49,7 @@ public class Player implements Contender {
 
         return true;
     }
+
 
     @Override
     public boolean setSpecial(SpecialCard special) {
@@ -119,10 +121,6 @@ public class Player implements Contender {
         //this.field.addCardToStructure();
     }
 
-    @Override
-    public void addNCardsToStructure(int n) {
-        //this.field.addNCardsToStructure(n);
-    }
 
     @Override
     public void endAction() {
@@ -169,8 +167,13 @@ public class Player implements Contender {
 
     }
     public void addCardToHand(){
-       // this.field.addCardToHand();
+
+       this.field.addCardToHand();
     }
+    public void addIlluminatiCard(){
+        this.field.addIlluminatiCard();
+    }
+
 
     public Card getCard(Card i) {
         return i;
@@ -178,6 +181,7 @@ public class Player implements Contender {
     public String getName() {
         return name;
     }
+
    public int getIncome(){
         for(Card e: hand){
             if(getCard(e).getType().equalsIgnoreCase("illuminati") || getCard(e).getType().equalsIgnoreCase("other group")){
@@ -200,6 +204,19 @@ public class Player implements Contender {
     public int returnLocation(Card e){
         return hand.indexOf(e);
 
+    }
+    public int getTotalIncome(){
+        for(int i = 0; i < hand.size();i++){
+            totalIncome+=hand.get(i).getIncome();
+        }
+        return totalIncome;
+    }
+    public void passing(){
+       totalIncome = getTotalIncome() + 5;
+
+    }
+    public Field getField(){
+        return field;
     }
 
 
