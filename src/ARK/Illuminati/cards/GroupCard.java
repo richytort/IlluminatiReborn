@@ -73,23 +73,27 @@ public class GroupCard extends Card {
        }
     }
 
-//    public void attackToNeutralize(GroupCard target){
-//        Player active = getBoard().getActivePlayer();
-//        Player opponent = getBoard().getOpponentPlayer();
-//        if(target.getMode() == Mode.ATTACK){
-//            target.setMode(Mode.DEFENSE);
-//        }
-//        int thisPower = this.getPower();
-//        int otherResistance = target.getResistance();
-//        int totalSubtraction = thisPower-otherResistance;
+    public void attackToNeutralize(GroupCard target) {
+        Player active = getBoard().getActivePlayer();
+        Player opponent = getBoard().getOpponentPlayer();
+        if (target.getMode() == Mode.ATTACK) {
+            target.setMode(Mode.DEFENSE);
+        }
+        int thisPower = this.getPower();
+        int otherResistance = target.getResistance();
+        int total = thisPower - otherResistance;
 //        this.setAttacked(true);
-//        int diceNumber = boardd.rollDice();
-//        System.out.println(diceNumber);
-//        if(diceNumber >= totalSubtraction){
-//          //  opponent.getField().removeGroupToUncontrolled(target);
-//            income =active.getIncome() +6;
-//            targetIncome = target.getIncome() - target.getIncome();
-//        }else if(diceNumber == 11 || diceNumber == 12){
+        int diceNumber = boardd.rollDice();
+        System.out.println(diceNumber);
+        if (diceNumber >= total) {
+            opponent.getField().removeGroupToUncontrolled(target);
+            active.setIncome(active.getIncome() + 6);
+            target.setIncome(target.getIncome() - target.getIncome());
+            active.setResult(10);
+        } else if (diceNumber == 11 || diceNumber == 12) {
+            active.setIncome(0);
+        }
+    }
 //            System.out.println("Sorry automatic lost");
 //
 //        }else{
@@ -121,12 +125,12 @@ public class GroupCard extends Card {
 //
 //    }
 
-    public int transferMoney(GroupCard groupTransfer, int incomeTransfer){
-        income = this.getIncome()- incomeTransfer;
-        targetIncome = groupTransfer.getIncome()+ incomeTransfer;
-        return targetIncome;
-
-    }
+// //   public int transferMoney(GroupCard groupTransfer, int incomeTransfer){
+//        income = this.getIncome()- incomeTransfer;
+//        targetIncome = groupTransfer.getIncome()+ incomeTransfer;
+//        return targetIncome;
+//
+//    }
 
     public void dropAgroup(GroupCard i){
         //field.removeCard(i);

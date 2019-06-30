@@ -135,22 +135,22 @@ public class Player implements Contender {
         return false; //delete when fixed.
     }
 */
-    public boolean declareAttackToControl(GroupCard group) {}
-    public boolean declareAttackToNeutralize(GroupCard group) {}
-
-    public boolean declareAttackToDestroy(GroupCard group) {}
-
-
-    public boolean declareAttackToControlI(Card activeGroup, Card opponentGroup) {
-        if(Card.getBoard().isGameOver())
-            return false;
-        if(this != Card.getBoard().getActivePlayer())
-            return false;
-//        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
+//    public boolean declareAttackToControl(GroupCard group) {}
+//    public boolean declareAttackToNeutralize(GroupCard group) {}
 //
-//        return cardAttacked;
-        return false;
-    }
+//    public boolean declareAttackToDestroy(GroupCard group) {}
+//
+//
+//    public boolean declareAttackToControlI(Card activeGroup, Card opponentGroup) {
+//        if(Card.getBoard().isGameOver())
+//            return false;
+//        if(this != Card.getBoard().getActivePlayer())
+//            return false;
+////        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
+////
+////        return cardAttacked;
+//        return false;
+//    }
 
     public boolean declareAttackToControlG(Card activeGroup, Card opponentGroup) {
         if(Card.getBoard().isGameOver())
@@ -355,6 +355,9 @@ public class Player implements Contender {
     }
     public int getResult(){
         return result;
+    }
+    public void setIncome(int income){
+        this.income = income;
     }
 
 }

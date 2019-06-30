@@ -106,7 +106,7 @@ public class Field {
         special.setLocation(Location.GRAVEYARD);
         return true;
     }
-    //need one for illuminati
+//    public boolean declareAttackToControlI(GroupCard g1, GroupCard g2){}
 
     public boolean declareAttackToControlG(GroupCard g1, GroupCard g2){
         if(g1.getMode() != Mode.ATTACK)
@@ -125,12 +125,11 @@ public class Field {
 
 
     }
-    public boolean declareAttackToControlI(GroupCard g1, GroupCard g2){}
 
-        public boolean declareAttackToNeutralize(Card activeGroup, GroupCard opponentGroup) { }
-    public boolean declareAttackToDestroy(Card activeGroup, GroupCard opponentGroup) { }
-    public boolean dropAGroup(Card card){}
-    public boolean giveawayGroup(Card card){}
+//        public boolean declareAttackToNeutralize(Card activeGroup, GroupCard opponentGroup) { }
+//    public boolean declareAttackToDestroy(Card activeGroup, GroupCard opponentGroup) { }
+//    public boolean dropAGroup(Card card){}
+//    public boolean giveawayGroup(Card card){}
 
 
 
@@ -194,6 +193,7 @@ public class Field {
         field.addIlluminatiCard();
         field.addCardToHand();
         field.add4CardsToUncontrolled();
+        System.out.println("hand");
         field.printHand();
         System.out.println("uncontrolled");
         field.printUncontroled();
@@ -205,7 +205,7 @@ public class Field {
         uncontrolledGroups.add(e);
     }
 
-    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
+ //   public boolean useSpecialCard(SpecialCard card, GroupCard group) {
 //        if (!specialArea.contains(card))
 //            return false;
 ////        if (Action == Action.BATTLE)
