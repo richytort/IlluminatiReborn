@@ -125,7 +125,9 @@ public class Field {
 
 
     }
-    public boolean declareAttackToNeutralize(Card activeGroup, GroupCard opponentGroup) { }
+    public boolean declareAttackToControlI(GroupCard g1, GroupCard g2){}
+
+        public boolean declareAttackToNeutralize(Card activeGroup, GroupCard opponentGroup) { }
     public boolean declareAttackToDestroy(Card activeGroup, GroupCard opponentGroup) { }
     public boolean dropAGroup(Card card){}
     public boolean giveawayGroup(Card card){}
