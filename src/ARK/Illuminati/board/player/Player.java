@@ -30,25 +30,23 @@ public class Player implements Contender {
     }
 
 
+    //need to set it facing up
     @Override
-    public boolean setGroup(GroupCard group) {
+    public boolean setGroup(Card group) {
+
         if (Card.getBoard().isGameOver())
             return false;
 
         if(this != Card.getBoard().getActivePlayer()){
             return false;
         }
-//
-//        if (addedGroupThisTurn)
-//            throw new MultipleGroupAdditionException();
-//
-//            boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
-//
+      //  if (addedGroupThisTurn)
+            //do we need it? because we can have multiple cards there??
+          // throw new MultipleGroupAdditionException();
+        boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
 //            if (!groupAdded)
 //              return false;
-//
 //            addedGroupThisTurn = true;
-
         return true;
     }
 
@@ -58,16 +56,27 @@ public class Player implements Contender {
         if (Card.getBoard().isGameOver())
             return false;
 
-        if (this != Card.getBoard().getActivePlayer())
+        if (this != Card.getBoard().getActivePlayer()) {
             return false;
+        }
+        boolean specialAdded = this.field.addSpecialToField( special , null , false );
+        return specialAdded;
 
-        //boolean specialAdded = this.field.addSpecialToField( special , null , true );
+    }
 
-        //return specialAdded;
-        return false; ///////////////////delete when specialAdded is done
+    public boolean setSpecialFaceDown(SpecialCard special){
+            if (Card.getBoard().isGameOver())
+                return false;
+
+            if (this != Card.getBoard().getActivePlayer()) {
+                return false;
+            }
+            boolean specialAdded = this.field.addSpecialToField( special , null , true );
+            return specialAdded;
     }
 
     @Override
+    //finish when they finish field.
     public boolean activateSpecial(SpecialCard special, GroupCard group) {
 
         if (Card.getBoard().isGameOver())
@@ -87,7 +96,13 @@ public class Player implements Contender {
         return false; ///////////////////delete when specialactivated
     }
 
-    @Override
+  //  @Override
+    //declare attack control
+    //declare attack neutralze
+    //deckare attck destroy
+    //list all the actions
+
+    //finish when field
     public boolean declareAttack(GroupCard group) {
         if (Card.getBoard().isGameOver())
             return false;
@@ -102,7 +117,8 @@ public class Player implements Contender {
 
     }
 
-    @Override
+    //do we really need it
+  //  @Override
     public boolean declareAttack(GroupCard activeGroup, GroupCard opponentGroup) {
 
         if (Card.getBoard().isGameOver())
@@ -118,12 +134,59 @@ public class Player implements Contender {
         return false; //delete when fixed.
     }
 
+    public boolean declareAttackToControl(Card activeGroup, Card opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
+//
+//        return cardAttacked;
+        return false;
+    }
+
+
+    public boolean declareAttackToNeutralize(GroupCard activeGroup, GroupCard opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToNeutralize(activeGroup,opponentGroup);
+//
+//        return cardAttacked;
+        return false;
+    }
+
+
+
+    public boolean declareAttackToDestroy(GroupCard activeGroup, GroupCard opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToDestroy(activeGroup,opponentGroup);
+//
+//        return cardAttacked;
+        return false;
+
+    }
+
+    //fix
+    public boolean dropAGroup(Card card){
+        return false;
+    }
+    //fix
+    public boolean giveawayGroup(Card card){
+        return false;
+    }
+
     @Override
     public void addCardToStructure() {
         //this.field.addCardToStructure();
     }
 
 
+    //get from field
     @Override
     public void endAction() {
 
@@ -137,6 +200,7 @@ public class Player implements Contender {
 
     }
 
+    //get from field
     @Override
     public boolean endTurn() {
         if (Card.getBoard().isGameOver())
@@ -150,6 +214,7 @@ public class Player implements Contender {
         return true;
 
     }
+    //fixed later
     public boolean switchCardMode(Card cards){
         if(Card.getBoard().isGameOver())
             return false;
@@ -216,10 +281,14 @@ public class Player implements Contender {
         return hand;
     }
 
+    //should it be boolean
+    //implement this actions
     public void giveAwaySpecialCard(){
 
     }
+    //should it be boolean
 
+    //implement this action
     public void useSpecialCard(){
 
     }
@@ -230,6 +299,7 @@ public class Player implements Contender {
         hand.add(e);
     }
 
+    //finish implementing
 //    public void passing(){
 //        this.getField().endTurn();
 //        totalIncome = getTotalIncome() + 5;

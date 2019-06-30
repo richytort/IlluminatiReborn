@@ -3,11 +3,9 @@ package ARK.Illuminati.board.player;
 import java.io.IOException;
 import java.security.PublicKey;
 import java.util.ArrayList;
-import ARK.Illuminati.cards.Card;
-import ARK.Illuminati.cards.IlluminatiCard;
+
+import ARK.Illuminati.cards.*;
 import ARK.Illuminati.board.player.Player;
-import ARK.Illuminati.cards.GroupCard;
-import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
@@ -81,6 +79,8 @@ public class Field {
 //            uncontrolledGroups.setLocation(Location.uncontrolledGroups);
 //        }
 //    }
+
+    //need a remove group to uncontrolled are
 //    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
 //        if (!specialArea.contains(card))
 //            return false;
@@ -101,5 +101,16 @@ public class Field {
             p1.getHand().remove(target);
             p2.getHand().add(target);
         }
+    }
+
+    //needs work
+    public boolean addGroupToField(Card group, Mode attack, boolean b) {
+        return true;
+    }
+
+    //needs work
+
+    public boolean addSpecialToField(SpecialCard special, Object o, boolean b) {
+   return true;
     }
 }
