@@ -147,7 +147,7 @@ public class IlluminatiCard extends Card {
         //what does it really do??
         //  this.setAttacked(true);
         if(diceNumber >= totalSubtraction){
-            opponentPl.getField().removeGroupToHand(target);
+            //opponentPl.getField().removeGroupToHand(target);
             activePl.setResult(10);
             income = activePl.getIncome() + target.getIncome()/2;
             targetIncome = target.getIncome() - target.getIncome();
@@ -171,7 +171,8 @@ public class IlluminatiCard extends Card {
         int diceNumber = boardd.rollDice();
         System.out.println(diceNumber);
         if (diceNumber >= total) {
-            opponent.getField().removeGroupToUncontrolled(target);
+            ///COMMENTED OUT FOR NOW SINCE I GOT AN ERROR
+            //opponent.getField().removeGroupToUncontrolled(target);
             active.setIncome(active.getIncome() + 6);
             target.setIncome(target.getIncome() - target.getIncome());
             active.setResult(10);
