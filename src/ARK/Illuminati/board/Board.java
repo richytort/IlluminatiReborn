@@ -12,7 +12,7 @@ public class Board {
     private Player winner;
     private int dice1;
     private UncontrolledArea uncontrolled;
-    Deck deck;
+    //Deck deck;
 
     private int dice2;
     private int total;
@@ -33,8 +33,10 @@ public class Board {
         }
     }
     public void startGame(Player p1 , Player p2 ){
-        p1.addIlluminatiCard();
-        p2.addIlluminatiCard();
+        p1.addNCardsToHand(1);
+        p2.addNCardsToHand(1);
+        //p1.addIlluminatiCard();
+        //p2.addIlluminatiCard();
         //deck.shuffle();
         //uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);

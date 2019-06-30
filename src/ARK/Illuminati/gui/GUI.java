@@ -160,7 +160,6 @@ public class GUI extends JFrame {
         b.startGame(p1, p2);
         setP1(p1);
         setP2(p2);
-
         ImageIcon bg = new ImageIcon("src/bg3.png");
         JLabel g = new JLabel(bg);
         g.setVisible(true);

@@ -249,6 +249,10 @@ public class Player implements Contender {
         this.field.addCardToHand();
     }
 
+    public void addNCardsToHand(int n){
+        this.field.addNCardsToHand(n);
+    }
+
     public void addIlluminatiCard(){
         this.field.addIlluminatiCard();
     }

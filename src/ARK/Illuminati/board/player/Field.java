@@ -45,6 +45,13 @@ public class Field {
         }
     }
 
+    public void addNCardsToHand(int n ){
+
+        for(int i = 0 ; i < n ; i++)
+            addCardToHand();
+
+    }
+
     public void addIlluminatiCard(){
         Card temp = deck.drawIlluminatiCard();
         hand.add(temp);
@@ -62,6 +69,10 @@ public class Field {
     public Deck getDeck(){
         return deck ;
     }
+
+
+
+
 /*
     public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 
