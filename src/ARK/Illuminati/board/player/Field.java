@@ -27,6 +27,12 @@ public class Field {
         uncontrolledGroups.add(e);
     }
     public void addCardToHand(){
+
+        Card temp = deck.drawOneCard();
+        hand.add(temp);
+        temp.setLocation(Location.HAND);
+
+        /*
         if(deck.getDeck().size()==0){
             if (this == Card.getBoard().getActivePlayer().getField())
                 Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
@@ -43,6 +49,8 @@ public class Field {
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }
+
+         */
     }
 
     public void addNCardsToHand(int n ){

@@ -345,6 +345,10 @@ public class Deck {
         Collections.shuffle(deck);
     }
 
+    public Card drawOneCard(){
+       return deck.remove(0);
+    }
+
     public Card drawOneCardB() {
         Card c = deck.get(0);
         if (c.getType().toLowerCase().equalsIgnoreCase( "special Card")) {
