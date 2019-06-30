@@ -5,30 +5,23 @@ import ARK.Illuminati.cards.GroupCard;
 import javax.swing.*;
 
 public class GroupButton extends JButton {
-
-    private GroupCard group ;
-
-    public GroupButton(){
-        this.setVisible(true);
-    }
-
-    public GroupButton(String name){
-        super(name);
-    }
-
-    public GroupButton(GroupCard group){
-        this.setVisible(true);
-        this.setName(group.getName());
-    }
-
-    public GroupCard getGroup(){
+    private GroupCard group;
+    public GroupCard getGroup() {
         return group;
     }
-
-    public void setGroup(GroupCard group){
-
-        this.group = group ;
+    public void setGroup(GroupCard group) {
+        this.group = group;
     }
+    public GroupButton() {
+        this.setVisible(true);
+    }
+    public GroupButton(GroupCard monster){
+        this.setVisible(true);
+        this.setName(group.getName());
 
+    }
+    public GroupButton(String name){
 
+        super(name);
+    }
 }

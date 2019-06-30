@@ -239,6 +239,8 @@ public class GUI extends JFrame {
         //groupAreap2 = new MonstersPanel(p2);
         structureAreaP1 = new StructurePanel(p1);
         structureAreaP2 = new StructurePanel(p2);
+        handAreaP1 = new HandPanel(p1);
+        handAreaP2 = new HandPanel(p2);
         nextAction = new NextActionButton("Next Action");
         endTurn = new EndTurnButton("End Turn");
         p1name = new JLabel(p1.getName());
@@ -281,13 +283,13 @@ public class GUI extends JFrame {
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
         panel1.add(structureAreaP1,BorderLayout.CENTER);
-        panel1.setOpaque(true);
+        panel1.setOpaque(false);
 
         JScrollPane hand1SP = new JScrollPane(handAreaP1);
         hand1SP.setBorder(null);
         hand1SP.getViewport().setOpaque(false);
         hand1SP.setPreferredSize(new Dimension(200, 150));
-        hand1SP.setOpaque(false);
+        hand1SP.setOpaque(true);
         hand1SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         hand1SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         panel1.add(hand1SP,BorderLayout.EAST);
@@ -310,7 +312,7 @@ public class GUI extends JFrame {
         panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
         panel2.add(structureAreaP2, BorderLayout.CENTER);
-        panel2.setOpaque(true);
+        panel2.setOpaque(false);
 
         JScrollPane hand2SP = new JScrollPane(handAreaP2) ; //sp2 = new JScrollPane(handp2);
         hand2SP.setBorder(null);
