@@ -65,6 +65,7 @@ public class Board {
         Player p2 = new Player("ulu");
         board.whoStarts(p1,p2);
         board.startGame(p1,p2);
+        p1.printHand();
 
     }
 
