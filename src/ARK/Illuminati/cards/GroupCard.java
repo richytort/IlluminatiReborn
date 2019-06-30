@@ -83,6 +83,10 @@ public class GroupCard extends Card {
         }
 
     }
+    public  void action(Card cardA){
+
+    }
+
     public void attacktoDestroy(GroupCard target){
         Player active = getBoard().getActivePlayer();
         Player opponent = getBoard().getOpponentPlayer();
@@ -140,9 +144,6 @@ public class GroupCard extends Card {
 
     }
 
-    public void passing(){
-
-    }
 
 
     public void switchMode(){

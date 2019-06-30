@@ -1,13 +1,19 @@
 package ARK.Illuminati.board;
 
 import ARK.Illuminati.board.player.Player;
+import ARK.Illuminati.board.player.UncontrolledArea;
 import ARK.Illuminati.cards.Card;
+import ARK.Illuminati.board.player.Deck;
+import ARK.Illuminati.board.player.Field;
 
 public class Board {
     private Player activePlayer;
     private Player opponentPlayer;
     private Player winner;
     private int dice1;
+    private UncontrolledArea uncontrolled;
+    Deck deck;
+
     private int dice2;
     private int total;
 
@@ -15,7 +21,6 @@ public class Board {
 
         Card.setBoard(this);
     }
-
     public void whoStarts(Player p1, Player p2){
         int FirstP =rollDice();
         int SecondP = rollDice();
@@ -28,23 +33,20 @@ public class Board {
         }
     }
     public void startGame(Player p1 , Player p2 ){
-        //We will need to figure out how to place cards on uncontrolled area instead
-        //of adding cards to each player hand.
-        //4 cards will be added to uncontrolled area.
-        //p1.addNCardsToHand(5);
-        //p2.addNCardsToHand(5);
-
+        p1.addIlluminatiCard();
+        p2.addIlluminatiCard();
+        deck.shuffle();
+        uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);
-
-        //activePlayer.addCardToHand();
-
+        activePlayer.addCardToHand();
     }
 
     public void nextPlayer(){
         Player temp = activePlayer;
         activePlayer = opponentPlayer;
         opponentPlayer = temp;
-       //activePlayer.addCardToHand();
+        activePlayer.getIncome();
+        activePlayer.addCardToHand();
     }
 
     public boolean isGameOver(){
@@ -57,6 +59,9 @@ public class Board {
         dice1 = (int) (Math.random() * 6);
         dice2 = (int) (Math.random() * 6);
         total = dice1 * dice2;
+        if(total == 0){
+            rollDice();
+        }
         return total;
     }
     public Player getActivePlayer() {
@@ -84,6 +89,5 @@ public class Board {
             return;
         this.winner = winner;
     }
-
 
 }

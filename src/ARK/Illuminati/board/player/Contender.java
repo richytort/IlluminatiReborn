@@ -20,8 +20,6 @@ public interface Contender {
 
     public void addCardToStructure();
 
-    public void addNCardsToStructure(int n );
-
     public void endAction();
 
     public boolean endTurn();
