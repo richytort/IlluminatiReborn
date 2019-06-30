@@ -213,8 +213,6 @@ public class Field {
 
 
     }
-//    public boolean dropAGroup(Card card){}
-//    public boolean giveawayGroup(Card card){}
 
 
 

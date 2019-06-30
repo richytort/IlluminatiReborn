@@ -256,6 +256,11 @@ public class Player implements Contender {
         return true;
 
     }
+    public void printHand(){
+        for(Card e: hand){
+            System.out.println(e+ " ");
+        }
+    }
     //fixed later
     public boolean switchCardMode(Card cards){
         if(Card.getBoard().isGameOver())

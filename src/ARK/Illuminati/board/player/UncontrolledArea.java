@@ -28,5 +28,11 @@ public class UncontrolledArea {
         this.field.addCardToHand();
     }
 
+    public void printUn(){
+        for(Card e: uncontrolled){
+            System.out.println(e + " ");
+        }
+    }
+
 
 }
