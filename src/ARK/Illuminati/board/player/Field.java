@@ -49,6 +49,37 @@ public class Field {
     }
 
 
+    public void removeCard(GroupCard group) {
+
+        if (illuminatiArea.contains(group)) {
+
+            illuminatiArea.remove(group);
+            uncontrolledGroups.add(group);
+            uncontrolledGroups.setLocation(Location.uncontrolledGroups);
+        }
+
+    }
+
+    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
+
+        if (!specialArea.contains(card))
+            return false;
+
+        if (Action == Action.BATTLE)
+            throw new WrongActionException();
+        card.action(group);
+        removeCard(card);
+
+        return true;
+
+    }
+
+
+
+
+
+
+
 
 
 
