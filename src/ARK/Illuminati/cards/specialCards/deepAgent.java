@@ -10,7 +10,10 @@ public class deepAgent extends SpecialCard {
         super(name, type);
         this.ability = ability;
     }
-    public  void action(Card cardA){}
+    @Override
+    public void action(GroupCard card) {
+
+    }
 
 
     public void setAbility(String ability){

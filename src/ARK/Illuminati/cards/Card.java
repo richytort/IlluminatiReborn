@@ -9,6 +9,7 @@ public abstract class Card {
     private String description;
     private boolean isHidden;
     private Location location;
+    private Mode mode;
     private int income;
     private static Board board;
 
@@ -39,6 +40,10 @@ public abstract class Card {
     public void setType(String type) { this.description = type; }
 
     public int getIncome() { return getIncome(); }
+    public void setMode(Mode mode){ this.mode = mode; }
+
+    public Mode getMode(){ return mode; }
+
 
     public int getPower(){ return getPower(); }
 

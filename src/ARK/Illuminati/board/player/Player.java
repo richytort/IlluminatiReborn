@@ -19,6 +19,7 @@ public class Player implements Contender {
     private final String name;
     private int income;
     private int totalIncome;
+    private int result;
     private Field field;
     private boolean addedGroupThisTurn;
     private ArrayList<Card> hand;
@@ -101,20 +102,20 @@ public class Player implements Contender {
     }
 
   //  @Override
-    //finish when field
-    public boolean declareAttack(GroupCard group) {
-        if (Card.getBoard().isGameOver())
-            return false;
-
-        if (this != Card.getBoard().getActivePlayer())
-            return false;
-
-        //boolean groupAttacked = this.field.declareAttack(group, null);
-
-        //return groupAttacked;
-        return false;///////////delete when fixed.
-
-    }
+//    //finish when field
+//    public boolean declareAttack(GroupCard group) {
+//        if (Card.getBoard().isGameOver())
+//            return false;
+//
+//        if (this != Card.getBoard().getActivePlayer())
+//            return false;
+//
+//        //boolean groupAttacked = this.field.declareAttack(group, null);
+//
+//        //return groupAttacked;
+//        return false;///////////delete when fixed.
+//
+//    }
 
     //do we really need it
   //  @Override
@@ -134,7 +135,24 @@ public class Player implements Contender {
         return false; //delete when fixed.
     }
 */
-    public boolean declareAttackToControl(Card activeGroup, Card opponentGroup) {
+    public boolean declareAttackToControl(GroupCard group) {}
+    public boolean declareAttackToNeutralize(GroupCard group) {}
+
+    public boolean declareAttackToDestroy(GroupCard group) {}
+
+
+    public boolean declareAttackToControlI(Card activeGroup, Card opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
+//
+//        return cardAttacked;
+        return false;
+    }
+
+    public boolean declareAttackToControlG(Card activeGroup, Card opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
@@ -146,7 +164,17 @@ public class Player implements Contender {
     }
 
 
-    public boolean declareAttackToNeutralize(GroupCard activeGroup, GroupCard opponentGroup) {
+    public boolean declareAttackToNeutralizeI(Card activeGroup, GroupCard opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToNeutralize(activeGroup,opponentGroup);
+//
+//        return cardAttacked;
+        return false;
+    }
+    public boolean declareAttackToNeutralizeG(Card activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
@@ -159,7 +187,21 @@ public class Player implements Contender {
 
 
 
-    public boolean declareAttackToDestroy(GroupCard activeGroup, GroupCard opponentGroup) {
+    public boolean declareAttackToDestroyI(Card activeGroup, GroupCard opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToDestroy(activeGroup,opponentGroup);
+//
+//        return cardAttacked;
+        return false;
+
+    }
+
+
+
+    public boolean declareAttackToDestroyG(Card activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
@@ -308,6 +350,12 @@ public class Player implements Contender {
 //        this.getField().endTurn();
 //        totalIncome = getTotalIncome() + 5;
 //    }
+    public void setResult(int result){
+        this.result = result;
+    }
+    public int getResult(){
+        return result;
+    }
 
 }
 
