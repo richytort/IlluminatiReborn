@@ -26,7 +26,7 @@ public abstract class Card {
         this.location = location;
     }
 
-    public abstract void action(Card cardA);
+  //  public abstract void action(Card cardA);
 
     public String getName() {
         return name;

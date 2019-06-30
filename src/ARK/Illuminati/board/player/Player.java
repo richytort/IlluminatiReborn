@@ -11,6 +11,8 @@ import ARK.Illuminati.exceptions.MultipleGroupAdditionException;
 import javax.print.attribute.standard.MediaSize;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Player implements Contender {
     //instance variables
@@ -131,7 +133,7 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer())
             return;
 
-        //this.getField().endAction();
+        this.getField().endAction();
 
     }
 
@@ -139,22 +141,27 @@ public class Player implements Contender {
     public boolean endTurn() {
         if (Card.getBoard().isGameOver())
             return false;
-
         if (this != Card.getBoard().getActivePlayer())
             return false;
 
-        /////////////////////////////////////////May have to adjust this part for addedGropuThisTurn////////////////////
         addedGroupThisTurn = false;
-        //this.getField().endTurn();
+        this.getField().endTurn();
 
         return true;
 
+    }
+    public boolean switchCardMode(Card cards){
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+        boolean CardSwitched = this.file.switchCardMode(cards);
+        return CardSwitched;
     }
 
     /////////////Seems we can adjust the rotation on this part/////////////////////////////////////////////////////////
     @Override
     public boolean switchGroupPosition(GroupCard group) {
-
         if (Card.getBoard().isGameOver())
             return false;
 
@@ -166,21 +173,16 @@ public class Player implements Contender {
         return false; //return groupRotated ;
 
     }
-    public void addCardToHand(){
 
-       this.field.addCardToHand();
+    public void addCardToHand(){
+        this.field.addCardToHand();
     }
+
     public void addIlluminatiCard(){
         this.field.addIlluminatiCard();
     }
 
 
-    public Card getCard(Card i) {
-        return i;
-    }
-    public String getName() {
-        return name;
-    }
 
    public int getIncome(){
         for(Card e: hand){
@@ -190,35 +192,44 @@ public class Player implements Contender {
         }return income;
 
     }
-    public int getPower(Card e){
-        return e.getPower();
-    }
 
-    public int getResistance(Card e){
-        return e.getResistance();
-    }
-
-    public ArrayList<Card> getHand(){
-        return hand;
-    }
-    public int returnLocation(Card e){
-        return hand.indexOf(e);
-
-    }
-    public int getTotalIncome(){
+    public int getTotalIncome(){ //use it to check for winner
         for(int i = 0; i < hand.size();i++){
             totalIncome+=hand.get(i).getIncome();
         }
         return totalIncome;
     }
+
+    public Field getField(){ return field; }
+
+    //check if neeeded
+    public Card getCard(Card i) {
+        return i;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+
+    public void giveAwaySpecialCard(){
+
+    }
+
+    public void useSpecialCard(){
+
+    }
+    public void moveAGroup(int moveGroup, int newLocation ){
+        Collections.swap(hand,moveGroup,newLocation);
+    }
+
     public void passing(){
-       totalIncome = getTotalIncome() + 5;
-
+        this.getField().endTurn();
+        totalIncome = getTotalIncome() + 5;
     }
-    public Field getField(){
-        return field;
-    }
-
 
 }
 

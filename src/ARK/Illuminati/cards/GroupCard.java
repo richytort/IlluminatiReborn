@@ -22,7 +22,6 @@ public class GroupCard extends Card {
     private int targetIncome;
     private String alignment;
 
-
     public GroupCard(String name, String type, String ability,String alignment, int power, int tpower, int resistance, int income){
         super(name,type);
         this.ability = ability;
@@ -31,6 +30,8 @@ public class GroupCard extends Card {
         this.income = income;
         this.resistance = resistance;
         this.alignment = alignment;
+        this.attacked = false;
+        this.switchedMode = false;
     }
 
     public void attackToControl(GroupCard target){
@@ -83,9 +84,6 @@ public class GroupCard extends Card {
         }
 
     }
-    public  void action(Card cardA){
-
-    }
 
     public void attacktoDestroy(GroupCard target){
         Player active = getBoard().getActivePlayer();
@@ -115,18 +113,8 @@ public class GroupCard extends Card {
         targetIncome = groupTransfer.getIncome()+ incomeTransfer;
         return targetIncome;
 
-
-
     }
-    public void moveAGroup(int moveGroup, int newLocation ){
-        Collections.swap(p.getHand(),newLocation,moveGroup);
 
-    }
-    public void giveAgroupAway(GroupCard target){
-        Player p1 = getBoard().getActivePlayer();
-     //   p1.getField().removeGroupToHand(target);
-
-    }
     public void dropAgroup(GroupCard i){
         //field.removeCard(i);
     }
@@ -135,14 +123,12 @@ public class GroupCard extends Card {
     public void aidAnAttack(){
 
     }
+//    public void giveAgroupAway(GroupCard target){
+//        Player p1 = getBoard().getActivePlayer();
+//        p1.getField().removeGroupToHand(target);
+//
+//    }
 
-    public void giveAwaySpecialCard(){
-
-    }
-
-    public void useSpecialCard(){
-
-    }
 
 
 
