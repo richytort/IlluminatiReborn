@@ -35,8 +35,8 @@ public class Board {
     public void startGame(Player p1 , Player p2 ){
         p1.addIlluminatiCard();
         p2.addIlluminatiCard();
-        deck.shuffle();
-        uncontrolled.add4CardsToUncontrolled();
+        //deck.shuffle();
+        //uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);
         activePlayer.addCardToHand();
     }

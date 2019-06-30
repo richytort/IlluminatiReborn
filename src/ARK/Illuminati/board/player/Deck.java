@@ -404,4 +404,6 @@ public class Deck {
     public static void setSpecialPath(String specialPath){Deck.specialPath = specialPath;}
 
     public static void setOtherPath(String otherPath){ Deck.otherPath = otherPath;}
+
+
 }

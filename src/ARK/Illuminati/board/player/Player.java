@@ -43,7 +43,7 @@ public class Player implements Contender {
       //  if (addedGroupThisTurn)
             //do we need it? because we can have multiple cards there??
           // throw new MultipleGroupAdditionException();
-        boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
+       // boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
 //            if (!groupAdded)
 //              return false;
 //            addedGroupThisTurn = true;
@@ -59,11 +59,13 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer()) {
             return false;
         }
-        boolean specialAdded = this.field.addSpecialToField( special , null , false );
-        return specialAdded;
-
+        //boolean specialAdded = this.field.addSpecialToField( special , null , false );
+        //return specialAdded;
+        return true;
     }
 
+
+ /*
     public boolean setSpecialFaceDown(SpecialCard special){
             if (Card.getBoard().isGameOver())
                 return false;
@@ -74,6 +76,8 @@ public class Player implements Contender {
             boolean specialAdded = this.field.addSpecialToField( special , null , true );
             return specialAdded;
     }
+
+ */
 
     @Override
     //finish when they finish field.
@@ -119,6 +123,7 @@ public class Player implements Contender {
 
     //do we really need it
   //  @Override
+    /*
     public boolean declareAttack(GroupCard activeGroup, GroupCard opponentGroup) {
 
         if (Card.getBoard().isGameOver())
@@ -127,13 +132,13 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer())
             return false;
 
-        //boolean groupAttacked = this.field.declareAttack(activeGroup, opponentGroup);
+        boolean groupAttacked = this.field.declareAttack(activeGroup, opponentGroup);
 
-        //return groupAttacked ;
+        return groupAttacked ;
 
         return false; //delete when fixed.
     }
-
+*/
     public boolean declareAttackToControl(Card activeGroup, Card opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;

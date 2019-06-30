@@ -205,7 +205,7 @@ public class GUI extends JFrame {
 
         //finish field class
         //test deck and test currAction
-        deck = new JLabel(); //deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
+        deck = new JLabel(p1.getField().getDeck().getDeck().size() + "");
         currAction = new JLabel(); //currAction = new JLabel(Card.getBoard().getActivePlayer().getField().getPhase().name());
 
         deck.setFont(new Font("Ariel", Font.BOLD, 15));

@@ -58,6 +58,15 @@ public class Field {
             temp.setLocation(Location.UNCONTROLLED);
         }
     }
+
+    public Deck getDeck(){
+        return deck ;
+    }
+/*
+    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
+
+        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
+            return false;
 //
 //    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 //        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
@@ -113,4 +122,6 @@ public class Field {
     public boolean addSpecialToField(SpecialCard special, Object o, boolean b) {
    return true;
     }
+    */
+
 }
