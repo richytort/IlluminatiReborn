@@ -101,11 +101,6 @@ public class Player implements Contender {
     }
 
   //  @Override
-    //declare attack control
-    //declare attack neutralze
-    //deckare attck destroy
-    //list all the actions
-
     //finish when field
     public boolean declareAttack(GroupCard group) {
         if (Card.getBoard().isGameOver())

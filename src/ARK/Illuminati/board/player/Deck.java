@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.stream.StreamSupport;
 
 public class Deck {
 
@@ -234,7 +235,6 @@ public class Deck {
             }
         }
         br.close();
-
         return (temp);
    }
 
@@ -342,7 +342,19 @@ public class Deck {
    }
 
     public void shuffle(){
-        Collections.shuffle(deck);
+
+       Collections.shuffle(deck);
+    }
+    public int getIndex(Card e){
+       int index = deck.indexOf(e);
+       return index;
+    }
+
+    public void printDeck(){
+       for(Card e: deck){
+           System.out.println(getIndex(e));
+           System.out.println(e + " ");
+       }
     }
 
     public Card drawOneCard(){
@@ -351,38 +363,41 @@ public class Deck {
 
     public Card drawOneCardB() {
         Card c = deck.get(0);
-        if (c.getType().toLowerCase().equalsIgnoreCase( "special Card")) {
+        if(deck.get(0).getType().equalsIgnoreCase("other group")){
+           c = deck.remove(0);
+        }
+        else if (deck.get(0).getType().equalsIgnoreCase( "special Card")) {
             shuffle();
-            drawOneCardB();
-        } else {
-            c= deck.remove(0);
+             c = deck.get(1);
+             if(deck.get(1).getType().equalsIgnoreCase("Special Card")){
+                 c = deck.get(2);
+             }
         }return c;
     }
+//    public static void main(String [] args)throws IOException, UnexpectedFormatException{
+//       Deck deck1 = new Deck();
+//       deck1.drawIlluminatiCard();
+//       for(int e = 0; e< 4;e++) {
+//           Card c = deck1.drawOneCardB();
+//           System.out.println(c + " ");
+//       }
+//    }
     //figure out how to add to uncontrolled and hand
     public Card drawCards(){
        return deck.remove(0);
-    }
+   }
 
     public Card drawIlluminatiCard(){
         Card c = deck.get(0);
         deck.remove(0);
-        for(int e = 0; e <deck.size(); e++){
-            if(deck.get(e).getType().toLowerCase().equals( "illuminati")){
-                deck.remove(0);
+        for(int e = deck.size() - 1; e >= 0; e--){
+            if (deck.get(e).getType().equalsIgnoreCase("illuminati")) {
+                deck.remove(e);
             }
-        }return c;
+        }shuffle();
+        return c;
     }
-    public void printd(){
-       for(Card e : deck){
-           System.out.println(e+ " ");
-       }
-    }
-    public static void main(String [] arg)throws IOException, UnexpectedFormatException {
-       Deck deck1 = new Deck();
-       deck1.printd();
 
-
-    }
     public  ArrayList<Card> getDeck(){ return deck; }
 
     public static void setIlluminati(ArrayList<Card> illuminati){ Deck.illuminati = illuminati; }

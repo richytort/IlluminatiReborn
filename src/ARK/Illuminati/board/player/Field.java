@@ -60,6 +60,11 @@ public class Field {
 
     }
 
+    public void printUncontroled(){
+        for(Card e: uncontrolledGroups){
+            System.out.println(e+ " ");
+        }
+    }
     public void addIlluminatiCard(){
         Card temp = deck.drawIlluminatiCard();
         hand.add(temp);
@@ -72,6 +77,26 @@ public class Field {
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }
+    }
+    public void printHand(){
+        for(Card e: hand){
+            System.out.println(e+ " ");
+        }
+    }
+
+    public static void main(String [] args) throws IOException,UnexpectedFormatException{
+        Field field = new Field();
+        Deck deck = new Deck();
+       // deck.printDeck();
+        field.addIlluminatiCard();
+      //  field.addCardToHand();
+       field.add4CardsToUncontrolled();
+        field.printHand();
+        System.out.println("uncontrolled");
+        field.printUncontroled();
+      //  deck.printDeck();
+
+
     }
 
     public ArrayList<Card> getHand(){

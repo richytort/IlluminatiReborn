@@ -5,6 +5,10 @@ import ARK.Illuminati.board.player.UncontrolledArea;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.board.player.Deck;
 import ARK.Illuminati.board.player.Field;
+import ARK.Illuminati.exceptions.UnexpectedFormatException;
+
+import java.io.IOException;
+import java.util.UnknownFormatConversionException;
 
 public class Board {
     private Player activePlayer;
@@ -12,7 +16,7 @@ public class Board {
     private Player winner;
     private int dice1;
     private UncontrolledArea uncontrolled;
-    //Deck deck;
+    Deck deck;
 
     private int dice2;
     private int total;
@@ -39,6 +43,9 @@ public class Board {
         //p2.addIlluminatiCard();
         //deck.shuffle();
         //uncontrolled.add4CardsToUncontrolled();
+        p1.addIlluminatiCard();
+        p2.addIlluminatiCard();
+        uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);
         activePlayer.addCardToHand();
     }
@@ -49,6 +56,16 @@ public class Board {
         opponentPlayer = temp;
         activePlayer.getIncome();
         activePlayer.addCardToHand();
+    }
+    public static void main(String [] args)throws IOException, UnexpectedFormatException {
+        Board board = new Board();
+        Deck deck=new Deck();
+
+        Player p1 = new Player("Kathya");
+        Player p2 = new Player("ulu");
+        board.whoStarts(p1,p2);
+        board.startGame(p1,p2);
+
     }
 
     public boolean isGameOver(){
