@@ -62,5 +62,59 @@ public class Field {
         }
     }
 
+    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
+
+        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
+            return false;
+
+        if (hand.size() >= 5)
+            throw new NoSpaceException();
+
+        if (Action == Action.Attack)
+            throw new WrongActionException();
+
+        hand.remove(group);
+        group.setHidden(isHidden);
+        group.setLocation(Location.FIELD);
+        hand.add(group);
+        return true;
+
+    }
+
+
+    public void removeCard(GroupCard group) {
+
+        if (illuminatiArea.contains(group)) {
+
+            illuminatiArea.remove(group);
+            uncontrolledGroups.add(group);
+            uncontrolledGroups.setLocation(Location.uncontrolledGroups);
+        }
+
+    }
+
+    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
+
+        if (!specialArea.contains(card))
+            return false;
+
+        if (Action == Action.BATTLE)
+            throw new WrongActionException();
+        card.action(group);
+        removeCard(card);
+
+        return true;
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 }
