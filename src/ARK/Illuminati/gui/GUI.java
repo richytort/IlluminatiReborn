@@ -281,7 +281,7 @@ public class GUI extends JFrame {
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
         panel1.add(structureAreaP1,BorderLayout.CENTER);
-        panel1.setOpaque(false);
+        panel1.setOpaque(true);
 
         JScrollPane hand1SP = new JScrollPane(handAreaP1);
         hand1SP.setBorder(null);
@@ -310,7 +310,7 @@ public class GUI extends JFrame {
         panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
         panel2.add(structureAreaP2, BorderLayout.CENTER);
-        panel2.setOpaque(false);
+        panel2.setOpaque(true);
 
         JScrollPane hand2SP = new JScrollPane(handAreaP2) ; //sp2 = new JScrollPane(handp2);
         hand2SP.setBorder(null);
