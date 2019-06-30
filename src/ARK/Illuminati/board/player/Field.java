@@ -66,6 +66,10 @@ public class Field {
         }
     }
 
+    public ArrayList<Card> getHand(){
+        return hand ;
+    }
+
     public Deck getDeck(){
         return deck ;
     }

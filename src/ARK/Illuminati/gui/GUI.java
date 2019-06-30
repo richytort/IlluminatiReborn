@@ -24,6 +24,9 @@ public class GUI extends JFrame {
     private JPanel panel2; // This is for player 2 Structure
     private JPanel uPanel; // this will be for uncontrolled groups
     public JLabel deck ;
+
+
+
     public JButton grave ;
     private NextActionButton nextAction ;
     private JLabel p1name ;
@@ -33,6 +36,8 @@ public class GUI extends JFrame {
     private JScrollPane pan ;
     private StructurePanel structureAreaP1;
     private StructurePanel structureAreaP2 ;
+    private HandPanel handAreaP1;
+    private HandPanel handAreaP2;
     private UncontrolledPanel uncontrolledArea ;
     private SpecialPanel specialAreaP1;
     private SpecialPanel specialAreaP2;
@@ -47,6 +52,34 @@ public class GUI extends JFrame {
     public static Clip getAudioClip(){ return audioClip ; }
 
     public static void setAudioClip( Clip audioClip ) { GUI.audioClip = audioClip ; }
+
+    public void setPanel1(JPanel panel1) {
+        this.panel1 = panel1;
+    }
+
+    public JPanel getuPanel() {
+        return uPanel;
+    }
+
+    public void setuPanel(JPanel uPanel) {
+        this.uPanel = uPanel;
+    }
+
+    public HandPanel getHandAreaP1() {
+        return handAreaP1;
+    }
+
+    public void setHandAreaP1(HandPanel handAreaP1) {
+        this.handAreaP1 = handAreaP1;
+    }
+
+    public HandPanel getHandAreaP2() {
+        return handAreaP2;
+    }
+
+    public void setHandAreaP2(HandPanel handAreaP2) {
+        this.handAreaP2 = handAreaP2;
+    }
 
     public StructurePanel getStructureAreaP1(){
         return structureAreaP1;
