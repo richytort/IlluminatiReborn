@@ -1,7 +1,12 @@
 package ARK.Illuminati.cards;
 import ARK.Illuminati.board.Board;
 import ARK.Illuminati.board.player.Field;
+import ARK.Illuminati.board.player.Deck;
 import ARK.Illuminati.board.player.Player;
+import ARK.Illuminati.exceptions.UnexpectedFormatException;
+
+import java.io.IOException;
+import java.security.PublicKey;
 
 
 public class GroupCard extends Card {
@@ -126,6 +131,13 @@ public class GroupCard extends Card {
         //p1.getField().removeGroupToHand(target);
 
     }
+
+//    public static void main(String [] args)throws IOException, UnexpectedFormatException {
+//        Player p1 = new Player("Kathya");
+//        Player p2 = new Player("ulyssez");
+//        Deck deck = new Deck();
+//
+//    }
 
 
 

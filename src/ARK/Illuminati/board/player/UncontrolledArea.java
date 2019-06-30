@@ -16,6 +16,7 @@ public class UncontrolledArea {
     }
 
     public void add4CardsToUncontrolled(){
+
         this.field.add4CardsToUncontrolled();
     }
     //check it!!!
