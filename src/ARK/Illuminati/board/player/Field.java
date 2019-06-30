@@ -3,139 +3,148 @@ package ARK.Illuminati.board.player;
 import java.io.IOException;
 import java.security.PublicKey;
 import java.util.ArrayList;
-
-import ARK.Illuminati.cards.*;
-import ARK.Illuminati.board.player.Player;
+import ARK.Illuminati.cards.Card;
+import ARK.Illuminati.cards.IlluminatiCard;
+import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
 public class Field {
     private final Deck deck;
     private ArrayList<Card> hand;
-    Player p1;
-    Player p2;
+    private ArrayList<IlluminatiCard> illuminatiArea;
+    private ArrayList<SpecialCard> specialArea;
+    private ArrayList<GroupCard> GroupArea;
     private  ArrayList<Card> uncontrolledGroups;
-    private ArrayList<Card> graveYard;
 
     public Field()throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         uncontrolledGroups = new ArrayList<Card>();
+        specialArea = new ArrayList<>();
+        illuminatiArea = new ArrayList<>();
         deck = new Deck();
     }
     public void removeCard(Card e){
         hand.remove(e);
         uncontrolledGroups.add(e);
     }
-    public void addCardToHand(){
-        if(deck.getDeck().size()==0){
-            if (this == Card.getBoard().getActivePlayer().getField())
-                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
-            else
-                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
 
-            return;
-        }
-        Card temp = deck.drawCards();
-        if (temp.getType().equalsIgnoreCase("special card")) {
-            hand.add(temp);
-            temp.setLocation(Location.HAND);
-        }else{
-            uncontrolledGroups.add(temp);
-            temp.setLocation(Location.UNCONTROLLED);
-        }
-    }
+    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 
-    public void printUncontroled(){
-        for(Card e: uncontrolledGroups){
-            System.out.println(e+ " ");
-        }
-    }
-    public void addIlluminatiCard(){
-        Card temp = deck.drawIlluminatiCard();
-        hand.add(temp);
-        temp.setLocation(Location.HAND);
-    }
+        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
+            return false;
 
-    public void add4CardsToUncontrolled(){
-        for(int i = 0; i <4;i++){
-            Card temp = deck.drawOneCardB();
-            uncontrolledGroups.add(temp);
-            temp.setLocation(Location.UNCONTROLLED);
-        }
-    }
-    public void printHand(){
-        for(Card e: hand){
-            System.out.println(e+ " ");
-        }
-    }
+        if (hand.size() >= 5)
+            throw new NoSpaceException();
 
-    public static void main(String [] args) throws IOException,UnexpectedFormatException{
-        Field field = new Field();
-        Deck deck = new Deck();
-       // deck.printDeck();
-        field.addIlluminatiCard();
-      //  field.addCardToHand();
-       field.add4CardsToUncontrolled();
-        field.printHand();
-        System.out.println("uncontrolled");
-        field.printUncontroled();
-      //  deck.printDeck();
+        if (Action == Action.Attack)
+            throw new WrongActionException();
 
-
-    }
-//
-//    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
-//        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
-//            return false;
-//        if (hand.size() >= 5)
-//            throw new NoSpaceException();
-//        if (Action == Action.Attack)
-//            throw new WrongActionException();
-//        hand.remove(group);
-//        group.setHidden(isHidden);
-//        group.setLocation(Location.FIELD);
-//        hand.add(group);
-//        return true;
-//    }
-//    public void removeCardtoGraveYard(GroupCard group) {
-//        if (illuminatiArea.contains(group)) {
-//            illuminatiArea.remove(group);
-//            uncontrolledGroups.add(group);
-//            uncontrolledGroups.setLocation(Location.uncontrolledGroups);
-//        }
-//    }
-
-    //need a remove group to uncontrolled are
-//    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
-//        if (!specialArea.contains(card))
-//            return false;
-//        if (Action == Action.BATTLE)
-//            throw new WrongActionException();
-//        card.action(group);
-//        removeCard(card);
-//        return true;
-//    }
-//
-//
-//
-//
-//
-//
-    public void removeGroupToHand(Card target){
-        if(p1.getHand().contains(target)){
-            p1.getHand().remove(target);
-            p2.getHand().add(target);
-        }
-    }
-
-    //needs work
-    public boolean addGroupToField(Card group, Mode attack, boolean b) {
+        hand.remove(group);
+        group.setHidden(isHidden);
+        group.setLocation(Location.FIELD);
+        hand.add(group);
         return true;
+
     }
 
-    //needs work
 
-    public boolean addSpecialToField(SpecialCard special, Object o, boolean b) {
-   return true;
+    public void removeCard(GroupCard group) {
+
+        if (illuminatiArea.contains(group)) {
+
+            illuminatiArea.remove(group);
+            uncontrolledGroups.add(group);
+            uncontrolledGroups.setLocation(Location.uncontrolledGroups);
+        }
+
     }
+
+    public boolean useSpecialCard(SpecialCard card, GroupCard group) {
+
+        if (!specialArea.contains(card))
+            return false;
+
+        if (Action == Action.BATTLE)
+            throw new WrongActionException();
+        card.action(group);
+        removeCard(card);
+
+        return true;
+
+
+
+    public boolean declareAttack(GroupCard one, GroupCard two) {
+
+        if (Action != Action.BATTLE)
+            throw new WrongActioneException();
+
+        if (one.getMode() != Mode.ATTACK)
+            throw new DefenseGroupAttackException();
+
+        ArrayList<MonsterCard> oppMonstersArea = Card.getBoard().getOpponentPlayer().getField().monstersArea;
+
+        if (m2 == null && oppMonstersArea.size() == 0)
+            m1.action();
+        else if (m2 != null && oppMonstersArea.contains(m2))
+            m1.action(m2);
+        else
+            return false;
+
+        if (Card.getBoard().getActivePlayer().getLifePoints() <= 0) {
+            Card.getBoard().getActivePlayer().setLifePoints(0);
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        if (Card.getBoard().getOpponentPlayer().getLifePoints() <= 0) {
+            Card.getBoard().getOpponentPlayer().setLifePoints(0);
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+        }
+
+        return true;
+
+    }
+//
+//    public void endPhase() {
+//
+//        switch (phase) {
+//
+//            case MAIN1:
+//                setPhase(Phase.BATTLE);
+//                break;
+//
+//            case BATTLE:
+//                setPhase(Phase.MAIN2);
+//                break;
+//
+//            case MAIN2:
+//                endTurn();
+//                break;
+//
+//        }
+//
+//    }
+//
+//    public void endTurn() {
+//
+//        phase = Phase.MAIN1;
+//
+//        for (MonsterCard m : monstersArea) {
+//            m.setAttacked(false);
+//            m.setSwitchedMode(false);
+//        }
+//
+//        Card.getBoard().nextPlayer();
+//
+//    }
+//
+
+
+
+
+
+
+
+
+
+
 }
