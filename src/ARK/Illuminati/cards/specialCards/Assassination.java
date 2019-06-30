@@ -1,6 +1,7 @@
 package ARK.Illuminati.cards.specialCards;
 
 import ARK.Illuminati.cards.Card;
+import ARK.Illuminati.cards.GroupCard;
 
 public class Assassination extends SpecialCard {
     String ability;
@@ -9,7 +10,6 @@ public class Assassination extends SpecialCard {
         super(name, type);
         this.ability = ability;
     }
-    public  void action(Card cardA){}
 
     public void setAbility(String ability){
         this.ability = ability;
@@ -18,4 +18,8 @@ public class Assassination extends SpecialCard {
         return ability;
     }
 
+    @Override
+    public void action(GroupCard card) {
+
+    }
 }

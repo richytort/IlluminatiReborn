@@ -86,6 +86,9 @@ public class Board {
     public Player getActivePlayer() {
         return activePlayer;
     }
+    public UncontrolledArea uncontrolledRIGHT(){
+        return uncontrolled;
+    }
 
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
