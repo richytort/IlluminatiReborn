@@ -106,7 +106,22 @@ public class Field {
         special.setLocation(Location.GRAVEYARD);
         return true;
     }
-//    public boolean declareAttackToControlI(GroupCard g1, GroupCard g2){}
+    public boolean declareAttackToControlI(IlluminatiCard g1, GroupCard g2){
+        if(g1.getMode() != Mode.ATTACK)
+            throw new DefenseGroupAttackException();
+        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+        if(g2 != null && oppGroupArea.contains(g2))
+            g1.attackToControl(g2);
+        else
+            return false;
+        if(Card.getBoard().getActivePlayer().getResult() == 10){
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        return true;
+
+    }
 
     public boolean declareAttackToControlG(GroupCard g1, GroupCard g2){
         if(g1.getMode() != Mode.ATTACK)
@@ -126,8 +141,78 @@ public class Field {
 
     }
 
-//        public boolean declareAttackToNeutralize(Card activeGroup, GroupCard opponentGroup) { }
-//    public boolean declareAttackToDestroy(Card activeGroup, GroupCard opponentGroup) { }
+      public boolean declareAttackToNeutralizeI(IlluminatiCard g1, GroupCard g2) {
+
+          if(g1.getMode() != Mode.ATTACK)
+              throw new DefenseGroupAttackException();
+          ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+          if(g2 != null && oppGroupArea.contains(g2))
+              g1.attackToControl(g2);
+          else
+              return false;
+          if(Card.getBoard().getActivePlayer().getResult() == 10){
+              Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+          }if(Card.getBoard().getActivePlayer().getResult() == 0){
+              Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+          }
+          return true;
+
+
+      }
+
+    public boolean declareAttackToNeutralizeG(GroupCard g1, GroupCard g2) {
+
+        if(g1.getMode() != Mode.ATTACK)
+            throw new DefenseGroupAttackException();
+        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+        if(g2 != null && oppGroupArea.contains(g2))
+            g1.attackToControl(g2);
+        else
+            return false;
+        if(Card.getBoard().getActivePlayer().getResult() == 10){
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        return true;
+
+
+    }
+    public boolean declareAttackToDestroyI(IlluminatiCard g1, GroupCard g2) {
+        if(g1.getMode() != Mode.ATTACK)
+            throw new DefenseGroupAttackException();
+        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+        if(g2 != null && oppGroupArea.contains(g2))
+            g1.attackToControl(g2);
+        else
+            return false;
+        if(Card.getBoard().getActivePlayer().getResult() == 10){
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        return true;
+
+
+    }
+
+    public boolean declareAttackToDestroyG(GroupCard g1, GroupCard g2) {
+        if(g1.getMode() != Mode.ATTACK)
+            throw new DefenseGroupAttackException();
+        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+        if(g2 != null && oppGroupArea.contains(g2))
+            g1.attackToControl(g2);
+        else
+            return false;
+        if(Card.getBoard().getActivePlayer().getResult() == 10){
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        return true;
+
+
+    }
 //    public boolean dropAGroup(Card card){}
 //    public boolean giveawayGroup(Card card){}
 
