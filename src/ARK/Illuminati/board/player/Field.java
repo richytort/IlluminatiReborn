@@ -57,12 +57,13 @@ public class Field {
     }
 
     public void add4CardsToUncontrolled(){
-        for(int i = 0; i <4;i++){
+      //  for(int i = 0; i <4;i++){
             Card temp = deck.drawOneCardB();
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
-        }
+      //  }
     }
+
     public void printHand(){
         for(Card e: hand){
             System.out.println(e+ " ");
