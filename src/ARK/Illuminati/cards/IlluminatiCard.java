@@ -3,6 +3,7 @@ package ARK.Illuminati.cards;
 import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.board.Board;
 import ARK.Illuminati.board.player.Field;
+import ARK.Illuminati.board.player.UncontrolledArea;
 
 public class IlluminatiCard extends Card {
     private int income;
@@ -120,6 +121,99 @@ public class IlluminatiCard extends Card {
         Player p2 = getBoard().getOpponentPlayer();
         int totalIncome = p1.getTotalIncome() - amount;
         int newIncome = p2.getTotalIncome() + amount;
+
+    }
+
+
+    public void attackToControl(IlluminatiCard target){
+        Player activePl = getBoard().getActivePlayer();
+        Player opponentPl = getBoard().getOpponentPlayer();
+        UncontrolledArea uncontrolled = getBoard().uncontrolledRIGHT();
+        if(target.getMode() == Mode.ATTACK){
+            // target.switchMode();
+        }
+        int opponentResistance = 0;
+        if(target.getLocation().equals("UNCONTROLLED")) {
+            opponentResistance = uncontrolled.getCard(target).getResistance();
+
+
+        }else if(target.getLocation().equals("HAND")){
+            opponentResistance = opponentPl.getCard(target).getResistance();
+        }
+        int activePower = this.getPower();
+        int totalSubtraction = activePower - opponentResistance;
+        int diceNumber = boardd.rollDice();
+        System.out.println(diceNumber);
+        //what does it really do??
+        //  this.setAttacked(true);
+        if(diceNumber >= totalSubtraction){
+            opponentPl.getField().removeGroupToHand(target);
+            activePl.setResult(10);
+            income = activePl.getIncome() + target.getIncome()/2;
+            targetIncome = target.getIncome() - target.getIncome();
+        }else if(diceNumber == 11 || diceNumber == 12){
+            activePl.setResult(0);
+        }else{
+            activePl.setResult(0);
+        }
+    }
+
+    public void attackToNeutralize(IlluminatiCard target) {
+        Player active = getBoard().getActivePlayer();
+        Player opponent = getBoard().getOpponentPlayer();
+        if (target.getMode() == Mode.ATTACK) {
+            target.setMode(Mode.DEFENSE);
+        }
+        int thisPower = this.getPower();
+        int otherResistance = target.getResistance();
+        int total = thisPower - otherResistance;
+//        this.setAttacked(true);
+        int diceNumber = boardd.rollDice();
+        System.out.println(diceNumber);
+        if (diceNumber >= total) {
+            opponent.getField().removeGroupToUncontrolled(target);
+            active.setIncome(active.getIncome() + 6);
+            target.setIncome(target.getIncome() - target.getIncome());
+            active.setResult(10);
+        } else if (diceNumber == 11 || diceNumber == 12) {
+            active.setIncome(0);
+        }
+    }
+//            System.out.println("Sorry automatic lost");
+//
+//        }else{
+//            System.out.println("Maybe next time");
+//        }
+//
+//    }
+//
+    public void attacktoDestroy(IlluminatiCard target){
+        Player active = getBoard().getActivePlayer();
+        Player opponent = getBoard().getOpponentPlayer();
+//        if(target.getMode() == Mode.ATTACK){
+//            target.switchMode();
+//        }
+        int thisPower = this.getPower();
+        int otherPower = target.getPower();
+        int totalSubtraction = thisPower - otherPower;
+        this.setAttacked(true);
+        int diceNumber = boardd.rollDice();
+        System.out.println(diceNumber);
+        if(diceNumber >= totalSubtraction){
+           // opponent.getField().removeToGraveYard(target);
+        }else if(diceNumber == 11 || diceNumber == 12){
+            System.out.println("Sorry this is an automatic lost");
+
+        }else{
+            System.out.println("Maybe next time");
+        }
+
+    }
+
+      public int transferMoney(IlluminatiCard groupTransfer, int incomeTransfer){
+        income = this.getIncome()- incomeTransfer;
+        targetIncome = groupTransfer.getIncome()+ incomeTransfer;
+        return targetIncome;
 
     }
 

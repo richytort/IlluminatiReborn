@@ -3,6 +3,7 @@ package ARK.Illuminati.board.player;
 
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
+import ARK.Illuminati.cards.IlluminatiCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.cards.Mode;
@@ -141,16 +142,16 @@ public class Player implements Contender {
 //    public boolean declareAttackToDestroy(GroupCard group) {}
 //
 //
-//    public boolean declareAttackToControlI(Card activeGroup, Card opponentGroup) {
-//        if(Card.getBoard().isGameOver())
-//            return false;
-//        if(this != Card.getBoard().getActivePlayer())
-//            return false;
-////        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
-////
-////        return cardAttacked;
-//        return false;
-//    }
+
+    public boolean declareAttackToControlI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+//        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
+//        return cardAttacked;
+        return false;
+    }
 
     public boolean declareAttackToControlG(Card activeGroup, Card opponentGroup) {
         if(Card.getBoard().isGameOver())
