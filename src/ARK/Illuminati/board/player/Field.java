@@ -29,5 +29,28 @@ public class Field {
         uncontrolledGroups.add(e);
     }
 
+    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
+
+        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
+            return false;
+
+        if (hand.size() >= 5)
+            throw new NoSpaceException();
+
+        if (Action == Action.Attack)
+            throw new WrongActionException();
+
+        hand.remove(group);
+        group.setHidden(isHidden);
+        group.setLocation(Location.FIELD);
+        hand.add(group);
+        return true;
+
+    }
+
+
+
+
+
 
 }
