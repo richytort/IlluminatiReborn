@@ -1,6 +1,7 @@
 package ARK.Illuminati.cards.specialCards;
 
 import ARK.Illuminati.cards.Card;
+import ARK.Illuminati.cards.GroupCard;
 
 public class secretsManWasNotMeantToKnow extends SpecialCard {
     String ability;
@@ -10,8 +11,10 @@ public class secretsManWasNotMeantToKnow extends SpecialCard {
         this.ability = ability;
     }
 
-    public  void action(Card cardA){}
+    @Override
+    public void action(GroupCard card) {
 
+    }
     public void setAbility(String ability){
         this.ability = ability;
     }

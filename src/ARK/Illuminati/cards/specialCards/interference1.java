@@ -1,6 +1,7 @@
 package ARK.Illuminati.cards.specialCards;
 
 import ARK.Illuminati.cards.Card;
+import ARK.Illuminati.cards.GroupCard;
 
 public class interference1 extends SpecialCard{
     String ability;
@@ -9,8 +10,10 @@ public class interference1 extends SpecialCard{
         super(name, type);
         this.ability = ability;
     }
-    public  void action(Card cardA){}
+    @Override
+    public void action(GroupCard card) {
 
+    }
     public void setAbility(String ability){
         this.ability = ability;
     }
