@@ -36,13 +36,16 @@ public class Board {
             opponentPlayer = p1;
         }
     }
-    public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
+    public void startGame(Player p1 , Player p2 ){
+        p1.addNCardsToHand(1);
+        p2.addNCardsToHand(1);
+        //p1.addIlluminatiCard();
+        //p2.addIlluminatiCard();
+        //deck.shuffle();
+        //uncontrolled.add4CardsToUncontrolled();
         p1.addIlluminatiCard();
         p2.addIlluminatiCard();
-        uncontrolled = new UncontrolledArea();
-        for(int e = 0; e < 4;e++){
-            uncontrolled.add4CardsToUncontrolled();
-        }
+        uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);
         activePlayer.addCardToHand();
     }
@@ -57,7 +60,7 @@ public class Board {
     public static void main(String [] args)throws IOException, UnexpectedFormatException {
         Board board = new Board();
         Deck deck=new Deck();
-        UncontrolledArea uncontrolled = new UncontrolledArea();
+
         Player p1 = new Player("Kathya");
         Player p2 = new Player("ulu");
         board.whoStarts(p1,p2);

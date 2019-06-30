@@ -27,6 +27,12 @@ public class Field {
         uncontrolledGroups.add(e);
     }
     public void addCardToHand(){
+
+        Card temp = deck.drawOneCard();
+        hand.add(temp);
+        temp.setLocation(Location.HAND);
+
+        /*
         if(deck.getDeck().size()==0){
             if (this == Card.getBoard().getActivePlayer().getField())
                 Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
@@ -43,6 +49,15 @@ public class Field {
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }
+
+         */
+    }
+
+    public void addNCardsToHand(int n ){
+
+        for(int i = 0 ; i < n ; i++)
+            addCardToHand();
+
     }
 
     public void printUncontroled(){
@@ -84,6 +99,23 @@ public class Field {
 
 
     }
+
+    public ArrayList<Card> getHand(){
+        return hand ;
+    }
+
+    public Deck getDeck(){
+        return deck ;
+    }
+
+
+
+
+/*
+    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
+
+        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
+            return false;
 //
 //    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
 //        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
@@ -139,4 +171,6 @@ public class Field {
     public boolean addSpecialToField(SpecialCard special, Object o, boolean b) {
    return true;
     }
+    */
+
 }
