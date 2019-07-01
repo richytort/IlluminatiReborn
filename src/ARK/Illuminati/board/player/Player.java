@@ -1,12 +1,10 @@
 package ARK.Illuminati.board.player;
 
 
-import ARK.Illuminati.cards.Card;
-import ARK.Illuminati.cards.GroupCard;
-import ARK.Illuminati.cards.IlluminatiCard;
+import ARK.Illuminati.cards.*;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
-import ARK.Illuminati.cards.Mode;
+import ARK.Illuminati.board.Board;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +17,7 @@ public class Player implements Contender {
     private int totalIncome;
     private int result;
     private Field field;
+    private Board board;
     private boolean addedGroupThisTurn;
     private ArrayList<Card> hand;
 
@@ -250,10 +249,18 @@ public class Player implements Contender {
 //        this.field.addNCardsToHand(n);
 //    }
 //
-//    public void addIlluminatiCard(){
-//        this.field.addIlluminatiCard();
-//    }
+    public void addIlluminatiCard(){
+//        Card temp = board.getDeck().drawIlluminatiCard();
+//        hand.add(temp);
+//        temp.setLocation(Location.HAND);
 
+        this.field.addIlluminatiCard();
+    }
+
+    public void addCard(Card k){
+        this.field.addCardToHand();
+       // hand.add(k);
+    }
 
     //DO I NEED IT IN FIELD
     //implement this actions

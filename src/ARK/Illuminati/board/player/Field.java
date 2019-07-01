@@ -15,7 +15,6 @@ import ARK.Illuminati.exceptions.WrongActionException;
 import ARK.Illuminati.gui.GroupButton;
 
 public class Field {
-  //  private final Deck deck;
     private ArrayList<Card> hand;
     private ArrayList<Card> cardArea;
     private ArrayList<SpecialCard> specialArea;
@@ -25,7 +24,6 @@ public class Field {
     private Board board;
     Player p1;
     Player p2;
-//
 
     public Field() throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
@@ -33,7 +31,6 @@ public class Field {
         specialArea = new ArrayList<SpecialCard>();
         uncontrolledGroups = new ArrayList<Card>();
         board = new Board();
-    //    deck = new Deck();
     }
 
     //do we need one for Illuminati
@@ -241,20 +238,24 @@ public class Field {
     }
 
 
-//    public void addCardToHand() {
-//        /*
-//        if (deck.getDeck().size() == 0) {
-//            if (this == Card.getBoard().getActivePlayer().getField())
-//                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
-//            else
-//                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-//
-//            return;
-//        }
-//
-//         */
-//        Card temp = board.getDeck().drawOneCard();
-//    }
+    public void addCardToHand() {
+        /*
+        if (deck.getDeck().size() == 0) {
+            if (this == Card.getBoard().getActivePlayer().getField())
+                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+            else
+                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+
+            return;
+        }
+
+         */
+        Card temp = Board.deck.drawOneCard();
+        if(hand.contains(temp)){
+            Board.deck.getDeck().remove(temp);
+            addCardToHand();
+        }
+    }
 
     public void addNCardsToHand(int n) {
 
@@ -264,19 +265,9 @@ public class Field {
     }
 
 
-//    public void addIlluminatiCard() {
-//        Card temp = board.getDeck().drawIlluminatiCard();
-//        hand.add(temp);
-//        temp.setLocation(Location.HAND);
-//    }
-//
-//    public void add4CardsToUncontrolled() {
-//        for (int i = 0; i < 4; i++) {
-//            Card temp = board.getDeck().drawOneCardB();
-//            uncontrolledGroups.add(temp);
-//            temp.setLocation(Location.UNCONTROLLED);
-//        }
-//    }
+    public void addIlluminatiCard() {
+        hand.add(Board.deck.drawOneCard());
+       }
 
 
    public void printHand(){
