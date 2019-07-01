@@ -90,8 +90,8 @@ public class Field {
         hand.remove(special);
         specialArea.add(special);
         special.setLocation(Location.FIELD);
-        if (!hidden)
-            return activeSpecial(special, group);
+//        if (!hidden)
+//            return activeSpecial(special, group);
         return true;
     }
 
@@ -282,10 +282,8 @@ public class Field {
 
          */
         Card temp = Board.deck.drawOneCard(); //temp card object pulled from deck
-        if(hand.contains(temp)){  //if the hand has the card pulled from the deck
-            Board.deck.getDeck().remove(temp);
-            addCardToHand();   //card added to hand
-        }
+       hand.add(temp);
+       temp.setLocation(Location.HAND);
     }
 
     /**
