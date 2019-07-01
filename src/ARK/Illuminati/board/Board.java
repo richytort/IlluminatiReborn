@@ -16,7 +16,7 @@ public class Board {
     private Player winner;
     private int dice1;
     private UncontrolledArea uncontrolled;
-    protected static Deck deck;
+    public static Deck deck;
 
 
 
@@ -24,7 +24,6 @@ public class Board {
     private int total;
 
     public Board() throws IOException, UnexpectedFormatException{
-        deck = new Deck();
         Card.setBoard(this);
     }
     public void whoStarts(Player p1, Player p2){
@@ -39,12 +38,13 @@ public class Board {
         }
     }
     public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
+        deck = new Deck();
         uncontrolled = new UncontrolledArea();
         //p1.addIlluminatiCard();
         //p2.addIlluminatiCard();
         //deck.shuffle();
         //uncontrolled.add4CardsToUncontrolled();
-        p1.addNCardsToHand(100);
+        p1.addNCardsToHand(10);
         System.out.println("Printing in board:");
         p1.getField().printHand();
         p2.addNCardsToHand(10);

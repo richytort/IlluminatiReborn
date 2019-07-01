@@ -263,7 +263,7 @@ public class Field {
     public void addNCardsToHand(int n) {
 
         for (int i = 0; i < n; i++)
-            addCardToHand();
+            hand.add( Board.deck.drawOneCard()) ;
 
     }
 
