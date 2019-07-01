@@ -352,9 +352,11 @@ public class Controller implements ActionListener, MouseListener {
                                 Object[] options3 = {"Drop a Group", "Give Away a Special Card", "Give away Money", "Cancel"};
                                 int options = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
                                 if (options == 3) {
-
+                                    fc = null;
+                                    sc = null;
+                                    tc = null;
+                                    return;
                                 }
-
                                 if (options == 0) {
 
                                 }
@@ -372,10 +374,35 @@ public class Controller implements ActionListener, MouseListener {
                                 Object[] options3 = {"Attack a Group", "Transfer Money", "Move a Group", "Give a Group Away", "Cancel"};
                                 int optionsRegular = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
                                 if (optionsRegular == 4) {
-
+                                    fc = null;
+                                    sc = null;
+                                    tc = null;
+                                    return;
                                 }
                                 if (optionsRegular == 0) {
-
+                                    Object[] options4 = {"Attack to Control", "Attack To Neutralize", "Attack To Destroy", "Cancel"};
+                                    int attacks = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options4, options4[1]);
+                                    if(attacks==3){
+                                        fc = null;
+                                        sc = null;
+                                        tc = null;
+                                        return;
+                                    }if(attacks==0){
+                                        board.getActivePlayer().getField().declareAttackToControlG(group,((GroupButton)fc).getGroup());
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }if(attacks==1){
+                                        board.getActivePlayer().getField().declareAttackToNeutralizeG(group,((GroupButton)fc).getGroup());
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }if(attacks==2){
+                                        board.getActivePlayer().getField().declareAttackToDestroyG(group,((GroupButton)fc).getGroup());
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
                                 }
                                 if (optionsRegular == 1) {
 
@@ -388,8 +415,7 @@ public class Controller implements ActionListener, MouseListener {
                                 }
                             }
                             if (y == 2) {
-
-
+                                board.getActivePlayer().passing();
                             }
 
                         }
