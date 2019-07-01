@@ -132,49 +132,65 @@ public class Field {
         return true;
 
     }
-
+    /**This method declares attacks with intent to control group
+     * @param g1 - the group card atttacking
+     * @param g2- the second group card that is being attacked
+     * @return boolean true or false if the attack to control occurs
+     */
     public boolean declareAttackToControlG(GroupCard g1, GroupCard g2) {
-        if(g1.getMode() != Mode.ATTACK)
-            throw new DefenseGroupAttackException();
-//        if(g1.isAttacked())//what is it for??
-//            throw new MultopleGroupAttackException();
+        if(g1.getMode() != Mode.ATTACK)      //if group1 is not attacking
+            throw new DefenseGroupAttackException();  //defenser exception appears
+
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if (g2 != null && oppGroupArea.contains(g2))
-            g1.attackToControl(g2);
+        if (g2 != null && oppGroupArea.contains(g2)) //if group 2 exists and its in a grouparea
+            g1.attackToControl(g2); // //attack to control occurs
         else
-            return false;
+            return false; //false
         if (Card.getBoard().getActivePlayer().getResult() == 10) {
             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
         }
         if (Card.getBoard().getActivePlayer().getResult() == 0) {
             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
         }
-        return true;
+        return true; //true is returned
 
 
     }
 
+    /**
+     * This method declares on a group with intent to neutralize
+     * @param g1 Illuminati card played to attack g2
+     * @param g2 the group being attacked by g1
+     * @return true or false if the attack to neutralize was successful
+     **/
     public boolean declareAttackToNeutralizeI(IlluminatiCard g1, GroupCard g2) {
-        if(g1.getMode() != Mode.ATTACK)
-            throw new DefenseGroupAttackException();
+        if(g1.getMode() != Mode.ATTACK) //IlluminatiCard is not played to attack
+            throw new DefenseGroupAttackException();   //defense exception is thrown
 //        if(g1.isAttacked())//what is it for??
 //            throw new MultopleGroupAttackException();
-        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea; //arraylist for the opponent group area
         if (g2 != null && oppGroupArea.contains(g2))
-            g1.attackToControl(g2);
+            g1.attackToControl(g2);   //attack to control occurs
         else
-            return false;
+            return false; //false is returned
+
         if (Card.getBoard().getActivePlayer().getResult() == 10) {
             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
         }
         if (Card.getBoard().getActivePlayer().getResult() == 0) {
             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
         }
-        return true;
+        return true;   //boolean true is returned
 
 
     }
 
+    /**
+     * This method declares attacks to neutralize another group
+     * @param g1 - group to attack the other group
+     * @param g2 - group to be attacked by g1
+     * @return boolean for whether the attack is declared
+     * */
     public boolean declareAttackToNeutralizeG(GroupCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
@@ -196,14 +212,20 @@ public class Field {
 
     }
 
+    /**
+     * This method declares attacks to destroy another group
+     * @param g1 - the IlluminatiCard played
+     * @param g2 - the group the attack is declared on
+     * @return true or false if the attack is declared
+     * */
     public boolean declareAttackToDestroyI(IlluminatiCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
 //        if(g1.isAttacked())//what is it for??
 //            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if (g2 != null && oppGroupArea.contains(g2))
-            g1.attackToControl(g2);
+        if (g2 != null && oppGroupArea.contains(g2))    //g2 isnt empty and the opponent group contains g2
+            g1.attackToControl(g2);   //g1 attacks g2 to control
         else
             return false;
         if (Card.getBoard().getActivePlayer().getResult() == 10) {
@@ -217,6 +239,12 @@ public class Field {
 
     }
 
+    /**
+     * This method declares attacks with the intent to destroy another group
+     * @param g1 - The first group that attacks g2
+     * @param g2 - the group being attacked by the first group
+     * @return boolean true or false if the declare occurred
+     * */
     public boolean declareAttackToDestroyG(GroupCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
@@ -238,7 +266,9 @@ public class Field {
 
     }
 
-
+    /**
+     * Adds a card from the deck to the players hand
+     */
     public void addCardToHand() {
         /*
         if (deck.getDeck().size() == 0) {
@@ -251,13 +281,17 @@ public class Field {
         }
 
          */
-        Card temp = Board.deck.drawOneCard();
-        if(hand.contains(temp)){
+        Card temp = Board.deck.drawOneCard(); //temp card object pulled from deck
+        if(hand.contains(temp)){  //if the hand has the card pulled from the deck
             Board.deck.getDeck().remove(temp);
-            addCardToHand();
+            addCardToHand();   //card added to hand
         }
     }
 
+    /**
+     * This method adds cards to the players hand
+     * @param n: the number of cards added to players hand
+     */
     public void addNCardsToHand(int n) {
         for (int i = 0; i < n; i++) {
             Card temp =Board.deck.drawOneCard();
@@ -269,9 +303,14 @@ public class Field {
     }
 
 
+    /**
+     * This method adds an Illuminati Card to the players hand
+     */
     public void addIlluminatiCard() {
         hand.add(Board.deck.drawOneCard());
        }
+
+
 
 
    public void printHand(){
@@ -292,6 +331,9 @@ public class Field {
 //    }
 //
 
+    /**
+     * Phase of the players actions ends
+     */
     public void endPhase(){
         switch (phase){
             case MAIN:
@@ -305,6 +347,9 @@ public class Field {
         }
     }
 
+    /**
+     * Ends the turn of the player
+     */
     public void endTurn(){
         phase = Phase.MAIN;
         for(Card m: cardArea){
