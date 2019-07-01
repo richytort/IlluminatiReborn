@@ -177,10 +177,10 @@ public class Player implements Contender {
 
 
     /**
-     * Declaring an attack on the
-     * @param activeGroup
-     * @param opponentGroup
-     * @return
+     * Declaring an attack on the opponent group with intent to destroy
+     * @param activeGroup: type Illuminati, attacks the opposing group
+     * @param opponentGroup: the opponent group that is being attacked
+     * @return boolean value CardAttacked
      */
     public boolean declareAttackToDestroyI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
@@ -193,8 +193,9 @@ public class Player implements Contender {
 
     }
 
-
-
+    /**
+     * Attack to destroy the opponent group
+     */
     public boolean declareAttackToDestroyG(GroupCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
