@@ -46,10 +46,12 @@ public class Controller implements ActionListener, MouseListener {
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroups();
         ArrayList<GroupButton> handP1 = this.gui.getHandAreaP1().getGroupButtons();
         ArrayList<GroupButton> handP2 = this.gui.getHandAreaP2().getGroupButtons();
+        ArrayList<GroupButton> uncontrolledGroup = this.gui.getUncontrolledArea().getGroupButtons();
         ArrayList<IlluminatiButton> handIlluminatiP1 = this.gui.getHandAreaP1().getIlluminatiButtons();
         ArrayList<IlluminatiButton> handIlluminatiP2 = this.gui.getHandAreaP2().getIlluminatiButtons();
         ArrayList<SpecialButton> handSpecialP1 = this.gui.getHandAreaP1().getSpecialButtons();
         ArrayList<SpecialButton> handSpecialP2 = this.gui.getHandAreaP2().getSpecialButtons();
+
         ///////not too sure of line 37. Investigate later.
         ArrayList<JButton> specialsP1 = this.gui.getSpecialAreaP1().getSpecials();
         ArrayList<JButton> specialsP2 = this.gui.getSpecialAreaP2().getSpecials();
@@ -106,6 +108,11 @@ public class Controller implements ActionListener, MouseListener {
         for(int i = 0 ; i < handSpecialP2.size(); i++){
             handSpecialP2.get(i).addActionListener(this);
             handSpecialP2.get(i).addMouseListener(this );
+        }
+
+        for(int i = 0 ; i < uncontrolledGroup.size(); i++){
+            uncontrolledGroup.get(i).addActionListener(this);
+            uncontrolledGroup.get(i).addMouseListener(this);
         }
 
 
