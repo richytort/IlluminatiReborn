@@ -91,6 +91,7 @@ public class HandPanel extends JPanel {
                 illuminatiButton.repaint();
                 //monsterbuttons.add(mb);
                 //this.add(mb);
+                System.out.println("Done");
             }
             else{
                 //spellbuttons.get(i).setText(hand.get(i).getName());
