@@ -238,6 +238,7 @@ public class Field {
 
 
     public void addCardToHand() {
+        /*
         if (deck.getDeck().size() == 0) {
             if (this == Card.getBoard().getActivePlayer().getField())
                 Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
@@ -246,14 +247,11 @@ public class Field {
 
             return;
         }
-        Card temp = deck.drawCards();
-        if (temp.getType().equalsIgnoreCase("special card")) {
-            hand.add(temp);
-            temp.setLocation(Location.HAND);
-        } else {
-            uncontrolledGroups.add(temp);
-            temp.setLocation(Location.UNCONTROLLED);
-        }
+
+         */
+        Card temp = deck.drawOneCard();
+        hand.add(temp);
+        temp.setLocation(Location.HAND);
 
 
     }
@@ -284,13 +282,13 @@ public class Field {
         }
     }
 
-    //
-//    public void printHand(){
-//        for(Card e: hand){
-//            System.out.println(e+ " ");
-//        }
-//    }
-//
+
+   public void printHand(){
+       for(Card e: hand){
+           System.out.println(e+ " ");
+        }
+    }
+
 //    public static void main(String [] args) throws IOException,UnexpectedFormatException{
 //        Field field = new Field();
 //        Deck deck = new Deck();

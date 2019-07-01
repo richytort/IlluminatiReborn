@@ -42,15 +42,17 @@ public class Board {
         //p2.addIlluminatiCard();
         //deck.shuffle();
         //uncontrolled.add4CardsToUncontrolled();
-        p1.addNCardsToHand(10);
+        p1.addNCardsToHand(100);
+        System.out.println("Printing in board:");
+        p1.getField().printHand();
         p2.addNCardsToHand(10);
-        p1.addIlluminatiCard();
-        p2.addIlluminatiCard();
+        //p1.addIlluminatiCard();
+        //p2.addIlluminatiCard();
        // p1.addNCardsToHand(1);
        // p2.addNCardsToHand(1);
-        uncontrolled.add4CardsToUncontrolled();
+        //uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);
-        activePlayer.addCardToHand();
+        //activePlayer.addCardToHand();
     }
 
     public void nextPlayer(){

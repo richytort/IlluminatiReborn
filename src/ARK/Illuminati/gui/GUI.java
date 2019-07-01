@@ -266,8 +266,8 @@ public class GUI extends JFrame {
 
         //Note: Find out what description is used for. It may be important.
         description = new JLabel();
-        p1hid = new HiddenHandPanel(p1);
-        p2hid = new HiddenHandPanel(p2);
+        //p1hid = new HiddenHandPanel(p1);
+        //p2hid = new HiddenHandPanel(p2);
 
         p2name.setFont(new Font("Century Gothic", Font.BOLD, 25));
         p2name.setForeground(Color.BLACK);
@@ -315,10 +315,14 @@ public class GUI extends JFrame {
         panel2.add(structureAreaP2, BorderLayout.CENTER);
         panel2.setOpaque(false);
 
+        System.out.println("Printing hand:" );
+        p1.printHand();
+        p2.printHand();
+
         JScrollPane hand2SP = new JScrollPane(handAreaP2) ; //sp2 = new JScrollPane(handp2);
         hand2SP.setBorder(null);
         hand2SP.getViewport().setOpaque(false);
-        hand2SP.setPreferredSize(new Dimension(300,150));
+        hand2SP.setPreferredSize(new Dimension(200,150));
         hand2SP.setOpaque(false);
         hand2SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         hand2SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);

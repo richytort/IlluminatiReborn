@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class HandPanel extends JPanel {
     private ArrayList<GroupButton> groupButtons ;
     private ArrayList<SpecialButton> specialButtons;
-    private IlluminatiButton illuminatiButton ;
+    private ArrayList<IlluminatiButton> illuminatiButtons ;
 
     public HandPanel(Player p ) {
         super();
@@ -32,32 +32,34 @@ public class HandPanel extends JPanel {
     public void update(Player p){
         this.removeAll();
         this.revalidate();
-        groupButtons = new ArrayList<GroupButton>(20);
-        specialButtons = new ArrayList<SpecialButton>(20);
-        illuminatiButton = new IlluminatiButton() ;
+        groupButtons = new ArrayList<GroupButton>();
+        specialButtons = new ArrayList<SpecialButton>();
+        illuminatiButtons = new ArrayList<IlluminatiButton>() ;
         //setPreferredSize(new Dimension(500,150));
         ArrayList<Card> hand = p.getField().getHand();
         this.setLayout(new FlowLayout());
         this.setOpaque(false);
 
-        for (int i = 0; i <20; i++) {
+        for (int i = 0; i <100; i++) {
             GroupButton b = new GroupButton();
             b.setVisible(false);
             this.add(b);
             groupButtons.add(b);
 
         }
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             SpecialButton s = new SpecialButton();
             s.setVisible(false);
             this.add(s);
             specialButtons.add(s);
         }
 
-        IlluminatiButton ii = new IlluminatiButton();
-        ii.setVisible(false);
-        this.add(ii);
-        illuminatiButton.add(ii);
+        for(int i = 0 ; i < 100; i++) {
+            IlluminatiButton ii = new IlluminatiButton();
+            ii.setVisible(false);
+            this.add(ii);
+            illuminatiButtons.add(ii);
+        }
 
         for(int i = 0; i <hand.size();i++){
             if(hand.get(i) instanceof GroupCard){
@@ -66,10 +68,10 @@ public class HandPanel extends JPanel {
                 groupButtons.get(i).setVisible(true);
                 ImageIcon img = new ImageIcon(hand.get(i).getName()+ ".png");
                 Image img2 = img.getImage();
-                Image newimg = img2.getScaledInstance(100, 146,  java.awt.Image.SCALE_SMOOTH);
+                Image newimg = img2.getScaledInstance(146, 100,  java.awt.Image.SCALE_SMOOTH);
                 ImageIcon newIcon = new ImageIcon(newimg);
                 groupButtons.get(i).setIcon(newIcon);
-                groupButtons.get(i).setPreferredSize(new Dimension(100,146));
+                groupButtons.get(i).setPreferredSize(new Dimension(146,100));
                 groupButtons.get(i).revalidate();
                 groupButtons.get(i).setOpaque(false);
                 groupButtons.get(i).repaint();
@@ -78,17 +80,17 @@ public class HandPanel extends JPanel {
             }
             else if(hand.get(i) instanceof IlluminatiCard){
                 //monsterbuttons.get(i).setText(hand.get(i).getName());
-                illuminatiButton.setIlluminati((IlluminatiCard) hand.get(i));
-                illuminatiButton.setVisible(true);
+                illuminatiButtons.get(i).setIlluminati((IlluminatiCard) hand.get(i));
+                illuminatiButtons.get(i).setVisible(true);
                 ImageIcon img = new ImageIcon(hand.get(i).getName()+".png");
                 Image img2 = img.getImage();
-                Image newimg = img2.getScaledInstance(100, 146,  java.awt.Image.SCALE_SMOOTH);
+                Image newimg = img2.getScaledInstance(146, 100,  java.awt.Image.SCALE_SMOOTH);
                 ImageIcon newIcon = new ImageIcon(newimg);
-                illuminatiButton.setIcon(newIcon);
-                illuminatiButton.setPreferredSize(new Dimension(100,146));
-                illuminatiButton.revalidate();
-                illuminatiButton.setOpaque(false);
-                illuminatiButton.repaint();
+                illuminatiButtons.get(i).setIcon(newIcon);
+                illuminatiButtons.get(i).setPreferredSize(new Dimension(146,100));
+                illuminatiButtons.get(i).revalidate();
+                illuminatiButtons.get(i).setOpaque(false);
+                illuminatiButtons.get(i).repaint();
             }
             else{
                 //spellbuttons.get(i).setText(hand.get(i).getName());
@@ -96,10 +98,10 @@ public class HandPanel extends JPanel {
                 specialButtons.get(i).setVisible(true);
                 ImageIcon img = new ImageIcon(hand.get(i).getName()+".png");
                 Image img2 = img.getImage();
-                Image newimg = img2.getScaledInstance(100, 146,  java.awt.Image.SCALE_SMOOTH);
+                Image newimg = img2.getScaledInstance(146, 100,  java.awt.Image.SCALE_SMOOTH);
                 ImageIcon newIcon = new ImageIcon(newimg);
                 specialButtons.get(i).setIcon(newIcon);
-                specialButtons.get(i).setPreferredSize(new Dimension(100,146));
+                specialButtons.get(i).setPreferredSize(new Dimension(146,100));
                 specialButtons.get(i).revalidate();
                 specialButtons.get(i).setOpaque(false);
                 specialButtons.get(i).repaint();
@@ -119,12 +121,12 @@ public class HandPanel extends JPanel {
         this.specialButtons = specialButtons;
     }
 
-    public IlluminatiButton getIlluminatiButton(){
-        return illuminatiButton;
+    public ArrayList<IlluminatiButton> getIlluminatiButton(){
+        return illuminatiButtons;
     }
 
-    public void setIlluminatiButton(IlluminatiButton illuminatiButton ){
-        this.illuminatiButton = illuminatiButton ;
+    public void setIlluminatiButton(ArrayList<IlluminatiButton> illuminatiButtons ){
+        this.illuminatiButtons = illuminatiButtons ;
     }
 
 }
