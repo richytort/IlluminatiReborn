@@ -398,11 +398,11 @@ public class Controller implements ActionListener, MouseListener {
                                         return;
                                     }if(attacks==2){
                                         board.getActivePlayer().getField().declareAttackToDestroyG(group,((GroupButton)fc).getGroup());
-                                        JOptionPane.showMessageDialog(gui, "Choose what card to attack");
                                         fc = null;
                                         updateField();
                                         return;
                                     }
+                                    JOptionPane.showMessageDialog(gui, "Choose what card to attack");
                                 }
                                 //WHAT DO I DOOO????
 //                                JOptionPane.showMessageDialog(gui, "Choose what card to attack");

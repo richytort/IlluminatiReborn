@@ -16,7 +16,9 @@ public class Board {
     private Player winner;
     private int dice1;
     private UncontrolledArea uncontrolled;
-    Deck deck;
+    protected static Deck deck;
+
+
 
     private int dice2;
     private int total;
@@ -113,6 +115,10 @@ public class Board {
 
     public Deck getDeck() {
         return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 
 

@@ -424,5 +424,9 @@ public class Deck {
 
     public static void setOtherPath(String otherPath){ Deck.otherPath = otherPath;}
 
+    public int size(){
+       return deck.size();
+    }
+
 
 }
