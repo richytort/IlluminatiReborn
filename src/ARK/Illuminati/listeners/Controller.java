@@ -23,6 +23,8 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.awt.Image.SCALE_SMOOTH;
+
 public class Controller implements ActionListener, MouseListener {
 
     private JButton fc;
@@ -274,6 +276,8 @@ public class Controller implements ActionListener, MouseListener {
 
     }
 
+
+
     @Override
     public void mouseEntered(MouseEvent e) {
         System.out.println("Entering");
@@ -285,6 +289,8 @@ public class Controller implements ActionListener, MouseListener {
                 String url = c.getName()+".png";
 
                 ImageIcon img = new ImageIcon(url);
+                Image img2 = img.getImage();
+                img = new ImageIcon(img2.getScaledInstance(338, 200, SCALE_SMOOTH));
                 gui.getDescription().setIcon(img);
                 gui.getDescription().revalidate();
                 gui.revalidate();
@@ -297,6 +303,8 @@ public class Controller implements ActionListener, MouseListener {
                 String url = c.getName()+".png";
 
                 ImageIcon img = new ImageIcon(url);
+                Image img2 = img.getImage();
+                img = new ImageIcon(img2.getScaledInstance(338, 200, SCALE_SMOOTH));
                 gui.getDescription().setIcon(img);
                 gui.getDescription().revalidate();
                 gui.revalidate();
@@ -310,6 +318,8 @@ public class Controller implements ActionListener, MouseListener {
                 String url = c.getName()+".png";
 
                 ImageIcon img = new ImageIcon(url);
+                Image img2 = img.getImage();
+                img = new ImageIcon(img2.getScaledInstance(338, 200, SCALE_SMOOTH));
                 gui.getDescription().setIcon(img);
                 gui.getDescription().revalidate();
                 gui.revalidate();
