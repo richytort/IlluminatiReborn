@@ -4,6 +4,9 @@ import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.cards.Card;
 
+/**
+ * Interface to perform actions within Illuminati game
+ */
 public interface Contender {
 
     public boolean setGroup( Card group );

@@ -36,16 +36,20 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.stream.StreamSupport;
 
+/**
+ * Deck class for the deck of cards in Illuminati
+ * Creates methods that allow user to interact with the deck and use cards
+ */
 public class Deck {
 
     //instance variables
-    private static ArrayList<Card> illuminati ;
-    private static ArrayList<Card> group ;
-    private static ArrayList<Card> special ;
+    private static ArrayList<Card> illuminati ; //Arraylist of Illuminati cards
+    private static ArrayList<Card> group ; //storage of group cards
+    private static ArrayList<Card> special ; //storage of special cards
 
-    private final ArrayList<Card> deck;
+    private final ArrayList<Card> deck; //storage for the deck of cards in the game
 
-   private static String specialPath = "Database-specialCards.csv";
+   private static String specialPath = "Database-specialCards.csv";  //database in strings
    private static String otherPath = "Database-othergroupsCards.csv";
    private static String illuminatiPath = "Database-IlluminatiCards.csv";
    int trials = 0;
@@ -127,23 +131,29 @@ public class Deck {
 
    }
 
+    /**
+     * This method gets the cards stored in the system and returns exception errors if issues arise
+     * @param path: the pathway from which the cards are retrieve
+     * @throws IOException error exception to be thrown when system error occurs
+     * @throws UnexpectedFormatException: when the format is incorrect for retrieving the cards
+     */
     public ArrayList<Card> loadCardsFromFile(String path) throws  IOException, UnexpectedFormatException {
-        ArrayList<Card> temp = new ArrayList<Card>();
+        ArrayList<Card> temp = new ArrayList<Card>();  //new arraylist
         String line;
         BufferedReader br = new BufferedReader(new FileReader(path));
         int lineNumber = 0;
-        while ((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {    //reading lines
             lineNumber++;
             String[] cardInfo = line.split(",");
 
             if (cardInfo.length == 0) {
 
                 br.close();
-                 throw new MissingFieldException(
+                 throw new MissingFieldException(   //Missing Field Exception when fields does not meet expected
                          "The number of fields in the line did not match the expected.",
                         path, lineNumber);
 
-            } else {
+            } else {  //error not thrown
                 if (cardInfo[0].equalsIgnoreCase("Illuminati") && cardInfo.length != 6) {
                     br.close();
                     System.out.println("there");
@@ -162,7 +172,7 @@ public class Deck {
                             path, lineNumber);
                 }
             }
-            for (int i = 0; i < cardInfo.length; i++)
+            for (int i = 0; i < cardInfo.length; i++)   //empty field
                 if (cardInfo[i].equals("") || cardInfo[i].equals(" ")) {
 
                     br.close();
@@ -238,6 +248,12 @@ public class Deck {
         return (temp);
    }
 
+    /**
+     * This method uses multiple for loops to create the "deck" consisting of arraylists.
+     * @param illuminati - type Illuminati Cards from the databases
+     * @param special - special action Illuminati Cards; stored in database
+     * @param group - type group cards from the Illuminati Game
+     */
    public void buildDeck(ArrayList<Card> illuminati, ArrayList<Card> special, ArrayList<Card> group){
       for(int i =0; i < illuminati.size();i++) {
           IlluminatiCard illuminati1 = (IlluminatiCard) illuminati.get(i);
@@ -262,27 +278,27 @@ public class Deck {
       for(int i = 0; i < special.size();i++){
           Card specialC = special.get(i);
           SpecialCard clone;
-          if(specialC instanceof Assassination){
+          if(specialC instanceof Assassination){  //Assassination card
               clone = new Assassination(specialC.getName(), specialC.getType(),((Assassination) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof Bribery){
+          } if(specialC instanceof Bribery){   //bribery card
               clone = new Bribery(specialC.getName(), specialC.getType(),((Bribery) specialC).getAbility());
               clone.setLocation(Location.DECK);
-              deck.add(clone);
+              deck.add(clone);   //placed into deck
               continue;
-          } if(specialC instanceof computerEspionage){
+          } if(specialC instanceof computerEspionage){   //computer espionage
               clone = new computerEspionage(specialC.getName(), specialC.getType(),((computerEspionage) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof deepAgent){
+          } if(specialC instanceof deepAgent){ //deep espionage
               clone = new deepAgent(specialC.getName(), specialC.getType(),((deepAgent) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof interference1){
+          } if(specialC instanceof interference1){   //interference
               clone = new interference2(specialC.getName(), specialC.getType(),((interference1) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
@@ -292,47 +308,47 @@ public class Deck {
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof marketManipulation){
+          } if(specialC instanceof marketManipulation){  //market manipulation
               clone = new marketManipulation(specialC.getName(), specialC.getType(),((marketManipulation) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof mediaCampaign){
+          } if(specialC instanceof mediaCampaign){  //media campaign
               clone = new mediaCampaign(specialC.getName(), specialC.getType(),((mediaCampaign) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof murphysLaw){
-              clone = new murphysLaw(specialC.getName(), specialC.getType(),((murphysLaw) specialC).getAbility());
+          } if(specialC instanceof murphysLaw){   //murphy's law
+               clone = new murphysLaw(specialC.getName(), specialC.getType(),((murphysLaw) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof secretsManWasNotMeantToKnow){
+          } if(specialC instanceof secretsManWasNotMeantToKnow){   //secrets man was not meant to know
               clone = new secretsManWasNotMeantToKnow(specialC.getName(), specialC.getType(),((secretsManWasNotMeantToKnow) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof senateInvestigatingCommittee){
+          } if(specialC instanceof senateInvestigatingCommittee){    //senate investigating commitee
               clone = new senateInvestigatingCommittee(specialC.getName(), specialC.getType(),((senateInvestigatingCommittee) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof slushFund){
+          } if(specialC instanceof slushFund){   //slash fund
               clone = new slushFund(specialC.getName(), specialC.getType(),((slushFund) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof swissBankAccount){
+          } if(specialC instanceof swissBankAccount){   //swiss Bank Account
               clone = new swissBankAccount(specialC.getName(), specialC.getType(),((swissBankAccount) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof whisperingCampaign){
+          } if(specialC instanceof whisperingCampaign){   //whispering campaign
               clone = new whisperingCampaign(specialC.getName(), specialC.getType(),((whisperingCampaign) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
               continue;
-          } if(specialC instanceof whiteCollarCrime){
+          } if(specialC instanceof whiteCollarCrime){   //white collar crime
               clone = new whiteCollarCrime(specialC.getName(), specialC.getType(),((whiteCollarCrime) specialC).getAbility());
               clone.setLocation(Location.DECK);
               deck.add(clone);
@@ -341,10 +357,19 @@ public class Deck {
       }
    }
 
+    /**
+     * Shuffles the deck of cards
+     */
     public void shuffle(){
 
        Collections.shuffle(deck);
     }
+
+    /**
+     * returns the index of the card
+     * @param e - Card to be read
+     * @return int called index- the index of the card
+     */
     public int getIndex(Card e){
        int index = deck.indexOf(e);
        return index;
@@ -357,6 +382,10 @@ public class Deck {
        }
     }
 
+    /**
+     * Draws a card from the deck
+     * @return a card taken from the deck
+     */
     public Card drawOneCard(){
        return deck.remove(0);
     }
@@ -374,6 +403,12 @@ public class Deck {
              }
         }return c;
     }
+
+    /**
+     *
+     * @throws IOException- error in system input
+     * @throws UnexpectedFormatException- error in format
+     */
     public static void main(String [] args)throws IOException, UnexpectedFormatException{
        Deck deck1 = new Deck();
        for(int e = 0; e< 4;e++) {
@@ -386,6 +421,9 @@ public class Deck {
        return deck.remove(0);
    }
 
+    /**
+     * @return Illuminati Card from the deck
+     */
     public Card drawIlluminatiCard(){
         Card c = deck.get(0);
         deck.remove(0);
