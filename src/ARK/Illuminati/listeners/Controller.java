@@ -299,127 +299,102 @@ public class Controller implements ActionListener, MouseListener {
             updateField();
             //addActionListeners();
         }
+        //need to do it for ILLUMINATI
         if(arg0.getSource() instanceof GroupButton){
 
             try{
-                if(fc==null){
+                if(fc==null) {
 
                     GroupCard group = ((GroupButton) arg0.getSource()).getGroup();
                     //fc = button;
 
-                    if(group.getLocation()== Location.HAND){
+                    if (group.getLocation() == Location.HAND) {
                         fc = (GroupButton) arg0.getSource();
                         group = ((GroupButton) fc).getGroup();
                         //fc = button;
                         ///////////THIS MAY NEED TO BE CHANGED. BETTER YET, will be changed.
-                        Object[] options = {"Summon","Set","Cancel"};
-                        summonset = JOptionPane.showOptionDialog(gui, "What is your action?",null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,options, options[2]);
-                        if(summonset==2){
+                        Object[] options = {"Set", "Cancel"};
+                        summonset = JOptionPane.showOptionDialog(gui, "What is your action?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                        if (summonset == 1) {
                             fc = null;
                             return;
                         }
-
-                        /*
-                        if(group.getLevel()<=4){
-                            if(summonset==0){
-                                Card.getBoard().getActivePlayer().summonMonster(monster);
-                            }
-                            else{
-                                Card.getBoard().getActivePlayer().setMonster(monster);
-                            }
-
+                        if (summonset == 0) {
+                            Card.getBoard().getActivePlayer().setGroup(group);
                             fc = null;
                             updateField();
                             return;
                         }
-
-                        else{
-                            if(monster.getLevel()<=6){
-                                if(Card.getBoard().getActivePlayer().getField().getMonstersArea().size()==0){
-                                    JOptionPane.showMessageDialog(gui, "No sufficient monsters");
-                                    fc = null;
-                                    //updatefield();
-                                    return;
-                                }
-                                Object[] options2 = {"OK","Cancel"};
-                                int y = JOptionPane.showOptionDialog(gui, "Choose one sacrifice",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
-                                if(y==0){
-                                    fc = (MonsterButton) arg0.getSource();
-                                    //JOptionPane.showMessageDialog(gui, "nnnnjjs");
-                                    //updatefield();
-                                    return;
-                                }
-                                else{
-                                    fc = null;
-                                    //updatefield();
-                                    return;
-                                }
-
-
-                            }
-                            else{
-                                if(Card.getBoard().getActivePlayer().getField().getMonstersArea().size()<=1){
-                                    JOptionPane.showMessageDialog(gui, "No sufficient monsters");
-                                    fc = null;
-                                    updatefield();
-                                    return;
-                                }
-                                Object[] options2 = {"OK","Cancel"};
-                                int y = JOptionPane.showOptionDialog(gui, "Choose the first sacrifice",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
-                                if(y==0){
-                                    //updatefield();
-                                    return;
-                                }
-                                else{
-                                    fc = null;
-                                    //updatefield();
-                                    return;
-                                }
-
-                            }
-
-
-                        }
-                        */
-
-                    }
-                    /*
-                    else{
-                        if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE){
-                            Object[] options2 = {"OK","Cancel"};
-                            int y = JOptionPane.showOptionDialog(gui, "Change Monster's Mode ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
-                            if(y==0){
-                                board.getActivePlayer().switchGroupPosition(group);
+                    } else {
+                        if (board.getActivePlayer().getField().getPhase() != Phase.ACTION1 || board.getActivePlayer().getField().getPhase() != Phase.ACTION2) {
+                            Object[] options2 = {"OK", "Cancel"};
+                            int y = JOptionPane.showOptionDialog(gui, "Change Card's Mode ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
+                            if (y == 0) {
+                                board.getActivePlayer().switchCardModeG(group);
                                 updateField();
-                                fc=null;
-                                sc=null;
-                                tc=null;
+                                fc = null;
+                                sc = null;
+                                tc = null;
                             }
-                        }else{
-                            fc = (GroupButton)arg0.getSource();
+                        } else {
+                            fc = (GroupButton) arg0.getSource();
                             group = ((GroupButton) fc).getGroup();
-                            Object[] options2 = {"OK","Cancel"};
-                            int y = JOptionPane.showOptionDialog(gui, "Attack ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
-                            if(y==1){
-                                fc=null;
-                                sc=null;
-                                tc=null;
+                            Object[] options2 = {"Free Action", "Regular Action", "Passing", "Cancel"};
+                            int y = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
+                            if (y == 3) {
+                                fc = null;
+                                sc = null;
+                                tc = null;
                                 return;
                             }
-                            if(board.getOpponentPlayer().getField().getGroupArea().size()==0){
-                                board.getActivePlayer().declareAttack(((GroupButton)fc).getGroup());
-                                fc=null;
-                                updateField();
-                                return;
+                            if (y == 0) {
+                                //havent added aid a group or use special card because they have not been implemented
+                                Object[] options3 = {"Drop a Group", "Give Away a Special Card", "Give away Money", "Cancel"};
+                                int options = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
+                                if (options == 3) {
+
+                                }
+
+                                if (options == 0) {
+
+                                }
+                                if (options == 1) {
+
+                                }
+                                if (options == 2) {
+                                    board.getActivePlayer().passing();
+                                    fc = null;
+                                    updateField();
+                                    return;
+                                }
                             }
-                            JOptionPane.showMessageDialog(gui, "Choose the monster you wish to attack");
-                            return;
+                            if (y == 1) {
+                                Object[] options3 = {"Attack a Group", "Transfer Money", "Move a Group", "Give a Group Away", "Cancel"};
+                                int optionsRegular = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
+                                if (optionsRegular == 4) {
+
+                                }
+                                if (optionsRegular == 0) {
+
+                                }
+                                if (optionsRegular == 1) {
+
+                                }
+                                if (optionsRegular == 2) {
+
+                                }
+                                if (optionsRegular == 3) {
+
+                                }
+                            }
+                            if (y == 2) {
+
+
+                            }
 
                         }
                     }
-                    */
                 }
-
 
 
 /*
@@ -614,6 +589,7 @@ public class Controller implements ActionListener, MouseListener {
 
         }
 
+        //IM NOT SURE WHAT IT DOES!!!!!!!!!!!!
         if(arg0.getSource() instanceof SpecialButton){
             if(fc instanceof GroupButton){
                 fc = null;
@@ -770,27 +746,27 @@ public class Controller implements ActionListener, MouseListener {
                                     }
                                     fc=null;
                                     return;
-                                case "Dark Hole":
+                                case "Assassination":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Graceful Dice":
+                                case "Bribery":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Harpie's Feather Duster":
+                                case "Computer Espionage":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Heavy Storm":
+                                case "Deep Agent":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Mage Power":
+                                case "Interference1":
                                     String[] options1 = { "ok", "cancel"};
 
                                     int x1 = JOptionPane.showOptionDialog(null, "Choose the monster you wish to enhance", "SpellCard",
@@ -801,17 +777,54 @@ public class Controller implements ActionListener, MouseListener {
                                     }
                                     fc=null;
                                     return;
-                                case "Monster Reborn":
+                                case "Interference2":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Pot of Greed":
+                                case "Market Manipulation":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Raigeki":
+                                case "Media Campaign":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+                                case "Murphy's Law":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+
+                                case "Secrets Man Was Not Meant to Know":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+
+                                case "Senate Investigating Committee":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+                                case "Slush Fund":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+                                case "Swiss Bank Account":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+                                case "Whispering Campaign":
+                                    board.getActivePlayer().activateSpecial(card, null);
+                                    updateField();
+                                    fc = null;
+                                    return;
+                                case "White Collar Crime":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;

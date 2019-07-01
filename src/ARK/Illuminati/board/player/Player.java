@@ -200,12 +200,21 @@ public class Player implements Contender {
         }
     }
     //fixed later
-    public boolean switchCardMode(GroupCard cards){
+    public boolean switchCardModeG(GroupCard cards){
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-        boolean CardSwitched = this.field.switchCardMode(cards);
+        boolean CardSwitched = this.field.switchCardModeG(cards);
+        return CardSwitched;
+    }
+
+    public boolean switchCardModeI(IlluminatiCard illu){
+        if(Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+        boolean CardSwitched = this.field.switchCardModeI(illu);
         return CardSwitched;
     }
 
