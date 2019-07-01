@@ -12,6 +12,7 @@ import ARK.Illuminati.exceptions.DefenseGroupAttackException;
 import ARK.Illuminati.exceptions.NoGroupSpaceException;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.exceptions.WrongActionException;
+import ARK.Illuminati.gui.GroupButton;
 
 public class Field {
   //  private final Deck deck;
@@ -376,6 +377,10 @@ public class Field {
 
     public Card getCardL(Card e){
         return e;
+    }
+
+    public GroupCard getGroup(GroupCard group){
+        return group;
     }
     public ArrayList<Card> getCardArea(){return cardArea;}
 

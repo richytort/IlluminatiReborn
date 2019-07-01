@@ -336,6 +336,7 @@ public class Controller implements ActionListener, MouseListener {
                                 sc = null;
                                 tc = null;
                             }
+
                         } else {
                             fc = (GroupButton) arg0.getSource();
                             group = ((GroupButton) fc).getGroup();
@@ -349,27 +350,25 @@ public class Controller implements ActionListener, MouseListener {
                             }
                             if (y == 0) {
                                 //havent added aid a group or use special card because they have not been implemented
-                                Object[] options3 = {"Drop a Group", "Give Away a Special Card", "Give away Money", "Cancel"};
+                                Object[] options3 = {"Drop a Group", "Give Away a Special Card", "Cancel"};
                                 int options = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
-                                if (options == 3) {
+                                if (options == 2) {
                                     fc = null;
                                     sc = null;
                                     tc = null;
                                     return;
                                 }
                                 if (options == 0) {
-
-                                }
-                                if (options == 1) {
-
-                                }
-                                if (options == 2) {
-                                    board.getActivePlayer().passing();
+                                    board.getActivePlayer().dropAgroup(((GroupButton) fc).getGroup());
                                     fc = null;
                                     updateField();
                                     return;
                                 }
+                                if (options == 1) {
+                                    //think about implementation how to select special card
+                                }
                             }
+
                             if (y == 1) {
                                 Object[] options3 = {"Attack a Group", "Transfer Money", "Move a Group", "Give a Group Away", "Cancel"};
                                 int optionsRegular = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
@@ -399,25 +398,78 @@ public class Controller implements ActionListener, MouseListener {
                                         return;
                                     }if(attacks==2){
                                         board.getActivePlayer().getField().declareAttackToDestroyG(group,((GroupButton)fc).getGroup());
+                                        JOptionPane.showMessageDialog(gui, "Choose what card to attack");
                                         fc = null;
                                         updateField();
                                         return;
                                     }
                                 }
+                                //WHAT DO I DOOO????
+//                                JOptionPane.showMessageDialog(gui, "Choose what card to attack");
+//                                return;
                                 if (optionsRegular == 1) {
-
+                                    Object [] incomeO = {1,2,3,5,10,20,50};
+                                    int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,incomeO, incomeO[1]);
+                                    if(incomeO.equals(1)){
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),1);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if(incomeO.equals(2)){
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),2);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if(incomeO.equals(3)){
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),3);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if(incomeO.equals(5)){
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),5);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if(incomeO.equals(10)){
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),10);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if(incomeO.equals(20)){
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),20);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if(incomeO.equals(50)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 50);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
                                 }
                                 if (optionsRegular == 2) {
-
+                                    //need to figure out implementation
+                                 //   board.getActivePlayer().moveAGroup(((GroupButton) fc).getGroup());
                                 }
                                 if (optionsRegular == 3) {
-
+                                    board.getActivePlayer().giveAgroupAway(group);
+                                    fc=null;
+                                    updateField();
+                                    return;
                                 }
                             }
                             if (y == 2) {
                                 board.getActivePlayer().passing();
+                                fc=null;
+                                updateField();
+                                return;
                             }
-
                         }
                     }
                 }
