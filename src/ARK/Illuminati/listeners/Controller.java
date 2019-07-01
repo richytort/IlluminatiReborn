@@ -87,10 +87,12 @@ public class Controller implements ActionListener, MouseListener {
             }
         }
 
-/*
-        gui.getDeck().setText("" + gui.getP1().getField().getDeck().getDeck().size());
-        gui.getCurrAction().setText(Card.getBoard().getActivePlayer().getField().getPhase().name());
-*/
+
+       // gui.getDeck().setText("" + gui.getP1().getField().getDeck().getDeck().size());
+        //gui.setText("Income: "+gui.getP1().getTotalIncome());
+        //gui.setText("Income: "+gui.getP2().getTotalIncome());
+        //gui.getCurrAction().setText(Card.getBoard().getActivePlayer().getField().getPhase().name());
+
         ///////Seems that this area may need to have some work done.
         if (gui.getP1() == board.getActivePlayer() ) {
             gui.getSp1().remove(gui.getP1hid());
@@ -288,7 +290,7 @@ public class Controller implements ActionListener, MouseListener {
         if(arg0.getSource() instanceof NextActionButton){
             board.getActivePlayer().endAction();
             //////////////IMPLEMENT WHEN FIELD IS DONE
-            //gui.getCurrAction().setText("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
+            gui.getCurrAction().setText("Current Action: "+ Card.getBoard().getActivePlayer().getField().getPhase());
             updateField();
             //addActionListeners();
         }
@@ -656,15 +658,14 @@ public class Controller implements ActionListener, MouseListener {
                         else{
                             switch (card.getName()) {
 ///////////change eventually
-                                case "Card Destruction":
+                                case "Assassination":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
 
-                                case "Change Of Heart":
+                                case "Bribery":
                                     String[] options = { "ok", "cancel"};
-
                                     int x = JOptionPane.showOptionDialog(null, "Choose the monster you wish to control", "SpellCard",
                                             JOptionPane.WARNING_MESSAGE, 0, null, options, options[1]);
                                     if(x==0){
@@ -673,27 +674,27 @@ public class Controller implements ActionListener, MouseListener {
                                     }
                                     fc=null;
                                     return;
-                                case "Dark Hole":
+                                case "Computer Espionage":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Graceful Dice":
+                                case "Deep Agent":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Harpie's Feather Duster":
+                                case "Interference1":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Heavy Storm":
+                                case "Interferece2":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Mage Power":
+                                case "Market Manipulation":
                                     String[] options1 = { "ok", "cancel"};
 
                                     int x1 = JOptionPane.showOptionDialog(null, "Choose the monster you wish to enhance", "SpellCard",
@@ -704,21 +705,31 @@ public class Controller implements ActionListener, MouseListener {
                                     }
                                     fc=null;
                                     return;
-                                case "Monster Reborn":
+                                case "Media Campaign":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Pot of Greed":
+                                case "Murphy'S Law":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
-                                case "Raigeki":
+                                case "Secrets Man was not Meant to Know":
                                     board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
                                     fc = null;
                                     return;
+                                case "Senate Investigating Committee":
+                                    board.getActivePlayer().activateSpecial(card,null);
+                                case"Slush Fund ":
+                                    board.getActivePlayer().activateSpecial(card,null);
+                                case "Swiss Bank Account":
+                                    board.getActivePlayer().activateSpecial(card,null);
+                                case"Whispering Campaign":
+                                    board.getActivePlayer().activateSpecial(card,null);
+                                case "White Collar Crime":
+                                    board.getActivePlayer().activateSpecial(card,null);
                                 default:
                                     board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), null);
                                     updateField();
@@ -729,7 +740,7 @@ public class Controller implements ActionListener, MouseListener {
                     else{
                         String[] buttons = { "ok", "cancel"};
 
-                        int rc = JOptionPane.showOptionDialog(null, "Activate spell card ?", "SpellCard",
+                        int rc = JOptionPane.showOptionDialog(null, "Activate special card ?", "SpecialCard",
                                 JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
                         SpecialButton button = (SpecialButton) arg0.getSource();
                         SpecialCard card = button.getSpecial();

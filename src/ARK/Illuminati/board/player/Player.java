@@ -5,15 +5,11 @@ import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.IlluminatiCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
-import ARK.Illuminati.exceptions.DefenseGroupAttackException;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.cards.Mode;
-import ARK.Illuminati.exceptions.MultipleGroupAdditionException;
 
-import javax.print.attribute.standard.MediaSize;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Player implements Contender {
@@ -242,7 +238,13 @@ public class Player implements Contender {
 
     //DO I NEED IT IN FIELD
     //implement this actions
-    public void giveAwaySpecialCard(){ }
+    public void giveAwaySpecialCard(SpecialCard special){
+        Player p1 = Card.getBoard().getActivePlayer();
+        if(this ==Card.getBoard().getActivePlayer()){
+
+        }
+
+    }
 
     //DO I NEED IT IN FIELD
     //implement this action

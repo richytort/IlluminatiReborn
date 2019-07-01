@@ -76,6 +76,14 @@ public class Field {
         }
     }
 
+    public void giveSpecial(SpecialCard target) {
+        if (p1.getHand().contains(target)) {
+            p1.getHand().remove(target);
+            p2.getHand().add(target);
+        }
+    }
+
+
 
     //what do we really need them for
     public boolean addSpecialToField(SpecialCard special, GroupCard group, boolean hidden) {
@@ -83,8 +91,6 @@ public class Field {
             return false;
 //       if(cardArea.size() >=5)
 //            throw new WrongActionException();
-//        if(phase == Phase.BATTLE)
-//            throw W
         hand.remove(special);
         specialArea.add(special);
         special.setLocation(Location.FIELD);
@@ -233,8 +239,17 @@ public class Field {
         }
         return true;
 
+    }
+    public boolean giveAwaySpecialCard(SpecialCard special){
+        Player p1 = Card.getBoard().getActivePlayer();
+        if(!p1.getHand().contains(special)){
+            return false;
+        }else{
+            p1.getField().giveSpecial(special);
+        }return true;
 
     }
+
 
 
     public void addCardToHand() {
@@ -265,11 +280,11 @@ public class Field {
 
     }
 
-    //    public void printUncontroled(){
-//        for(Card e: uncontrolledGroups){
-//            System.out.println(e+ " ");
-//        }
-//    }
+        public void printUncontroled(){
+        for(Card e: uncontrolledGroups){
+            System.out.println(e+ " ");
+        }
+    }
     public void addIlluminatiCard() {
         Card temp = deck.drawIlluminatiCard();
         hand.add(temp);
@@ -284,12 +299,12 @@ public class Field {
         }
     }
 
-    //
-//    public void printHand(){
-//        for(Card e: hand){
-//            System.out.println(e+ " ");
-//        }
-//    }
+
+    public void printHand(){
+        for(Card e: hand){
+            System.out.println(e+ " ");
+        }
+    }
 //
 //    public static void main(String [] args) throws IOException,UnexpectedFormatException{
 //        Field field = new Field();
