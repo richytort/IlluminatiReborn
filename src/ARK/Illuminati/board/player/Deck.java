@@ -383,7 +383,7 @@ public class Deck {
 //       }
 //    }
     //figure out how to add to uncontrolled and hand
-    public Card drawCards(){
+    public Card drawCard(){
        return deck.remove(0);
    }
 

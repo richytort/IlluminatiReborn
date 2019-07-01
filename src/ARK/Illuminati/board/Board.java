@@ -38,12 +38,21 @@ public class Board {
     }
     public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
         uncontrolled = new UncontrolledArea();
-        p1.addIlluminatiCard();
-        p2.addIlluminatiCard();
-        uncontrolled.add4CardsToUncontrolled();
-        System.out.println();
+        //p1.addIlluminatiCard();
+        //p2.addIlluminatiCard();
+        //deck.shuffle();
+        //uncontrolled.add4CardsToUncontrolled();
+        p1.addNCardsToHand(100);
+        System.out.println("Printing in board:");
+        p1.getField().printHand();
+        p2.addNCardsToHand(10);
+        //p1.addIlluminatiCard();
+        //p2.addIlluminatiCard();
+       // p1.addNCardsToHand(1);
+       // p2.addNCardsToHand(1);
+        //uncontrolled.add4CardsToUncontrolled();
         whoStarts(p1, p2);
-        activePlayer.addCardToHand();
+        //activePlayer.addCardToHand();
     }
 
     public void nextPlayer(){
@@ -52,6 +61,16 @@ public class Board {
         opponentPlayer = temp;
         activePlayer.getIncome();
         activePlayer.addCardToHand();
+    }
+    public static void main(String [] args)throws IOException, UnexpectedFormatException {
+        Board board = new Board();
+        Deck deck=new Deck();
+        Player p1 = new Player("Kathya");
+        Player p2 = new Player("ulu");
+        board.whoStarts(p1,p2);
+        board.startGame(p1,p2);
+        p1.printHand();
+
     }
 
     public boolean isGameOver(){
