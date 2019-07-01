@@ -65,7 +65,11 @@ public class Player implements Contender {
     }
 
 
-
+    /**
+     * Places the special card face down
+     * @param special the special card to be placed face down
+     * @return boolean true/false
+     */
     public boolean setSpecialFaceDown(SpecialCard special){
             if (Card.getBoard().isGameOver())
                 return false;
@@ -81,6 +85,9 @@ public class Player implements Contender {
 
     @Override
     //finish when they finish field.
+    /**
+     * Activates the special card from the player
+     */
     public boolean activateSpecial(SpecialCard special, GroupCard group) {
 
         if (Card.getBoard().isGameOver())
@@ -100,6 +107,12 @@ public class Player implements Contender {
     }
 
 
+    /**
+     * Declares an attack on the opponents group with the intention to control
+     * @param activeGroup - the IlluminatiCard
+     * @param opponentGroup - the opponent group attempted to be controlled via attacking
+     * @return opponent group Card that was attacked
+     */
     public boolean declareAttackToControlI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
        if(Card.getBoard().isGameOver())
              return false;
@@ -111,6 +124,12 @@ public class Player implements Contender {
 
     }
 
+    /**
+     * Declares attacks on opponent group to control
+     * @param activeGroup - the current group attempting to control the other
+     * @param opponentGroup - the group at risk of being attacked and controlled
+     * @return boolean value true/false
+     */
     public boolean declareAttackToControlG(GroupCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
@@ -122,6 +141,12 @@ public class Player implements Contender {
     }
 
 
+    /**
+     *
+     * @param activeGroup
+     * @param opponentGroup
+     * @return
+     */
     public boolean declareAttackToNeutralizeI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;

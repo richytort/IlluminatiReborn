@@ -307,9 +307,10 @@ public class Field {
        }
 
 
-
-
-   public void printHand(){
+    /**
+     * Prints the hand of the player
+      */
+    public void printHand(){
        for(Card e: hand){
            System.out.println(e+ " ");
         }
