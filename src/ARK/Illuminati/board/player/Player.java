@@ -96,12 +96,13 @@ public class Player implements Contender {
 
 
     public boolean declareAttackToControlI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
-        return false;
+       if(Card.getBoard().isGameOver())
+             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
         boolean CardAttacked = this.field.declareAttackToControlI(activeGroup,opponentGroup);
 
-        return cardAttacked;
+        return CardAttacked;
 
     }
 
@@ -112,7 +113,7 @@ public class Player implements Contender {
             return false;
         boolean CardAttacked = this.field.declareAttackToControlG(activeGroup,opponentGroup);
 
-        return cardAttacked;
+        return CardAttacked;
     }
 
 
@@ -123,7 +124,7 @@ public class Player implements Contender {
             return false;
         boolean CardAttacked = this.field.declareAttackToNeutralizeI(activeGroup,opponentGroup);
 
-        return cardAttacked;
+        return CardAttacked;
     }
 
     public boolean declareAttackToNeutralizeG(GroupCard activeGroup, GroupCard opponentGroup) {
@@ -133,44 +134,35 @@ public class Player implements Contender {
             return false;
         boolean CardAttacked = this.field.declareAttackToNeutralizeG(activeGroup,opponentGroup);
 
-        return cardAttacked;
+        return CardAttacked;
     }
 
 
 
-    public boolean declareAttackToDestroyI(Card activeGroup, GroupCard opponentGroup) {
+    public boolean declareAttackToDestroyI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
         boolean CardAttacked = this.field.declareAttackToDestroyI(activeGroup,opponentGroup);
 
-        return cardAttacked;
+        return CardAttacked;
 
     }
 
 
 
-    public boolean declareAttackToDestroyG(Card activeGroup, GroupCard opponentGroup) {
+    public boolean declareAttackToDestroyG(GroupCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-        boolean CardAttacked = this.field.declareAttackToDestroy(activeGroup,opponentGroup);
+        boolean CardAttacked = this.field.declareAttackToDestroyG(activeGroup,opponentGroup);
 
-        return cardAttacked;
-        return false;
+        return CardAttacked;
 
     }
 
-    //fix
-    public boolean dropAGroup(Card card){
-        return false;
-    }
-    //fix
-    public boolean giveawayGroup(Card card){
-        return false;
-    }
 
     @Override
     public void addCardToStructure() {
@@ -212,26 +204,24 @@ public class Player implements Contender {
         }
     }
     //fixed later
-    public boolean switchCardMode(Card cards){
+    public boolean switchCardMode(GroupCard cards){
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-       // boolean CardSwitched = this.file.switchCardMode(cards);
-        //return CardSwitched;
-        return false;
+        boolean CardSwitched = this.field.switchCardMode(cards);
+        return CardSwitched;
     }
 
     /////////////Seems we can adjust the rotation on this part/////////////////////////////////////////////////////////
     @Override
-    public boolean switchGroupPosition(Card group) {
-        if (Card.getBoard().isGameOver())
-            return false;
-
-        if (this != Card.getBoard().getActivePlayer())
-            return false;
-
-       // boolean groupRotated = this.field.switchGroupPosition(group);
+    public boolean switchGroupPosition( GroupCard group ){
+//        if (Card.getBoard().isGameOver())
+//            return false;
+//
+//        if (this != Card.getBoard().getActivePlayer())
+//            return false;
+//        boolean groupRotated = this.field.switchGroupPosition(group);
 
         return false; //return groupRotated ;
 
