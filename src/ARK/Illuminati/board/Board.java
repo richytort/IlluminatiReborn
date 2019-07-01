@@ -51,32 +51,39 @@ public class Board {
     public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
         deck = new Deck();
         uncontrolled = new ArrayList<Card>();
-        p1.addIlluminatiCard();
-        p2.addIlluminatiCard();
-        for(int e = deck.size() - 1; e >= 0; e--) {
-            if (Board.deck.getDeck().get(e).getType().equalsIgnoreCase("Illuminati")) {
-                Board.deck.getDeck().remove(e);
-            }
-        }
-        deck.shuffle();
-        for(int i = 0 ; i < 4 ; i++) {
-            uncontrolled.add(deck.drawOneCardB());
-            Board.deck.getDeck().remove(i);
-        }
-
-        whoStarts(p1, p2);
-        Card k = deck.drawOneCard();
-        if(activePlayer.getHand().contains(k) || uncontrolled.contains(k)){
-            Board.deck.getDeck().remove(k);
-            k = deck.drawOneCard();
-        }
-        else{if(k.getType().equalsIgnoreCase("special card")){
-            activePlayer.addCard(k);
-        }
-        else {
-            uncontrolled.add(k);
-        }
-       }Board.deck.getDeck().remove(k);
+        p1.getField().addNCardsToHand(1);
+        p2.getField().addNCardsToHand(1);
+        Board.deck.shuffle();
+     //   p1.getField().addNCardsToHand(10);
+//        Card k = deck.getDeck().get(0);
+//        p1.getHand().add(k);
+//        deck.getDeck().remove(0);
+//        p1.addIlluminatiCard();
+//        p2.addIlluminatiCard();
+//        for(int e = deck.size() - 1; e >= 0; e--) {
+//            if (Board.deck.getDeck().get(e).getType().equalsIgnoreCase("Illuminati")) {
+//                Board.deck.getDeck().remove(e);
+//            }
+//        }
+//        deck.shuffle();
+//        for(int i = 0 ; i < 4 ; i++) {
+//            uncontrolled.add(deck.drawOneCardB());
+//            Board.deck.getDeck().remove(i);
+//        }
+//        whoStarts(p1, p2);
+//        Card k = deck.drawOneCard();
+//        if(activePlayer.getHand().contains(k) || uncontrolled.contains(k)){
+//            Board.deck.getDeck().remove(k);
+//            k = deck.drawOneCard();
+//        }
+//        else{
+//            if(k.getType().equalsIgnoreCase("special card")){
+//                activePlayer.addCard(k);
+//            }
+//            else {
+//                uncontrolled.add(k);
+//            }
+//       }Board.deck.getDeck().remove(k);
     }
 
 
@@ -86,12 +93,12 @@ public class Board {
         opponentPlayer = temp;
         activePlayer.getIncome();
         Card c = deck.drawOneCard();
-        if(c.getType().equalsIgnoreCase("special card")){
-            activePlayer.addCard(c);
-        }
-        else{
-            uncontrolled.add(c);
-        }Board.deck.getDeck().remove(c);
+//        if(c.getType().equalsIgnoreCase("special card")){
+//            activePlayer.addCard(c);
+//        }
+//        else{
+//            uncontrolled.add(c);
+//        }Board.deck.getDeck().remove(c);
     }
 
     public boolean isGameOver(){

@@ -18,6 +18,7 @@ public class Player implements Contender {
     private int result;
     private Field field;
     private Board board;
+    private Deck deck;
     private boolean addedGroupThisTurn;
     private ArrayList<Card> hand;
 
@@ -25,6 +26,7 @@ public class Player implements Contender {
         this.name = name;
         this.field = new Field();
         hand = new ArrayList<>();
+        this.deck = new Deck();
     }
 
 
@@ -249,18 +251,20 @@ public class Player implements Contender {
 //        this.field.addNCardsToHand(n);
 //    }
 //
-    public void addIlluminatiCard(){
-//        Card temp = board.getDeck().drawIlluminatiCard();
+//    public void addIlluminatiCard(){
+//        Card temp = Board.deck.drawOneCard();
 //        hand.add(temp);
-//        temp.setLocation(Location.HAND);
-
-        this.field.addIlluminatiCard();
-    }
-
-    public void addCard(Card k){
-        this.field.addCardToHand();
-       // hand.add(k);
-    }
+//          //temp.setLocation(Location.HAND);
+//
+// //       this.field.addIlluminatiCard();
+//    }
+//
+//    public void addCard(Card k){
+//        getHand().add(k);
+//     //   board.getDeck().drawOneCard();
+//      //  this.field.addCardToHand();
+//       // hand.add(k);
+//    }
 
     //DO I NEED IT IN FIELD
     //implement this actions

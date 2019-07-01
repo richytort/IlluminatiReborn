@@ -21,7 +21,7 @@ public class Field {
     private Phase phase = Phase.ACTION1;
     private ArrayList<Card> uncontrolledGroups;
     private ArrayList<Card> graveYard;
-    private Board board;
+   // private Board board;
     Player p1;
     Player p2;
 
@@ -30,7 +30,8 @@ public class Field {
         cardArea = new ArrayList<>();
         specialArea = new ArrayList<SpecialCard>();
         uncontrolledGroups = new ArrayList<Card>();
-        board = new Board();
+       //
+        // board = new Board();
     }
 
     //do we need one for Illuminati
@@ -258,9 +259,12 @@ public class Field {
     }
 
     public void addNCardsToHand(int n) {
+        for (int i = 0; i < n; i++) {
+            Card temp =Board.deck.drawOneCard();
+            hand.add(temp);
+            temp.setLocation(Location.HAND);
 
-        for (int i = 0; i < n; i++)
-            hand.add( Board.deck.drawOneCard()) ;
+        }
 
     }
 
