@@ -246,8 +246,8 @@ public class GUI extends JFrame {
         endTurn = new EndTurnButton("End Turn");
         p1name = new JLabel(p1.getName());
         p2name = new JLabel(p2.getName());
-        income1= new JLabel("Income:"+p1.getTotalIncome());
-        income2 = new JLabel("Income:"+p2.getTotalIncome());
+     //   income1= new JLabel("Income:"+p1.getTotalIncome());
+       // income2 = new JLabel("Income:"+p2.getTotalIncome());
         handAreaP1 = new HandPanel(p1);
         handAreaP2 = new HandPanel(p2);
 
@@ -325,6 +325,7 @@ public class GUI extends JFrame {
         System.out.println("Printing hand:" );
         p1.printHand();
         p2.printHand();
+
 
         JScrollPane hand2SP = new JScrollPane(handAreaP2) ; //sp2 = new JScrollPane(handp2);
         hand2SP.setBorder(null);

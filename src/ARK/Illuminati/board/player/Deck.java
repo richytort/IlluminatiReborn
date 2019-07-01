@@ -345,19 +345,9 @@ public class Deck {
 
        Collections.shuffle(deck);
     }
-    public int getIndex(Card e){
-       int index = deck.indexOf(e);
-       return index;
-    }
-
-    public void printDeck(){
-       for(Card e: deck){
-           System.out.println(getIndex(e));
-           System.out.println(e + " ");
-       }
-    }
 
     public Card drawOneCard(){
+
        return deck.remove(0);
     }
 
@@ -374,21 +364,9 @@ public class Deck {
              }
         }return c;
     }
-    public static void main(String [] args)throws IOException, UnexpectedFormatException{
-       Deck deck1 = new Deck();
-       for(int e = 0; e< 4;e++) {
-           Card c = deck1.drawOneCardB();
-           System.out.println(c + " ");
-       }
-    }
-    //figure out how to add to uncontrolled and hand
-    public Card drawCard(){
-       return deck.remove(0);
-   }
 
     public Card drawIlluminatiCard(){
-        Card c = deck.get(0);
-        deck.remove(0);
+        Card c = deck.remove(0);
         return c;
     }
 
