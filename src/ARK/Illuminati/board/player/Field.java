@@ -223,8 +223,8 @@ public class Field {
 //        if(g1.isAttacked())//what is it for??
 //            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if (g2 != null && oppGroupArea.contains(g2))
-            g1.attackToControl(g2);
+        if (g2 != null && oppGroupArea.contains(g2))    //g2 isnt empty and the opponent group contains g2
+            g1.attackToControl(g2);   //g1 attacks g2 to control
         else
             return false;
         if (Card.getBoard().getActivePlayer().getResult() == 10) {
@@ -239,8 +239,10 @@ public class Field {
     }
 
     /**
-     *
-     *
+     * This method declares attacks with the intent to destroy another group
+     * @param g1 - The first group that attacks g2
+     * @param g2 - the group being attacked by the first group
+     * @return boolean true or false if the declare occurred
      * */
     public boolean declareAttackToDestroyG(GroupCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
@@ -263,7 +265,9 @@ public class Field {
 
     }
 
-
+    /**
+     * Adds a card from the deck to the players hand
+     */
     public void addCardToHand() {
         /*
         if (deck.getDeck().size() == 0) {
@@ -276,13 +280,17 @@ public class Field {
         }
 
          */
-        Card temp = Board.deck.drawOneCard();
-        if(hand.contains(temp)){
+        Card temp = Board.deck.drawOneCard(); //temp card object pulled from deck
+        if(hand.contains(temp)){  //if the hand has the card pulled from the deck
             Board.deck.getDeck().remove(temp);
-            addCardToHand();
+            addCardToHand();   //card added to hand
         }
     }
 
+    /**
+     * This method adds cards to the players hand
+     * @param n: the number of cards added to players hand
+     */
     public void addNCardsToHand(int n) {
 
         for (int i = 0; i < n; i++)
@@ -291,9 +299,14 @@ public class Field {
     }
 
 
+    /**
+     * This method adds an Illuminati Card to the players hand
+     */
     public void addIlluminatiCard() {
         hand.add(Board.deck.drawOneCard());
        }
+
+
 
 
    public void printHand(){
@@ -314,6 +327,9 @@ public class Field {
 //    }
 //
 
+    /**
+     * Phase of the players actions ends
+     */
     public void endPhase(){
         switch (phase){
             case MAIN:
@@ -327,6 +343,9 @@ public class Field {
         }
     }
 
+    /**
+     * Ends the turn of the player
+     */
     public void endTurn(){
         phase = Phase.MAIN;
         for(Card m: cardArea){
