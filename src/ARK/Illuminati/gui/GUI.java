@@ -44,6 +44,8 @@ public class GUI extends JFrame {
     private HiddenHandPanel p2hid;
     private Player p1 ;
     private Player p2 ;
+    private JLabel income1;
+    private JLabel income2;
     private ImageIcon imgThisImg ;
     private JLabel description ;
     private JScrollPane sp1 ; //use this for uncontrolled area scroll pane
@@ -240,12 +242,16 @@ public class GUI extends JFrame {
         //groupAreap2 = new MonstersPanel(p2);
         structureAreaP1 = new StructurePanel(p1);
         structureAreaP2 = new StructurePanel(p2);
-        handAreaP1 = new HandPanel(p1);
-        handAreaP2 = new HandPanel(p2);
         nextAction = new NextActionButton("Next Action");
         endTurn = new EndTurnButton("End Turn");
         p1name = new JLabel(p1.getName());
         p2name = new JLabel(p2.getName());
+        income1= new JLabel("Income:"+p1.getTotalIncome());
+        income2 = new JLabel("Income:"+p2.getTotalIncome());
+        handAreaP1 = new HandPanel(p1);
+        handAreaP2 = new HandPanel(p2);
+
+
         grave = new JButton();
 
         //finish field class

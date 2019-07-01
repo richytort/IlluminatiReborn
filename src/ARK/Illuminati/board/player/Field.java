@@ -340,6 +340,19 @@ public class Field {
         Card.getBoard().nextPlayer();
     }
 
+    public boolean switchCardModeE(SpecialCard group){
+        if(!cardArea.contains(group))
+            return false;
+        //(if phase
+        if(group.isSwitchedMode())
+            return false;
+        group.switchMode();
+        group.setSwitchedMode(true);
+        return true;
+
+    }
+
+    //DO WE REALLY NEED CARD DOES NOT TURN FACE DOWN
     public boolean switchCardModeG(GroupCard group){
         if(!cardArea.contains(group))
             return false;
@@ -361,6 +374,9 @@ public class Field {
         group.setSwitchedMode(true);
         return true;
 
+    }
+    public IlluminatiCard getIlluminati(IlluminatiCard illu){
+        return illu;
     }
 
 

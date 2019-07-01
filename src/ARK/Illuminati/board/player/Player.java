@@ -41,6 +41,16 @@ public class Player implements Contender {
 
         return groupAdded;
     }
+    public boolean setGroupDown(Card group) {
+        if (Card.getBoard().isGameOver())
+            return false;
+        if(this != Card.getBoard().getActivePlayer()){
+            return false;
+        }
+        boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, true);
+
+        return groupAdded;
+    }
 
 
     @Override

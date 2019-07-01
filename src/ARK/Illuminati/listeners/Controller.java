@@ -142,7 +142,7 @@ public class Controller implements ActionListener, MouseListener {
        // gui.getDeck().setText("" + gui.getP1().getField().getDeck().getDeck().size());
         //gui.setText("Income: "+gui.getP1().getTotalIncome());
         //gui.setText("Income: "+gui.getP2().getTotalIncome());
-        //gui.getCurrAction().setText(Card.getBoard().getActivePlayer().getField().getPhase().name());
+        gui.getCurrAction().setText(Card.getBoard().getActivePlayer().getField().getPhase().name());
 
         ///////Seems that this area may need to have some work done.
         if (gui.getP1() == board.getActivePlayer() ) {
@@ -373,11 +373,9 @@ public class Controller implements ActionListener, MouseListener {
             updateField();
             //addActionListeners();
         }
-        //need to do it for ILLUMINATI
-        if(arg0.getSource() instanceof GroupButton){
-
-            try{
-                if(fc==null) {
+        if(arg0.getSource() instanceof GroupButton) {
+            try {
+                if (fc == null) {
 
                     GroupCard group = ((GroupButton) arg0.getSource()).getGroup();
                     //fc = button;
@@ -387,28 +385,38 @@ public class Controller implements ActionListener, MouseListener {
                         group = ((GroupButton) fc).getGroup();
                         //fc = button;
                         ///////////THIS MAY NEED TO BE CHANGED. BETTER YET, will be changed.
-                        Object[] options = {"Set", "Cancel"};
+                        Object[] options = {"Summon", "Set", "Cancel"};
                         summonset = JOptionPane.showOptionDialog(gui, "What is your action?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                         if (summonset == 1) {
                             fc = null;
                             return;
                         }
                         if (summonset == 0) {
-                            Card.getBoard().getActivePlayer().setGroup(group);
+                            Card.getBoard().getActivePlayer().setGroupDown(((GroupButton) fc).getGroup());
                             fc = null;
                             updateField();
                             return;
                         }
+                        if (summonset == 1) {
+                            Card.getBoard().getActivePlayer().setGroup(group);
+                            fc = null;
+                            updateField();
+                            return;
+
+                        }
                     } else {
                         if (board.getActivePlayer().getField().getPhase() != Phase.ACTION1 || board.getActivePlayer().getField().getPhase() != Phase.ACTION2) {
                             Object[] options2 = {"OK", "Cancel"};
+                            //DO WE REALLY NEED THIS BECAUSE THIS ONE DOES NOT HAVE ANOTHER MODE
                             int y = JOptionPane.showOptionDialog(gui, "Change Card's Mode ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
                             if (y == 0) {
+                                //if (board.getActivePlayer().getCard(group).getLocation().equals("HAND")) {
                                 board.getActivePlayer().switchCardModeG(group);
                                 updateField();
                                 fc = null;
                                 sc = null;
                                 tc = null;
+                                //   }
                             }
 
                         } else {
@@ -424,9 +432,9 @@ public class Controller implements ActionListener, MouseListener {
                             }
                             if (y == 0) {
                                 //havent added aid a group or use special card because they have not been implemented
-                                Object[] options3 = {"Drop a Group", "Give Away a Special Card", "Cancel"};
+                                Object[] options3 = {"Drop a Group", "Cancel"};
                                 int options = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
-                                if (options == 2) {
+                                if (options == 1) {
                                     fc = null;
                                     sc = null;
                                     tc = null;
@@ -438,9 +446,7 @@ public class Controller implements ActionListener, MouseListener {
                                     updateField();
                                     return;
                                 }
-                                if (options == 1) {
-                                    //think about implementation how to select special card
-                                }
+                                JOptionPane.showMessageDialog(gui, "Choose what group to drop: ");
                             }
 
                             if (y == 1) {
@@ -455,269 +461,108 @@ public class Controller implements ActionListener, MouseListener {
                                 if (optionsRegular == 0) {
                                     Object[] options4 = {"Attack to Control", "Attack To Neutralize", "Attack To Destroy", "Cancel"};
                                     int attacks = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options4, options4[1]);
-                                    if(attacks==3){
+                                    if (attacks == 3) {
                                         fc = null;
                                         sc = null;
                                         tc = null;
                                         return;
-                                    }if(attacks==0){
-                                        board.getActivePlayer().getField().declareAttackToControlG(group,((GroupButton)fc).getGroup());
+                                    }
+                                    if (attacks == 0) {
+                                        board.getActivePlayer().getField().declareAttackToControlG(group, ((GroupButton) fc).getGroup());
                                         fc = null;
                                         updateField();
                                         return;
-                                    }if(attacks==1){
-                                        board.getActivePlayer().getField().declareAttackToNeutralizeG(group,((GroupButton)fc).getGroup());
+                                    }
+                                    if (attacks == 1) {
+                                        board.getActivePlayer().getField().declareAttackToNeutralizeG(group, ((GroupButton) fc).getGroup());
                                         fc = null;
                                         updateField();
                                         return;
-                                    }if(attacks==2){
-                                        board.getActivePlayer().getField().declareAttackToDestroyG(group,((GroupButton)fc).getGroup());
+                                    }
+                                    if (attacks == 2) {
+                                        board.getActivePlayer().getField().declareAttackToDestroyG(group, ((GroupButton) fc).getGroup());
                                         fc = null;
                                         updateField();
                                         return;
                                     }
                                     JOptionPane.showMessageDialog(gui, "Choose what card to attack");
                                 }
-                                //WHAT DO I DOOO????
-//                                JOptionPane.showMessageDialog(gui, "Choose what card to attack");
-//                                return;
                                 if (optionsRegular == 1) {
-                                    Object [] incomeO = {1,2,3,5,10,20,50};
-                                    int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,incomeO, incomeO[1]);
-                                    if(incomeO.equals(1)){
-                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),1);
+                                    Object[] incomeO = {1, 2, 3, 5, 10, 20, 50};
+                                    int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, incomeO, incomeO[1]);
+                                    if (incomeO.equals(1)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 1);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
-                                    if(incomeO.equals(2)){
-                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),2);
+                                    if (incomeO.equals(2)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 2);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
-                                    if(incomeO.equals(3)){
-                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),3);
+                                    if (incomeO.equals(3)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 3);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
-                                    if(incomeO.equals(5)){
-                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),5);
+                                    if (incomeO.equals(5)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 5);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
-                                    if(incomeO.equals(10)){
-                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),10);
+                                    if (incomeO.equals(10)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 10);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
-                                    if(incomeO.equals(20)){
-                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(),20);
+                                    if (incomeO.equals(20)) {
+                                        board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 20);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
-                                    if(incomeO.equals(50)) {
+                                    if (incomeO.equals(50)) {
                                         board.getActivePlayer().getField().getGroup(group).transferMoney(((GroupButton) fc).getGroup(), 50);
                                         fc = null;
                                         updateField();
                                         return;
                                     }
+                                    JOptionPane.showMessageDialog(gui, "Choose group to transfer the money to: ");
                                 }
                                 if (optionsRegular == 2) {
                                     //need to figure out implementation
-                                 //   board.getActivePlayer().moveAGroup(((GroupButton) fc).getGroup());
+                                    //   board.getActivePlayer().moveAGroup(((GroupButton) fc).getGroup());
                                 }
                                 if (optionsRegular == 3) {
                                     board.getActivePlayer().giveAgroupAway(group);
-                                    fc=null;
+                                    fc = null;
                                     updateField();
                                     return;
                                 }
                             }
                             if (y == 2) {
                                 board.getActivePlayer().passing();
-                                fc=null;
+                                fc = null;
                                 updateField();
                                 return;
                             }
                         }
                     }
+                } else {
+                    //do i put it here or on top
                 }
 
-
-/*
-                else{
-
-
-                    if(sc==null){
-
-                        if(fc instanceof GroupButton){
-
-                            GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
-                            if(board.getActivePlayer().getField().getPhase()!= Phase.BATTLE && !board.getActivePlayer().getField().getMonstersArea().contains(group)){
-                                JOptionPane.showMessageDialog(gui, "You must choose monster cards from your field");
-                                fc=null;
-                                sc=null;
-                                return;
-                            }
-                            if(((GroupButton) fc).getGroup().getLocation()==Location.HAND && group.getLocation()==Location.FIELD
-                                    && board.getActivePlayer().getField().getGroupArea().contains(group)
-                                    && board.getActivePlayer().getField().getPhase()!= Phase.BATTLE){
-
-
-                                if(((GroupButton) fc).getGroup().getLevel()<=6){
-
-                                    sc = (GroupButton) arg0.getSource();
-                                    group = ((GroupButton) sc).getGroup();
-
-                                    if(group.getLocation()==Location.FIELD){
-                                        ArrayList<GroupCard> sacrifices = new ArrayList<GroupCard>();
-                                        sacrifices.add(((GroupButton)sc).getGroup());
-                                        if(summonset == 0){
-                                            Card.getBoard().getActivePlayer().summonGroup(((GroupButton) fc).getGroup(), sacrifices);
-                                        }
-                                        else{
-                                            board.getActivePlayer().setGroup(((GroupButton)fc).getGroup(), sacrifices);
-                                        }
-                                        updateField();
-                                        fc=null;
-                                        sc=null;
-                                        return;
-                                    }
-                                }
-
-                                ////////////CHECK THIS!!!!!!!!!!!!!
-                                else{
-                                    GroupButton button = (GroupButton) arg0.getSource();
-                                    GroupCard card = button.getGroup();
-                                    sc = button;
-                                    Object[] options2 = {"OK","Cancel"};
-                                    int y = JOptionPane.showOptionDialog(gui, "Choose the second sacrifice",null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options2, options2[1]);
-                                    if(y==0){
-                                        //updateField();
-                                        return;
-                                    }
-                                    else{
-                                        //updateField();
-                                        fc = null;
-                                        sc = null;
-                                        return;
-                                    }
-                                }
-                            }
-                            else{
-                                sc = (GroupButton) arg0.getSource();
-                                group = ((GroupButton) sc).getGroup();
-                                board.getActivePlayer().declareAttack(((GroupButton)fc).getGroup(), ((GroupButton)sc).getGroup());
-                                fc=null;
-                                sc=null;
-                                tc = null;
-                                updateField();
-                                return;
-                            }
-                        }
-                        else{//fc is a spellbutton
-                            GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
-
-                            /////////EVENTIALLY CHANGE SPELL NAME/////////////
-                            if(((SpecialButton)fc).getSpecial().getName().equalsIgnoreCase("Change Of Heart")){
-                                if(!board.getOpponentPlayer().getField().getGroupArea().contains(group)){
-                                    JOptionPane.showMessageDialog(gui, "You must choose monster cards from your opponent's field");
-                                    fc=null;
-                                    sc=null;
-                                    return;
-                                }
-                                sc = (GroupButton)arg0.getSource();
-                                GroupCard mons = ((GroupButton)sc).getGroup();
-                                board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), ((GroupButton)sc).getGroup());
-                                fc=null;
-                                sc=null;
-                                updateField();
-                                return;
-                            }
-                            else{
-                                if(!board.getActivePlayer().getField().getGroupArea().contains(group)){
-                                    JOptionPane.showMessageDialog(gui, "You must choose monster cards from your field");
-                                    fc=null;
-                                    sc=null;
-                                    return;
-                                }
-                                sc = (GroupButton)arg0.getSource();
-                                GroupCard mons = ((GroupButton)sc).getGroup();
-                                board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), ((GroupButton)sc).getGroup());
-                                fc=null;
-                                sc=null;
-                                updateField();
-                                return;
-                            }
-                        }
-                    }
-                    else{
-                        if(arg0.getSource() instanceof GroupButton){
-                            GroupCard group = ((GroupButton)arg0.getSource()).getGroup();
-
-                            if(fc instanceof GroupButton && ((GroupButton) fc).getGroup().getLocation()==Location.HAND && group.getLocation()==Location.FIELD && board.getActivePlayer().getField().getGroupArea().contains(group)){
-
-                                GroupButton button = (GroupButton) arg0.getSource();
-                                group = button.getGroup();
-                                tc = button;
-                                if(tc==sc){
-                                    JOptionPane.showMessageDialog(gui, "you have to choose two different monsters");
-                                    fc=null;
-                                    sc=null;
-                                    tc=null;
-                                    return;
-                                }
-                                ArrayList<GroupCard> sacrifices = new ArrayList<GroupCard>();
-                                sacrifices.add(((GroupButton)sc).getGroup());
-                                sacrifices.add(((GroupButton)tc).getGroup());
-                                if(summonset == 0){
-                                    Card.getBoard().getActivePlayer().summonGroup(((GroupButton) fc).getGroup(), sacrifices);
-                                }
-                                else{
-                                    board.getActivePlayer().setGroup(((GroupButton) fc).getGroup(), sacrifices);
-                                }
-                                updateField();
-                                fc=null;
-                                sc=null;
-                                tc=null;
-                                return;
-
-                            }
-                            else{
-
-                            }
-                        }
-                    }
-
-                }
-
-                */
-
-
-
-
-            }
-/*
-            catch(MultipleMonsterAdditionException e){
-                fc = null;
-                sc = null;
-                tc = null;
-                JOptionPane.showMessageDialog(gui, "you can't play more than one card");
-            }
-
- */
-            catch(WrongActionException e){
+            } catch (WrongActionException e) {
                 fc = null;
                 sc = null;
                 tc = null;
                 JOptionPane.showMessageDialog(gui, "you can't set or summon a monster in this phase");
-            }
-            catch(NoGroupSpaceException e){
+            } catch (NoGroupSpaceException e) {
                 fc = null;
                 sc = null;
                 tc = null;
@@ -731,280 +576,437 @@ public class Controller implements ActionListener, MouseListener {
                 JOptionPane.showMessageDialog(gui, "You Can Attack Only Once");
             }
 
-             */
-            catch(DefenseGroupAttackException e){
+             */ catch (DefenseGroupAttackException e) {
                 fc = null;
                 sc = null;
                 tc = null;
                 JOptionPane.showMessageDialog(gui, "You Can't Attack in Defense Mode");
             }
-
         }
 
-        //IM NOT SURE WHAT IT DOES!!!!!!!!!!!!
-        if(arg0.getSource() instanceof SpecialButton){
-            if(fc instanceof GroupButton){
-                fc = null;
-                sc=null;
-                JOptionPane.showMessageDialog(gui, "you must sacrifice a monster card");
-                return;
-            }
 
-            ///////eventally change the name or so
-            if(fc!=null &&((SpecialButton)fc).getName().equalsIgnoreCase("Change Of Heart")){
-                JOptionPane.showMessageDialog(gui, "you must choose a monster card");
-                fc = null;
-                sc=null;
-                return;
-            }
+            if (arg0.getSource() instanceof IlluminatiButton) {
 
-            if(fc==null){
+                if (fc == null) {
+                        IlluminatiCard illuminati = ((IlluminatiButton) arg0.getSource()).getIlluminati();
 
-                //if(board.getActivePlayer().getField().getSpecialArea().contains(((SpecialButton)arg0.getSource()).getSpecial()) || board.getActivePlayer().getField().getHand().contains(((SpecialButton)arg0.getSource()).getSpecial()))
-                //repleace bottom line with top when field is implemented.
-                if(true)
-                {
-                    if(((SpecialButton)arg0.getSource()).getSpecial().getLocation()==Location.HAND){
-                        String[] buttons = { "Activate", "Set", "cancel"};
-
-                        int rc = JOptionPane.showOptionDialog(null, "Activate or set spell ?", "SpellCard",
-                                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
-                        SpecialButton button = (SpecialButton) arg0.getSource();
-                        SpecialCard card = button.getSpecial();
-                        fc=button;
-                        if(rc==1){
-                            Card.getBoard().getActivePlayer().setSpecial(card);
-                            fc=null;
-                            updateField();
-                            return;
-
-                        }
-                        if(rc==2){
-                            fc=null;
-                            return;
-                        }
-                        else{
-                            switch (card.getName()) {
-///////////change eventually
-                                case "Assassination":
-                                    board.getActivePlayer().activateSpecial(card, null);
+                        if (illuminati.getLocation() == Location.HAND) {
+                            fc = (IlluminatiButton) arg0.getSource();
+                            illuminati = ((IlluminatiButton) fc).getIlluminati();
+                            //fc = button;
+                            ///////////THIS MAY NEED TO BE CHANGED. BETTER YET, will be changed.
+                            Object[] options = {"Set", "Cancel"};
+                            summonset = JOptionPane.showOptionDialog(gui, "What is your action?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                            if (summonset == 1) {
+                                fc = null;
+                                return;
+                            }
+                            if (summonset == 0) {
+                                Card.getBoard().getActivePlayer().setGroup(illuminati);
+                                fc = null;
+                                updateField();
+                                return;
+                            }
+                        } else {
+                            if (board.getActivePlayer().getField().getPhase() != Phase.ACTION1 || board.getActivePlayer().getField().getPhase() != Phase.ACTION2) {
+                                Object[] options2 = {"OK", "Cancel"};
+                                //DO WE REALLY NEED THIS BECAUSE THIS ONE DOES NOT HAVE ANOTHER MODE
+                                int y = JOptionPane.showOptionDialog(gui, "Change Card's Mode ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
+                                if (y == 0) {
+                                    board.getActivePlayer().switchCardModeI(illuminati);
                                     updateField();
                                     fc = null;
-                                    return;
+                                    sc = null;
+                                    tc = null;
+                                }
 
-                                case "Bribery":
-                                    String[] options = { "ok", "cancel"};
-                                    int x = JOptionPane.showOptionDialog(null, "Choose the monster you wish to control", "SpellCard",
-                                            JOptionPane.WARNING_MESSAGE, 0, null, options, options[1]);
-                                    if(x==0){
-                                        fc = button;
+                            } else {
+                                fc = (IlluminatiButton) arg0.getSource();
+                                illuminati = ((IlluminatiButton) fc).getIlluminati();
+                                Object[] options2 = {"Free Action", "Regular Action", "Passing", "Cancel"};
+                                int y = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
+                                if (y == 3) {
+                                    fc = null;
+                                    sc = null;
+                                    tc = null;
+                                    return;
+                                }
+                                if (y == 0) {
+                                    //havent added aid a group or use special card because they have not been implemented
+                                    Object[] options3 = {"Give Away Money", "Cancel"};
+                                    int options = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
+                                    if (options == 1) {
+                                        fc = null;
+                                        sc = null;
+                                        tc = null;
                                         return;
                                     }
-                                    fc=null;
-                                    return;
-                                case "Computer Espionage":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Deep Agent":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Interference1":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Interferece2":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Market Manipulation":
-                                    String[] options1 = { "ok", "cancel"};
-
-                                    int x1 = JOptionPane.showOptionDialog(null, "Choose the monster you wish to enhance", "SpellCard",
-                                            JOptionPane.WARNING_MESSAGE, 0, null, options1, options1[1]);
-                                    if(x1==0){
-                                        fc = button;
+                                    if (options == 0) {
+                                        Object[] incomeO = {1, 2, 3, 5, 10, 20, 50};
+                                        int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, incomeO, incomeO[1]);
+                                        if (incomeO.equals(1)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(1);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(2)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(2);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(3)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(3);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(5)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(5);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(10)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(10);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(20)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(20);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(50)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(50);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        JOptionPane.showMessageDialog(gui, "Choose group to transfer the money to: ");
+                                    }
+                                }
+                                if (y == 1) {
+                                    Object[] options3 = {"Attack a Group", "Transfer Money", "Move a Group", "Cancel"};
+                                    int optionsRegular = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
+                                    if (optionsRegular == 4) {
+                                        fc = null;
+                                        sc = null;
+                                        tc = null;
                                         return;
                                     }
-                                    fc=null;
-                                    return;
-                                case "Media Campaign":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
+                                    if (optionsRegular == 0) {
+                                        Object[] options4 = {"Attack to Control", "Attack To Neutralize", "Attack To Destroy", "Cancel"};
+                                        int attacks = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options4, options4[1]);
+                                        if (attacks == 3) {
+                                            fc = null;
+                                            sc = null;
+                                            tc = null;
+                                            return;
+                                        }
+                                        if (attacks == 0) {
+                                            board.getActivePlayer().getField().declareAttackToControlI(illuminati, ((GroupButton) fc).getGroup());
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (attacks == 1) {
+                                            board.getActivePlayer().getField().declareAttackToControlI(illuminati, ((GroupButton) fc).getGroup());
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (attacks == 2) {
+                                            board.getActivePlayer().getField().declareAttackToControlI(illuminati, ((GroupButton) fc).getGroup());
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        JOptionPane.showMessageDialog(gui, "Choose what card to attack");
+                                    }
+                                    if (optionsRegular == 1) {
+                                        Object[] incomeO = {1, 2, 3, 5, 10, 20, 50};
+                                        int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, incomeO, incomeO[1]);
+                                        if (incomeO.equals(1)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 1);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(2)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 2);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(3)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 3);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(5)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 5);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(10)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 10);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(20)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 20);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        if (incomeO.equals(50)) {
+                                            board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) fc).getGroup(), 50);
+                                            fc = null;
+                                            updateField();
+                                            return;
+                                        }
+                                        JOptionPane.showMessageDialog(gui, "Choose group to transfer the money to: ");
+                                    }
+                                    if (optionsRegular == 2) {
+                                        //need to figure out implementation
+                                        //   board.getActivePlayer().moveAGroup(((GroupButton) fc).getGroup());
+                                    }
+                                }
+                                if (y == 2) {
+                                    board.getActivePlayer().passing();
                                     fc = null;
-                                    return;
-                                case "Murphy'S Law":
-                                    board.getActivePlayer().activateSpecial(card, null);
                                     updateField();
-                                    fc = null;
                                     return;
-                                case "Secrets Man was not Meant to Know":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Senate Investigating Committee":
-                                    board.getActivePlayer().activateSpecial(card,null);
-                                case"Slush Fund ":
-                                    board.getActivePlayer().activateSpecial(card,null);
-                                case "Swiss Bank Account":
-                                    board.getActivePlayer().activateSpecial(card,null);
-                                case"Whispering Campaign":
-                                    board.getActivePlayer().activateSpecial(card,null);
-                                case "White Collar Crime":
-                                    board.getActivePlayer().activateSpecial(card,null);
-                                default:
-                                    board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), null);
-                                    updateField();
-
+                                }
                             }
                         }
                     }
-                    else{
-                        String[] buttons = { "ok", "cancel"};
-
-                        int rc = JOptionPane.showOptionDialog(null, "Activate special card ?", "SpecialCard",
-                                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
-                        SpecialButton button = (SpecialButton) arg0.getSource();
-                        SpecialCard card = button.getSpecial();
-                        fc=button;
-                        if(rc==1){
-                            Card.getBoard().getActivePlayer().setSpecial(card);
-                            fc=null;
-                            updateField();
-                            return;
-                        }
-                        else{
-                            switch (card.getName()) {
-
-                                case "Card Destruction":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Change Of Heart":
-                                    String[] options = { "ok", "cancel"};
-
-                                    int x = JOptionPane.showOptionDialog(null, "Choose the monster you wish to control", "SpellCard",
-                                            JOptionPane.WARNING_MESSAGE, 0, null, options, options[1]);
-                                    if(x==0){
-                                        fc = button;
-                                        return;
-                                    }
-                                    fc=null;
-                                    return;
-                                case "Assassination":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Bribery":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Computer Espionage":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Deep Agent":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Interference1":
-                                    String[] options1 = { "ok", "cancel"};
-
-                                    int x1 = JOptionPane.showOptionDialog(null, "Choose the monster you wish to enhance", "SpellCard",
-                                            JOptionPane.WARNING_MESSAGE, 0, null, options1, options1[1]);
-                                    if(x1==0){
-                                        fc = button;
-                                        return;
-                                    }
-                                    fc=null;
-                                    return;
-                                case "Interference2":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Market Manipulation":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Media Campaign":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Murphy's Law":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-
-                                case "Secrets Man Was Not Meant to Know":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-
-                                case "Senate Investigating Committee":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Slush Fund":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Swiss Bank Account":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "Whispering Campaign":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                case "White Collar Crime":
-                                    board.getActivePlayer().activateSpecial(card, null);
-                                    updateField();
-                                    fc = null;
-                                    return;
-                                default:
-                                    board.getActivePlayer().activateSpecial(((SpecialButton)fc).getSpecial(), null);
-                                    updateField();
-
-                            }
-                        }
-                    }
-
 
                 }
+            if(arg0.getSource() instanceof SpecialButton){
+                if (fc == null) {
+                    if(board.getActivePlayer().getField().getSpecialArea().contains(((SpecialButton)arg0.getSource()).getSpecial()) || board.getActivePlayer().getField().getHand().contains(((SpecialButton)arg0.getSource()).getSpecial()))
+                         if (((SpecialButton) arg0.getSource()).getSpecial().getLocation() == Location.HAND) {
+                            String[] buttons = {"Activate", "Set", "cancel"};
+
+                            int rc = JOptionPane.showOptionDialog(null, "Summon, Set, Activate or Cancel" ,"Special",
+                                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
+                            SpecialButton button = (SpecialButton) arg0.getSource();
+                            SpecialCard card = button.getSpecial();
+                            fc = button;
+                            if (rc == 1) {
+                                Card.getBoard().getActivePlayer().setSpecial(card);
+                                fc = null;
+                                updateField();
+                                return;
+
+                            }
+                            if(rc==0){
+                                Card.getBoard().getActivePlayer().setSpecialFaceDown(card);
+                            }
+                            if (rc == 3) {
+                                fc = null;
+                                return;
+                            } else {
+                                switch (card.getName()) {
+                                    case "Assassination":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+
+                                    case "Bribery":
+                                       board.getActivePlayer().activateSpecial(card,null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Computer Espionage":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Deep Agent":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Interference1":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Interferece2":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Market Manipulation":
+                                        board.getActivePlayer().activateSpecial(card,null);
+                                         fc = null;
+                                        return;
+                                    case "Media Campaign":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Murphy'S Law":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Secrets Man was not Meant to Know":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Senate Investigating Committee":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Slush Fund ":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Swiss Bank Account":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Whispering Campaign":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "White Collar Crime":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    default:
+                                        board.getActivePlayer().activateSpecial(((SpecialButton) fc).getSpecial(), null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+
+                                }
+                            }
+                        } else {
+                            String[] buttons = {"ok", "cancel"};
+
+                            int rc = JOptionPane.showOptionDialog(null, "Activate special card ?", "SpecialCard",
+                                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
+                            SpecialButton button = (SpecialButton) arg0.getSource();
+                            SpecialCard card = button.getSpecial();
+                            fc = button;
+                            if (rc == 1) {
+                                Card.getBoard().getActivePlayer().setSpecial(card);
+                                fc = null;
+                                updateField();
+                                return;
+                            } else {
+                                switch (card.getName()) {
+                                    case "Card Destruction":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Change Of Heart":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Assassination":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Bribery":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Computer Espionage":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Deep Agent":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Interference1":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Interference2":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Market Manipulation":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Media Campaign":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Murphy's Law":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Secrets Man Was Not Meant to Know":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Senate Investigating Committee":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Slush Fund":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Swiss Bank Account":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "Whispering Campaign":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    case "White Collar Crime":
+                                        board.getActivePlayer().activateSpecial(card, null);
+                                        updateField();
+                                        fc = null;
+                                        return;
+                                    default:
+                                        board.getActivePlayer().activateSpecial(((SpecialButton) fc).getSpecial(), null);
+                                        updateField();
+                                }
+                            }
+                         }
+                }
             }
-
-
-        }
-
     }
-
-
-
-
-
-
-
-
-
-
 }
+

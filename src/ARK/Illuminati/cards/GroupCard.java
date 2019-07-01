@@ -130,15 +130,6 @@ public class GroupCard extends Card {
     }
 
 
-    public void switchMode(){
-        if(mode == Mode.ATTACK){
-            mode = Mode.DEFENSE;
-            setHidden(true);
-        }else{
-            mode = Mode.ATTACK;
-            setHidden(true);
-        }
-    }
     public String getAbility() { return ability; }
 
     public String getAlignment(){ return alignment; }
@@ -157,7 +148,7 @@ public class GroupCard extends Card {
 
     public void setHidden(boolean hidden){ super.setHidden(hidden); }
 
-    public void setMode(Mode mode){ this.mode = mode; }
+  //  public void setMode(Mode mode){ this.mode = mode; }
 
     public Mode getMode(){ return mode; }
 

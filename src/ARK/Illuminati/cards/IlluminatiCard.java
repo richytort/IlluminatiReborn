@@ -120,13 +120,13 @@ public class IlluminatiCard extends Card {
         }
 
     }
-
-      public int transferMoney(IlluminatiCard groupTransfer, int incomeTransfer){
-        income = this.getIncome()- incomeTransfer;
-        targetIncome = groupTransfer.getIncome()+ incomeTransfer;
-        return targetIncome;
-
-    }
+//
+//      public int giveAwAyMoney(IlluminatiCard groupTransfer, int incomeTransfer){
+//        income = this.getIncome()- incomeTransfer;
+//        targetIncome = groupTransfer.getIncome()+ incomeTransfer;
+//        return targetIncome;
+//
+//    }
 
     public void switchMode(){
         if(mode == Mode.ATTACK){
