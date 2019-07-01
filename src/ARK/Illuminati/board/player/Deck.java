@@ -365,10 +365,10 @@ public class Deck {
         }return c;
     }
 
-    public Card drawIlluminatiCard(){
-        Card c = deck.remove(0);
-        return c;
-    }
+//    public Card drawIlluminatiCard(){
+//        Card c = deck.remove(0);
+//        return c;
+//    }
 
     public  ArrayList<Card> getDeck(){ return deck; }
 
