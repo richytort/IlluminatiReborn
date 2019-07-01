@@ -246,8 +246,8 @@ public class GUI extends JFrame {
         endTurn = new EndTurnButton("End Turn");
         p1name = new JLabel(p1.getName());
         p2name = new JLabel(p2.getName());
-        income1= new JLabel("Income:"+p1.getTotalIncome());
-        income2 = new JLabel("Income:"+p2.getTotalIncome());
+     //   income1= new JLabel("Income:"+p1.getTotalIncome());
+       // income2 = new JLabel("Income:"+p2.getTotalIncome());
         handAreaP1 = new HandPanel(p1);
         handAreaP2 = new HandPanel(p2);
 
@@ -298,7 +298,7 @@ public class GUI extends JFrame {
         hand1SP.getViewport().setOpaque(false);
         hand1SP.setPreferredSize(new Dimension(200, 150));
         hand1SP.setOpaque(false);
-        hand1SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        hand1SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         hand1SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         panel1.add(hand1SP,BorderLayout.EAST);
         this.revalidate();
@@ -326,12 +326,13 @@ public class GUI extends JFrame {
         p1.printHand();
         p2.printHand();
 
+
         JScrollPane hand2SP = new JScrollPane(handAreaP2) ; //sp2 = new JScrollPane(handp2);
         hand2SP.setBorder(null);
         hand2SP.getViewport().setOpaque(false);
         hand2SP.setPreferredSize(new Dimension(200,150));
         hand2SP.setOpaque(false);
-        hand2SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        hand2SP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         hand2SP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         panel2.add(hand2SP,BorderLayout.EAST);
         this.revalidate();

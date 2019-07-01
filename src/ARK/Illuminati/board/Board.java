@@ -5,6 +5,7 @@ import ARK.Illuminati.board.player.UncontrolledArea;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.board.player.Deck;
 import ARK.Illuminati.board.player.Field;
+import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
 import java.io.IOException;
@@ -50,45 +51,47 @@ public class Board {
     public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
         deck = new Deck();
         uncontrolled = new ArrayList<Card>();
-        p1.addIlluminatiCard();
-        p2.addIlluminatiCard();
+        Card illu = deck.drawIlluminatiCard();
+        p1.getHand().add(illu);
+        deck.getDeck().remove(illu);
+        Card illu2 = deck.drawIlluminatiCard();
+        p2.getHand().add(illu2);
+        deck.getDeck().remove(illu2);
         for(int e = deck.size() - 1; e >= 0; e--) {
             if (deck.getDeck().get(e).getType().equalsIgnoreCase("Illuminati")) {
                 deck.getDeck().remove(e);
             }
         }
         deck.shuffle();
-        //  p1.addNCardsToHand(10);
-        //System.out.println("Printing in board:");
-        p1.getField().printHand();
-        //p2.addNCardsToHand(10);
-        p2.getField().printHand();
         for(int i = 0 ; i < 4 ; i++) {
             uncontrolled.add(deck.drawOneCardB());
+            deck.getDeck().remove(i);
         }
-       // p1.addNCardsToHand(1);
-       // p2.addNCardsToHand(1);
-        //uncontrolled.add4CardsToUncontrolled();
+
         whoStarts(p1, p2);
-        //activePlayer.addCardToHand();
+        Card k = deck.drawOneCard();
+        if(k.getType().equalsIgnoreCase("special card")){
+            activePlayer.getHand().add(k);
+        }
+        else{
+            uncontrolled.add(k);
+        }deck.getDeck().remove(k);
     }
+
 
     public void nextPlayer(){
         Player temp = activePlayer;
         activePlayer = opponentPlayer;
         opponentPlayer = temp;
         activePlayer.getIncome();
-        activePlayer.addCardToHand();
-    }
-    public static void main(String [] args)throws IOException, UnexpectedFormatException {
-        Board board = new Board();
-        Deck deck=new Deck();
-        Player p1 = new Player("Kathya");
-        Player p2 = new Player("ulu");
-        board.whoStarts(p1,p2);
-        board.startGame(p1,p2);
-        p1.printHand();
+        Card k = deck.drawOneCard();
+        if(k.getType().equalsIgnoreCase("special card")){
+            activePlayer.getHand().add(k);
 
+        }
+        else{
+            uncontrolled.add(k);
+        }deck.getDeck().remove(k);
     }
 
     public boolean isGameOver(){

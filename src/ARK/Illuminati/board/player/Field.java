@@ -283,27 +283,20 @@ public class Field {
     }
 
 
-    public void addCardToHand() {
-        /*
-        if (deck.getDeck().size() == 0) {
-            if (this == Card.getBoard().getActivePlayer().getField())
-                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
-            else
-                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-
-            return;
-        }
-
-         */
-        Card temp = board.getDeck().drawOneCard();
-        if (temp.getType().equalsIgnoreCase("Special Card")) {
-            hand.add(temp);
-            temp.setLocation(Location.HAND);
-        }else{
-            uncontrolledGroups.add(temp);
-            temp.setLocation(Location.UNCONTROLLED);
-        }
-    }
+//    public void addCardToHand() {
+//        /*
+//        if (deck.getDeck().size() == 0) {
+//            if (this == Card.getBoard().getActivePlayer().getField())
+//                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+//            else
+//                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+//
+//            return;
+//        }
+//
+//         */
+//        Card temp = board.getDeck().drawOneCard();
+//    }
 
     public void addNCardsToHand(int n) {
 
@@ -313,19 +306,19 @@ public class Field {
     }
 
 
-    public void addIlluminatiCard() {
-        Card temp = board.getDeck().drawIlluminatiCard();
-        hand.add(temp);
-        temp.setLocation(Location.HAND);
-    }
-
-    public void add4CardsToUncontrolled() {
-        for (int i = 0; i < 4; i++) {
-            Card temp = board.getDeck().drawOneCardB();
-            uncontrolledGroups.add(temp);
-            temp.setLocation(Location.UNCONTROLLED);
-        }
-    }
+//    public void addIlluminatiCard() {
+//        Card temp = board.getDeck().drawIlluminatiCard();
+//        hand.add(temp);
+//        temp.setLocation(Location.HAND);
+//    }
+//
+//    public void add4CardsToUncontrolled() {
+//        for (int i = 0; i < 4; i++) {
+//            Card temp = board.getDeck().drawOneCardB();
+//            uncontrolledGroups.add(temp);
+//            temp.setLocation(Location.UNCONTROLLED);
+//        }
+//    }
 
 
    public void printHand(){
