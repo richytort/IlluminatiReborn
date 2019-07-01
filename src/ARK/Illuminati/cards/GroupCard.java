@@ -123,26 +123,12 @@ public class GroupCard extends Card {
     }
 
     public int transferMoney(GroupCard groupTransfer, int incomeTransfer){
-        income = this.getIncome()- incomeTransfer;
-        targetIncome = groupTransfer.getIncome()+ incomeTransfer;
-        return targetIncome;
+        setIncome(this.getIncome()-incomeTransfer);
+        groupTransfer.setIncome(groupTransfer.getIncome()+ incomeTransfer);
+        return groupTransfer.getIncome();
 
     }
 
-    public void dropAgroup(GroupCard i){
-        Player p1 = getBoard().getActivePlayer();
-        p1.getField().removeGroupToUncontrolled(i);
-    }
-
-
-    //need to implement it
-    public void aidAnAttack(){ }
-
-    public void giveAgroupAway(GroupCard target){
-        Player p1 = getBoard().getActivePlayer();
-        p1.getField().removeGroupToHand(target);
-
-    }
 
     public void switchMode(){
         if(mode == Mode.ATTACK){
@@ -153,32 +139,19 @@ public class GroupCard extends Card {
             setHidden(true);
         }
     }
-    public String getAbility() {
-        return ability;
-    }
+    public String getAbility() { return ability; }
 
-    public String getAlignment(){
-        return alignment;
-    }
-    public void setAbility(String ability) {
-        this.ability = ability;
-    }
+    public String getAlignment(){ return alignment; }
 
-    public int getPower() {
-        return power;
-    }
+    public void setAbility(String ability) { this.ability = ability; }
 
+    public int getPower() { return power; }
 
-   public int getResistance(){
-        return resistance;
-   }
+   public int getResistance(){ return resistance; }
 
-    public void setIncome(int income) {
-        this.income = income;
-    }
+    public void setIncome(int income) { this.income = income; }
 
     public int gettPower() { return tpower; }
-
 
     public int getIncome(){ return income;}
 
@@ -190,9 +163,9 @@ public class GroupCard extends Card {
 
     public void setAttacked(boolean attacked){this.attacked = attacked;}
 
+    public boolean isAttacked(){ return attacked; }
+
     public boolean isSwitchedMode(){ return switchedMode;}
 
-    public void setSwitchedMode(boolean switchedMode){
-        this.switchedMode = switchedMode;
-    }
+    public void setSwitchedMode(boolean switchedMode){ this.switchedMode = switchedMode; }
 }

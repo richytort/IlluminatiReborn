@@ -12,6 +12,8 @@ public interface Contender {
 
     public Card getCard(Card i);
 
+    public boolean setSpecialFaceDown(SpecialCard special);
+
     public boolean activateSpecial( SpecialCard special, GroupCard group );
 
  //   public boolean declareAttack(GroupCard group);

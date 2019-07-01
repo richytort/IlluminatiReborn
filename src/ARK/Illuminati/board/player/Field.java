@@ -18,23 +18,27 @@ public class Field {
     private ArrayList<Card> cardArea;
     private ArrayList<SpecialCard> specialArea;
     private Phase phase = Phase.ACTION1;
-    private  ArrayList<Card> uncontrolledGroups;
+    private ArrayList<Card> uncontrolledGroups;
     private ArrayList<Card> graveYard;
     Player p1;
     Player p2;
 //
 
-    public Field()throws IOException, UnexpectedFormatException {
+    public Field() throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         cardArea = new ArrayList<>();
         specialArea = new ArrayList<SpecialCard>();
         uncontrolledGroups = new ArrayList<Card>();
         deck = new Deck();
     }
-//do we need one for Illuminati
+
+    //do we need one for Illuminati
     public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
-        if(!(hand.contains(group) && group.getLocation() == Location.HAND))
+        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
             return false;
+        if(group.getType().equalsIgnoreCase("special card"))
+            return false;
+
 //        if(cardArea.size() >=5)
 //            throw new NoGroupSpaceException();
 //        if(phase == phase.BATTLE)
@@ -48,7 +52,7 @@ public class Field {
     }
 
     public void removeGroupToGraveyard(GroupCard target) {
-        if(cardArea.contains(target)){
+        if (cardArea.contains(target)) {
             cardArea.remove(target);
             graveYard.add(target);
             target.setLocation(Location.GRAVEYARD);
@@ -65,8 +69,8 @@ public class Field {
     }
 
 
-    public void removeGroupToHand(GroupCard target){
-        if(p1.getHand().contains(target)){
+    public void removeGroupToHand(GroupCard target) {
+        if (p1.getHand().contains(target)) {
             p1.getHand().remove(target);
             p2.getHand().add(target);
         }
@@ -74,8 +78,8 @@ public class Field {
 
 
     //what do we really need them for
-    public boolean addSpecialToField(SpecialCard special, GroupCard group, boolean hidden){
-        if(!hand.add(special))
+    public boolean addSpecialToField(SpecialCard special, GroupCard group, boolean hidden) {
+        if (!hand.contains(special))
             return false;
 //       if(cardArea.size() >=5)
 //            throw new WrongActionException();
@@ -84,13 +88,13 @@ public class Field {
         hand.remove(special);
         specialArea.add(special);
         special.setLocation(Location.FIELD);
-        if(!hidden)
+        if (!hidden)
             return activeSpecial(special, group);
         return true;
     }
 
-    private boolean activeSpecial(SpecialCard special, GroupCard group) {
-        if(!specialArea.contains(special))
+    public boolean activeSpecial(SpecialCard special, GroupCard group) {
+        if (!specialArea.contains(special))
             return false;
         //if(phase)
         special.action(group);
@@ -99,96 +103,111 @@ public class Field {
     }
 
     public boolean removeSpecialToGraveyard(SpecialCard special) {
-        if(!specialArea.contains(special))
-           return false;
+        if (!specialArea.contains(special))
+            return false;
         specialArea.remove(special);
         graveYard.add(special);
         special.setLocation(Location.GRAVEYARD);
         return true;
     }
-    public boolean declareAttackToControlI(IlluminatiCard g1, GroupCard g2){
+
+    public boolean declareAttackToControlI(IlluminatiCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
+//        if(g1.isAttacked())//what is it for??
+//            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if(g2 != null && oppGroupArea.contains(g2))
+        if (g2 != null && oppGroupArea.contains(g2))
             g1.attackToControl(g2);
         else
             return false;
-        if(Card.getBoard().getActivePlayer().getResult() == 10){
+        if (Card.getBoard().getActivePlayer().getResult() == 10) {
             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+        }
+        if (Card.getBoard().getActivePlayer().getResult() == 0) {
             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
         }
         return true;
 
     }
 
-    public boolean declareAttackToControlG(GroupCard g1, GroupCard g2){
+    public boolean declareAttackToControlG(GroupCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
+//        if(g1.isAttacked())//what is it for??
+//            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if(g2 != null && oppGroupArea.contains(g2))
+        if (g2 != null && oppGroupArea.contains(g2))
             g1.attackToControl(g2);
-         else
-             return false;
-         if(Card.getBoard().getActivePlayer().getResult() == 10){
-             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-         }if(Card.getBoard().getActivePlayer().getResult() == 0){
-             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        else
+            return false;
+        if (Card.getBoard().getActivePlayer().getResult() == 10) {
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
         }
-         return true;
+        if (Card.getBoard().getActivePlayer().getResult() == 0) {
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        return true;
 
 
     }
 
-      public boolean declareAttackToNeutralizeI(IlluminatiCard g1, GroupCard g2) {
+    public boolean declareAttackToNeutralizeI(IlluminatiCard g1, GroupCard g2) {
+        if(g1.getMode() != Mode.ATTACK)
+            throw new DefenseGroupAttackException();
+//        if(g1.isAttacked())//what is it for??
+//            throw new MultopleGroupAttackException();
+        ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
+        if (g2 != null && oppGroupArea.contains(g2))
+            g1.attackToControl(g2);
+        else
+            return false;
+        if (Card.getBoard().getActivePlayer().getResult() == 10) {
+            Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+        }
+        if (Card.getBoard().getActivePlayer().getResult() == 0) {
+            Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+        }
+        return true;
 
-          if(g1.getMode() != Mode.ATTACK)
-              throw new DefenseGroupAttackException();
-          ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-          if(g2 != null && oppGroupArea.contains(g2))
-              g1.attackToControl(g2);
-          else
-              return false;
-          if(Card.getBoard().getActivePlayer().getResult() == 10){
-              Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-          }if(Card.getBoard().getActivePlayer().getResult() == 0){
-              Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
-          }
-          return true;
 
-
-      }
+    }
 
     public boolean declareAttackToNeutralizeG(GroupCard g1, GroupCard g2) {
-
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
+//        if(g1.isAttacked())//what is it for??
+//            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if(g2 != null && oppGroupArea.contains(g2))
+        if (g2 != null && oppGroupArea.contains(g2))
             g1.attackToControl(g2);
         else
             return false;
-        if(Card.getBoard().getActivePlayer().getResult() == 10){
+        if (Card.getBoard().getActivePlayer().getResult() == 10) {
             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+        }
+        if (Card.getBoard().getActivePlayer().getResult() == 0) {
             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
         }
         return true;
 
 
     }
+
     public boolean declareAttackToDestroyI(IlluminatiCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
+//        if(g1.isAttacked())//what is it for??
+//            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if(g2 != null && oppGroupArea.contains(g2))
+        if (g2 != null && oppGroupArea.contains(g2))
             g1.attackToControl(g2);
         else
             return false;
-        if(Card.getBoard().getActivePlayer().getResult() == 10){
+        if (Card.getBoard().getActivePlayer().getResult() == 10) {
             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+        }
+        if (Card.getBoard().getActivePlayer().getResult() == 0) {
             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
         }
         return true;
@@ -199,14 +218,17 @@ public class Field {
     public boolean declareAttackToDestroyG(GroupCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
+//        if(g1.isAttacked())//what is it for??
+//            throw new MultopleGroupAttackException();
         ArrayList<Card> oppGroupArea = Card.getBoard().getOpponentPlayer().getField().cardArea;
-        if(g2 != null && oppGroupArea.contains(g2))
+        if (g2 != null && oppGroupArea.contains(g2))
             g1.attackToControl(g2);
         else
             return false;
-        if(Card.getBoard().getActivePlayer().getResult() == 10){
+        if (Card.getBoard().getActivePlayer().getResult() == 10) {
             Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-        }if(Card.getBoard().getActivePlayer().getResult() == 0){
+        }
+        if (Card.getBoard().getActivePlayer().getResult() == 0) {
             Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
         }
         return true;
@@ -215,10 +237,8 @@ public class Field {
     }
 
 
-
-
-        public void addCardToHand(){
-        if(deck.getDeck().size()==0){
+    public void addCardToHand() {
+        if (deck.getDeck().size() == 0) {
             if (this == Card.getBoard().getActivePlayer().getField())
                 Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
             else
@@ -230,7 +250,7 @@ public class Field {
         if (temp.getType().equalsIgnoreCase("special card")) {
             hand.add(temp);
             temp.setLocation(Location.HAND);
-        }else{
+        } else {
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }
@@ -238,57 +258,54 @@ public class Field {
 
     }
 
-    public void addNCardsToHand(int n ){
+    public void addNCardsToHand(int n) {
 
-        for(int i = 0 ; i < n ; i++)
+        for (int i = 0; i < n; i++)
             addCardToHand();
 
     }
 
-    public void printUncontroled(){
-        for(Card e: uncontrolledGroups){
-            System.out.println(e+ " ");
-        }
-    }
-    public void addIlluminatiCard(){
+    //    public void printUncontroled(){
+//        for(Card e: uncontrolledGroups){
+//            System.out.println(e+ " ");
+//        }
+//    }
+    public void addIlluminatiCard() {
         Card temp = deck.drawIlluminatiCard();
         hand.add(temp);
         temp.setLocation(Location.HAND);
     }
 
-    public void add4CardsToUncontrolled(){
-        for(int i = 0; i <4;i++){
+    public void add4CardsToUncontrolled() {
+        for (int i = 0; i < 4; i++) {
             Card temp = deck.drawOneCardB();
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }
     }
 
-    public void printHand(){
-        for(Card e: hand){
-            System.out.println(e+ " ");
-        }
-    }
+    //
+//    public void printHand(){
+//        for(Card e: hand){
+//            System.out.println(e+ " ");
+//        }
+//    }
+//
+//    public static void main(String [] args) throws IOException,UnexpectedFormatException{
+//        Field field = new Field();
+//        Deck deck = new Deck();
+//        field.addIlluminatiCard();
+//        field.addCardToHand();
+//        field.add4CardsToUncontrolled();
+//        System.out.println("hand");
+//        field.printHand();
+//        System.out.println("uncontrolled");
+//        field.printUncontroled();
+//
+//
+    // }
 
-    public static void main(String [] args) throws IOException,UnexpectedFormatException{
-        Field field = new Field();
-        Deck deck = new Deck();
-        field.addIlluminatiCard();
-        field.addCardToHand();
-        field.add4CardsToUncontrolled();
-        System.out.println("hand");
-        field.printHand();
-        System.out.println("uncontrolled");
-        field.printUncontroled();
-
-
-    }
-    public void removeCard(Card e){
-        hand.remove(e);
-        uncontrolledGroups.add(e);
-    }
-
- //   public boolean useSpecialCard(SpecialCard card, GroupCard group) {
+    //   public boolean useSpecialCard(SpecialCard card, GroupCard group) {
 //        if (!specialArea.contains(card))
 //            return false;
 ////        if (Action == Action.BATTLE)
@@ -299,43 +316,73 @@ public class Field {
 //    }
 //
 
-    public ArrayList<Card> getHand(){
-        return hand ;
+    public void endPhase(){
+        switch (phase){
+            case MAIN:
+                setPhase(Phase.ACTION1);
+                break;
+            case ACTION1:
+                setPhase(Phase.ACTION2);
+                break;
+            case ACTION2:
+                endTurn();
+        }
     }
 
-    public Deck getDeck(){
-        return deck ;
+    public void endTurn(){
+        phase = Phase.MAIN;
+        for(Card m: cardArea){
+            m.setAttacked(false);
+            m.setSwitchedMode(false);
+        }
+        Card.getBoard().nextPlayer();
     }
 
-
-
-
-/*
-    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
-
-        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
+    public boolean switchCardMode(GroupCard group){
+        if(!cardArea.contains(group))
             return false;
-//
-//    public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
-//        if (!(hand.contains(group) && group.getLocation() == Location.HAND))
-//            return false;
-//        if (hand.size() >= 5)
-//            throw new NoSpaceException();
-//        if (Action == Action.Attack)
-//            throw new WrongActionException();
-//        hand.remove(group);
-//        group.setHidden(isHidden);
-//        group.setLocation(Location.FIELD);
-//        hand.add(group);
-//        return true;
-//
+        //(if phase
+        if(group.isSwitchedMode())
+            return false;
+        group.switchMode();
+        group.setSwitchedMode(true);
+        return true;
 
-
-    //needs work
-
-    public boolean addSpecialToField(SpecialCard special, Object o, boolean b) {
-   return true;
     }
-    */
+    public boolean switchCardModeI(IlluminatiCard group){
+        if(!cardArea.contains(group))
+            return false;
+        //(if phase
+        if(group.isSwitchedMode())
+            return false;
+        group.switchMode();
+        group.setSwitchedMode(true);
+        return true;
+
+    }
+
+
+    public ArrayList<Card> getHand() { return hand; }
+
+    public Deck getDeck() { return deck; }
+
+    public Phase getPhase() {
+        return phase;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
+    }
+
+    public ArrayList<Card> getCardArea(){return cardArea;}
+
+    public ArrayList<SpecialCard> getSpecialArea(){ return specialArea;}
+
+    public ArrayList<Card> getUncontrolledGroups(){ return uncontrolledGroups;}
+
+    public ArrayList<Card> getGraveYard(){ return graveYard;}
+
+
+
 
 }

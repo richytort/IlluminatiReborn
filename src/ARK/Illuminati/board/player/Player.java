@@ -5,6 +5,7 @@ import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
 import ARK.Illuminati.cards.IlluminatiCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
+import ARK.Illuminati.exceptions.DefenseGroupAttackException;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.cards.Mode;
 import ARK.Illuminati.exceptions.MultipleGroupAdditionException;
@@ -35,21 +36,14 @@ public class Player implements Contender {
     //need to set it facing up
     @Override
     public boolean setGroup(Card group) {
-
         if (Card.getBoard().isGameOver())
             return false;
-
         if(this != Card.getBoard().getActivePlayer()){
             return false;
         }
-      //  if (addedGroupThisTurn)
-            //do we need it? because we can have multiple cards there??
-          // throw new MultipleGroupAdditionException();
-       // boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
-//            if (!groupAdded)
-//              return false;
-//            addedGroupThisTurn = true;
-        return true;
+        boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
+
+        return groupAdded;
     }
 
 
@@ -61,13 +55,12 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer()) {
             return false;
         }
-        //boolean specialAdded = this.field.addSpecialToField( special , null , false );
-        //return specialAdded;
-        return true;
+        boolean specialAdded = this.field.addSpecialToField( special , null , false );
+        return specialAdded;
     }
 
 
- /*
+
     public boolean setSpecialFaceDown(SpecialCard special){
             if (Card.getBoard().isGameOver())
                 return false;
@@ -79,7 +72,7 @@ public class Player implements Contender {
             return specialAdded;
     }
 
- */
+
 
     @Override
     //finish when they finish field.
@@ -93,97 +86,54 @@ public class Player implements Contender {
 
         boolean specialActivated;
 
-        ///if(this.field.getSpecialArea().contains(special))
-        //    specialActivated = this.field.activateSetSpell(special,group);
-        //else
-        //    specialActivated = this.field.addSpellToField(special, group, false);
+        if(this.field.getSpecialArea().contains(special))
+            specialActivated = this.field.activeSpecial(special,group);
+        else
+            specialActivated = this.field.addSpecialToField(special, group, false);
 
-        //return specialActivated ;
-        return false; ///////////////////delete when specialactivated
+        return specialActivated;
     }
 
-  //  @Override
-//    //finish when field
-//    public boolean declareAttack(GroupCard group) {
-//        if (Card.getBoard().isGameOver())
-//            return false;
-//
-//        if (this != Card.getBoard().getActivePlayer())
-//            return false;
-//
-//        //boolean groupAttacked = this.field.declareAttack(group, null);
-//
-//        //return groupAttacked;
-//        return false;///////////delete when fixed.
-//
-//    }
-
-    //do we really need it
-  //  @Override
-    /*
-    public boolean declareAttack(GroupCard activeGroup, GroupCard opponentGroup) {
-
-        if (Card.getBoard().isGameOver())
-            return false;
-
-        if (this != Card.getBoard().getActivePlayer())
-            return false;
-
-        boolean groupAttacked = this.field.declareAttack(activeGroup, opponentGroup);
-
-        return groupAttacked ;
-
-        return false; //delete when fixed.
-    }
-*/
-//    public boolean declareAttackToControl(GroupCard group) {}
-//    public boolean declareAttackToNeutralize(GroupCard group) {}
-//
-//    public boolean declareAttackToDestroy(GroupCard group) {}
-//
-//
 
     public boolean declareAttackToControlI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
-        if(Card.getBoard().isGameOver())
-            return false;
+        return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-//        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
-//        return cardAttacked;
-        return false;
+        boolean CardAttacked = this.field.declareAttackToControlI(activeGroup,opponentGroup);
+
+        return cardAttacked;
+
     }
 
-    public boolean declareAttackToControlG(Card activeGroup, Card opponentGroup) {
+    public boolean declareAttackToControlG(GroupCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-//        boolean CardAttacked = this.field.declareAttackToControl(activeGroup,opponentGroup);
-//
-//        return cardAttacked;
-        return false;
+        boolean CardAttacked = this.field.declareAttackToControlG(activeGroup,opponentGroup);
+
+        return cardAttacked;
     }
 
 
-    public boolean declareAttackToNeutralizeI(Card activeGroup, GroupCard opponentGroup) {
+    public boolean declareAttackToNeutralizeI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-//        boolean CardAttacked = this.field.declareAttackToNeutralize(activeGroup,opponentGroup);
-//
-//        return cardAttacked;
-        return false;
+        boolean CardAttacked = this.field.declareAttackToNeutralizeI(activeGroup,opponentGroup);
+
+        return cardAttacked;
     }
-    public boolean declareAttackToNeutralizeG(Card activeGroup, GroupCard opponentGroup) {
+
+    public boolean declareAttackToNeutralizeG(GroupCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-//        boolean CardAttacked = this.field.declareAttackToNeutralize(activeGroup,opponentGroup);
-//
-//        return cardAttacked;
-        return false;
+        boolean CardAttacked = this.field.declareAttackToNeutralizeG(activeGroup,opponentGroup);
+
+        return cardAttacked;
     }
 
 
@@ -193,10 +143,9 @@ public class Player implements Contender {
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-//        boolean CardAttacked = this.field.declareAttackToDestroy(activeGroup,opponentGroup);
-//
-//        return cardAttacked;
-        return false;
+        boolean CardAttacked = this.field.declareAttackToDestroyI(activeGroup,opponentGroup);
+
+        return cardAttacked;
 
     }
 
@@ -207,9 +156,9 @@ public class Player implements Contender {
             return false;
         if(this != Card.getBoard().getActivePlayer())
             return false;
-//        boolean CardAttacked = this.field.declareAttackToDestroy(activeGroup,opponentGroup);
-//
-//        return cardAttacked;
+        boolean CardAttacked = this.field.declareAttackToDestroy(activeGroup,opponentGroup);
+
+        return cardAttacked;
         return false;
 
     }
@@ -275,14 +224,14 @@ public class Player implements Contender {
 
     /////////////Seems we can adjust the rotation on this part/////////////////////////////////////////////////////////
     @Override
-    public boolean switchGroupPosition(GroupCard group) {
+    public boolean switchGroupPosition(Card group) {
         if (Card.getBoard().isGameOver())
             return false;
 
         if (this != Card.getBoard().getActivePlayer())
             return false;
 
-        //boolean groupRotated = this.field.switchGroupPosition(group);
+       // boolean groupRotated = this.field.switchGroupPosition(group);
 
         return false; //return groupRotated ;
 
@@ -299,10 +248,49 @@ public class Player implements Contender {
     public void addIlluminatiCard(){
         this.field.addIlluminatiCard();
     }
+    public void addNCardsToHand(int n){
+        this.field.addNCardsToHand(n);
+    }
 
 
+    //DO I NEED IT IN FIELD
+    //implement this actions
+    public void giveAwaySpecialCard(){ }
 
-   public int getIncome(){
+    //DO I NEED IT IN FIELD
+    //implement this action
+    public void useSpecialCard(){ }
+
+    //DO I NEED THEM IN FIELD
+    public void moveAGroup(int moveGroup, int newLocation ){
+        Collections.swap(Card.getBoard().getActivePlayer().getHand(),moveGroup,newLocation);
+    }
+
+    //DO I NEED IT IN FIELD
+    public void passing(){
+        this.getField().endTurn();
+        this.setIncome(getTotalIncome() + 5);
+    }
+
+    //DO I NEED IT IN FIELD
+    public void dropAgroup(GroupCard i){
+       Player p = Card.getBoard().getActivePlayer();
+        p.getField().removeGroupToUncontrolled(i);
+    }
+
+
+    //DO I NEED IT IN FIELD
+    //need to implement it
+    public void aidAnAttack(){ }
+
+    //DO I NEED IT IN FIELD
+    public void giveAgroupAway(GroupCard target){
+        Player p1 = Card.getBoard().getActivePlayer();
+        p1.getField().removeGroupToHand(target);
+
+    }
+
+    public int getIncome(){
         for(Card e: hand){
             if(getCard(e).getType().equalsIgnoreCase("illuminati") || getCard(e).getType().equalsIgnoreCase("other group")){
                 income = e.getIncome() + e.getIncome();
@@ -318,53 +306,21 @@ public class Player implements Contender {
         return totalIncome;
     }
 
-    public Field getField(){ return field; }
 
-    //check if neeeded
-    public Card getCard(Card i) {
-        return i;
-    }
+    public Field getField(){ return field;}
 
-    public String getName() {
-        return name;
+    public Card getCard(Card i) { return i;
     }
 
-    public ArrayList<Card> getHand(){
-        return hand;
-    }
+    public String getName() { return name; }
 
-    //should it be boolean
-    //implement this actions
-    public void giveAwaySpecialCard(){
+    public ArrayList<Card> getHand(){ return hand; }
 
-    }
-    //should it be boolean
+    public void setResult(int result){ this.result = result; }
 
-    //implement this action
-    public void useSpecialCard(){
+    public int getResult(){ return result; }
 
-    }
-    public void moveAGroup(int moveGroup, int newLocation ){
-        Collections.swap(hand,moveGroup,newLocation);
-    }
-    public void addCardToHand(Card e){
-        hand.add(e);
-    }
-
-    //finish implementing
-//    public void passing(){
-//        this.getField().endTurn();
-//        totalIncome = getTotalIncome() + 5;
-//    }
-    public void setResult(int result){
-        this.result = result;
-    }
-    public int getResult(){
-        return result;
-    }
-    public void setIncome(int income){
-        this.income = income;
-    }
+    public void setIncome(int income){ this.income = income; }
 
 }
 
