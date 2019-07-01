@@ -23,7 +23,7 @@ public class SpecialButton extends JButton {
         return special ;
     }
 
-    public void setSpecial(SpecialCard sepcial){
+    public void setSpecial(SpecialCard special){
         this.special = special ;
     }
 

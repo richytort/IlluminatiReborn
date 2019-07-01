@@ -111,17 +111,17 @@ public class HandPanel extends JPanel {
     public ArrayList<GroupButton> getGroupButtons() {
         return groupButtons;
     }
-    public void setMonsterbuttons(ArrayList<GroupButton> groupButtons) {
+    public void setGroupButtons(ArrayList<GroupButton> groupButtons) {
         this.groupButtons = groupButtons;
     }
-    public ArrayList<SpecialButton> getSpellbuttons() {
+    public ArrayList<SpecialButton> getSpecialButtons() {
         return specialButtons;
     }
     public void setSpecialButtons(ArrayList<SpecialButton> specialButtons) {
         this.specialButtons = specialButtons;
     }
 
-    public ArrayList<IlluminatiButton> getIlluminatiButton(){
+    public ArrayList<IlluminatiButton> getIlluminatiButtons(){
         return illuminatiButtons;
     }
 

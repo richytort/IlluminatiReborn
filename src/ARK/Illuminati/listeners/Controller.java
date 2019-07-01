@@ -4,6 +4,7 @@ import ARK.Illuminati.board.Board;
 import ARK.Illuminati.board.player.Phase;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.GroupCard;
+import ARK.Illuminati.cards.IlluminatiCard;
 import ARK.Illuminati.cards.Location;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.exceptions.DefenseGroupAttackException;
@@ -18,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,7 +35,7 @@ public class Controller implements ActionListener, MouseListener {
     public Controller(Board board, GUI gui){
         this.board = board ;
         this.gui = gui ;
-        //addActionListeners() ;
+        addActionListeners() ;
         gui.getEndTurn().addActionListener(this);
         gui.getNextAction().addActionListener(this);
     }
@@ -42,9 +44,18 @@ public class Controller implements ActionListener, MouseListener {
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroups();
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroups();
+        ArrayList<GroupButton> handP1 = this.gui.getHandAreaP1().getGroupButtons();
+        ArrayList<GroupButton> handP2 = this.gui.getHandAreaP2().getGroupButtons();
+        ArrayList<IlluminatiButton> handIlluminatiP1 = this.gui.getHandAreaP1().getIlluminatiButtons();
+        ArrayList<IlluminatiButton> handIlluminatiP2 = this.gui.getHandAreaP2().getIlluminatiButtons();
+        ArrayList<SpecialButton> handSpecialP1 = this.gui.getHandAreaP1().getSpecialButtons();
+        ArrayList<SpecialButton> handSpecialP2 = this.gui.getHandAreaP2().getSpecialButtons();
         ///////not too sure of line 37. Investigate later.
         ArrayList<JButton> specialsP1 = this.gui.getSpecialAreaP1().getSpecials();
         ArrayList<JButton> specialsP2 = this.gui.getSpecialAreaP2().getSpecials();
+
+
+
         ///Alot in this area that I felt didn't need to be implemented. Check back later to see if missing something.
 
         for(int i = 0 ; i < structureP1.size() ; i++){
@@ -66,6 +77,37 @@ public class Controller implements ActionListener, MouseListener {
             specialsP2.get(i).addActionListener(this);
             specialsP2.get(i).addMouseListener(this);
         }
+
+        for(int i = 0 ; i < handP1.size() ;i++){
+            handP1.get(i).addActionListener(this);
+            handP1.get(i).addMouseListener(this);
+        }
+
+        for(int i = 0 ; i < handP2.size();i++){
+            handP2.get(i).addActionListener(this);
+            handP2.get(i).addMouseListener(this);
+        }
+
+        for(int i = 0 ; i < handIlluminatiP1.size(); i++){
+            handIlluminatiP1.get(i).addActionListener(this);
+            handIlluminatiP1.get(i).addMouseListener(this) ;
+        }
+
+        for(int i = 0 ; i < handIlluminatiP2.size(); i++){
+            handIlluminatiP2.get(i).addActionListener(this);
+            handIlluminatiP2.get(i).addMouseListener(this) ;
+        }
+
+        for(int i = 0 ; i < handSpecialP1.size(); i++){
+            handSpecialP1.get(i).addActionListener(this);
+            handSpecialP1.get(i).addMouseListener(this );
+        }
+
+        for(int i = 0 ; i < handSpecialP2.size(); i++){
+            handSpecialP2.get(i).addActionListener(this);
+            handSpecialP2.get(i).addMouseListener(this );
+        }
+
 
     }
 
@@ -227,12 +269,13 @@ public class Controller implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        System.out.println("Entering");
         if(e.getSource() instanceof GroupButton){
 
             GroupButton b = (GroupButton) e.getSource();
             GroupCard c = b.getGroup();
             if(c!=null){
-                String url = "Cards Images Database/Monsters/"+c.getName()+".png";
+                String url = c.getName()+".png";
 
                 ImageIcon img = new ImageIcon(url);
                 gui.getDescription().setIcon(img);
@@ -244,7 +287,7 @@ public class Controller implements ActionListener, MouseListener {
             SpecialButton b = (SpecialButton) e.getSource();
             SpecialCard c = b.getSpecial();
             if(c!=null){
-                String url = "Cards Images Database/Spells/"+c.getName()+".png";
+                String url = c.getName()+".png";
 
                 ImageIcon img = new ImageIcon(url);
                 gui.getDescription().setIcon(img);
@@ -252,11 +295,25 @@ public class Controller implements ActionListener, MouseListener {
                 gui.revalidate();
             }
         }
+
+        if(e.getSource() instanceof IlluminatiButton){
+            IlluminatiButton b = (IlluminatiButton) e.getSource();
+            IlluminatiCard c = b.getIlluminati();
+            if(c!=null){
+                String url = c.getName()+".png";
+
+                ImageIcon img = new ImageIcon(url);
+                gui.getDescription().setIcon(img);
+                gui.getDescription().revalidate();
+                gui.revalidate();
+            }
+        }
+
         if(e.getSource() instanceof CardButton){
 
 
-            /////////MAYBE CHANGE IT BACK IF WE DECIDE TO GO THE DATABASE ROUTE>
-            ImageIcon img = new ImageIcon("Back.png"); //ImageIcon img = new ImageIcon("Cards Images Database/Card Back.png");
+
+            ImageIcon img = new ImageIcon("RegBack.png");
             gui.getDescription().setIcon(img);
             gui.getDescription().revalidate();
             gui.revalidate();
