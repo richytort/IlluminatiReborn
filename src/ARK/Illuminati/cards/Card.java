@@ -10,6 +10,9 @@ public abstract class Card {
     private boolean isHidden;
     private Location location;
     private Mode mode;
+    private boolean attacked;
+    private boolean switchedMode;
+
     private int income;
     private static Board board;
 
@@ -52,6 +55,16 @@ public abstract class Card {
     public boolean isHidden(){
         return isHidden;
     }
+    public void switchMode(){
+        if(mode == Mode.ATTACK){
+            mode = Mode.DEFENSE;
+            setHidden(true);
+        }else{
+            mode = Mode.ATTACK;
+            setHidden(true);
+        }
+    }
+
     public void setHidden(boolean isHidden){
         this.isHidden = isHidden;
     }
@@ -69,6 +82,14 @@ public abstract class Card {
 
     public static void setBoard(Board board) {
         Card.board = board;
+    }
+
+    public void setAttacked(boolean attacked){this.attacked = attacked;}
+
+    public boolean isSwitchedMode(){ return switchedMode;}
+
+    public void setSwitchedMode(boolean switchedMode){
+        this.switchedMode = switchedMode;
     }
 
 }
