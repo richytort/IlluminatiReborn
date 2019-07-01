@@ -50,7 +50,6 @@ public class Board {
     public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
         deck = new Deck();
         uncontrolled = new ArrayList<Card>();
-        Board.uncontrolled = new ArrayList<Card>();
         //p1.addIlluminatiCard();
         //p2.addIlluminatiCard();
         //deck.shuffle();
@@ -59,8 +58,9 @@ public class Board {
         System.out.println("Printing in board:");
         p1.getField().printHand();
         p2.addNCardsToHand(10);
+
         for(int i = 0 ; i < 20 ; i++) {
-            uncontrolled.add(Board.deck.drawOneCard());
+            uncontrolled.add(deck.drawOneCard());
         }
         //p1.addIlluminatiCard();
         //p2.addIlluminatiCard();
