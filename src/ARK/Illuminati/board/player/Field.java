@@ -337,7 +337,7 @@ public class Field {
         Card.getBoard().nextPlayer();
     }
 
-    public boolean switchCardMode(GroupCard group){
+    public boolean switchCardModeG(GroupCard group){
         if(!cardArea.contains(group))
             return false;
         //(if phase
@@ -373,6 +373,9 @@ public class Field {
         this.phase = phase;
     }
 
+    public Card getCardL(Card e){
+        return e;
+    }
     public ArrayList<Card> getCardArea(){return cardArea;}
 
     public ArrayList<SpecialCard> getSpecialArea(){ return specialArea;}
