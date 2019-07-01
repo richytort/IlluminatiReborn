@@ -14,19 +14,27 @@ import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.exceptions.WrongActionException;
 import ARK.Illuminati.gui.GroupButton;
 
+/**
+ * Field class for the "board" of the game
+ */
 public class Field {
   //  private final Deck deck;
-    private ArrayList<Card> hand;
+    private ArrayList<Card> hand;           //creating ArrayLists to be used- hand, cardarea, cards removed from game
     private ArrayList<Card> cardArea;
     private ArrayList<SpecialCard> specialArea;
     private Phase phase = Phase.ACTION1;
-    private ArrayList<Card> uncontrolledGroups;
+    private ArrayList<Card> uncontrolledGroups;     //uncontrolled groups
     private ArrayList<Card> graveYard;
     private Board board;
-    Player p1;
-    Player p2;
+    Player p1;  //first player
+    Player p2;   //second player
 //
 
+    /**
+     * Initializing new arraylists for the game.
+     * @throws IOException
+     * @throws UnexpectedFormatException
+     */
     public Field() throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         cardArea = new ArrayList<>();
@@ -36,17 +44,19 @@ public class Field {
     //    deck = new Deck();
     }
 
-    //do we need one for Illuminati
+    /**
+     * This Method adds a Illuminati group to the board/field of the game.
+     * @param group - group to be added from the database
+     * @param m - the position the card is in
+     * @param isHidden - the status of the group added to the field
+     * @return
+     */
     public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
         if (!(hand.contains(group) && group.getLocation() == Location.HAND))
             return false;
         if(group.getType().equalsIgnoreCase("special card"))
             return false;
 
-//        if(cardArea.size() >=5)
-//            throw new NoGroupSpaceException();
-//        if(phase == phase.BATTLE)
-//            throw new Wron
         hand.remove(group);
         group.setHidden(isHidden);
         group.setMode(m);
@@ -55,24 +65,34 @@ public class Field {
         return true;
     }
 
+    /**
+     * Removes group to the "graveyard" when it is targeted
+     * @param target - the group card to be removed from the session
+     */
     public void removeGroupToGraveyard(GroupCard target) {
-        if (cardArea.contains(target)) {
-            cardArea.remove(target);
-            graveYard.add(target);
+        if (cardArea.contains(target)) {            //if the target is in field
+            cardArea.remove(target);     //remove
+            graveYard.add(target);  //target group is added to pile
             target.setLocation(Location.GRAVEYARD);
         }
     }
 
-
+    /**
+     * group selected is moved to the uncontrolled group- no longer in player possession
+     * @param group -the group to moved to the uncontrolled area
+     */
     public void removeGroupToUncontrolled(GroupCard group) {
-        if (cardArea.contains(group)) {
-            cardArea.remove(group);
+        if (cardArea.contains(group)) {  //if group exists
+            cardArea.remove(group);  //remove the group
             uncontrolledGroups.add(group);
             group.setLocation(Location.UNCONTROLLED);
         }
     }
 
-
+    /**
+     * The group is removed from the hand of the player
+     * @param target - the group to be removed from the players hand
+     */
     public void removeGroupToHand(GroupCard target) {
         if (p1.getHand().contains(target)) {
             p1.getHand().remove(target);
@@ -80,23 +100,34 @@ public class Field {
         }
     }
 
-
-    //what do we really need them for
+    /**
+     * Adds a special card to the field - to be used
+     * @param special - the special card to be used ingame
+     * @param group - the group the special is used upon
+     * @param hidden - status of the card played
+     * @return
+     */
     public boolean addSpecialToField(SpecialCard special, GroupCard group, boolean hidden) {
-        if (!hand.contains(special))
+        if (!hand.contains(special))   //if the special card doesnt exists in the hand
             return false;
-//       if(cardArea.size() >=5)
+//       if(cardArea.size() >=5)   //if there is no room in the card area
 //            throw new WrongActionException();
 //        if(phase == Phase.BATTLE)
 //            throw W
-        hand.remove(special);
-        specialArea.add(special);
-        special.setLocation(Location.FIELD);
+        hand.remove(special);   //remove the special card
+        specialArea.add(special);    //add the special card to the area
+        special.setLocation(Location.FIELD);    //set the location of the special card to the field
         if (!hidden)
             return activeSpecial(special, group);
         return true;
     }
 
+    /**
+     * Determines whether the special card is currently in action
+     * @param special - the special card assessed to be in play or not
+     * @param group - the group the special card is acting upon
+     * @return - boolean true or false regarding the status of the special card
+     */
     public boolean activeSpecial(SpecialCard special, GroupCard group) {
         if (!specialArea.contains(special))
             return false;
@@ -106,17 +137,28 @@ public class Field {
         return true;
     }
 
+    /**
+     * Tests the validity of whether the special card was removed from the field
+     * @param special - the special card that was to be removed from game
+     * @return - true or false regarding the removal of the special card
+     */
     public boolean removeSpecialToGraveyard(SpecialCard special) {
         if (!specialArea.contains(special))
-            return false;
-        specialArea.remove(special);
-        graveYard.add(special);
+            return false; //return false
+        specialArea.remove(special);            //removing the special card
+        graveYard.add(special);             //special card is removed successfully
         special.setLocation(Location.GRAVEYARD);
-        return true;
+        return true; //return true
     }
 
-    public boolean declareAttackToControlI(IlluminatiCard g1, GroupCard g2) {
-        if(g1.getMode() != Mode.ATTACK)
+    /**
+     * Declaring attack to control a group
+     * @param g1 - the illuminaticard played to attack to control
+     * @param g2 - the group to by controlled as a result of the attack
+     * @return true or false regarding the control after attacking
+     */
+    public boolean declareAttackToControlI(IlluminatiCard g1, GroupCard g2) {   //parameters Illuminati Card and group
+        if(g1.getMode() != Mode.ATTACK)      //if the Illuminati card is not played to attack
             throw new DefenseGroupAttackException();
 //        if(g1.isAttacked())//what is it for??
 //            throw new MultopleGroupAttackException();
