@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
+import ARK.Illuminati.board.Board;
 import ARK.Illuminati.cards.*;
 import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
@@ -13,13 +14,14 @@ import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.exceptions.WrongActionException;
 
 public class Field {
-    private final Deck deck;
+  //  private final Deck deck;
     private ArrayList<Card> hand;
     private ArrayList<Card> cardArea;
     private ArrayList<SpecialCard> specialArea;
     private Phase phase = Phase.ACTION1;
     private ArrayList<Card> uncontrolledGroups;
     private ArrayList<Card> graveYard;
+    private Board board;
     Player p1;
     Player p2;
 //
@@ -29,7 +31,8 @@ public class Field {
         cardArea = new ArrayList<>();
         specialArea = new ArrayList<SpecialCard>();
         uncontrolledGroups = new ArrayList<Card>();
-        deck = new Deck();
+        board = new Board();
+    //    deck = new Deck();
     }
 
     //do we need one for Illuminati
@@ -249,7 +252,7 @@ public class Field {
         }
 
          */
-        Card temp = deck.drawOneCard();
+        Card temp = board.getDeck().drawOneCard();
         hand.add(temp);
         temp.setLocation(Location.HAND);
 
@@ -269,14 +272,14 @@ public class Field {
 //        }
 //    }
     public void addIlluminatiCard() {
-        Card temp = deck.drawIlluminatiCard();
+        Card temp = board.getDeck().drawIlluminatiCard();
         hand.add(temp);
         temp.setLocation(Location.HAND);
     }
 
     public void add4CardsToUncontrolled() {
         for (int i = 0; i < 4; i++) {
-            Card temp = deck.drawOneCardB();
+            Card temp = board.getDeck().drawOneCardB();
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }
@@ -362,7 +365,6 @@ public class Field {
 
     public ArrayList<Card> getHand() { return hand; }
 
-    public Deck getDeck() { return deck; }
 
     public Phase getPhase() {
         return phase;

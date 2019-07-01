@@ -21,8 +21,8 @@ public class Board {
     private int dice2;
     private int total;
 
-    public Board(){
-
+    public Board() throws IOException, UnexpectedFormatException{
+        deck = new Deck();
         Card.setBoard(this);
     }
     public void whoStarts(Player p1, Player p2){
@@ -110,6 +110,11 @@ public class Board {
     public Player getWinner() {
         return winner;
     }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
 
     public void setWinner(Player winner) {
         if (isGameOver())
