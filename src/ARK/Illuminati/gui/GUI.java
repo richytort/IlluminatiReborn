@@ -285,7 +285,6 @@ public class GUI extends JFrame {
         panel1.add(structureAreaP1,BorderLayout.CENTER);
         panel1.setOpaque(false);
 
-        System.out.println(p1.getHand().get(0).getName() );
 
         JScrollPane hand1SP = new JScrollPane(handAreaP1);
         hand1SP.setBorder(null);

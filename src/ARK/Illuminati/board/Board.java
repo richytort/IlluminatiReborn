@@ -42,6 +42,8 @@ public class Board {
         //p2.addIlluminatiCard();
         //deck.shuffle();
         //uncontrolled.add4CardsToUncontrolled();
+        p1.addNCardsToHand(10);
+        p2.addNCardsToHand(10);
         p1.addIlluminatiCard();
         p2.addIlluminatiCard();
        // p1.addNCardsToHand(1);

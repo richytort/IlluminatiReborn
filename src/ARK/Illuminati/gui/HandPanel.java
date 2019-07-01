@@ -80,7 +80,7 @@ public class HandPanel extends JPanel {
                 //monsterbuttons.get(i).setText(hand.get(i).getName());
                 illuminatiButton.setIlluminati((IlluminatiCard) hand.get(i));
                 illuminatiButton.setVisible(true);
-                ImageIcon img = new ImageIcon(hand.get(i).getName()+ ".png");
+                ImageIcon img = new ImageIcon(hand.get(i).getName()+".png");
                 Image img2 = img.getImage();
                 Image newimg = img2.getScaledInstance(100, 146,  java.awt.Image.SCALE_SMOOTH);
                 ImageIcon newIcon = new ImageIcon(newimg);
@@ -89,9 +89,6 @@ public class HandPanel extends JPanel {
                 illuminatiButton.revalidate();
                 illuminatiButton.setOpaque(false);
                 illuminatiButton.repaint();
-                //monsterbuttons.add(mb);
-                //this.add(mb);
-                System.out.println("Done");
             }
             else{
                 //spellbuttons.get(i).setText(hand.get(i).getName());
