@@ -374,14 +374,13 @@ public class Deck {
              }
         }return c;
     }
-//    public static void main(String [] args)throws IOException, UnexpectedFormatException{
-//       Deck deck1 = new Deck();
-//       deck1.drawIlluminatiCard();
-//       for(int e = 0; e< 4;e++) {
-//           Card c = deck1.drawOneCardB();
-//           System.out.println(c + " ");
-//       }
-//    }
+    public static void main(String [] args)throws IOException, UnexpectedFormatException{
+       Deck deck1 = new Deck();
+       for(int e = 0; e< 4;e++) {
+           Card c = deck1.drawOneCardB();
+           System.out.println(c + " ");
+       }
+    }
     //figure out how to add to uncontrolled and hand
     public Card drawCard(){
        return deck.remove(0);
@@ -390,11 +389,6 @@ public class Deck {
     public Card drawIlluminatiCard(){
         Card c = deck.get(0);
         deck.remove(0);
-        for(int e = deck.size() - 1; e >= 0; e--){
-            if (deck.get(e).getType().equalsIgnoreCase("illuminati")) {
-                deck.remove(e);
-            }
-        }shuffle();
         return c;
     }
 

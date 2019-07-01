@@ -254,10 +254,13 @@ public class Field {
 
          */
         Card temp = board.getDeck().drawOneCard();
-        hand.add(temp);
-        temp.setLocation(Location.HAND);
-
-
+        if (temp.getType().equalsIgnoreCase("Special Card")) {
+            hand.add(temp);
+            temp.setLocation(Location.HAND);
+        }else{
+            uncontrolledGroups.add(temp);
+            temp.setLocation(Location.UNCONTROLLED);
+        }
     }
 
     public void addNCardsToHand(int n) {
@@ -267,11 +270,7 @@ public class Field {
 
     }
 
-    //    public void printUncontroled(){
-//        for(Card e: uncontrolledGroups){
-//            System.out.println(e+ " ");
-//        }
-//    }
+
     public void addIlluminatiCard() {
         Card temp = board.getDeck().drawIlluminatiCard();
         hand.add(temp);
@@ -293,19 +292,6 @@ public class Field {
         }
     }
 
-//    public static void main(String [] args) throws IOException,UnexpectedFormatException{
-//        Field field = new Field();
-//        Deck deck = new Deck();
-//        field.addIlluminatiCard();
-//        field.addCardToHand();
-//        field.add4CardsToUncontrolled();
-//        System.out.println("hand");
-//        field.printHand();
-//        System.out.println("uncontrolled");
-//        field.printUncontroled();
-//
-//
-    // }
 
     //   public boolean useSpecialCard(SpecialCard card, GroupCard group) {
 //        if (!specialArea.contains(card))
