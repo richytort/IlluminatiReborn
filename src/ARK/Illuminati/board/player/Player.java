@@ -40,6 +40,7 @@ public class Player implements Contender {
         }
         boolean groupAdded = this.field.addGroupToField(group, Mode.ATTACK, false);
 
+
         return groupAdded;
     }
     public boolean setGroupDown(Card group) {
@@ -280,9 +281,9 @@ public class Player implements Contender {
 
     }
 
-//    public void addCardToHand(){
-//        this.field.addCardToHand();
-//    }
+    public void addCardToHand(){
+        this.field.addCardToHand();
+    }
 
 //    public void addNCardsToHand(int n){
 //        this.field.addNCardsToHand(n);
