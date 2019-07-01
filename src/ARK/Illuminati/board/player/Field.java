@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
+import ARK.Illuminati.board.Board;
 import ARK.Illuminati.cards.*;
 import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
@@ -269,14 +270,14 @@ public class Field {
 //        }
 //    }
     public void addIlluminatiCard() {
-        Card temp = deck.drawIlluminatiCard();
+        Card temp = Board.deck.drawIlluminatiCard();
         hand.add(temp);
         temp.setLocation(Location.HAND);
     }
 
     public void add4CardsToUncontrolled() {
         for (int i = 0; i < 4; i++) {
-            Card temp = deck.drawOneCardB();
+            Card temp = Board.deck.drawOneCardB();
             uncontrolledGroups.add(temp);
             temp.setLocation(Location.UNCONTROLLED);
         }

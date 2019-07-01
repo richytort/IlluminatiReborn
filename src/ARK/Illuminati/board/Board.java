@@ -16,13 +16,21 @@ public class Board {
     private Player winner;
     private int dice1;
     private UncontrolledArea uncontrolled;
-    Deck deck;
+    protected static Deck deck;
+
+
 
     private int dice2;
     private int total;
 
     public Board(){
-
+        try {
+            this.deck = new Deck();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnexpectedFormatException e) {
+            e.printStackTrace();
+        }
         Card.setBoard(this);
     }
     public void whoStarts(Player p1, Player p2){
@@ -116,5 +124,19 @@ public class Board {
             return;
         this.winner = winner;
     }
+    public UncontrolledArea getUncontrolled() {
+        return uncontrolled;
+    }
 
+    public void setUncontrolled(UncontrolledArea uncontrolled) {
+        this.uncontrolled = uncontrolled;
+    }
+
+    public static Deck getDeck() {
+        return deck;
+    }
+
+    public static void setDeck(Deck deck) {
+        Board.deck = deck;
+    }
 }
