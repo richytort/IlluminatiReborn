@@ -144,10 +144,10 @@ public class Player implements Contender {
 
 
     /**
-     *
-     * @param activeGroup
-     * @param opponentGroup
-     * @return
+     * Declares attacks on opponent group to neutralize
+     * @param activeGroup:
+     * @param opponentGroup:
+     * @return the card that was Attacked
      */
     public boolean declareAttackToNeutralizeI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
@@ -159,6 +159,12 @@ public class Player implements Contender {
         return CardAttacked;
     }
 
+    /**
+     * Declares an attack to neutralize the opponent group
+     * @param activeGroup: the first group carrying out the attack declaration
+     * @param opponentGroup: The opponent group that is being declared to be attacked
+     * @return Card Attacked
+     */
     public boolean declareAttackToNeutralizeG(GroupCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
@@ -170,7 +176,12 @@ public class Player implements Contender {
     }
 
 
-
+    /**
+     * Declaring an attack on the
+     * @param activeGroup
+     * @param opponentGroup
+     * @return
+     */
     public boolean declareAttackToDestroyI(IlluminatiCard activeGroup, GroupCard opponentGroup) {
         if(Card.getBoard().isGameOver())
             return false;
