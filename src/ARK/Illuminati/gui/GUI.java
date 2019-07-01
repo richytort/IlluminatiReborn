@@ -230,7 +230,7 @@ public class GUI extends JFrame {
         //groupAreap2 = new GroupsPanel(p2);
         structureAreaP2 = new StructurePanel(p2);
         //specialAreap1 = new SpecialPanel(p1);
-        uncontrolledArea = new UncontrolledPanel(); ///////////////////mabybe we will have to pass an array list of group cards in here. Makes sense.
+        uncontrolledArea = new UncontrolledPanel( Board.uncontrolled ); ///////////////////mabybe we will have to pass an array list of group cards in here. Makes sense.
         specialAreaP1 = new SpecialPanel(p1);
         //specialAreap2 = new SpecialPanel(p2);
         specialAreaP2 = new SpecialPanel(p2);

@@ -8,6 +8,7 @@ import ARK.Illuminati.board.player.Field;
 import ARK.Illuminati.exceptions.UnexpectedFormatException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UnknownFormatConversionException;
 
 public class Board {
@@ -15,7 +16,16 @@ public class Board {
     private Player opponentPlayer;
     private Player winner;
     private int dice1;
-    private UncontrolledArea uncontrolled;
+    public static ArrayList<Card> uncontrolled;
+
+    public static ArrayList<Card> getUncontrolled() {
+        return uncontrolled;
+    }
+
+    public static void setUncontrolled(ArrayList<Card> uncontrolled) {
+        Board.uncontrolled = uncontrolled;
+    }
+
     public static Deck deck;
 
 
@@ -39,7 +49,8 @@ public class Board {
     }
     public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
         deck = new Deck();
-        uncontrolled = new UncontrolledArea();
+        uncontrolled = new ArrayList<Card>();
+        Board.uncontrolled = new ArrayList<Card>();
         //p1.addIlluminatiCard();
         //p2.addIlluminatiCard();
         //deck.shuffle();
@@ -48,6 +59,9 @@ public class Board {
         System.out.println("Printing in board:");
         p1.getField().printHand();
         p2.addNCardsToHand(10);
+        for(int i = 0 ; i < 20 ; i++) {
+            uncontrolled.add(Board.deck.drawOneCard());
+        }
         //p1.addIlluminatiCard();
         //p2.addIlluminatiCard();
        // p1.addNCardsToHand(1);
@@ -93,9 +107,7 @@ public class Board {
     public Player getActivePlayer() {
         return activePlayer;
     }
-    public UncontrolledArea uncontrolledRIGHT(){
-        return uncontrolled;
-    }
+
 
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;

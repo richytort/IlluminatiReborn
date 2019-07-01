@@ -43,13 +43,13 @@ public class GroupCard extends Card {
     public void attackToControl(GroupCard target){
         Player activePl = getBoard().getActivePlayer();
         Player opponentPl = getBoard().getOpponentPlayer();
-        UncontrolledArea uncontrolled = getBoard().uncontrolledRIGHT();
+        //UncontrolledArea uncontrolled = getBoard().uncontrolledRIGHT();
         if(target.getMode() == Mode.ATTACK){
             target.switchMode();
         }
         int opponentResistance = 0;
         if(target.getLocation().equals("UNCONTROLLED")) {
-            opponentResistance = uncontrolled.getCard(target).getResistance();
+            //opponentResistance = uncontrolled.getCard(target).getResistance();
 
 
         }else if(target.getLocation().equals("HAND")){
