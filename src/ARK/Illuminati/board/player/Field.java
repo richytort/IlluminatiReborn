@@ -25,7 +25,7 @@ public class Field {
     private Phase phase = MAIN;
     private ArrayList<Card> uncontrolledGroups;
     private ArrayList<Card> graveYard;
-   // private Board board;
+    private Board board;
    public static ArrayList<Card> cardArea1 ;
     public static ArrayList<Card> cardArea2 ;
     Player p1;
@@ -70,7 +70,11 @@ public class Field {
         group.setHidden(isHidden);
         group.setMode(m);
         group.setLocation(STRUCTURE);
-        cardArea.add(group);
+//        if(board.getActivePlayer() == p1) {
+//            cardArea1.add(group);
+//        }else{
+//            cardArea2.add(group);
+//        }
         return true;
     }
 
@@ -99,6 +103,12 @@ public class Field {
             System.out.println("Setting card area 2" );
             Board.cardAreaP2.add(illuminati);
         }
+        if(Card.getBoard().getActivePlayer().getName() == GUI.p1.getName())
+            cardArea1.add(illuminati);
+        else
+            cardArea2.add(illuminati);
+        System.out.println(cardArea1.size());
+        System.out.println(cardArea2.size());
         return true;
 
     }

@@ -25,9 +25,6 @@ import java.util.ArrayList;
 
 import static java.awt.Image.SCALE_SMOOTH;
 
-/**
- * This class implements the controller for actions and mouse response for user selections.
- */
 public class Controller implements ActionListener, MouseListener {
 
     private JButton fc;
@@ -37,11 +34,6 @@ public class Controller implements ActionListener, MouseListener {
     private GUI gui ;
     private int summonset ;
 
-    /**
-     * Controller method set up.
-     * @param board the board of the game
-     * @param gui GUI used to create game
-     */
     public Controller(Board board, GUI gui){
         this.board = board ;
         this.gui = gui ;
@@ -50,20 +42,14 @@ public class Controller implements ActionListener, MouseListener {
         gui.getNextAction().addActionListener(this);
     }
 
-    /**
-     * This method sets up Buttons to call actions when selected by the user.
-     */
     public void addActionListeners(){
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroupButtons();
-
         ArrayList<IlluminatiButton> structureP1Illuminati = this.gui.getStructureAreaP1().getIlluminatiButtons();
-
+        System.out.println("P1 illu button size: " + this.gui.getStructureAreaP1().illuminatiButtons.size());
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroupButtons();
-
         ArrayList<IlluminatiButton> structureP2Illuminati = this.gui.getStructureAreaP2().getIlluminatiButtons();
-
-
+        System.out.println("P2 illum button size: " + this.gui.getStructureAreaP2().illuminatiButtons.size());
         ArrayList<GroupButton> handP1 = this.gui.getHandAreaP1().getGroupButtons();
         ArrayList<GroupButton> handP2 = this.gui.getHandAreaP2().getGroupButtons();
         ArrayList<GroupButton> uncontrolledGroup = this.gui.getUncontrolledArea().getGroupButtons();
@@ -90,7 +76,11 @@ public class Controller implements ActionListener, MouseListener {
             structureP1Illuminati.get(i).addActionListener(this);
             structureP1Illuminati.get(i).addMouseListener(this);
         }
-
+//
+//        for(int i = 0 ; i < structureP2Illuminati.size();i++){
+//            structureP2Illuminati.get(i).addActionListener(this);
+//            structureP2Illuminati.get(i).addMouseListener(this);
+//        }
 
 
         for(int i = 0 ; i < structureP2.size(); i++){
@@ -151,9 +141,6 @@ public class Controller implements ActionListener, MouseListener {
 
     }
 
-    /**
-     * This method updates the field when a new game is started.
-     */
     private void updateField(){
         if(board.isGameOver()) {
             Object[] options = {"End Game!", "Start New Game"};
@@ -192,10 +179,7 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel1().removeAll();
         gui.getPanel2().removeAll();
 
-        System.out.println("CardArea1 size: " + Board.cardAreaP1.size());
-        System.out.println("CardArea2 size: " + Board.cardAreaP2.size());
-
-        gui.setStructureAreaP1(new StructurePanel( Board.cardAreaP1 )) ;
+        gui.setStructureAreaP1(new StructurePanel( gui.getP1().getField().cardArea1 )) ;
 
         gui.setHandAreaP1(new HandPanel( gui.getP1() ) );
         JScrollPane sp1 = new JScrollPane(gui.getHandAreaP1());
@@ -208,13 +192,9 @@ public class Controller implements ActionListener, MouseListener {
         gui.setHand1SP( sp1 );
         gui.getPanel1().add(gui.getStructureAreaP1(), BorderLayout.CENTER);
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
-        System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
 
 
-        StructurePanel temp = new StructurePanel(Board.cardAreaP2);
-        System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
-
-        gui.setStructureAreaP2 ( temp );
+        gui.setStructureAreaP2 ( new StructurePanel( gui.getP2().getField().cardArea2 ) );
 
         gui.setHandAreaP2(new HandPanel( gui.getP2() ) );
         JScrollPane sp2 = new JScrollPane(gui.getHandAreaP2());
@@ -227,9 +207,6 @@ public class Controller implements ActionListener, MouseListener {
         gui.setHand2SP( sp2 );
         gui.getPanel2().add(gui.getStructureAreaP2(), BorderLayout.CENTER);
         gui.getPanel2().add(gui.getHand2SP(),BorderLayout.EAST);
-
-
-
 
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
@@ -279,9 +256,6 @@ public class Controller implements ActionListener, MouseListener {
 
 
     @Override
-    /**
-     * This method sets up mouse actions to the GUI buttons for actions.
-     */
     public void mouseEntered(MouseEvent e) {
         if(e.getSource() instanceof GroupButton){
 
@@ -362,9 +336,6 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     @Override
-    /**
-     * This method deals with actions taken by players and calls methods within the game per player turn.
-     */
     public void actionPerformed(ActionEvent click) {
         if(click.getSource() instanceof NextActionButton){
             System.out.println("Here");
@@ -410,7 +381,6 @@ public class Controller implements ActionListener, MouseListener {
                         System.out.println(board.getActivePlayer().getField().getPhase());
                         return ;
                     }
-
                     else if(illuminati.getLocation()==Location.STRUCTURE) {
                         System.out.println("IN side Structure");
                         if (board.getActivePlayer().getField().getPhase() == Phase.ACTION1 || board.getActivePlayer().getField().getPhase() == Phase.ACTION2) {

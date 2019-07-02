@@ -105,21 +105,21 @@ public class Board {
         whoStarts(p1, p2);
         //during game
         //for(int e=0; e<10;e++) {
-            activePlayer.getField().addOthers();
+        activePlayer.getField().addOthers();
         //}
     }
 
 
     /**
      * Next player in the game is set
-      **/
+     **/
     public void nextPlayer(){
         Player temp = activePlayer;
         activePlayer = opponentPlayer;
         opponentPlayer = temp;
         activePlayer.getIncome();
         activePlayer.getField().addOthers();
-   }
+    }
 
     /**
      * returns true/false for game over

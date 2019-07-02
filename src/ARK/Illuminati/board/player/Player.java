@@ -305,7 +305,7 @@ public class Player implements Contender {
             return false;
 
         addedGroupThisTurn = false;
-      //  this.getField().endTurn();
+        this.getField().endTurn();
 
         return true;
 
