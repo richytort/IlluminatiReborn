@@ -533,7 +533,7 @@ System.out.println("HELLO");
                                 return;
                             }
                             if (summonset == 0) {
-                                Card.getBoard().getActivePlayer().setIlluminati(illuminati);
+                              //  Card.getBoard().getActivePlayer().setIlluminati(illuminati);
                                 fc = null;
                                 updateField();
                                 return;

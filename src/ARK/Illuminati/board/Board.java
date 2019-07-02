@@ -65,12 +65,12 @@ public class Board {
                    p1.getField().addUncontrolled();
               //}
               //    System.out.println(deck.size()-1);
-        //      Card t = Board.deck.drawOneCard();
+         //     Card t = Board.deck.drawOneCard();
 //              if (uncontrolled.contains(t)) {
 //                  t = Board.deck.drawOneCard();
 //              } else {
-          //        uncontrolled.add(t);
-            //      Board.deck.getDeck().get(i).setLocation(Location.UNCONTROLLED);
+           //       uncontrolled.add(t);
+             //     Board.deck.getDeck().get(i).setLocation(Location.UNCONTROLLED);
               //    System.out.println(deck.size() - 1);
 //              }
                   whoStarts(p1, p2);

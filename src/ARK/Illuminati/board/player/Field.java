@@ -316,6 +316,11 @@ public class Field {
            System.out.println(e+ " ");
         }
     }
+    public void addUncontrolled(){
+        Card temp = Board.deck.drawOneCardB();
+        Board.uncontrolled.add(temp);
+        temp.setLocation(Location.UNCONTROLLED);
+    }
 
 
     //   public boolean useSpecialCard(SpecialCard card, GroupCard group) {
