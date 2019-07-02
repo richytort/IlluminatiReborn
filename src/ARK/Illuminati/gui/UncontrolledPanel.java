@@ -11,25 +11,44 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class deals with the Uncontrolled Panel for the player and sets the other buttons.
+ */
 public class UncontrolledPanel extends JPanel {
     private ArrayList<GroupButton> groupButtons ;
     private ArrayList<SpecialButton> specialButtons;
     private ArrayList<IlluminatiButton> illuminatiButtons ;
 
+    /**
+     * This method
+     * creates the Uncontrolled Panel
+     * @param s Arraylist of card
+     */
     public UncontrolledPanel( ArrayList<Card> s) {
         super();
         update(s);
     }
 
-
+    /**
+     * gets the Hand Buttons
+     * @return HandButtons
+     */
     public ArrayList<GroupButton> getHandButtons(){
         return this.groupButtons;
     }
 
+    /**
+     * sets the hand buttons
+     * @param hb arraylist of groupbuttons
+     */
     public void setHandButtons (ArrayList<GroupButton> hb ) {
         this.groupButtons = hb ;
     }
 
+    /**
+     * updates The buttons in the GUI
+     * @param ss Arraylist of cards
+     */
     public void update(ArrayList<Card> ss){
         this.removeAll();
         this.revalidate();
@@ -109,23 +128,51 @@ public class UncontrolledPanel extends JPanel {
             }
         }
     }
+
+    /**
+     * gets the group buttons
+     * @return group buttons
+     */
     public ArrayList<GroupButton> getGroupButtons() {
         return groupButtons;
     }
+
+    /**
+     * sets the Group buttons
+     * @param groupButtons - arraylist for group buttons
+     */
     public void setMonsterbuttons(ArrayList<GroupButton> groupButtons) {
         this.groupButtons = groupButtons;
     }
+
+    /**
+     * gets the special buttons
+     * @return special buttons
+     */
     public ArrayList<SpecialButton> getSpellbuttons() {
         return specialButtons;
     }
+
+    /**
+     * sets the special buttons
+     * @param specialButtons set in this method
+     */
     public void setSpecialButtons(ArrayList<SpecialButton> specialButtons) {
         this.specialButtons = specialButtons;
     }
 
+    /**
+     * gets Illuminati Buttons
+     * @return illuminati buttons
+     */
     public ArrayList<IlluminatiButton> getIlluminatiButton(){
         return illuminatiButtons;
     }
 
+    /**
+     * sets Illuminati Buttons
+     * @param illuminatiButtons set in the method
+     */
     public void setIlluminatiButton(ArrayList<IlluminatiButton> illuminatiButtons ){
         this.illuminatiButtons = illuminatiButtons ;
     }
