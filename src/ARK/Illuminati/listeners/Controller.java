@@ -123,10 +123,8 @@ public class Controller implements ActionListener, MouseListener {
     private void updateField(){
         Object[] options = {"End Game!","Start New Game"};
         int choice = JOptionPane.showOptionDialog(gui, "GAME Over!,The winner is "+board.getWinner().getName()+"",null, JOptionPane.INFORMATION_MESSAGE, JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
-
         if(choice==0)
             System.exit(0);
-
         else{
             try{
                 GUI.main(null);
@@ -149,7 +147,7 @@ public class Controller implements ActionListener, MouseListener {
             gui.getSp1().remove(gui.getP1hid());
             gui.getSp1().remove(gui.getStructureAreaP1());
             gui.getPanel1().remove(gui.getSp1());
-            gui.setStructureAreaP1(new StructurePanel(gui.getP1()));
+            gui.setStructureAreaP1(new StructurePanel(gui.getP1().getField().cardArea));
             JScrollPane sp1 = new JScrollPane(gui.getStructureAreaP1());
             sp1.setPreferredSize(new Dimension(500, 150));
             sp1.setBorder(null);
@@ -182,7 +180,7 @@ public class Controller implements ActionListener, MouseListener {
             gui.getSp2().remove(gui.getP2hid());
             gui.getSp2().remove(gui.getStructureAreaP2());
             gui.getPanel2().remove(gui.getSp2());
-            gui.setStructureAreaP2(new StructurePanel(gui.getP2()));
+            gui.setStructureAreaP2(new StructurePanel(gui.getP2().getField().cardArea));
             JScrollPane sp2 = new JScrollPane(gui.getStructureAreaP2());
             sp2.setBorder(null);
             sp2.getViewport().setOpaque(false);
@@ -212,12 +210,12 @@ public class Controller implements ActionListener, MouseListener {
         }
 
         gui.getPanel1().remove(gui.getStructureAreaP1());
-        gui.setStructureAreaP1(new StructurePanel(gui.getP1()));
+        gui.setStructureAreaP1(new StructurePanel(gui.getP1().getField().cardArea));
         gui.getPanel1().add(gui.getStructureAreaP1(),BorderLayout.NORTH);
 
 
         gui.getPanel2().remove(gui.getStructureAreaP2());
-        gui.setStructureAreaP2(new StructurePanel(gui.getP2()));
+        gui.setStructureAreaP2(new StructurePanel(gui.getP2().getField().cardArea));
         gui.getPanel2().add(gui.getStructureAreaP2(),BorderLayout.SOUTH);
 
 
@@ -280,7 +278,6 @@ public class Controller implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("Entering");
         if(e.getSource() instanceof GroupButton){
 
             GroupButton b = (GroupButton) e.getSource();

@@ -42,8 +42,8 @@ public class GUI extends JFrame {
     private SpecialPanel specialAreaP2;
     private HiddenHandPanel p1hid;
     private HiddenHandPanel p2hid;
-    private Player p1 ;
-    private Player p2 ;
+    public static Player p1 ;
+    public static Player p2 ;
     private JLabel income1;
     private JLabel income2;
     private ImageIcon imgThisImg ;
@@ -229,9 +229,9 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //groupAreap1 = new GroupsPanel(p1);
-        structureAreaP1 = new StructurePanel(p1);
+        structureAreaP1 = new StructurePanel(p1.getField().cardArea);
         //groupAreap2 = new GroupsPanel(p2);
-        structureAreaP2 = new StructurePanel(p2);
+        structureAreaP2 = new StructurePanel(p1.getField().cardArea);
         //specialAreap1 = new SpecialPanel(p1);
         uncontrolledArea = new UncontrolledPanel( Board.uncontrolled ); ///////////////////mabybe we will have to pass an array list of group cards in here. Makes sense.
         specialAreaP1 = new SpecialPanel(p1);
@@ -240,8 +240,8 @@ public class GUI extends JFrame {
         //I don't know why the previous added another set. Mistake?
         //groupAreap1= new MonstersPanel(p1);
         //groupAreap2 = new MonstersPanel(p2);
-        structureAreaP1 = new StructurePanel(p1);
-        structureAreaP2 = new StructurePanel(p2);
+        //structureAreaP1 = new StructurePanel(p1);
+        //structureAreaP2 = new StructurePanel(p2);
         nextAction = new NextActionButton("Next Action");
         endTurn = new EndTurnButton("End Turn");
         p1name = new JLabel(p1.getName());
