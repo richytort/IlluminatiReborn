@@ -11,26 +11,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class StructurePanel extends JPanel {
-    private ArrayList<IlluminatiButton> illuminatiButtons ;
+    public static ArrayList<IlluminatiButton> illuminatiButtons ;
     private ArrayList<GroupButton> groupButtons;
 
-    public ArrayList<IlluminatiButton> getIlluminatiButtons() {
-        return illuminatiButtons;
-    }
-
-    public void setIlluminatiButtons(ArrayList<IlluminatiButton> illuminatiButtons) {
-        this.illuminatiButtons = illuminatiButtons;
-    }
-
-    public ArrayList<GroupButton> getGroupButtons() {
-        return groupButtons;
-    }
-
-    public void setGroupButtons(ArrayList<GroupButton> groupButtons) {
-        this.groupButtons = groupButtons;
-    }
-
     public StructurePanel(ArrayList<Card> cards ){
+
         super();
         illuminatiButtons = new ArrayList<IlluminatiButton>();
         groupButtons = new ArrayList<GroupButton>();
@@ -86,7 +71,6 @@ public class StructurePanel extends JPanel {
                 this.add(temp);
             }
 
-
         }
 
 
@@ -133,6 +117,22 @@ public class StructurePanel extends JPanel {
 
          *************************************************************/
 
+    }
+
+    public ArrayList<IlluminatiButton> getIlluminatiButtons() {
+        return this.illuminatiButtons;
+    }
+
+    public void setIlluminatiButtons(ArrayList<IlluminatiButton> illuminatiButtons) {
+        this.illuminatiButtons = illuminatiButtons;
+    }
+
+    public ArrayList<GroupButton> getGroupButtons() {
+        return groupButtons;
+    }
+
+    public void setGroupButtons(ArrayList<GroupButton> groupButtons) {
+        this.groupButtons = groupButtons;
     }
 
 

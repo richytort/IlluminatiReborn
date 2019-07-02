@@ -27,6 +27,7 @@ public class GUI extends JFrame {
     private JPanel panel2; // This is for player 2 Structure
     private JPanel uPanel; // this will be for uncontrolled groups
     private JPanel hPanel; //this will be used for the hand.
+
     private JScrollPane hand1SP;
     private JScrollPane hand2SP;
 
@@ -179,7 +180,7 @@ public class GUI extends JFrame {
      * @return structure area
      */
     public StructurePanel getStructureAreaP1(){
-        return structureAreaP1;
+        return this.structureAreaP1;
     }
 
     /**
@@ -421,9 +422,9 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //groupAreap1 = new GroupsPanel(p1);
-        structureAreaP1 = new StructurePanel(p1.getField().cardArea1);
+        this.structureAreaP1 = new StructurePanel(p1.getField().cardArea1);
         //groupAreap2 = new GroupsPanel(p2);
-        structureAreaP2 = new StructurePanel(p2.getField().cardArea2);
+        this.structureAreaP2 = new StructurePanel(p2.getField().cardArea2);
         //specialAreap1 = new SpecialPanel(p1);
         uncontrolledArea = new UncontrolledPanel( Board.uncontrolled ); ///////////////////mabybe we will have to pass an array list of group cards in here. Makes sense.
         specialAreaP1 = new SpecialPanel(p1);
@@ -477,11 +478,11 @@ public class GUI extends JFrame {
         currAction.setFont(new Font("Century Gothic", Font.BOLD, 20));
         currAction.setForeground(Color.BLACK);
 
-
         ////figure out where to implement specials
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
         panel1.add(structureAreaP1,BorderLayout.CENTER);
+      //  panel1.add(specialAreaP1,BorderLayout.NORTH);
         panel1.setOpaque(false);
 
 
