@@ -24,20 +24,36 @@ public class Board {
         return uncontrolled;
     }
 
+    /**
+     * sets the uncontrolled data structure of cards
+     * @param uncontrolled arraylist of cards
+     */
     public static void setUncontrolled(ArrayList<Card> uncontrolled) {
         Board.uncontrolled = uncontrolled;
     }
 
+    /**
+     * Deck for the deck of cards
+     */
     public static Deck deck;
 
+    private int dice2;  //int for dice
+    private int total;  //total of the dice rolls
 
-    private int dice2;
-    private int total;
-
+    /**
+     * Board throws exceptions
+     * @throws IOException - error exception
+     * @throws UnexpectedFormatException- format exception thrown
+     */
     public Board() throws IOException, UnexpectedFormatException {
         Card.setBoard(this);
     }
 
+    /**
+     * Sets who starts the game
+     * @param p1 - player one
+     * @param p2 - second player
+     */
     public void whoStarts(Player p1, Player p2) {
         int FirstP = rollDice();
         int SecondP = rollDice();
@@ -52,6 +68,13 @@ public class Board {
         }
     }
 
+    /**
+     * Starst the game with the players
+     * @param p1 first player in the game
+     * @param p2 second player in the game
+     * @throws IOException error exception thrown
+     * @throws UnexpectedFormatException format exception thrown
+     */
     public void startGame(Player p1, Player p2) throws IOException, UnexpectedFormatException {
         deck = new Deck();
         uncontrolled = new ArrayList<Card>();
@@ -76,6 +99,9 @@ public class Board {
     }
 
 
+    /**
+     * Next player in the game is set
+      **/
     public void nextPlayer(){
         Player temp = activePlayer;
         activePlayer = opponentPlayer;
@@ -99,23 +125,43 @@ public class Board {
         }
         return total;
     }
+
+
+    /**
+     * @return the active player in the game
+     */
     public Player getActivePlayer() {
         return activePlayer;
     }
 
-
+    /**
+     * sets active player in the game
+     * @param activePlayer this is the active player
+     */
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
     }
 
+    /**
+     * Gets the opponent player
+     * @return the opponent player
+     */
     public Player getOpponentPlayer() {
         return opponentPlayer;
     }
 
+    /**
+     * Sets the opponent player
+     * @param opponentPlayer the other player against the player
+     */
     public void setOpponentPlayer(Player opponentPlayer) {
         this.opponentPlayer = opponentPlayer;
     }
 
+    /**
+     * getter for the winner
+     * @return the winner of the game
+     */
     public Player getWinner() {
         return winner;
     }
