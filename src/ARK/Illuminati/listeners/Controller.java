@@ -278,7 +278,7 @@ public class Controller implements ActionListener, MouseListener {
 
     @Override
     /**
-     * This method
+     * This method sets up mouse actions to the GUI buttons for actions.
      */
     public void mouseEntered(MouseEvent e) {
         if(e.getSource() instanceof GroupButton){
@@ -360,6 +360,9 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     @Override
+    /**
+     * This method deals with actions taken by players and calls methods within the game per player turn.
+     */
     public void actionPerformed(ActionEvent click) {
         if(click.getSource() instanceof NextActionButton){
             System.out.println("Here");
