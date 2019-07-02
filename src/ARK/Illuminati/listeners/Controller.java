@@ -25,6 +25,9 @@ import java.util.ArrayList;
 
 import static java.awt.Image.SCALE_SMOOTH;
 
+/**
+ * This class implements the controller for actions and mouse response for user selections.
+ */
 public class Controller implements ActionListener, MouseListener {
 
     private JButton fc;
@@ -34,6 +37,11 @@ public class Controller implements ActionListener, MouseListener {
     private GUI gui ;
     private int summonset ;
 
+    /**
+     * Controller method set up.
+     * @param board the board of the game
+     * @param gui GUI used to create game
+     */
     public Controller(Board board, GUI gui){
         this.board = board ;
         this.gui = gui ;
@@ -42,6 +50,9 @@ public class Controller implements ActionListener, MouseListener {
         gui.getNextAction().addActionListener(this);
     }
 
+    /**
+     * This method sets up Buttons to call actions when selected by the user.
+     */
     public void addActionListeners(){
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroupButtons();
@@ -140,6 +151,9 @@ public class Controller implements ActionListener, MouseListener {
 
     }
 
+    /**
+     * This method updates the field when a new game is started.
+     */
     private void updateField(){
         if(board.isGameOver()) {
             Object[] options = {"End Game!", "Start New Game"};
@@ -263,6 +277,9 @@ public class Controller implements ActionListener, MouseListener {
 
 
     @Override
+    /**
+     * This method
+     */
     public void mouseEntered(MouseEvent e) {
         if(e.getSource() instanceof GroupButton){
 
