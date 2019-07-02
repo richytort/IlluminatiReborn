@@ -157,9 +157,17 @@ System.out.println("HELLO");
         ///////Seems that this area may need to have some work done.
 
         gui.getPanel1().removeAll();
-
-
         gui.getPanel2().removeAll();
+        gui.setHandAreaP1(new HandPanel( gui.getP1() ) );
+        JScrollPane sp1 = new JScrollPane(gui.getHandAreaP1());
+        sp1.setBorder(null);
+        sp1.getViewport().setOpaque(false);
+        sp1.setPreferredSize(new Dimension(200, 150));
+        sp1.setOpaque(false);
+        sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        gui.setHand1SP( sp1 );
+        gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
 
 
 
