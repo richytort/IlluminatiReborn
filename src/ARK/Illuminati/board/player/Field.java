@@ -14,11 +14,14 @@ import ARK.Illuminati.exceptions.UnexpectedFormatException;
 import ARK.Illuminati.exceptions.WrongActionException;
 import ARK.Illuminati.gui.GroupButton;
 
+import static ARK.Illuminati.board.player.Phase.*;
+import static ARK.Illuminati.cards.Location.STRUCTURE;
+
 public class Field {
     private ArrayList<Card> hand;
     public static ArrayList<Card> cardArea;
     private ArrayList<SpecialCard> specialArea;
-    private Phase phase = Phase.ACTION1;
+    private Phase phase = MAIN;
     private ArrayList<Card> uncontrolledGroups;
     private ArrayList<Card> graveYard;
    // private Board board;
@@ -51,6 +54,21 @@ public class Field {
         group.setLocation(Location.FIELD);
         cardArea.add(group);
         return true;
+    }
+
+    public boolean addIlluminatiToField(IlluminatiCard illuminati  ){
+        if(!(hand.contains(illuminati) && illuminati.getLocation() == Location.HAND))
+            return false ;
+
+        if( phase == ACTION1 || phase == ACTION2)
+            throw new WrongActionException();
+
+        hand.remove(illuminati);
+        //illuminati.setHidden(isHidden); //MAYBE FIX LATER WHEN TIME IS GOOD
+        illuminati.setLocation(STRUCTURE) ;
+        cardArea.add(illuminati);
+        return true;
+
     }
 
     public void removeGroupToGraveyard(GroupCard target) {
@@ -346,10 +364,10 @@ public class Field {
     public void endPhase(){
         switch (phase){
             case MAIN:
-                setPhase(Phase.ACTION1);
+                setPhase(ACTION1);
                 break;
             case ACTION1:
-                setPhase(Phase.ACTION2);
+                setPhase(ACTION2);
                 break;
             case ACTION2:
                 endTurn();
@@ -360,7 +378,7 @@ public class Field {
      * Ends the turn of the player
      */
     public void endTurn(){
-        phase = Phase.MAIN;
+        phase = MAIN;
         for(Card m: cardArea){
             m.setAttacked(false);
             m.setSwitchedMode(false);

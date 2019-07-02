@@ -43,6 +43,25 @@ public class Player implements Contender {
 
         return groupAdded;
     }
+
+    public boolean setIlluminati(IlluminatiCard illuminati){
+
+        if (Card.getBoard().isGameOver())
+            return false;
+
+        if(this != Card.getBoard().getActivePlayer())
+            return false;
+
+        boolean illuminatiAdded = this.field.addIlluminatiToField( illuminati);
+
+        if( !illuminatiAdded)
+            return false;
+
+        addedGroupThisTurn = true ;
+
+        return true;
+    }
+
     public boolean setGroupDown(Card group) {
         if (Card.getBoard().isGameOver())
             return false;
