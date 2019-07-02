@@ -269,57 +269,63 @@ public class Field {
     /**
      * Adds a card from the deck to the players hand
      */
-    public void addCardToHand() {
-        /*
-        if (deck.getDeck().size() == 0) {
-            if (this == Card.getBoard().getActivePlayer().getField())
-                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
-            else
-                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
-
-            return;
-        }
-
-         */
-        Card temp = Board.deck.drawOneCard(); //temp card object pulled from deck
-       hand.add(temp);
-       temp.setLocation(Location.HAND);
-    }
+//    public void addCardToHand() {
+//        /*
+//        if (deck.getDeck().size() == 0) {
+//            if (this == Card.getBoard().getActivePlayer().getField())
+//                Card.getBoard().setWinner(Card.getBoard().getOpponentPlayer());
+//            else
+//                Card.getBoard().setWinner(Card.getBoard().getActivePlayer());
+//
+//            return;
+//        }
+//
+//         */
+//        Card temp = Board.deck.drawOneCardB(2);
+//        if(temp.getType().equalsIgnoreCase("other group")){
+//            Board.uncontrolled.add(temp);
+//            temp.setLocation(Location.UNCONTROLLED);
+//        }else {
+//            hand.add(temp);
+//            temp.setLocation(Location.HAND);
+//        }
+//    }
 
     /**
      * This method adds cards to the players hand
-     * @param n: the number of cards added to players hand
+     * @param : the number of cards added to players hand
      */
-    public void addNCardsToHand(int n) {
-        for (int i = 0; i < n; i++) {
-            Card temp =Board.deck.drawOneCard();
+    public void addNCardsToHand( ){
+            Card temp = Board.deck.getDeck().get(0);
+            //Card temp = Board.deck.drawOneCardB(2);
             hand.add(temp);
+            Board.deck.getDeck().remove(temp);
             temp.setLocation(Location.HAND);
-
-        }
-
     }
 
-
-    /**
-     * This method adds an Illuminati Card to the players hand
-     */
-    public void addIlluminatiCard() {
-        hand.add(Board.deck.drawOneCard());
-       }
-
-
-
-
-   public void printHand(){
-       for(Card e: hand){
-           System.out.println(e+ " ");
-        }
-    }
     public void addUncontrolled(){
-        Card temp = Board.deck.drawOneCardB();
-        Board.uncontrolled.add(temp);
-        temp.setLocation(Location.UNCONTROLLED);
+        Card temp = Board.deck.getDeck().get(0);
+        if(temp.getType().equalsIgnoreCase("other group")){
+            Board.uncontrolled.add(temp);
+            Board.deck.getDeck().remove(temp);
+            temp.setLocation(Location.UNCONTROLLED);
+        }else if(temp.getType().equalsIgnoreCase("special card")){
+            Board.deck.shuffle();
+            addUncontrolled();
+        }
+
+    }
+    public void addOthers(){
+        Card temp = Board.deck.getDeck().get(0);
+        if (temp.getType().equalsIgnoreCase("other group")) {
+            Board.uncontrolled.add(temp);
+            Board.deck.getDeck().remove(temp);
+            temp.setLocation(Location.UNCONTROLLED);
+        } else if (temp.getType().equalsIgnoreCase("special card")) {
+            hand.add(temp);
+            Board.deck.getDeck().remove(temp);
+            temp.setLocation(Location.HAND);
+        }
     }
 
 

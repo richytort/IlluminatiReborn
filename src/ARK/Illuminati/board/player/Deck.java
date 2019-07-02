@@ -342,29 +342,7 @@ public class Deck {
       }
    }
 
-    public void shuffle(){
-
-       Collections.shuffle(deck);
-    }
-
-    public Card drawOneCard(){
-       return Board.deck.getDeck().remove(0);
-    }
-
-    public Card drawOneCardB() {
-        Card c = Board.deck.getDeck().get(0);
-        if(Board.deck.getDeck().get(0).getType().equalsIgnoreCase("other group")){
-           c = Board.deck.getDeck().remove(0);
-        }
-        else if (Board.deck.getDeck().get(0).getType().equalsIgnoreCase( "special Card")) {
-            shuffle();
-             c = Board.deck.getDeck().get(1);
-             if(Board.deck.getDeck().get(1).getType().equalsIgnoreCase("Special Card")){
-                 c = Board.deck.getDeck().get(2);
-             }
-        }return c;
-    }
-
+    public void shuffle(){ Collections.shuffle(deck); }
 
     public  ArrayList<Card> getDeck(){ return deck; }
 

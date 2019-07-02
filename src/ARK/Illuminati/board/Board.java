@@ -53,34 +53,23 @@ public class Board {
     public void startGame(Player p1, Player p2) throws IOException, UnexpectedFormatException {
         deck = new Deck();
         uncontrolled = new ArrayList<Card>();
-        p1.getField().addNCardsToHand(1);
-         p2.getField().addNCardsToHand(1);
-         for (int e = deck.size() - 1; e >= 0; e--) {
+        //illuminati
+        p1.getField().addNCardsToHand();
+        p2.getField().addNCardsToHand();
+        for (int e = deck.size() - 1; e >= 0; e--) {
             if (Board.deck.getDeck().get(e).getType().equalsIgnoreCase("Illuminati")) {
                 Board.deck.getDeck().remove(e);
             }
         }
-      //  Board.deck.shuffle();
-          for (int i = 0; i < 85; i++) {
-                   p1.getField().addUncontrolled();
-              //}
-              //    System.out.println(deck.size()-1);
-         //     Card t = Board.deck.drawOneCard();
-//              if (uncontrolled.contains(t)) {
-//                  t = Board.deck.drawOneCard();
-//              } else {
-           //       uncontrolled.add(t);
-             //     Board.deck.getDeck().get(i).setLocation(Location.UNCONTROLLED);
-              //    System.out.println(deck.size() - 1);
-//              }
-                  whoStarts(p1, p2);
-//     //   Card c = Board.deck.drawOneCard();
-                //  activePlayer.getField().addCard();
-           //       System.out.println(deck.size() - 1);
-//
-
-              }
-          }
+        Board.deck.shuffle();
+        //uncontrolled
+        for (int i = 0; i < 4; i++) {
+            p1.getField().addUncontrolled();
+        }
+        whoStarts(p1, p2);
+        //during game
+        activePlayer.getField().addOthers();
+    }
 
 
     public void nextPlayer(){
@@ -88,7 +77,7 @@ public class Board {
         activePlayer = opponentPlayer;
         opponentPlayer = temp;
         activePlayer.getIncome();
-        activePlayer.getField().addNCardsToHand(1);
+        activePlayer.getField().addOthers();
    }
 
     public boolean isGameOver(){
