@@ -44,8 +44,10 @@ public class Controller implements ActionListener, MouseListener {
 
     public void addActionListeners(){
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
-        ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroups();
-        ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroups();
+        ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroupButtons();
+        ArrayList<IlluminatiButton> structureP1Illuminati = this.gui.getStructureAreaP1().getIlluminatiButtons();
+        ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroupButtons();
+        ArrayList<IlluminatiButton> structureP2Illuminati = this.gui.getStructureAreaP1().getIlluminatiButtons();
         ArrayList<GroupButton> handP1 = this.gui.getHandAreaP1().getGroupButtons();
         ArrayList<GroupButton> handP2 = this.gui.getHandAreaP2().getGroupButtons();
         ArrayList<GroupButton> uncontrolledGroup = this.gui.getUncontrolledArea().getGroupButtons();
@@ -67,9 +69,21 @@ public class Controller implements ActionListener, MouseListener {
             structureP1.get(i).addMouseListener(this);
         }
 
+        for(int i = 0 ; i < structureP1Illuminati.size();i++){
+            structureP1Illuminati.get(i).addActionListener(this);
+            structureP1Illuminati.get(i).addMouseListener(this);
+        }
+
+
+
         for(int i = 0 ; i < structureP2.size(); i++){
             structureP2.get(i).addActionListener(this);
             structureP2.get(i).addMouseListener(this);
+        }
+
+        for(int i = 0 ; i < structureP2Illuminati.size(); i++){
+            structureP2Illuminati.get(i).addActionListener(this);
+            structureP2Illuminati.get(i).addMouseListener(this);
         }
 
         for(int i = 0 ; i < specialsP1.size(); i++){
