@@ -27,6 +27,17 @@ public class GroupCard extends Card {
     private int targetIncome;
     private String alignment;
 
+    /**
+     * Initializes values for the Groupcard constructor
+     * @param name of group card
+     * @param type of group card
+     * @param ability of group card
+     * @param alignment of group card
+     * @param power of group card
+     * @param tpower of group card
+     * @param resistance of group card
+     * @param income of group card
+     */
     public GroupCard(String name, String type, String ability,String alignment, int power, int tpower, int resistance, int income){
         super(name,type);
         this.ability = ability;
@@ -39,7 +50,10 @@ public class GroupCard extends Card {
         this.switchedMode = false;
     }
 
-
+    /**
+     * Attack to control action
+     * @param target target group attacked to control
+     */
     public void attackToControl(GroupCard target){
         Player activePl = getBoard().getActivePlayer();
         Player opponentPl = getBoard().getOpponentPlayer();
@@ -73,6 +87,10 @@ public class GroupCard extends Card {
        }
     }
 
+    /**
+     * Attack to neutralize action
+     * @param target the target group to attack
+     */
     public void attackToNeutralize(GroupCard target) {
         Player active = getBoard().getActivePlayer();
         Player opponent = getBoard().getOpponentPlayer();
@@ -98,6 +116,10 @@ public class GroupCard extends Card {
         }
     }
 
+    /**
+     * attack to destroy action
+     * @param target the target group to attack
+     */
     public void attacktoDestroy(GroupCard target){
         Player active = getBoard().getActivePlayer();
         Player opponent = getBoard().getOpponentPlayer();
@@ -122,6 +144,12 @@ public class GroupCard extends Card {
 
     }
 
+    /**
+     * transfer money to a group
+     * @param groupTransfer groupcard to transfer
+     * @param incomeTransfer income amount
+     * @return the amount transferred
+     */
     public int transferMoney(GroupCard groupTransfer, int incomeTransfer){
         setIncome(this.getIncome()-incomeTransfer);
         groupTransfer.setIncome(groupTransfer.getIncome()+ incomeTransfer);
@@ -129,34 +157,89 @@ public class GroupCard extends Card {
 
     }
 
-
+    /**
+     * getter for ability
+     * @return ability
+     */
     public String getAbility() { return ability; }
 
+    /**
+     * getter for alignment
+     * @return alignment
+     */
     public String getAlignment(){ return alignment; }
 
+    /**
+     * setter for ability
+     * @param ability string ability
+     */
     public void setAbility(String ability) { this.ability = ability; }
 
+    /**
+     * getter for power of card
+     * @return the power
+     */
     public int getPower() { return power; }
 
+    /**
+     * getter for resistance
+     * @return the resistance of card
+     */
    public int getResistance(){ return resistance; }
 
+    /**
+     * setter for income amount of group card
+     * @param income of the group
+     */
     public void setIncome(int income) { this.income = income; }
 
+    /**
+     * gets the power of the group
+     * @return power
+     */
     public int gettPower() { return tpower; }
 
+    /**
+     *gets the income of the group
+     * @return income
+     */
     public int getIncome(){ return income;}
 
+    /**
+     * sets hidden group
+     * @param hidden boolean value for hidden
+     */
     public void setHidden(boolean hidden){ super.setHidden(hidden); }
 
   //  public void setMode(Mode mode){ this.mode = mode; }
 
+    /**
+     * gets the mode of the group
+     * @return mode
+     */
     public Mode getMode(){ return mode; }
 
+    /**
+     * sets attacked group
+     * @param attacked boolean value true or false
+     */
     public void setAttacked(boolean attacked){this.attacked = attacked;}
 
+    /**
+     * validates group is attacked
+     * @return attacked group
+     */
     public boolean isAttacked(){ return attacked; }
 
+    /**
+     * valiates switched mode
+     * @return switchedMode
+     */
     public boolean isSwitchedMode(){ return switchedMode;}
 
+    /**
+     *getter for the Switched Mode
+     * @param switchedMode - boolean value for switched mode
+     */
     public void setSwitchedMode(boolean switchedMode){ this.switchedMode = switchedMode; }
 }

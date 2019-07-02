@@ -1,8 +1,14 @@
 package ARK.Illuminati.exceptions;
 
 @SuppressWarnings("serial")
+/**
+ * No group space exception
+ */
 public class NoGroupSpaceException extends NoSpaceException {
 
+    /**
+     * No group space exception
+     */
     public NoGroupSpaceException() {
     }
 
