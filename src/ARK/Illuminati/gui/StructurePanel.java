@@ -10,10 +10,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class deals with the structure panel for the GUI
+ */
 public class StructurePanel extends JPanel {
     public static ArrayList<IlluminatiButton> illuminatiButtons ;
     private ArrayList<GroupButton> groupButtons;
 
+    /**
+     * Creates the structure Panel
+     * @param cards Arraylist of cards
+     */
     public StructurePanel(ArrayList<Card> cards ){
 
         super();
@@ -119,18 +126,34 @@ public class StructurePanel extends JPanel {
 
     }
 
+    /**
+     * gets the Illuminati Buttons
+     * @return Illuminati Buttons
+     */
     public ArrayList<IlluminatiButton> getIlluminatiButtons() {
         return this.illuminatiButtons;
     }
 
+    /**
+     * setter for Illuminati Buttons
+     * @param illuminatiButtons
+     */
     public void setIlluminatiButtons(ArrayList<IlluminatiButton> illuminatiButtons) {
         this.illuminatiButtons = illuminatiButtons;
     }
 
+    /**
+     * getter for Group Buttons
+     * @return groupButtons
+     */
     public ArrayList<GroupButton> getGroupButtons() {
         return groupButtons;
     }
 
+    /**
+     * setter for Group Buttons
+     * @param groupButtons
+     */
     public void setGroupButtons(ArrayList<GroupButton> groupButtons) {
         this.groupButtons = groupButtons;
     }
