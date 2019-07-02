@@ -16,7 +16,7 @@ import ARK.Illuminati.gui.GroupButton;
 
 public class Field {
     private ArrayList<Card> hand;
-    private ArrayList<Card> cardArea;
+    public static ArrayList<Card> cardArea;
     private ArrayList<SpecialCard> specialArea;
     private Phase phase = Phase.ACTION1;
     private ArrayList<Card> uncontrolledGroups;

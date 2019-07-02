@@ -1,6 +1,7 @@
 package ARK.Illuminati.gui;
 
 import ARK.Illuminati.board.player.Player;
+import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.Mode;
 
 import javax.swing.*;
@@ -9,9 +10,8 @@ import java.util.ArrayList;
 
 public class StructurePanel extends JPanel {
     private ArrayList<GroupButton> groups ;
-    public StructurePanel(Player p ){
+    public StructurePanel(ArrayList<Card> cards ){
         super();
-        //////SETS DIMENSIONS OF STRUCTURE PANEL
         setPreferredSize( new Dimension(500 , 100));
         groups = new ArrayList<GroupButton>();
         //////test this, might set the grid format!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!        Play with it
