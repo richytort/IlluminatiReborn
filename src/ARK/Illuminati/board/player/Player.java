@@ -208,7 +208,7 @@ public class Player implements Contender {
     }
     public void printHand(){
         for(Card e: hand){
-            System.out.println(e.getType()+e.getName()+ " ");
+            System.out.println(e+ " ");
         }
     }
     //fixed later
@@ -244,9 +244,9 @@ public class Player implements Contender {
 
     }
 
-    public void addCardToHand(){
-        this.field.addCardToHand();
-    }
+//    public void addCardToHand(){
+//        this.field.addCardToHand();
+//    }
 
 //    public void addNCardsToHand(int n){
 //        this.field.addNCardsToHand(n);

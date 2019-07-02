@@ -16,6 +16,7 @@ public class Board {
     private Player activePlayer;
     private Player opponentPlayer;
     private Player winner;
+    private Field field;
     private int dice1;
     public static ArrayList<Card> uncontrolled;
 
@@ -30,55 +31,56 @@ public class Board {
     public static Deck deck;
 
 
-
     private int dice2;
     private int total;
 
-    public Board() throws IOException, UnexpectedFormatException{
+    public Board() throws IOException, UnexpectedFormatException {
         Card.setBoard(this);
     }
-    public void whoStarts(Player p1, Player p2){
-        int FirstP =rollDice();
+
+    public void whoStarts(Player p1, Player p2) {
+        int FirstP = rollDice();
         int SecondP = rollDice();
-        if(FirstP > SecondP){
+        if (FirstP > SecondP) {
             activePlayer = p1;
-            opponentPlayer= p2;
-        }else{
+            opponentPlayer = p2;
+        } else {
             activePlayer = p2;
             opponentPlayer = p1;
         }
     }
-    public void startGame(Player p1 , Player p2 ) throws IOException, UnexpectedFormatException{
+
+    public void startGame(Player p1, Player p2) throws IOException, UnexpectedFormatException {
         deck = new Deck();
         uncontrolled = new ArrayList<Card>();
         p1.getField().addNCardsToHand(1);
-        p2.getField().addNCardsToHand(1);
-        for(int e = deck.size()-1;e>=0;e--){
+         p2.getField().addNCardsToHand(1);
+         for (int e = deck.size() - 1; e >= 0; e--) {
             if (Board.deck.getDeck().get(e).getType().equalsIgnoreCase("Illuminati")) {
                 Board.deck.getDeck().remove(e);
             }
-        }   Board.deck.shuffle();
-        for(int i = 0; i <4;i++){
-         uncontrolled.add(Board.deck.drawOneCardB());
-         Board.deck.getDeck().get(i).setLocation(Location.UNCONTROLLED);
-         Board.deck.getDeck().remove(i);
-        }whoStarts(p1,p2);
-        activePlayer.addCardToHand();
+        }
+      //  Board.deck.shuffle();
+          for (int i = 0; i < 85; i++) {
+                   p1.getField().addUncontrolled();
+              //}
+              //    System.out.println(deck.size()-1);
+        //      Card t = Board.deck.drawOneCard();
+//              if (uncontrolled.contains(t)) {
+//                  t = Board.deck.drawOneCard();
+//              } else {
+          //        uncontrolled.add(t);
+            //      Board.deck.getDeck().get(i).setLocation(Location.UNCONTROLLED);
+              //    System.out.println(deck.size() - 1);
+//              }
+                  whoStarts(p1, p2);
+//     //   Card c = Board.deck.drawOneCard();
+                //  activePlayer.getField().addCard();
+           //       System.out.println(deck.size() - 1);
 //
-//        Card k = deck.drawOneCard();
-//        if(activePlayer.getHand().contains(k) || uncontrolled.contains(k)){
-//            Board.deck.getDeck().remove(k);
-//            k = deck.drawOneCard();
-//        }
-//        else{
-//            if(k.getType().equalsIgnoreCase("special card")){
-//                activePlayer.addCard(k);
-//            }
-//            else {
-//                uncontrolled.add(k);
-//            }
-//       }Board.deck.getDeck().remove(k);
-    }
+
+              }
+          }
 
 
     public void nextPlayer(){
@@ -86,14 +88,8 @@ public class Board {
         activePlayer = opponentPlayer;
         opponentPlayer = temp;
         activePlayer.getIncome();
-        Card c = deck.drawOneCard();
-//        if(c.getType().equalsIgnoreCase("special card")){
-//            activePlayer.addCard(c);
-//        }
-//        else{
-//            uncontrolled.add(c);
-//        }Board.deck.getDeck().remove(c);
-    }
+        activePlayer.getField().addNCardsToHand(1);
+   }
 
     public boolean isGameOver(){
         if(winner != null){

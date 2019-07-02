@@ -1,5 +1,6 @@
 package ARK.Illuminati.board.player;
 
+import ARK.Illuminati.board.Board;
 import ARK.Illuminati.cards.Card;
 import ARK.Illuminati.cards.IlluminatiCard;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
@@ -347,28 +348,23 @@ public class Deck {
     }
 
     public Card drawOneCard(){
-
-       return deck.remove(0);
+       return Board.deck.getDeck().remove(0);
     }
 
     public Card drawOneCardB() {
-        Card c = deck.get(0);
-        if(deck.get(0).getType().equalsIgnoreCase("other group")){
-           c = deck.remove(0);
+        Card c = Board.deck.getDeck().get(0);
+        if(Board.deck.getDeck().get(0).getType().equalsIgnoreCase("other group")){
+           c = Board.deck.getDeck().remove(0);
         }
-        else if (deck.get(0).getType().equalsIgnoreCase( "special Card")) {
+        else if (Board.deck.getDeck().get(0).getType().equalsIgnoreCase( "special Card")) {
             shuffle();
-             c = deck.get(1);
-             if(deck.get(1).getType().equalsIgnoreCase("Special Card")){
-                 c = deck.get(2);
+             c = Board.deck.getDeck().get(1);
+             if(Board.deck.getDeck().get(1).getType().equalsIgnoreCase("Special Card")){
+                 c = Board.deck.getDeck().get(2);
              }
         }return c;
     }
 
-//    public Card drawIlluminatiCard(){
-//        Card c = deck.remove(0);
-//        return c;
-//    }
 
     public  ArrayList<Card> getDeck(){ return deck; }
 
