@@ -121,12 +121,24 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     private void updateField(){
-        Object[] options = {"End Game!","Start New Game"};
-        int choice = JOptionPane.showOptionDialog(gui, "GAME Over!,The winner is "+board.getWinner().getName()+"",null, JOptionPane.INFORMATION_MESSAGE, JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
-        if(choice==0)
-            System.exit(0);
-        else{
-            try{
+        if(board.isGameOver()) {
+            Object[] options = {"End Game!", "Start New Game"};
+            int choice = JOptionPane.showOptionDialog(gui, "GAME Over!,The winner is " + board.getWinner().getName() + "", null, JOptionPane.INFORMATION_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (choice == 0)
+                System.exit(0);
+            else {
+                try {
+                    GUI.main(null);
+                    gui.setVisible(false);
+                    gui.audioClip.close();
+                } catch (IOException | UnexpectedFormatException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+
+            try {
                 GUI.main(null);
                 gui.setVisible(false);
                 gui.audioClip.close();
@@ -134,101 +146,23 @@ public class Controller implements ActionListener, MouseListener {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+
         }
 
-
-       // gui.getDeck().setText("" + gui.getP1().getField().getDeck().getDeck().size());
+       gui.getDeck().setText("" + Board.deck.size() );
         //gui.setText("Income: "+gui.getP1().getTotalIncome());
         //gui.setText("Income: "+gui.getP2().getTotalIncome());
         gui.getCurrAction().setText(Card.getBoard().getActivePlayer().getField().getPhase().name());
-
+System.out.println("HELLO");
         ///////Seems that this area may need to have some work done.
-        if (gui.getP1() == board.getActivePlayer() ) {
-            gui.getSp1().remove(gui.getP1hid());
-            gui.getSp1().remove(gui.getStructureAreaP1());
-            gui.getPanel1().remove(gui.getSp1());
-            gui.setStructureAreaP1(new StructurePanel(gui.getP1().getField().cardArea));
-            JScrollPane sp1 = new JScrollPane(gui.getStructureAreaP1());
-            sp1.setPreferredSize(new Dimension(500, 150));
-            sp1.setBorder(null);
-            sp1.getViewport().setOpaque(false);
-            sp1.setOpaque(false);
-            sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            gui.setSp1(sp1);
-            gui.getPanel1().add(gui.getSp1(),BorderLayout.SOUTH);
-            gui.revalidate();
-        }
-        else{
-            gui.getSp1().remove(gui.getP1hid());
-            gui.getSp1().remove(gui.getStructureAreaP1());
-            gui.getPanel1().remove(gui.getSp1());
-            gui.setP1hid(new HiddenHandPanel(gui.getP1()));
-            JScrollPane sp1 = new JScrollPane(gui.getP1hid());
-            sp1.setBorder(null);
-            sp1.getViewport().setOpaque(false);
-            sp1.setPreferredSize(new Dimension(500,150));
-            sp1.setOpaque(false);
-            sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            gui.setSp1(sp1);
-            gui.getPanel1().add(gui.getSp1(),BorderLayout.SOUTH);
-            gui.revalidate();
-        }
 
-        if(gui.getP2()==board.getActivePlayer()){
-            gui.getSp2().remove(gui.getP2hid());
-            gui.getSp2().remove(gui.getStructureAreaP2());
-            gui.getPanel2().remove(gui.getSp2());
-            gui.setStructureAreaP2(new StructurePanel(gui.getP2().getField().cardArea));
-            JScrollPane sp2 = new JScrollPane(gui.getStructureAreaP2());
-            sp2.setBorder(null);
-            sp2.getViewport().setOpaque(false);
-            sp2.setPreferredSize(new Dimension(500,150));
-            sp2.setOpaque(false);
-            sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            gui.setSp2(sp2);
-            gui.getPanel2().add(gui.getSp2(),BorderLayout.NORTH);
-            gui.revalidate();
-        }
-        else{
-            gui.getSp2().remove(gui.getP2hid());
-            gui.getSp2().remove(gui.getStructureAreaP2());
-            gui.getPanel2().remove(gui.getSp2());
-            gui.setP2hid(new HiddenHandPanel(gui.getP2()));
-            JScrollPane sp2 = new JScrollPane(gui.getP2hid());
-            sp2.setBorder(null);
-            sp2.getViewport().setOpaque(false);
-            sp2.setPreferredSize(new Dimension(500,150));
-            sp2.setOpaque(false);
-            sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            gui.setSp2(sp2);
-            gui.getPanel2().add(gui.getSp2(),BorderLayout.NORTH);
-            gui.revalidate();
-        }
-
-        gui.getPanel1().remove(gui.getStructureAreaP1());
-        gui.setStructureAreaP1(new StructurePanel(gui.getP1().getField().cardArea));
-        gui.getPanel1().add(gui.getStructureAreaP1(),BorderLayout.NORTH);
+        gui.getPanel1().removeAll();
 
 
-        gui.getPanel2().remove(gui.getStructureAreaP2());
-        gui.setStructureAreaP2(new StructurePanel(gui.getP2().getField().cardArea));
-        gui.getPanel2().add(gui.getStructureAreaP2(),BorderLayout.SOUTH);
+        gui.getPanel2().removeAll();
 
 
 
-        gui.getPanel1().remove(gui.getSpecialAreaP1());
-        gui.setSpecialAreaP1(new SpecialPanel(gui.getP1()));
-        gui.getPanel1().add(gui.getSpecialAreaP1(),BorderLayout.CENTER);
-
-
-
-        gui.getPanel2().remove(gui.getSpecialAreaP2());
-        gui.setSpecialAreaP2(new SpecialPanel(gui.getP2()));
-        gui.getPanel2().add(gui.getSpecialAreaP2(),BorderLayout.CENTER);
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
 
@@ -592,14 +526,14 @@ public class Controller implements ActionListener, MouseListener {
                             illuminati = ((IlluminatiButton) fc).getIlluminati();
                             //fc = button;
                             ///////////THIS MAY NEED TO BE CHANGED. BETTER YET, will be changed.
-                            Object[] options = {"Set", "Cancel"};
+                            Object[] options = {"Summon", "Set", "Cancel"};
                             summonset = JOptionPane.showOptionDialog(gui, "What is your action?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                             if (summonset == 1) {
                                 fc = null;
                                 return;
                             }
                             if (summonset == 0) {
-                                Card.getBoard().getActivePlayer().setGroup(illuminati);
+                                Card.getBoard().getActivePlayer().setIlluminati(illuminati);
                                 fc = null;
                                 updateField();
                                 return;

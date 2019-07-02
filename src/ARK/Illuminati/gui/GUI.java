@@ -25,6 +25,25 @@ public class GUI extends JFrame {
     private JPanel panel2; // This is for player 2 Structure
     private JPanel uPanel; // this will be for uncontrolled groups
     private JPanel hPanel; //this will be used for the hand.
+    private JScrollPane hand1SP;
+    private JScrollPane hand2SP;
+
+    public JScrollPane getHand1SP() {
+        return hand1SP;
+    }
+
+    public void setHand1SP(JScrollPane hand1SP) {
+        this.hand1SP = hand1SP;
+    }
+
+    public JScrollPane getHand2SP() {
+        return hand2SP;
+    }
+
+    public void setHand2SP(JScrollPane hand2SP) {
+        this.hand2SP = hand2SP;
+    }
+
     public JLabel deck ;
     public JButton grave ;
     private NextActionButton nextAction ;
@@ -293,7 +312,7 @@ public class GUI extends JFrame {
         panel1.setOpaque(false);
 
 
-        JScrollPane hand1SP = new JScrollPane(handAreaP1);
+        hand1SP = new JScrollPane(handAreaP1);
         hand1SP.setBorder(null);
         hand1SP.getViewport().setOpaque(false);
         hand1SP.setPreferredSize(new Dimension(200, 150));
