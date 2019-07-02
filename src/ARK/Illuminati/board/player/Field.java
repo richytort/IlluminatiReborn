@@ -14,6 +14,9 @@ import ARK.Illuminati.gui.GroupButton;
 import static ARK.Illuminati.board.player.Phase.*;
 import static ARK.Illuminati.cards.Location.STRUCTURE;
 
+/**
+ * Field class for the field of the game. Setters and Getters for the board of Illuminati.
+ */
 public class Field {
     private ArrayList<Card> hand;
     public static ArrayList<Card> cardArea;
@@ -25,6 +28,11 @@ public class Field {
     Player p1;
     Player p2;
 
+    /**
+     * Initializes arraylsits for the field
+     * @throws IOException - IO errors cause this exception to be thrown
+     * @throws UnexpectedFormatException - format issues result in this exception thrown
+     */
     public Field() throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         cardArea = new ArrayList<>();
@@ -35,6 +43,14 @@ public class Field {
     }
 
     //do we need one for Illuminati
+
+    /**
+     * Adds a group to the field (board)
+     * @param group - group to be added
+     * @param m - mode of the group
+     * @param isHidden - boolean true or false for hidden
+     * @return boolean value when group added to field
+     */
     public boolean addGroupToField(Card group, Mode m, boolean isHidden) {
         if (!(hand.contains(group) && group.getLocation() == Location.HAND))
             return false;
@@ -53,6 +69,11 @@ public class Field {
         return true;
     }
 
+    /**
+     * Adds Illuminati cards to field
+     * @param illuminati - illuminati card added to the field
+     * @return boolean value for Illuminati card on field
+     */
     public boolean addIlluminatiToField(IlluminatiCard illuminati  ){
         if(!(hand.contains(illuminati) && illuminati.getLocation() == Location.HAND))
             return false ;
@@ -68,6 +89,10 @@ public class Field {
 
     }
 
+    /**
+     * Removes group to the "terminated" graveyard pile
+     * @param target the target groupcard to be removed
+     */
     public void removeGroupToGraveyard(GroupCard target) {
         if (cardArea.contains(target)) {
             cardArea.remove(target);
@@ -76,7 +101,10 @@ public class Field {
         }
     }
 
-
+    /**]
+     * Removes group to uncontrolled
+     * @param group to be removed
+     */
     public void removeGroupToUncontrolled(GroupCard group) {
         if (cardArea.contains(group)) {
             cardArea.remove(group);
@@ -85,7 +113,10 @@ public class Field {
         }
     }
 
-
+    /**
+     * Removes groups to hand
+     * @param target the group to be removed
+     */
     public void removeGroupToHand(GroupCard target) {
         if (p1.getHand().contains(target)) {
             p1.getHand().remove(target);
@@ -93,7 +124,13 @@ public class Field {
         }
     }
 
-
+    /**
+     * Adds special cards to the game board
+     * @param special special card to be added
+     * @param group group card to be added
+     * @param hidden boolean value for hidden (T or F)
+     * @return boolean value for special card to field
+     */
     //what do we really need them for
     public boolean addSpecialToField(SpecialCard special, GroupCard group, boolean hidden) {
         if (!hand.contains(special))
@@ -111,6 +148,12 @@ public class Field {
         return true;
     }
 
+    /**
+     * Boolean for if special card is activated
+     * @param special special card to be active
+     * @param group group to recieve effect of special card
+     * @return boolean value if special is active
+     */
     public boolean activeSpecial(SpecialCard special, GroupCard group) {
         if (!specialArea.contains(special))
             return false;
@@ -122,6 +165,11 @@ public class Field {
         return true;
     }
 
+    /**
+     * Remove the special cards from the game
+     * @param special special card to be removed
+     * @return boolean value confirming action
+     */
     public boolean removeSpecialToGraveyard(SpecialCard special) {
         if (!specialArea.contains(special))
             return false;
@@ -131,6 +179,12 @@ public class Field {
         return true;
     }
 
+    /**
+     * Declares attack to control with Illuminati type
+     * @param g1 Illuminati card
+     * @param g2 group card
+     * @return boolean value true or false
+     */
     public boolean declareAttackToControlI(IlluminatiCard g1, GroupCard g2) {
         if(g1.getMode() != Mode.ATTACK)
             throw new DefenseGroupAttackException();
@@ -321,6 +375,9 @@ public class Field {
             temp.setLocation(Location.HAND);
     }
 
+    /**
+     * adds uncontrollled cards to the game
+     */
     public void addUncontrolled(){
         Card temp = Board.deck.getDeck().get(0);
         if(temp.getType().equalsIgnoreCase("other group")){
@@ -333,6 +390,10 @@ public class Field {
         }
 
     }
+
+    /**
+     * add other type cards
+     */
     public void addOthers(){
         Card temp = Board.deck.getDeck().get(0);
         if (temp.getType().equalsIgnoreCase("other group")) {
@@ -375,6 +436,11 @@ public class Field {
         Card.getBoard().nextPlayer();
     }
 
+    /**
+     * switches position of the cards
+     * @param group type group card
+     * @return boolean to verify switched mode
+     */
     public boolean switchCardModeE(SpecialCard group){
         if(!specialArea.contains(group))
             return false;
@@ -389,7 +455,11 @@ public class Field {
 
     }
 
-    //DO WE REALLY NEED CARD DOES NOT TURN FACE DOWN
+    /**
+     * switch card mode for group types
+     * @param group type group cards
+     * @return boolean value true/false
+     */
     public boolean switchCardModeG(GroupCard group){
         if(!cardArea.contains(group))
             return false;
@@ -404,6 +474,12 @@ public class Field {
         return true;
 
     }
+
+    /**
+     * switch card mode for illuminati cards
+     * @param group type group cards for game
+     * @return boolean value
+     */
     public boolean switchCardModeI(IlluminatiCard group){
         if(!cardArea.contains(group))
             return false;
@@ -417,35 +493,77 @@ public class Field {
         return true;
 
     }
+
+    /**
+     * getter fpr Illuminati card
+     */
     public IlluminatiCard getIlluminati(IlluminatiCard illu){
         return illu;
     }
 
 
+    /**
+     * gets hand
+     * @return hand
+     */
     public ArrayList<Card> getHand() { return hand; }
 
-
+    /**
+     * getter for phase of game
+     * @return phase
+     */
     public Phase getPhase() {
         return phase;
     }
 
+    /**
+     * setter for phase of game
+     * @param phase phase of the game
+     */
     public void setPhase(Phase phase) {
         this.phase = phase;
     }
 
+    /**
+     * gets the card in the game
+     * @param e card
+     * @return card e
+     */
     public Card getCardL(Card e){
         return e;
     }
 
+    /**
+     * getter for group card
+     * @param group card type group
+     * @return group card
+     */
     public GroupCard getGroup(GroupCard group){
         return group;
     }
+
+    /**
+     * gets card area
+     * @return area
+     */
     public ArrayList<Card> getCardArea(){return cardArea;}
 
+    /**
+     * getter for special area
+     * @return special area
+     */
     public ArrayList<SpecialCard> getSpecialArea(){ return specialArea;}
 
+    /**
+     * getter for uncontrolled groups
+     * @return uncontrolled groups
+     */
     public ArrayList<Card> getUncontrolledGroups(){ return uncontrolledGroups;}
 
+    /**
+     * getter for terminated
+     * @return graveyard of terminated
+     */
     public ArrayList<Card> getGraveYard(){ return graveYard;}
 
 

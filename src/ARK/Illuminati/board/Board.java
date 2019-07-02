@@ -20,6 +20,10 @@ public class Board {
     private int dice1;
     public static ArrayList<Card> uncontrolled;
 
+    /**
+     * getter for uncontrolled cards
+     * @return the uncontrolled cards
+     */
     public static ArrayList<Card> getUncontrolled() {
         return uncontrolled;
     }
@@ -110,12 +114,20 @@ public class Board {
         activePlayer.getField().addOthers();
    }
 
+    /**
+     * returns true/false for game over
+     * @return boolean value
+     */
     public boolean isGameOver(){
         if(winner != null){
             return true;
         }return false;
     }
 
+    /**
+     * rolls the dice of the game
+     * @return total dice value
+     */
     public int rollDice() {
         dice1 = (int) (Math.random() * 6);
         dice2 = (int) (Math.random() * 6);
@@ -166,15 +178,26 @@ public class Board {
         return winner;
     }
 
+    /**
+     * gets the deck
+     * @return deck
+     */
     public Deck getDeck() {
         return deck;
     }
 
+    /**
+     * deck seter
+     * @param deck to be set
+     */
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
 
-
+    /**
+     * setter for the winner of game
+     * @param winner - the winner of the game
+     */
     public void setWinner(Player winner) {
         if (isGameOver())
             return;
