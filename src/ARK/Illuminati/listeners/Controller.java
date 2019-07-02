@@ -45,11 +45,14 @@ public class Controller implements ActionListener, MouseListener {
     public void addActionListeners(){
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroupButtons();
+
         ArrayList<IlluminatiButton> structureP1Illuminati = this.gui.getStructureAreaP1().getIlluminatiButtons();
-        System.out.println("P1 illu button size: " + this.gui.getStructureAreaP1().illuminatiButtons.size());
+
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroupButtons();
+
         ArrayList<IlluminatiButton> structureP2Illuminati = this.gui.getStructureAreaP2().getIlluminatiButtons();
-        System.out.println("P2 illum button size: " + this.gui.getStructureAreaP2().illuminatiButtons.size());
+
+
         ArrayList<GroupButton> handP1 = this.gui.getHandAreaP1().getGroupButtons();
         ArrayList<GroupButton> handP2 = this.gui.getHandAreaP2().getGroupButtons();
         ArrayList<GroupButton> uncontrolledGroup = this.gui.getUncontrolledArea().getGroupButtons();
@@ -175,7 +178,10 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel1().removeAll();
         gui.getPanel2().removeAll();
 
-        gui.setStructureAreaP1(new StructurePanel( gui.getP1().getField().cardArea1 )) ;
+        System.out.println("CardArea1 size: " + Board.cardAreaP1.size());
+        System.out.println("CardArea2 size: " + Board.cardAreaP2.size());
+
+        gui.setStructureAreaP1(new StructurePanel( Board.cardAreaP1 )) ;
 
         gui.setHandAreaP1(new HandPanel( gui.getP1() ) );
         JScrollPane sp1 = new JScrollPane(gui.getHandAreaP1());
@@ -188,10 +194,12 @@ public class Controller implements ActionListener, MouseListener {
         gui.setHand1SP( sp1 );
         gui.getPanel1().add(gui.getStructureAreaP1(), BorderLayout.CENTER);
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
+        System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
 
+        StructurePanel temp = new StructurePanel(Board.cardAreaP2);
 
-        gui.setStructureAreaP2 ( new StructurePanel( gui.getP2().getField().cardArea2 ) );
-
+        //gui.setStructureAreaP2 ( temp );
+/*
         gui.setHandAreaP2(new HandPanel( gui.getP2() ) );
         JScrollPane sp2 = new JScrollPane(gui.getHandAreaP2());
         sp2.setBorder(null);
@@ -204,6 +212,9 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel2().add(gui.getStructureAreaP2(), BorderLayout.CENTER);
         gui.getPanel2().add(gui.getHand2SP(),BorderLayout.EAST);
 
+
+ */
+        System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
 

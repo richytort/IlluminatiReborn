@@ -79,7 +79,7 @@ public class Field {
      * @param illuminati - illuminati card added to the field
      * @return boolean value for Illuminati card on field
      */
-    public boolean addIlluminatiToField(IlluminatiCard illuminati,Mode m  ){
+    public boolean addIlluminatiToField(IlluminatiCard illuminati , Mode m ){
         if(!(hand.contains(illuminati) && illuminati.getLocation() == Location.HAND))
             return false ;
 
@@ -91,10 +91,14 @@ public class Field {
         illuminati.setLocation(STRUCTURE) ;
         illuminati.setMode(m);
         Player p = Card.getBoard().getActivePlayer();
-        if(Card.getBoard().getActivePlayer().getName() == GUI.p1.getName())
-            cardArea1.add(illuminati);
-        else
-            cardArea2.add(illuminati);
+        if(Card.getBoard().getActivePlayer().getName() == GUI.p1.getName()) {
+            System.out.println("Setting card area1");
+            Board.cardAreaP1.add(illuminati);
+        }
+        else{
+            System.out.println("Setting card area 2" );
+            Board.cardAreaP2.add(illuminati);
+        }
         return true;
 
     }

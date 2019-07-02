@@ -115,14 +115,16 @@ public class GUI extends JFrame {
     }
 
     public StructurePanel getStructureAreaP1(){
+        System.out.println("structureArea size: " + structureAreaP1.getIlluminatiButtons().size());
         return this.structureAreaP1;
     }
 
     public void setStructureAreaP1(StructurePanel structureAreaP1 ){
         this.structureAreaP1 = structureAreaP1 ;
     }
+
     public StructurePanel getStructureAreaP2(){
-        return structureAreaP2;
+        return this.structureAreaP2;
     }
 
     public void setStructureAreaP2(StructurePanel structureAreaP2 ){
@@ -249,9 +251,9 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //groupAreap1 = new GroupsPanel(p1);
-        this.structureAreaP1 = new StructurePanel(p1.getField().cardArea1);
+        this.structureAreaP1 = new StructurePanel(Board.cardAreaP1);
         //groupAreap2 = new GroupsPanel(p2);
-        this.structureAreaP2 = new StructurePanel(p2.getField().cardArea2);
+        this.structureAreaP2 = new StructurePanel(Board.cardAreaP2);
         //specialAreap1 = new SpecialPanel(p1);
         uncontrolledArea = new UncontrolledPanel( Board.uncontrolled ); ///////////////////mabybe we will have to pass an array list of group cards in here. Makes sense.
         specialAreaP1 = new SpecialPanel(p1);
