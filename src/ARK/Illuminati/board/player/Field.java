@@ -9,6 +9,7 @@ import ARK.Illuminati.cards.*;
 import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
 import ARK.Illuminati.exceptions.*;
+import ARK.Illuminati.gui.GUI;
 import ARK.Illuminati.gui.GroupButton;
 
 import static ARK.Illuminati.board.player.Phase.*;
@@ -25,6 +26,8 @@ public class Field {
     private ArrayList<Card> uncontrolledGroups;
     private ArrayList<Card> graveYard;
    // private Board board;
+   public static ArrayList<Card> cardArea1 ;
+    public static ArrayList<Card> cardArea2 ;
     Player p1;
     Player p2;
 
@@ -36,6 +39,8 @@ public class Field {
     public Field() throws IOException, UnexpectedFormatException {
         hand = new ArrayList<Card>();
         cardArea = new ArrayList<>();
+        cardArea1 = new ArrayList<Card>();
+        cardArea2 = new ArrayList<Card>();
         specialArea = new ArrayList<SpecialCard>();
         uncontrolledGroups = new ArrayList<Card>();
        //
@@ -84,7 +89,11 @@ public class Field {
         hand.remove(illuminati);
         //illuminati.setHidden(isHidden); //MAYBE FIX LATER WHEN TIME IS GOOD
         illuminati.setLocation(STRUCTURE) ;
-        cardArea.add(illuminati);
+        Player p = Card.getBoard().getActivePlayer();
+        if(Card.getBoard().getActivePlayer().getName() == GUI.p1.getName())
+            cardArea1.add(illuminati);
+        else
+            cardArea2.add(illuminati);
         return true;
 
     }

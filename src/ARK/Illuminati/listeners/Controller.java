@@ -172,7 +172,7 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel1().removeAll();
         gui.getPanel2().removeAll();
 
-        StructurePanel structureAreaP1 = new StructurePanel( gui.getP1().getField().cardArea ) ;
+        StructurePanel structureAreaP1 = new StructurePanel( gui.getP1().getField().cardArea1 ) ;
 
         gui.setHandAreaP1(new HandPanel( gui.getP1() ) );
         JScrollPane sp1 = new JScrollPane(gui.getHandAreaP1());
@@ -187,7 +187,7 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
 
 
-        StructurePanel structureAreaP2 = new StructurePanel( gui.getP2().getField().cardArea ) ;
+        StructurePanel structureAreaP2 = new StructurePanel( gui.getP2().getField().cardArea2 ) ;
 
         gui.setHandAreaP2(new HandPanel( gui.getP2() ) );
         JScrollPane sp2 = new JScrollPane(gui.getHandAreaP2());
