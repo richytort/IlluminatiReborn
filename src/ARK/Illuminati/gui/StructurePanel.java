@@ -38,13 +38,27 @@ public class StructurePanel extends JPanel {
 
 
         setPreferredSize( new Dimension(500 , 100));
-        for(int i = 0 ; i < 15 ; i++){
+        for(int i = 0 ; i < 7 ; i++){
             GroupButton groupButton = new GroupButton();
             //groups.add(groupButton);
             groupButton.setBackground(Color.GRAY);
             groupButton.setOpaque(false);
             this.add(groupButton);
         }
+        for(int i = 0 ; i < illuminatiButtons.size(); i++){
+            IlluminatiButton illuminatiButton = new IlluminatiButton();
+            illuminatiButton.setBackground(Color.GRAY);
+            illuminatiButton.setOpaque(false);
+            this.add(illuminatiButton);
+        }
+        for(int i = 0 ; i < 7 ; i++){
+            GroupButton groupButton = new GroupButton();
+            //groups.add(groupButton);
+            groupButton.setBackground(Color.GRAY);
+            groupButton.setOpaque(false);
+            this.add(groupButton);
+        }
+
         this.setLayout(new GridLayout(3, 5));
         this.setOpaque(true);
         this.setVisible(true);
