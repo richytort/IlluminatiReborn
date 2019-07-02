@@ -12,10 +12,21 @@ public class UncontrolledArea {
     private ArrayList<GroupCard> uncontrolled;
     private Field field;
 
+    /**
+     * Uncontrolled area of the game
+     * @throws IOException  exception thrown for IO errors
+     * @throws UnexpectedFormatException format exceptions
+     */
     public UncontrolledArea()throws IOException, UnexpectedFormatException {
         uncontrolled = new ArrayList<>();
         this.field = new Field();
     }
+
+    /**
+     * gettter for card
+     * @param i card received
+     * @return the card
+     */
     public Card getCard(Card i) {
 
         return i;
@@ -24,10 +35,19 @@ public class UncontrolledArea {
 //
 //        this.field.add4CardsToUncontrolled();
 //    }
+
+    /**
+     * getter for uncontrolled
+     * @return uncontrolled
+     */
     public  ArrayList<GroupCard> getUncontrolled() {
         return uncontrolled;
     }
 
+    /**
+     * setter for uncontrolled
+     * @param uncontrolled the uncontrolled cards
+     */
     public  void setUncontrolled(ArrayList<GroupCard> uncontrolled) {
         this.uncontrolled= uncontrolled;
     }

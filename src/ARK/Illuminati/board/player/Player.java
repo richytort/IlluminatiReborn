@@ -22,6 +22,12 @@ public class Player implements Contender {
     private boolean addedGroupThisTurn;
     private ArrayList<Card> hand;
 
+    /**
+     * Initializes the player
+     * @param name name of the player
+     * @throws IOException - error exception
+     * @throws UnexpectedFormatException -format exception thrown
+     */
     public Player(String name)  throws IOException, UnexpectedFormatException {
         this.name = name;
         this.field = new Field();
@@ -32,6 +38,9 @@ public class Player implements Contender {
 
     //need to set it facing up
     @Override
+    /**
+     * setter for the group
+     */
     public boolean setGroup(Card group) {
         if (Card.getBoard().isGameOver())
             return false;
@@ -44,6 +53,11 @@ public class Player implements Contender {
         return groupAdded;
     }
 
+    /**
+     * setter for illuminati card
+     * @param illuminati - illuminati card set
+     * @return boolean value true/false for setting of illuminati card
+     */
     public boolean setIlluminati(IlluminatiCard illuminati){
 
         if (Card.getBoard().isGameOver())
@@ -62,6 +76,11 @@ public class Player implements Contender {
         return true;
     }
 
+    /**
+     * sets the group down
+     * @param group group card
+     * @return boolean value for group set down
+     */
     public boolean setGroupDown(Card group) {
         if (Card.getBoard().isGameOver())
             return false;
@@ -75,6 +94,9 @@ public class Player implements Contender {
 
 
     @Override
+    /**
+     * boolean for special card set to field
+     */
     public boolean setSpecial(SpecialCard special) {
         if (Card.getBoard().isGameOver())
             return false;
@@ -229,6 +251,9 @@ public class Player implements Contender {
 
 
     @Override
+    /**
+     * adds card to structure
+     */
     public void addCardToStructure() {
         //this.field.addCardToStructure();
     }
@@ -236,6 +261,9 @@ public class Player implements Contender {
 
     //get from field
     @Override
+    /**
+     * ends action on the field
+     */
     public void endAction() {
 
         if (Card.getBoard().isGameOver())
@@ -250,6 +278,9 @@ public class Player implements Contender {
 
     //get from field
     @Override
+    /**
+     * boolean for ending the turn of a player
+     */
     public boolean endTurn() {
         if (Card.getBoard().isGameOver())
             return false;
@@ -262,12 +293,22 @@ public class Player implements Contender {
         return true;
 
     }
+
+    /**
+     * prints players hand
+     */
     public void printHand(){
         for(Card e: hand){
             System.out.println(e+ " ");
         }
     }
     //fixed later
+
+    /**
+     * switches card mode
+     * @param cards group cards
+     * @return boolean value
+     */
     public boolean switchCardModeG(GroupCard cards){
         if(Card.getBoard().isGameOver())
             return false;
@@ -288,6 +329,9 @@ public class Player implements Contender {
 
     /////////////Seems we can adjust the rotation on this part/////////////////////////////////////////////////////////
     @Override
+    /**
+     * boolean value returned for switched group position
+     */
     public boolean switchGroupPosition( GroupCard group ){
 //        if (Card.getBoard().isGameOver())
 //            return false;
@@ -325,6 +369,11 @@ public class Player implements Contender {
 
     //DO I NEED IT IN FIELD
     //implement this actions
+
+    /**
+     * give away a special cards
+     * @param special
+     */
     public void giveAwaySpecialCard(SpecialCard special){
         Player p1 = Card.getBoard().getActivePlayer();
         if(this ==Card.getBoard().getActivePlayer()){
@@ -335,20 +384,39 @@ public class Player implements Contender {
 
     //DO I NEED IT IN FIELD
     //implement this action
+
+    /**
+     * use special cards
+     */
     public void useSpecialCard(){ }
 
     //DO I NEED THEM IN FIELD
+
+    /**
+     * moving a group
+     * @param moveGroup group to be moved
+     * @param newLocation int value for new location
+     */
     public void moveAGroup(int moveGroup, int newLocation ){
         Collections.swap(Card.getBoard().getActivePlayer().getHand(),moveGroup,newLocation);
     }
 
-    //DO I NEED IT IN FIELD
+    //DO I NEED IT IN
+
+    /**
+     * passing in turn
+     */
     public void passing(){
         this.getField().endTurn();
         this.setIncome(getTotalIncome() + 5);
     }
 
     //DO I NEED IT IN FIELD
+
+    /**
+     * dropping  a grouo
+     * @param i group card to be dropped
+     */
     public void dropAgroup(GroupCard i){
        Player p = Card.getBoard().getActivePlayer();
         p.getField().removeGroupToUncontrolled(i);
@@ -357,6 +425,10 @@ public class Player implements Contender {
 
     //DO I NEED IT IN FIELD
     //need to implement it
+
+    /**
+     * aiding an attack
+     */
     public void aidAnAttack(){ }
 
     //DO I NEED IT IN FIELD
@@ -366,6 +438,10 @@ public class Player implements Contender {
 
     }
 
+    /**
+     * getting the income
+     * @return int income
+     */
     public int getIncome(){
         for(Card e: hand){
             if(getCard(e).getType().equalsIgnoreCase("illuminati") || getCard(e).getType().equalsIgnoreCase("other group")){
@@ -375,6 +451,10 @@ public class Player implements Contender {
 
     }
 
+    /**
+     * getting total income
+     * @return total income
+     */
     public int getTotalIncome(){ //use it to check for winner
         for(int i = 0; i < hand.size();i++){
             totalIncome+=hand.get(i).getIncome();
@@ -383,19 +463,48 @@ public class Player implements Contender {
     }
 
 
+    /**
+     * get field of the game
+     * @return field
+     */
     public Field getField(){ return field;}
 
+    /**
+     * getter for card
+     * @param i card
+     * @return card
+     */
     public Card getCard(Card i) { return i;
     }
 
+    /**
+     * getter for name
+     * @return name
+     */
     public String getName() { return name; }
 
+    /**
+     * getter for hand
+     * @return hand
+     */
     public ArrayList<Card> getHand(){ return hand; }
 
+    /**
+     * setter for result
+     * @param result of the game
+     */
     public void setResult(int result){ this.result = result; }
 
+    /**
+     * getter for result
+     * @return game result
+     */
     public int getResult(){ return result; }
 
+    /**
+     * setter for income
+     * @param income of the player
+     */
     public void setIncome(int income){ this.income = income; }
 
 }

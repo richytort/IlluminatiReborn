@@ -51,6 +51,12 @@ public class Deck {
    private static String illuminatiPath = "Database-IlluminatiCards.csv";
    int trials = 0;
 
+    /**
+     * Deck method to set up deck and throw exceptions
+     * @throws IOException - exception error when IO error occurs
+     * @throws NumberFormatException - error when incorrect number format occur
+     * @throws UnexpectedFormatException - exception error for wrong format
+     */
    public Deck() throws IOException, NumberFormatException, UnexpectedFormatException{
 
        if((illuminati == null || special ==  null || group ==null )){
@@ -128,6 +134,13 @@ public class Deck {
 
    }
 
+    /**
+     * Loads cards from files to the arraylist
+     * @param path - path for which Illuminati cards are loaded
+     * @return temp variable containing cards
+     * @throws IOException - IO error occurs, exception is thrown
+     * @throws UnexpectedFormatException - error of unexpected format
+     */
     public ArrayList<Card> loadCardsFromFile(String path) throws  IOException, UnexpectedFormatException {
         ArrayList<Card> temp = new ArrayList<Card>();
         String line;
@@ -239,6 +252,12 @@ public class Deck {
         return (temp);
    }
 
+    /**
+     * Builds the deck using arraylists of different card types
+     * @param illuminati - Illuminati cards
+     * @param special - arraylist of special actions cards
+     * @param group- arraylist of group type cards
+     */
    public void buildDeck(ArrayList<Card> illuminati, ArrayList<Card> special, ArrayList<Card> group){
       for(int i =0; i < illuminati.size();i++) {
           IlluminatiCard illuminati1 = (IlluminatiCard) illuminati.get(i);
@@ -342,34 +361,91 @@ public class Deck {
       }
    }
 
+    /**
+     * Shuffles the deck
+     */
     public void shuffle(){ Collections.shuffle(deck); }
 
+    /**
+     * gets the deck
+     * @return the deck
+     */
     public  ArrayList<Card> getDeck(){ return deck; }
 
+    /**
+     * Sets up Illuminati with deck
+     * @param illuminati- arraylist of cards
+     */
     public static void setIlluminati(ArrayList<Card> illuminati){ Deck.illuminati = illuminati; }
 
+    /**
+     * getter for Illuminati Arraylist
+     * @return Arraylist of cards
+     */
     public ArrayList<Card> getIlluminati(){ return illuminati; }
 
+    /**
+     * sets the special cards in deck
+     * @param special special cards in deck
+     */
     public static void setSpecial(ArrayList<Card> special){ Deck.special= special; }
 
+    /**
+     * getter for special cards
+     * @return the special cards
+     */
     public ArrayList<Card> getSpecial(){ return special; }
 
+    /**
+     * setter for groups in deck
+     * @param group of the deck
+     */
     public static void setGroup(ArrayList<Card> group){ Deck.group = group; }
 
+    /**
+     * getter for the group
+     * @return group card in deck
+     */
     public ArrayList<Card> getGroup(){ return group; }
 
+    /**
+     * @return special path in game
+     */
     public static String getSpecialPath(){ return specialPath; }
 
+    /**
+     * @return-getter for other path
+     */
     public static String getOtherPath(){ return otherPath; }
 
+    /**
+     * getter for Illuminati Path
+     * @return path for Illuminati
+     */
     public static String getIlluminatiPath(){ return illuminatiPath; }
 
+    /**
+     * setter for Illuminati Path
+     * @param illuminatiPath- path in Illuminati game
+     */
     public static void setIlluminatiPath(String illuminatiPath){ Deck.illuminatiPath = illuminatiPath; }
 
+    /**
+     * setter for special path
+     * @param specialPath -path in game for specials
+     */
     public static void setSpecialPath(String specialPath){Deck.specialPath = specialPath;}
 
+    /**
+     * gets other path for deck
+     * @param otherPath - path for the deck of cards
+     */
     public static void setOtherPath(String otherPath){ Deck.otherPath = otherPath;}
 
+    /**
+     * getter for size of the deck
+     * @return the size of the deck
+     */
     public int size(){
        return deck.size();
     }
