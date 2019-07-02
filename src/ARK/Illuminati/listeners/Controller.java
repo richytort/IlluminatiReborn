@@ -157,6 +157,9 @@ public class Controller implements ActionListener, MouseListener {
 
         gui.getPanel1().removeAll();
         gui.getPanel2().removeAll();
+
+        StructurePanel structureAreaP1 = new StructurePanel( gui.getP1().getField().cardArea ) ;
+
         gui.setHandAreaP1(new HandPanel( gui.getP1() ) );
         JScrollPane sp1 = new JScrollPane(gui.getHandAreaP1());
         sp1.setBorder(null);
@@ -166,9 +169,23 @@ public class Controller implements ActionListener, MouseListener {
         sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         gui.setHand1SP( sp1 );
+        gui.getPanel1().add(structureAreaP1, BorderLayout.CENTER);
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
 
 
+        StructurePanel structureAreaP2 = new StructurePanel( gui.getP2().getField().cardArea ) ;
+
+        gui.setHandAreaP2(new HandPanel( gui.getP2() ) );
+        JScrollPane sp2 = new JScrollPane(gui.getHandAreaP2());
+        sp2.setBorder(null);
+        sp2.getViewport().setOpaque(false);
+        sp2.setPreferredSize(new Dimension(200, 150));
+        sp2.setOpaque(false);
+        sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        gui.setHand2SP( sp2 );
+        gui.getPanel2().add(structureAreaP2, BorderLayout.CENTER);
+        gui.getPanel2().add(gui.getHand2SP(),BorderLayout.EAST);
 
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.

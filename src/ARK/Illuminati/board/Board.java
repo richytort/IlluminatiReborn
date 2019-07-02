@@ -42,9 +42,11 @@ public class Board {
         int FirstP = rollDice();
         int SecondP = rollDice();
         if (FirstP > SecondP) {
+            System.out.println("Player 1 goes first");
             activePlayer = p1;
             opponentPlayer = p2;
         } else {
+            System.out.println("Player 2 goes first");
             activePlayer = p2;
             opponentPlayer = p1;
         }
