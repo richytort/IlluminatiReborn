@@ -145,19 +145,32 @@ public class HandPanel extends JPanel {
 
     /**
      * getter for special buttons
-     * @return
+     * @return special buttons
      */
     public ArrayList<SpecialButton> getSpecialButtons() {
         return specialButtons;
     }
+
+    /**
+     * setter for special buttons
+     * @param specialButtons to be set
+     */
     public void setSpecialButtons(ArrayList<SpecialButton> specialButtons) {
         this.specialButtons = specialButtons;
     }
 
+    /**
+     * getter for Illuminati Buttons
+     * @return Illuminati Buttons
+     */
     public ArrayList<IlluminatiButton> getIlluminatiButtons(){
         return illuminatiButtons;
     }
 
+    /**
+     * setter for Illuminati Buttons
+     * @param illuminatiButtons set
+     */
     public void setIlluminatiButton(ArrayList<IlluminatiButton> illuminatiButtons ){
         this.illuminatiButtons = illuminatiButtons ;
     }
