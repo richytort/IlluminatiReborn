@@ -354,6 +354,7 @@ public class Controller implements ActionListener, MouseListener {
                         illuminati = ((IlluminatiButton) fc).getIlluminati();
                         //fc = button;
                         ///////////THIS MAY NEED TO BE CHANGED. BETTER YET, will be changed.
+                        //check if we should summon, that changes defense
                         Object[] options = {"Set", "Cancel"};
                         summonset = JOptionPane.showOptionDialog(gui, "What is your action?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                         if (summonset == 1) {
@@ -363,11 +364,188 @@ public class Controller implements ActionListener, MouseListener {
                         if (summonset == 0) {
                             Card.getBoard().getActivePlayer().setIlluminati(((IlluminatiButton) fc).getIlluminati());
                         }
-
                         fc = null ;
                         updateField();
+                        System.out.println(board.getActivePlayer().getField().getPhase());
                         return ;
+                    }else if(illuminati.getLocation()==Location.STRUCTURE) {
+                        if (board.getActivePlayer().getField().getPhase() == Phase.ACTION1 || board.getActivePlayer().getField().getPhase() == Phase.ACTION2) {
+                            fc = (IlluminatiButton) click.getSource();
+                            illuminati = ((IlluminatiButton) fc).getIlluminati();
+                            Object[] options2 = {"Free Action", "Regular Action", "Passing", "Cancel"};
+                            int y = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[3]);
+                            if (y == 3) {
+                                fc = null;
+                                sc = null;
+                                tc = null;
+                                return;
+                            }
+                            if (y == 0) {
+                                Object[] options3 = {"Give Away Money", "Cancel"};
+                                int options = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
+                                sc = (IlluminatiButton) click.getSource();
+                                illuminati = ((IlluminatiButton) sc).getIlluminati();
+                                if (options == 1) {
+                                    fc = null;
+                                    sc = null;
+                                    tc = null;
+                                    return;
+                                }
+                                if (options == 0) {
+                                    Object[] incomeO = {1, 2, 3, 5, 10, 20, 50};
+                                    int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, incomeO, incomeO[5]);
+                                    if (incomeO.equals(1)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(1);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(2)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(2);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(3)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(3);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(5)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(5);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(10)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(10);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(20)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(20);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(50)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).giveAwayMoney(50);
+                                        fc = (IlluminatiButton) click.getSource();
+                                        updateField();
+                                        return;
+                                    }
+                                    JOptionPane.showMessageDialog(gui, "Choose group to transfer the money to: ");
 
+                                }
+                            }
+                            if (y == 1) {
+                                Object[] options3 = {"Attack a Group", "Transfer Money", "Move a Group", "Cancel"};
+                                int optionsRegular = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[3]);
+                                sc = (IlluminatiButton) click.getSource();
+                                illuminati = ((IlluminatiButton) sc).getIlluminati();
+                                if (optionsRegular == 4) {
+                                    fc = null;
+                                    sc = null;
+                                    tc = null;
+                                    return;
+                                }
+                                if (optionsRegular == 0) {
+                                    GroupCard group = ((GroupButton) click.getSource()).getGroup();
+                                    GroupButton tc = (GroupButton) click.getSource();
+                                    group = ((GroupButton) tc).getGroup();
+                                    Object[] options4 = {"Attack to Control", "Attack To Neutralize", "Attack To Destroy", "Cancel"};
+                                    int attacks = JOptionPane.showOptionDialog(gui, "What is your Action?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options4, options4[3]);
+                                    if (attacks == 3) {
+                                        fc = (IlluminatiButton)click.getSource();
+                                        sc = null;
+                                        tc = null;
+                                        return;
+                                    }
+                                    if (attacks == 0) {
+                                        board.getActivePlayer().getField().declareAttackToControlI(((IlluminatiButton)sc).getIlluminati(), ((GroupButton) tc).getGroup());
+                                        fc = null;
+                                        sc=null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (attacks == 1) {
+                                        board.getActivePlayer().getField().declareAttackToControlI(((IlluminatiButton)sc).getIlluminati(), ((GroupButton) tc).getGroup());
+                                        fc = null;
+                                        sc=null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (attacks == 2) {
+                                        board.getActivePlayer().getField().declareAttackToControlI(((IlluminatiButton)sc).getIlluminati(), ((GroupButton) tc).getGroup());
+                                        fc = null;
+                                        sc=null;
+                                        updateField();
+                                        return;
+                                    }
+                                    JOptionPane.showMessageDialog(gui, "Choose what card to attack");
+                                }
+                                if(optionsRegular==1){
+                                    sc = (IlluminatiButton) click.getSource();
+                                    illuminati = ((IlluminatiButton) sc).getIlluminati();
+                                    Object[] incomeO = {1, 2, 3, 5, 10, 20, 50};
+                                    int k = JOptionPane.showOptionDialog(gui, "How much do you want to transfer ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, incomeO, incomeO[1]);
+                                    if (incomeO.equals(1)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 1);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(2)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 2);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(3)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 3);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(5)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 5);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(10)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 10);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(20)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 20);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    if (incomeO.equals(50)) {
+                                        board.getActivePlayer().getField().getIlluminati(illuminati).transferMoney(((GroupButton) sc).getGroup(), 50);
+                                        fc = null;
+                                        updateField();
+                                        return;
+                                    }
+                                    JOptionPane.showMessageDialog(gui, "Choose group to transfer the money to: ");
+                                }
+                                if(optionsRegular==2){
+                                    //not sure yet
+                                }
+                            }
+                            if (y ==2) {
+                                board.getActivePlayer().passing();
+                                fc = null;
+                                updateField();
+                                return;
+                            }
+                        }
                     }
 
                 }

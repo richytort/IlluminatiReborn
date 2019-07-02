@@ -66,7 +66,7 @@ public class Player implements Contender {
         if(this != Card.getBoard().getActivePlayer())
             return false;
 
-        boolean illuminatiAdded = this.field.addIlluminatiToField( illuminati);
+        boolean illuminatiAdded = this.field.addIlluminatiToField( illuminati,Mode.ATTACK);
 
         if( !illuminatiAdded)
             return false;
@@ -104,26 +104,26 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer()) {
             return false;
         }
-        boolean specialAdded = this.field.addSpecialToField( special , null , false );
+        boolean specialAdded = this.field.addSpecialToField( special , null , true );
         return specialAdded;
     }
 
 
-    /**
-     * Places the special card face down
-     * @param special the special card to be placed face down
-     * @return boolean true/false
-     */
-    public boolean setSpecialFaceDown(SpecialCard special){
-            if (Card.getBoard().isGameOver())
-                return false;
-
-            if (this != Card.getBoard().getActivePlayer()) {
-                return false;
-            }
-            boolean specialAdded = this.field.addSpecialToField( special , null , true );
-            return specialAdded;
-    }
+//    /**
+//     * Places the special card face down
+//     * @param special the special card to be placed face down
+//     * @return boolean true/false
+//     */
+//    public boolean setSpecialFaceDown(SpecialCard special){
+//            if (Card.getBoard().isGameOver())
+//                return false;
+//
+//            if (this != Card.getBoard().getActivePlayer()) {
+//                return false;
+//            }
+//            boolean specialAdded = this.field.addSpecialToField( special , null , true );
+//            return specialAdded;
+//    }
 
 
 
@@ -272,7 +272,7 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer())
             return;
 
-      //  this.getField().endAction();
+        this.getField().endPhase();
 
     }
 
@@ -288,7 +288,7 @@ public class Player implements Contender {
             return false;
 
         addedGroupThisTurn = false;
-      //  this.getField().endTurn();
+        this.getField().endTurn();
 
         return true;
 

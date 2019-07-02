@@ -33,7 +33,7 @@ public interface Contender {
      * @param special - card of type special
      * @return bool value t or f
      */
-    public boolean setSpecialFaceDown(SpecialCard special);
+   // public boolean setSpecialFaceDown(SpecialCard special);
 
     /**
      * Activates the special cards on a group
