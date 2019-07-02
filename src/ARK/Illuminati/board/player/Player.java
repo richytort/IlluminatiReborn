@@ -272,7 +272,7 @@ public class Player implements Contender {
         if (this != Card.getBoard().getActivePlayer())
             return;
 
-      //  this.getField().endAction();
+        this.getField().endAction();
 
     }
 

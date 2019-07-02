@@ -331,11 +331,13 @@ public class Controller implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent click) {
         if(click.getSource() instanceof NextActionButton){
+            System.out.println("Here");
             board.getActivePlayer().endAction();
-            //////////////IMPLEMENT WHEN FIELD IS DONE
             gui.getCurrAction().setText("Current Action: "+ Card.getBoard().getActivePlayer().getField().getPhase());
+            System.out.println("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
+
             updateField();
-            //addActionListeners();
+            System.out.println("Current Phase: " + Card.getBoard().getActivePlayer().getField().getPhase());
         }
         if(click.getSource() instanceof EndTurnButton){
             board.getActivePlayer().endTurn();

@@ -420,7 +420,7 @@ public class Field {
     /**
      * Phase of the players actions ends
      */
-    public void endPhase(){
+    public void endAction(){
         switch (phase){
             case MAIN:
                 setPhase(ACTION1);
