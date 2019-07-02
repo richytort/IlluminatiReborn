@@ -8,21 +8,42 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This methods deals wth hidden handbuttons for the players
+ */
 public class HiddenHandPanel extends JPanel {
     //instance variables
     private ArrayList<CardButton> handButtons;
+
+    /**
+     * HIdden Hand Panel constructor
+     * @param p the player
+     */
     public HiddenHandPanel( Player p ){
         super();
         update(p);
     }
 
+    /**
+     * getter for Hand Buttons
+     * @return the hand buttons
+     */
     public ArrayList<CardButton> getHandButtons(){
         return this.handButtons;
     }
+
+    /**
+     * setter for hand buttons
+     * @param hb arraylist of cardbuttons
+     */
     public void setHandButtons(ArrayList<CardButton> hb) {
         this.handButtons = hb;
     }
 
+    /**
+     * Updates the players button settings
+     * @param p player
+     */
     public void update(Player p ) {
         this.removeAll();
         this.revalidate();

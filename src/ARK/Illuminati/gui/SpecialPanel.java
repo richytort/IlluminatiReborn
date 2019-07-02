@@ -8,24 +8,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Special Panel creates the special panel for the player
+ */
 public class SpecialPanel extends JPanel {
     private ArrayList<JButton> specials;
     private Player p;
 
+    /**
+     * special panel constructor for player
+     * @param p
+     */
     public SpecialPanel(Player p) {
         super();
         setPreferredSize(new Dimension(500, 100));
         update(p);
     }
 
+    /**
+     * getter for specials
+     * @return special
+     */
     public ArrayList<JButton> getSpecials() {
         return specials;
     }
 
+    /**
+     * setter for specials
+     * @param specials specials
+     */
     public void setSpecials(ArrayList<JButton> specials) {
         this.specials = specials;
     }
 
+    /**
+     * updates the players settings
+     * @param p player
+     */
     public void update(Player p) {
         specials = new ArrayList<JButton>();
         ///////Sets the grid layout for the specials........

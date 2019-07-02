@@ -3,8 +3,14 @@ package ARK.Illuminati.gui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class creates an endturn button for the game
+ */
 public class EndTurnButton extends JButton {
-
+    /**
+     * End turn button created with settings
+     * @param string string for button
+     */
     public EndTurnButton(String string){
         super(string);
         this.setPreferredSize(new Dimension(214, 53));
