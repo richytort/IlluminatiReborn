@@ -170,6 +170,22 @@ System.out.println("HELLO");
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
 
 
+        gui.getPanel1().remove(gui.getStructureAreaP1());
+        gui.setStructureAreaP1(new StructurePanel(gui.getP1().getField().cardArea));
+        gui.getPanel1().add(gui.getStructureAreaP1(),BorderLayout.NORTH);
+
+        gui.getPanel2().remove(gui.getStructureAreaP2());
+        gui.setStructureAreaP2(new StructurePanel(gui.getP2().getField().cardArea));
+        gui.getPanel2().add(gui.getStructureAreaP2(),BorderLayout.NORTH);
+
+        gui.getPanel1().remove(gui.getStructureAreaP1());
+        gui.setSpecialAreaP1(new SpecialPanel(gui.getP1()));
+        gui.getPanel1().add(gui.getSpecialAreaP1(),BorderLayout.CENTER);
+
+
+        gui.getPanel2().remove(gui.getSpecialAreaP2());
+        gui.setSpecialAreaP2(new SpecialPanel(gui.getP2()));
+        gui.getPanel2().add(gui.getSpecialAreaP2(),BorderLayout.CENTER);
 
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
@@ -349,7 +365,6 @@ System.out.println("HELLO");
                             //DO WE REALLY NEED THIS BECAUSE THIS ONE DOES NOT HAVE ANOTHER MODE
                             int y = JOptionPane.showOptionDialog(gui, "Change Card's Mode ?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
                             if (y == 0) {
-                                //if (board.getActivePlayer().getCard(group).getLocation().equals("HAND")) {
                                 board.getActivePlayer().switchCardModeG(group);
                                 updateField();
                                 fc = null;
@@ -735,22 +750,15 @@ System.out.println("HELLO");
                          if (((SpecialButton) arg0.getSource()).getSpecial().getLocation() == Location.HAND) {
                             String[] buttons = {"Activate", "Set", "cancel"};
 
-                            int rc = JOptionPane.showOptionDialog(null, "Summon, Set, Activate or Cancel" ,"Special",
+                            int rc = JOptionPane.showOptionDialog(null, "Choose an action?" ,"Special",
                                     JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
                             SpecialButton button = (SpecialButton) arg0.getSource();
                             SpecialCard card = button.getSpecial();
                             fc = button;
-                            if (rc == 1) {
-                                Card.getBoard().getActivePlayer().setSpecial(card);
-                                fc = null;
-                                updateField();
-                                return;
-
-                            }
                             if(rc==0){
-                                Card.getBoard().getActivePlayer().setSpecialFaceDown(card);
+                                Card.getBoard().getActivePlayer().setSpecial(card);
                             }
-                            if (rc == 3) {
+                            if (rc == 1) {
                                 fc = null;
                                 return;
                             } else {

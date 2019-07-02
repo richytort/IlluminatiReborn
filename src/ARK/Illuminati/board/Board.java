@@ -68,7 +68,9 @@ public class Board {
         }
         whoStarts(p1, p2);
         //during game
-        activePlayer.getField().addOthers();
+        //for(int e=0; e<10;e++) {
+            activePlayer.getField().addOthers();
+        //}
     }
 
 

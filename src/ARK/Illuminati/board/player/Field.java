@@ -8,10 +8,7 @@ import ARK.Illuminati.board.Board;
 import ARK.Illuminati.cards.*;
 import ARK.Illuminati.board.player.Player;
 import ARK.Illuminati.cards.specialCards.SpecialCard;
-import ARK.Illuminati.exceptions.DefenseGroupAttackException;
-import ARK.Illuminati.exceptions.NoGroupSpaceException;
-import ARK.Illuminati.exceptions.UnexpectedFormatException;
-import ARK.Illuminati.exceptions.WrongActionException;
+import ARK.Illuminati.exceptions.*;
 import ARK.Illuminati.gui.GroupButton;
 
 public class Field {
@@ -40,11 +37,11 @@ public class Field {
             return false;
         if(group.getType().equalsIgnoreCase("special card"))
             return false;
-
-//        if(cardArea.size() >=5)
-//            throw new NoGroupSpaceException();
-//        if(phase == phase.BATTLE)
-//            throw new Wron
+        if(cardArea.size() >=15)
+            throw new NoGroupSpaceException();
+        if(phase == phase.ACTION1 || phase==phase.ACTION2) {
+            throw new WrongActionException();
+        }
         hand.remove(group);
         group.setHidden(isHidden);
         group.setMode(m);
@@ -83,22 +80,25 @@ public class Field {
     public boolean addSpecialToField(SpecialCard special, GroupCard group, boolean hidden) {
         if (!hand.contains(special))
             return false;
-//       if(cardArea.size() >=5)
-//            throw new WrongActionException();
-//        if(phase == Phase.BATTLE)
-//            throw W
+        if(cardArea.size() >=5)
+            throw new NoSpecialSpaceException();
+        if(phase == phase.ACTION1 || phase==phase.ACTION2) {
+            throw new WrongActionException();
+        }
         hand.remove(special);
         specialArea.add(special);
         special.setLocation(Location.FIELD);
-//        if (!hidden)
-//            return activeSpecial(special, group);
+        if (!hidden)
+            return activeSpecial(special, group);
         return true;
     }
 
     public boolean activeSpecial(SpecialCard special, GroupCard group) {
         if (!specialArea.contains(special))
             return false;
-        //if(phase)
+        if(phase==phase.ACTION1 || phase==phase.ACTION2){
+            throw new WrongActionException();
+        }
         special.action(group);
         removeSpecialToGraveyard(special);
         return true;
@@ -329,17 +329,6 @@ public class Field {
     }
 
 
-    //   public boolean useSpecialCard(SpecialCard card, GroupCard group) {
-//        if (!specialArea.contains(card))
-//            return false;
-////        if (Action == Action.BATTLE)
-////            throw new WrongActionException();
-//        card.action(group);
-//        removeCard(card);
-//        return true;
-//    }
-//
-
     /**
      * Phase of the players actions ends
      */
@@ -369,9 +358,11 @@ public class Field {
     }
 
     public boolean switchCardModeE(SpecialCard group){
-        if(!cardArea.contains(group))
+        if(!specialArea.contains(group))
             return false;
-        //(if phase
+        if(phase==phase.ACTION1 || phase==phase.ACTION2){
+            throw new WrongActionException();
+        }
         if(group.isSwitchedMode())
             return false;
         group.switchMode();
@@ -384,7 +375,10 @@ public class Field {
     public boolean switchCardModeG(GroupCard group){
         if(!cardArea.contains(group))
             return false;
-        //(if phase
+        if(phase==phase.ACTION1 || phase==phase.ACTION2){
+            throw new WrongActionException();
+        }
+
         if(group.isSwitchedMode())
             return false;
         group.switchMode();
@@ -395,7 +389,9 @@ public class Field {
     public boolean switchCardModeI(IlluminatiCard group){
         if(!cardArea.contains(group))
             return false;
-        //(if phase
+        if(phase==phase.ACTION1 || phase==phase.ACTION2){
+            throw new WrongActionException();
+        }
         if(group.isSwitchedMode())
             return false;
         group.switchMode();
