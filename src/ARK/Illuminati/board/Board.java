@@ -19,6 +19,8 @@ public class Board {
     private Field field;
     private int dice1;
 
+    public static ArrayList<Card> cardAreaP1 ;
+    public static ArrayList<Card> cardAreaP2 ;
 
 
     public static ArrayList<Card> uncontrolled;
@@ -62,6 +64,8 @@ public class Board {
      * @param p2 - second player
      */
     public void whoStarts(Player p1, Player p2) {
+        cardAreaP1 = new ArrayList<Card>();
+        cardAreaP2 = new ArrayList<Card>();
         int FirstP = rollDice();
         int SecondP = rollDice();
         if (FirstP > SecondP) {
