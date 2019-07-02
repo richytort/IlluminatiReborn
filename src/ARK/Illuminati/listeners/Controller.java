@@ -46,8 +46,10 @@ public class Controller implements ActionListener, MouseListener {
         /////CHECK IF THIS IS RIGHT////////////////////////////////////////////////////////////
         ArrayList<GroupButton> structureP1 = this.gui.getStructureAreaP1().getGroupButtons();
         ArrayList<IlluminatiButton> structureP1Illuminati = this.gui.getStructureAreaP1().getIlluminatiButtons();
+        System.out.println("P1 illu button size: " + this.gui.getStructureAreaP1().illuminatiButtons.size());
         ArrayList<GroupButton> structureP2 = this.gui.getStructureAreaP2().getGroupButtons();
-        ArrayList<IlluminatiButton> structureP2Illuminati = this.gui.getStructureAreaP1().getIlluminatiButtons();
+        ArrayList<IlluminatiButton> structureP2Illuminati = this.gui.getStructureAreaP2().getIlluminatiButtons();
+        System.out.println("P2 illum button size: " + this.gui.getStructureAreaP2().illuminatiButtons.size());
         ArrayList<GroupButton> handP1 = this.gui.getHandAreaP1().getGroupButtons();
         ArrayList<GroupButton> handP2 = this.gui.getHandAreaP2().getGroupButtons();
         ArrayList<GroupButton> uncontrolledGroup = this.gui.getUncontrolledArea().getGroupButtons();
@@ -68,6 +70,7 @@ public class Controller implements ActionListener, MouseListener {
             structureP1.get(i).addActionListener(this);
             structureP1.get(i).addMouseListener(this);
         }
+        System.out.println("setting action listener for illuminati");
 
         for(int i = 0 ; i < structureP1Illuminati.size();i++){
             structureP1Illuminati.get(i).addActionListener(this);
@@ -172,7 +175,7 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel1().removeAll();
         gui.getPanel2().removeAll();
 
-        StructurePanel structureAreaP1 = new StructurePanel( gui.getP1().getField().cardArea1 ) ;
+        gui.setStructureAreaP1(new StructurePanel( gui.getP1().getField().cardArea1 )) ;
 
         gui.setHandAreaP1(new HandPanel( gui.getP1() ) );
         JScrollPane sp1 = new JScrollPane(gui.getHandAreaP1());
@@ -183,11 +186,11 @@ public class Controller implements ActionListener, MouseListener {
         sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         gui.setHand1SP( sp1 );
-        gui.getPanel1().add(structureAreaP1, BorderLayout.CENTER);
+        gui.getPanel1().add(gui.getStructureAreaP1(), BorderLayout.CENTER);
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
 
 
-        StructurePanel structureAreaP2 = new StructurePanel( gui.getP2().getField().cardArea2 ) ;
+        gui.setStructureAreaP2 ( new StructurePanel( gui.getP2().getField().cardArea2 ) );
 
         gui.setHandAreaP2(new HandPanel( gui.getP2() ) );
         JScrollPane sp2 = new JScrollPane(gui.getHandAreaP2());
@@ -198,7 +201,7 @@ public class Controller implements ActionListener, MouseListener {
         sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         gui.setHand2SP( sp2 );
-        gui.getPanel2().add(structureAreaP2, BorderLayout.CENTER);
+        gui.getPanel2().add(gui.getStructureAreaP2(), BorderLayout.CENTER);
         gui.getPanel2().add(gui.getHand2SP(),BorderLayout.EAST);
 
 
@@ -349,6 +352,7 @@ public class Controller implements ActionListener, MouseListener {
                 if (fc == null) {
 
                     IlluminatiCard illuminati = ((IlluminatiButton) click.getSource()).getIlluminati();
+                    System.out.println("Where");
                     //fc = button;
 
                     if (illuminati.getLocation() == Location.HAND) {
@@ -366,11 +370,16 @@ public class Controller implements ActionListener, MouseListener {
                         if (summonset == 0) {
                             Card.getBoard().getActivePlayer().setIlluminati(((IlluminatiButton) fc).getIlluminati());
                         }
+
                         fc = null ;
+                        System.out.println("Updating field");
                         updateField();
                         System.out.println(board.getActivePlayer().getField().getPhase());
                         return ;
-                    }else if(illuminati.getLocation()==Location.STRUCTURE) {
+                    }
+
+                    else if(illuminati.getLocation()==Location.STRUCTURE) {
+                        System.out.println("IN side Structure");
                         if (board.getActivePlayer().getField().getPhase() == Phase.ACTION1 || board.getActivePlayer().getField().getPhase() == Phase.ACTION2) {
                             fc = (IlluminatiButton) click.getSource();
                             illuminati = ((IlluminatiButton) fc).getIlluminati();
