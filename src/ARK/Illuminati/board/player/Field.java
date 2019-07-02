@@ -69,7 +69,7 @@ public class Field {
         hand.remove(group);
         group.setHidden(isHidden);
         group.setMode(m);
-        group.setLocation(Location.FIELD);
+        group.setLocation(STRUCTURE);
         cardArea.add(group);
         return true;
     }
@@ -79,7 +79,7 @@ public class Field {
      * @param illuminati - illuminati card added to the field
      * @return boolean value for Illuminati card on field
      */
-    public boolean addIlluminatiToField(IlluminatiCard illuminati  ){
+    public boolean addIlluminatiToField(IlluminatiCard illuminati,Mode m  ){
         if(!(hand.contains(illuminati) && illuminati.getLocation() == Location.HAND))
             return false ;
 
@@ -89,6 +89,7 @@ public class Field {
         hand.remove(illuminati);
         //illuminati.setHidden(isHidden); //MAYBE FIX LATER WHEN TIME IS GOOD
         illuminati.setLocation(STRUCTURE) ;
+        illuminati.setMode(m);
         Player p = Card.getBoard().getActivePlayer();
         if(Card.getBoard().getActivePlayer().getName() == GUI.p1.getName())
             cardArea1.add(illuminati);
@@ -151,7 +152,7 @@ public class Field {
         }
         hand.remove(special);
         specialArea.add(special);
-        special.setLocation(Location.FIELD);
+        special.setLocation(STRUCTURE);
         if (!hidden)
             return activeSpecial(special, group);
         return true;
@@ -430,6 +431,7 @@ public class Field {
                 break;
             case ACTION2:
                 endTurn();
+                break;
         }
     }
 
@@ -437,7 +439,7 @@ public class Field {
      * Ends the turn of the player
      */
     public void endTurn(){
-        phase = MAIN;
+        phase = phase.MAIN;
         for(Card m: cardArea){
             m.setAttacked(false);
             m.setSwitchedMode(false);

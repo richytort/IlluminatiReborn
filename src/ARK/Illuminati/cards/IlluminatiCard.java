@@ -18,6 +18,15 @@ public class IlluminatiCard extends Card {
     private boolean switchedMode;
     private int targetIncome;
 
+    /**
+     * Illuminati Card Constructor
+     * @param name of the Illuminati card
+     * @param type of the Illuminati card
+     * @param ability of the Illuminati card
+     * @param i income of the Illuminati card
+     * @param p power of the Illuminati card
+     * @param tp transfer power of the Illuminati card
+     */
     public IlluminatiCard(String name, String type,String ability, int i, int p, int tp){
         super(name, type);
         this.ability= ability;
@@ -27,6 +36,9 @@ public class IlluminatiCard extends Card {
 
     }
 
+    /**
+     * gets the transferMoney of the group
+     */
     public int transferMoney(GroupCard groupTransfer, int incomeTransfer){
         setIncome(this.getIncome()-incomeTransfer);
         groupTransfer.setIncome(incomeTransfer);
@@ -34,6 +46,10 @@ public class IlluminatiCard extends Card {
     }
 
 
+    /**
+     * give money away action
+     * @param amount to be given away
+     */
     public void giveAwayMoney( int amount){
         Player p1 = getBoard().getActivePlayer();
         Player p2 = getBoard().getOpponentPlayer();
@@ -42,7 +58,10 @@ public class IlluminatiCard extends Card {
 
     }
 
-
+    /**
+     * attack to control action
+     * @param target the target to be attacked
+     */
     public void attackToControl(GroupCard target){
         Player activePl = getBoard().getActivePlayer();
         Player opponentPl = getBoard().getOpponentPlayer();
@@ -75,6 +94,10 @@ public class IlluminatiCard extends Card {
         }
     }
 
+    /**
+     * attack to neutralize action
+     * @param target target group to be attacked for intent to neutralize
+     */
     public void attackToNeutralize(GroupCard target) {
         Player active = getBoard().getActivePlayer();
         Player opponent = getBoard().getOpponentPlayer();
@@ -98,6 +121,10 @@ public class IlluminatiCard extends Card {
         }
     }
 
+    /**
+     * attack to destroy action
+     * @param target to be attacked for the purpose of being destroyed
+     */
     public void attacktoDestroy(GroupCard target){
         Player active = getBoard().getActivePlayer();
         Player opponent = getBoard().getOpponentPlayer();
@@ -128,6 +155,9 @@ public class IlluminatiCard extends Card {
 //
 //    }
 
+    /**
+     * switches the mode of the illuminati card
+     */
     public void switchMode(){
         if(mode == Mode.ATTACK){
             mode = Mode.DEFENSE;
@@ -143,41 +173,92 @@ public class IlluminatiCard extends Card {
         return ability;
     }
 
+    /**
+     * sets the ability of the illuminati card
+     * @param ability of the illuminati card
+     */
     public void setAbility(String ability) {
         this.ability = ability;
     }
 
+    /**
+     * gets the power of the illuminati card
+     * @return the power
+     */
     public int getPower() {
         return power;
     }
 
+    /**
+     * sets the power of the illuminati card
+     * @param power set
+     */
     public void setPower(int power) {
         this.power = power;
     }
 
+    /**
+     * gets the transferable power
+     * @return the transferable power
+     */
     public int gettPower() { return tpower; }
 
+    /**
+     * setter for transferable power
+     * @param tPower transferable power
+     */
     public void settPower(int tPower) {
         this.tpower = tPower;
     }
 
-
+    /**
+     * sets the income
+     * @param income setted
+     */
     public void setIncome(int income) {
         this.income = income;
     }
 
+    /**
+     * getter for the income
+     * @return the income
+     */
     public int getIncome(){ return income;}
 
+    /**
+     * setter for hidden
+     * @param hidden boolean value
+     */
     public void setHidden(boolean hidden){ super.setHidden(hidden); }
 
+    /**
+     * setter for mode
+     * @param mode of the card
+     */
     public void setMode(Mode mode){ this.mode = mode; }
 
+    /**
+     * getter for mode of Illuminati card
+     * @return mode
+     */
     public Mode getMode(){ return mode; }
 
+    /**
+     * setter for attacked
+     * @param attacked boolean value true or false
+     */
     public void setAttacked(boolean attacked){this.attacked = attacked;}
 
+    /**
+     * test if switched
+     * @return boolean value
+     */
     public boolean isSwitchedMode(){ return switchedMode;}
 
+    /**
+     * setter fpr switched mode
+     * @param switchedMode for the setting
+     */
     public void setSwitchedMode(boolean switchedMode){
         this.switchedMode = switchedMode;
     }

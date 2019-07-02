@@ -25,6 +25,7 @@ public class GUI extends JFrame {
     private JPanel panel2; // This is for player 2 Structure
     private JPanel uPanel; // this will be for uncontrolled groups
     private JPanel hPanel; //this will be used for the hand.
+
     private JScrollPane hand1SP;
     private JScrollPane hand2SP;
 
@@ -304,11 +305,11 @@ public class GUI extends JFrame {
         currAction.setFont(new Font("Century Gothic", Font.BOLD, 20));
         currAction.setForeground(Color.BLACK);
 
-
         ////figure out where to implement specials
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
         panel1.add(structureAreaP1,BorderLayout.CENTER);
+      //  panel1.add(specialAreaP1,BorderLayout.NORTH);
         panel1.setOpaque(false);
 
 
