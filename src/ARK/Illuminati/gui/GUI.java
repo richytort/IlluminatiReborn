@@ -18,8 +18,10 @@ import java.io.IOException;
 import java.awt.Image;
 import static java.awt.Image.SCALE_SMOOTH;
 
+/**
+ * GUI class
+ */
 public class GUI extends JFrame {
-
     public static Clip audioClip ;
     private JPanel panel1 ; //make this for player 1 Structure
     private JPanel panel2; // This is for player 2 Structure
@@ -28,18 +30,33 @@ public class GUI extends JFrame {
     private JScrollPane hand1SP;
     private JScrollPane hand2SP;
 
+    /**
+     * Getter for hand SP
+     * @return hand1sp
+     */
     public JScrollPane getHand1SP() {
         return hand1SP;
     }
 
+    /**
+     * setter for hand 1
+     */
     public void setHand1SP(JScrollPane hand1SP) {
         this.hand1SP = hand1SP;
     }
 
+    /**
+     * getter for hand 2 sp
+     * @return hand2sp
+     */
     public JScrollPane getHand2SP() {
         return hand2SP;
     }
 
+    /**
+     * setter for hand2sp
+     * @param hand2SP
+     */
     public void setHand2SP(JScrollPane hand2SP) {
         this.hand2SP = hand2SP;
     }
@@ -71,154 +88,310 @@ public class GUI extends JFrame {
     private JScrollPane sp2 ;
     public static Clip getAudioClip(){ return audioClip ; }
 
+    /**
+     * setter for audio in game
+     * @param audioClip audio
+     */
     public static void setAudioClip( Clip audioClip ) { GUI.audioClip = audioClip ; }
 
+    /**
+     * setter for game panel
+     * @param panel1 for game
+     */
     public void setPanel1(JPanel panel1) {
         this.panel1 = panel1;
     }
 
+    /**
+     * getter for oanel
+     * @return panel
+     */
     public JPanel getuPanel() {
         return uPanel;
     }
 
+    /**
+     * setter for uPanel
+     * @param uPanel
+     */
     public void setuPanel(JPanel uPanel) {
         this.uPanel = uPanel;
     }
 
+    /**
+     * getter for panel1
+     * @return hPanel
+     */
     public JPanel gethPanel() {
         return hPanel;
     }
 
+    /**
+     * setter for hPanel
+     * @param hPanel
+     */
     public void sethPanel(JPanel hPanel) {
         this.hPanel = hPanel;
     }
 
+    /**
+     * Setter for next action
+     * @param nextAction to happen
+     */
     public void setNextAction(NextActionButton nextAction) {
         this.nextAction = nextAction;
     }
 
+    /**
+     * getter for HandArea
+     * @return hand area
+     */
     public HandPanel getHandAreaP1() {
         return handAreaP1;
     }
 
+    /**
+     * setter for handArea
+     * @param handAreaP1
+     */
     public void setHandAreaP1(HandPanel handAreaP1) {
         this.handAreaP1 = handAreaP1;
     }
 
+    /**
+     * getter for Hand area
+     * @return
+     */
     public HandPanel getHandAreaP2() {
         return handAreaP2;
     }
 
+    /**
+     * setter for hand Area
+     * @param handAreaP2
+     */
     public void setHandAreaP2(HandPanel handAreaP2) {
         this.handAreaP2 = handAreaP2;
     }
 
+    /**
+     * getter for Structure Area
+     * @return structure area
+     */
     public StructurePanel getStructureAreaP1(){
         return structureAreaP1;
     }
 
+    /**
+     * setter for Structure ARea
+     * @param structureAreaP1
+     */
     public void setStructureAreaP1(StructurePanel structureAreaP1 ){
         this.structureAreaP1 = structureAreaP1 ;
     }
+
+    /**
+     * getter for Structure Area of player 2
+     * @return structureAreaP2
+     */
     public StructurePanel getStructureAreaP2(){
         return structureAreaP2;
     }
 
+    /**
+     * setter for structure of Area P2
+     * @param structureAreaP2
+     */
     public void setStructureAreaP2(StructurePanel structureAreaP2 ){
         this.structureAreaP2 = structureAreaP2 ;
     }
 
+    /**
+     * getter for Uncontrolled Area
+     * @return uncontroled Area
+     */
     public UncontrolledPanel getUncontrolledArea(){
         return uncontrolledArea;
     }
 
+    /**
+     * setter for uncontrolled area
+     */
     public void setUncontrolledArea(UncontrolledPanel uncontrolledArea){
         this.uncontrolledArea = uncontrolledArea;
     }
 
+    /**
+     * getter for special area player 1
+     * @return special area player 1
+     */
     public SpecialPanel getSpecialAreaP1(){
         return specialAreaP1;
     }
 
+    /**
+     * setter for special area player 1
+     * @param specialAreaP1
+     */
     public void setSpecialAreaP1(SpecialPanel specialAreaP1 ){
         this.specialAreaP1 = specialAreaP1 ;
     }
+
+    /**
+     * getter for special area player 2
+     * @return special area player 2
+     */
     public SpecialPanel getSpecialAreaP2(){
         return specialAreaP2;
     }
 
+    /**
+     * setter for special area of player 2
+     * @param specialAreaP2
+     */
     public void setSpecialAreaP2(SpecialPanel specialAreaP2 ){
         this.specialAreaP2 = specialAreaP2 ;
     }
 
+    /**
+     * gets SP1 for jscroll paane
+     */
     public JScrollPane getSp1() { return sp1 ; }
 
+    /**
+     * sets Sp1
+     */
     public void setSp1(JScrollPane sp1) { this.sp1 = sp1 ;  }
-
+    /**
+     * gets Sp2
+     */
     public JScrollPane getSp2() { return sp2 ; }
-
+    /**
+     * gets Sp2
+     */
     public void setSp2( JScrollPane sp2) { this.sp2 = sp2 ; }
-
+    /**
+     * sets Sp2
+     */
     public HiddenHandPanel getP1hid() {return p1hid; }
-
+    /**
+     * gets Sp1hid
+     */
     public void setP1hid(HiddenHandPanel p1hid) {this.p1hid = p1hid ; }
-
+    /**
+     * sets p1hid
+     */
     public HiddenHandPanel getP2hid() { return p2hid; }
-
+    /**
+     * gets p2hid
+     */
     public void setP2hid(HiddenHandPanel p2hid){ this.p2hid = p2hid ; }
-
+    /**
+     * sets p2hid
+     */
     public Player getP1() {return p1 ; }
-
+    /**
+     * gets Player 1
+     */
     public void setP1(Player p1 ){ this.p1 = p1 ; }
-
+    /**
+     * sets player
+     */
     public Player getP2( ) { return p2 ; }
-
+    /**
+     * gets p2
+     */
     public void setP2( Player p2 ) { this.p2 = p2 ; }
-
+    /**
+     * sets p2
+     */
     public JPanel getPanel2() {return panel2 ; }
-
+    /**
+     * gets panel12
+     */
     public void setPanel2( JPanel panel2 ) { this.panel2 = panel2 ; }
-
+    /**
+     * sets panel12
+     */
     public JLabel getDeck(){ return deck ; }
-
+    /**
+     * gets Deck
+     */
     public void setDeck( JLabel deck ) { this.deck = deck ; }
-
+    /**
+     * gets grave
+     */
     public JButton getGrave() {
         return grave;
     }
-
+    /**
+     * sets grave
+     */
     public void setGrave(JButton gravep1) {
         this.grave = grave;
     }
-
+    /**
+     * gets nextAction
+     */
     public NextActionButton getNextAction(){ return nextAction ; }
-
+    /**
+     * sets Next action Button
+     */
     public void setNextActionButton( NextActionButton nextAction ){ this.nextAction = nextAction ; }
-
+    /**
+     * return p1name
+     */
     public JLabel getP1name( ) { return p1name ; }
-
+    /**
+     * sets p1name
+     */
     public void setP1name( JLabel p1name ){ this.p1name = p1name ; }
-
+    /**
+     * gets p2name
+     */
     public JLabel getP2name() { return p2name; }
-
+    /**
+     * gets p2name
+     */
     public void setP2name(JLabel p2name) { this.p2name = p2name; }
-
+    /**
+     * sets p2name
+     */
     public JLabel getCurrAction() { return currAction; }
-
+    /**
+     * gets current action
+     */
     public void setCurrAction(JLabel currAction) { this.currAction = currAction; }
-
+    /**
+     * gets the end of the Turn- end turn button
+     */
     public EndTurnButton getEndTurn() { return endTurn ; }
-
+    /**
+     * sets End Turn button
+     */
     public void setEndTurn( EndTurnButton endTurn ){ this.endTurn = endTurn ; }
-
+    /**
+     * gets Panel1
+     */
     public JPanel getPanel1() { return panel1 ; }
-
+    /**
+     * set Panel
+     */
     public void setPanel( JPanel panel1 ){ this.panel1 = panel1 ; }
-
+    /**
+     * gets Pan
+     */
     public JScrollPane getPan(){ return pan ; }
-
+    /**
+     * sets Pan
+     */
     public void setPan( JScrollPane pan ){ this.pan = pan ; }
 
+    /**
+     * This method constructs the GUI for the two players
+     * @param p1 first player
+     * @param p2 second player
+     */
     public GUI(Player p1, Player p2) throws IOException, UnexpectedFormatException {
         super("Illuminati!");
         Board b = new Board();
@@ -407,22 +580,39 @@ public class GUI extends JFrame {
 
     }
 
+    /**
+     * @return Image icon
+     */
     public ImageIcon getImgThisImg(){
         return imgThisImg;
     }
 
+    /**
+     * sets ImgIcon
+     * @param imgThisImg to be set
+     */
     public void setImgThisImg(ImageIcon imgThisImg){
         this.imgThisImg = imgThisImg;
     }
-    //Here is that description again.
+    //
+
+    /**
+     * getter for Description
+     * */
     public JLabel getDescription(){
         return description;
     }
 
+    /**
+     * setter for description
+     */
     public void setDescription(JLabel description){
         this.description = description;
     }
 
+    /**
+     * Main method to format game settings
+     */
     public static void main(String[]args) throws IOException, UnexpectedFormatException {
         //find an appropriate audio file to add here.
         File audioFile = new File("Halo.wav");

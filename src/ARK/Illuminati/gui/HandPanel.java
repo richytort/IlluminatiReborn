@@ -10,25 +10,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class creates the hand panel for the different button
+ */
 public class HandPanel extends JPanel {
     private ArrayList<GroupButton> groupButtons ;
     private ArrayList<SpecialButton> specialButtons;
     private ArrayList<IlluminatiButton> illuminatiButtons ;
 
+    /**
+     * Handpanel for the player
+     * @param p player
+     */
     public HandPanel(Player p ) {
         super();
         update(p);
     }
 
-
+    /**
+     * getter for hand button
+     * @return group buttons
+     */
     public ArrayList<GroupButton> getHandButtons(){
         return this.groupButtons;
     }
 
+    /**
+     * setter for hand buttons
+     * @param hb arraylist of group buttons
+     */
     public void setHandButtons (ArrayList<GroupButton> hb ) {
         this.groupButtons = hb ;
     }
 
+    /**
+     * Updates the players buttons
+     * @param p player
+     */
     public void update(Player p){
         this.removeAll();
         this.revalidate();
@@ -108,12 +126,27 @@ public class HandPanel extends JPanel {
             }
         }
     }
+
+    /**
+     * getter for Group Buttons
+     * @return groupbuttons
+     */
     public ArrayList<GroupButton> getGroupButtons() {
         return groupButtons;
     }
+
+    /**
+     * setter for GroupButtons
+     * @param groupButtons
+     */
     public void setGroupButtons(ArrayList<GroupButton> groupButtons) {
         this.groupButtons = groupButtons;
     }
+
+    /**
+     * getter for special buttons
+     * @return
+     */
     public ArrayList<SpecialButton> getSpecialButtons() {
         return specialButtons;
     }
