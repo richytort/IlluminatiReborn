@@ -196,10 +196,12 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel1().add(gui.getHand1SP(),BorderLayout.EAST);
         System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
 
-        StructurePanel temp = new StructurePanel(Board.cardAreaP2);
 
-        //gui.setStructureAreaP2 ( temp );
-/*
+        StructurePanel temp = new StructurePanel(Board.cardAreaP2);
+        System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
+
+        gui.setStructureAreaP2 ( temp );
+
         gui.setHandAreaP2(new HandPanel( gui.getP2() ) );
         JScrollPane sp2 = new JScrollPane(gui.getHandAreaP2());
         sp2.setBorder(null);
@@ -213,8 +215,8 @@ public class Controller implements ActionListener, MouseListener {
         gui.getPanel2().add(gui.getHand2SP(),BorderLayout.EAST);
 
 
- */
-        System.out.println( "Getting num but S1: " + gui.getStructureAreaP1().getIlluminatiButtons().size());
+
+
 
         ////////////THIS WILL NEED SOME WORK DONE.....OR maybe it won't. Since this is the graveyard. Investigate.
 
