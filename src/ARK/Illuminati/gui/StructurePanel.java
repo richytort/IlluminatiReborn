@@ -8,6 +8,8 @@ import ARK.Illuminati.cards.Mode;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +18,20 @@ import java.util.ArrayList;
 public class StructurePanel extends JPanel {
     public static ArrayList<IlluminatiButton> illuminatiButtons ;
     private ArrayList<GroupButton> groupButtons;
+    private ArrayList<Card> cards ;
+
+    JPopupMenu pm ;
+    JMenuItem mi;
+    JMenuItem mi2;
+    JMenuItem mi3;
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
+    }
 
     /**
      * Creates the structure Panel
@@ -24,19 +40,31 @@ public class StructurePanel extends JPanel {
     public StructurePanel(ArrayList<Card> cards ){
 
         super();
+        this.cards = cards ;
+        JFrame frame = new JFrame();
+
         illuminatiButtons = new ArrayList<IlluminatiButton>();
         groupButtons = new ArrayList<GroupButton>();
+        pm = new JPopupMenu();
+        mi = new JMenuItem("Attack Group From Uncontrolled");
+        mi2 = new JMenuItem("Attack Group From Opponent");
+        mi3 = new JMenuItem("Use Ability");
+        this.pm.add(mi);
+        this.pm.add(mi2);
+        this.pm.add(mi3);
 
 
 
-        setPreferredSize( new Dimension(500 , 100));
+
+
+      /*  setPreferredSize( new Dimension(500 , 100));
         for(int i = 0 ; i < 7 ; i++){
             GroupButton groupButton = new GroupButton();
             //groups.add(groupButton);
             groupButton.setBackground(Color.GRAY);
             groupButton.setOpaque(false);
             this.add(groupButton);
-        }
+        }*/
         for(int i = 0 ; i < illuminatiButtons.size(); i++){
             IlluminatiButton illuminatiButton = new IlluminatiButton();
             illuminatiButton.setBackground(Color.GRAY);
@@ -71,6 +99,17 @@ public class StructurePanel extends JPanel {
                 illuminatiButtons.get(i).revalidate();
                 illuminatiButtons.get(i).setOpaque(false);
                 illuminatiButtons.get(i).repaint();
+
+                illuminatiButtons.get(i).addMouseListener(new MouseAdapter(){
+
+                    public void mouseReleased(MouseEvent me){
+                        pm.show(me.getComponent(),me.getX(),me.getY());
+                    }
+
+
+
+                });
+
             }
             else{
                 GroupButton temp = new GroupButton((GroupCard) cards.get(i) );
